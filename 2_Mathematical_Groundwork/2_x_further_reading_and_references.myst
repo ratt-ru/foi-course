@@ -13,11 +13,11 @@ kernelspec:
 
 ***
 
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
-* [2. Mathematical Groundwork](2_0_introduction.ipynb)
-    * Previous: [2.13 Spherical Trigonometry](2_13_spherical_trigonometry.ipynb)
-    * Next: [Chapter 3: Positional Astronomy](../3_Positional_Astronomy/3_0_introduction.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [2. Mathematical Groundwork](2_0_introduction.myst)
+    * Previous: [2.13 Spherical Trigonometry](2_13_spherical_trigonometry.myst)
+    * Next: [Chapter 3: Positional Astronomy](../3_Positional_Astronomy/3_0_introduction.myst)
 
 ***
 
@@ -29,4 +29,4 @@ kernelspec:
 
 ***
 
-* Next: [Chapter 3: Positional Astronomy](../3_Positional_Astronomy/3_0_introduction.ipynb)
+* Next: [Chapter 3: Positional Astronomy](../3_Positional_Astronomy/3_0_introduction.myst)

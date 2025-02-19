@@ -1,23 +1,23 @@
 ---
 jupytext:
   text_representation:
-    extension: .md
+    extension: .myst
     format_name: myst
     format_version: 0.13
     jupytext_version: 1.16.7
 kernelspec:
-  display_name: Python 3
+  display_name: Python 3 (ipykernel)
   language: python
   name: python3
 ---
 
 ***
 
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
-* [2. Mathematical Groundwork](2_0_introduction.ipynb)
-    * Previous: [2.1 Complex Numbers](2_1_complex_numbers.ipynb)
-    * Next: [2.3 Fourier Series](2_3_fourier_series.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [2. Mathematical Groundwork](2_0_introduction.myst)
+    * Previous: [2.1 Complex Numbers](2_1_complex_numbers.myst)
+    * Next: [2.3 Fourier Series](2_3_fourier_series.myst)
 
 ***
 
@@ -51,7 +51,7 @@ We introduce a set of functions that will turn up frequently in this book or hav
 
 +++
 
-A Gaussian function, also refered to as a bell curve, is defined as 
+A Gaussian function, also refered to as a bell curve, is defined as
 
 +++
 
@@ -61,7 +61,7 @@ $$
 
 +++
 
-where $a$, is the amplitude, $\mu$ is the mean and $\sigma$ is the standard deviation. 
+where $a$, is the amplitude, $\mu$ is the mean and $\sigma$ is the standard deviation.
 
 ```{code-cell} ipython3
 def gaussian(x, a, mu, sig):
@@ -392,7 +392,7 @@ $$
 
 +++
 
-then it becomes clear that (first using integration by parts, then substituting $y = \tan(\phi)$). 
+then it becomes clear that (first using integration by parts, then substituting $y = \tan(\phi)$).
 
 +++
 
@@ -829,7 +829,7 @@ $$
 
 +++
 
-This defines the scaled shah function $III_a$ with period $\frac{1}{\lvert a \rvert}$. It is easy to see that the following rules apply: 
+This defines the scaled shah function $III_a$ with period $\frac{1}{\lvert a \rvert}$. It is easy to see that the following rules apply:
 
 +++
 
@@ -946,4 +946,4 @@ plotboxcar()
 
 ***
 
-* Next: [2.3 Fourier Series](2_3_fourier_series.ipynb)
+* Next: [2.3 Fourier Series](2_3_fourier_series.myst)

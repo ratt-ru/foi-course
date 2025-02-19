@@ -15,11 +15,11 @@ kernelspec:
 
 ***
 
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
-* [Positional Astronomy](3_0_introduction.ipynb)
-    * Previous: [Hour Angle and Local Sidereal Time](3_2_hour_angle.ipynb)
-    * Next: [Horizontal Coordinates](3_3_horizontal_coordinates.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [Positional Astronomy](3_0_introduction.myst)
+    * Previous: [Hour Angle and Local Sidereal Time](3_2_hour_angle.myst)
+    * Next: [Horizontal Coordinates](3_3_horizontal_coordinates.myst)
 
 ***
 
@@ -197,4 +197,4 @@ plt.grid('on')
 
 ***
 
-Next: [Horizontal Coordinates](3_3_horizontal_coordinates.ipynb)
+Next: [Horizontal Coordinates](3_3_horizontal_coordinates.myst)

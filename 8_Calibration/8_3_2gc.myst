@@ -13,11 +13,11 @@ kernelspec:
 
 ***
 
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
-* [8. Calibration](8_0_Introduction.ipynb)
-    * Previous: [8.2 1GC Calibration](8_2_1gc.ipynb)
-    * Next: [8.4 3GC Calibration](8_4_3gc.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [8. Calibration](8_0_Introduction.myst)
+    * Previous: [8.2 1GC Calibration](8_2_1gc.myst)
+    * Next: [8.4 3GC Calibration](8_4_3gc.myst)
 
 ***
 
@@ -73,7 +73,7 @@ we should be able to make a decent image of our target field. The dynamic range 
 
 +++
 
-Self-calibration makes use of the observed field to calibrate the visibilities. In [Fig. 8.3.1 &#10549;](#cal:fig:self_cal) <!--\ref{cal:fig:self_cal}--> we have a block diagram depicting the self-calibration framework. We continuously switch between two domains; the image domain and the visibility domain. In the image domain we perform deconvolution and source finding, while calibration takes place in the visibility domain. Deconvolution and source finding are discussed in [$\S$ 6.2 &#10142;](../6_Deconvolution/6_2_clean.ipynb) and [$\S$ 6.5 &#10142;](../6_Deconvolution/6_5_source_finding.ipynb) respectively. It is important to realize that [Fig. 8.3.1 &#10549;](#cal:fig:self_cal) <!--\ref{cal:fig:self_cal}--> is a very rudimentary representation of the self-calibration framework. Self-calibration is performed by using the following procedure:
+Self-calibration makes use of the observed field to calibrate the visibilities. In [Fig. 8.3.1 &#10549;](#cal:fig:self_cal) <!--\ref{cal:fig:self_cal}--> we have a block diagram depicting the self-calibration framework. We continuously switch between two domains; the image domain and the visibility domain. In the image domain we perform deconvolution and source finding, while calibration takes place in the visibility domain. Deconvolution and source finding are discussed in [$\S$ 6.2 &#10142;](../6_Deconvolution/6_2_clean.myst) and [$\S$ 6.5 &#10142;](../6_Deconvolution/6_5_source_finding.myst) respectively. It is important to realize that [Fig. 8.3.1 &#10549;](#cal:fig:self_cal) <!--\ref{cal:fig:self_cal}--> is a very rudimentary representation of the self-calibration framework. Self-calibration is performed by using the following procedure:
 
 <p class=conclusion>
   <font size=4> <b>Self-calibration algorithm</b></font>
@@ -136,7 +136,7 @@ In short, self-calibration greatly improves the quality of radio images.
 
 +++
 
-Up until this point we have not described the actual calibration algorithm one needs to use in the self-calibration framework. This is because the algorithm used is irrelevant in the context of the framework. However, it is useful to note that the (currently) most used algorithm is the least-squares approach discussed in [$\S$ 8.1 &#10142;](../8_Calibration/8_1_calibration_least_squares_problem.ipynb#cal:sec:cal_ls) <!--\ref{cal:sec:cal_ls}-->. This was not always the case.
+Up until this point we have not described the actual calibration algorithm one needs to use in the self-calibration framework. This is because the algorithm used is irrelevant in the context of the framework. However, it is useful to note that the (currently) most used algorithm is the least-squares approach discussed in [$\S$ 8.1 &#10142;](../8_Calibration/8_1_calibration_least_squares_problem.myst#cal:sec:cal_ls) <!--\ref{cal:sec:cal_ls}-->. This was not always the case.
 
 In the past self-calibration actually employed closure quantities (see [<cite data-cite='Jennison1958'>A phase sensitive interferometer technique for the measurement of the Fourier transforms of spatial brightness distributions of small angular extent</cite> &#10548;](http://mnras.oxfordjournals.org/content/118/3/276.short) and [<cite data-cite='Smith1952'>The measurement of the angular diameter of radio stars</cite> &#10548;](http://iopscience.iop.org/article/10.1088/0370-1301/65/12/309/meta;jsessionid=9DF36DAB88B75643A607FA921E11CC4A.c2.iopscience.cld.iop.org)). Back when closure quantities were used to implement the calibration sub-block in [Fig. 8.3.1 &#10549;](#cal:fig:self_cal) <!--\ref{cal:fig:self_cal}-->, self-calibration was known by a different name: hybrid-mapping.<br><br> 
 
@@ -144,7 +144,7 @@ In the past self-calibration actually employed closure quantities (see [<cite da
 <b>Warning:</b> Generally speaking, when the calibration framework in [Fig. 8.3.1 &#10549;](#cal:fig:self_cal) <!--\ref{cal:fig:self_cal}--> employs a the least squares solver we use the term "self-calibration", while the name "hybrid-mapping" is used when the calibration framework in [Fig. 8.3.1 &#10549;](#cal:fig:self_cal) <!--\ref{cal:fig:self_cal}--> relies on closure quantities instead.
 </div>
 
-We discussed closure quantities in [$\S$ 8.2 &#10142;](../8_Calibration/8_2_1GC.ipynb#cal:sec:closure) <!--\ref{cal:sec:closure}-->. One of the best known hybrid-mapping approaches was developed by Readhead and Wilkinson ([<cite data-cite='Readhead1978'>The mapping of compact radio sources from VLBI data</cite> &#10548;](http://adsabs.harvard.edu/full/1978ApJ...223...25R)). It requires the following steps:
+We discussed closure quantities in [$\S$ 8.2 &#10142;](../8_Calibration/8_2_1GC.myst#cal:sec:closure) <!--\ref{cal:sec:closure}-->. One of the best known hybrid-mapping approaches was developed by Readhead and Wilkinson ([<cite data-cite='Readhead1978'>The mapping of compact radio sources from VLBI data</cite> &#10548;](http://adsabs.harvard.edu/full/1978ApJ...223...25R)). It requires the following steps:
 
 <p class=conclusion>
   <font size=4> <b>Hybrid-mapping algorithm</b></font>
@@ -173,7 +173,7 @@ Using a least-squares solver to calibrate was first proposed in [<cite data-cite
 
 ***
 
-Next: [8.4 3GC Calibration](8_4_3gc.ipynb)
+Next: [8.4 3GC Calibration](8_4_3gc.myst)
 
 ```{code-cell} ipython3
 

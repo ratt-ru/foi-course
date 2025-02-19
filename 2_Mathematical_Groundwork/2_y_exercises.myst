@@ -15,11 +15,11 @@ kernelspec:
 
 ***
 
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
-* [2. Mathematical Groundwork](2_0_introduction.ipynb)
-    * Previous: [2.x Further reading and references](2_x_further_reading_and_references.ipynb)
-    * Next: [3. Positional Astronomy](3_0_introduction.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [2. Mathematical Groundwork](2_0_introduction.myst)
+    * Previous: [2.x Further reading and references](2_x_further_reading_and_references.myst)
+    * Next: [3. Positional Astronomy](3_0_introduction.myst)
 
 ***
 
@@ -185,7 +185,7 @@ plottriangle()
 
 +++ {"deletable": true, "editable": true}
 
-The function is real-valued ($f^*(x)\,=\,f(x)$) and even ($f(x)\,=\,f(-x)$), so it is Hermetian ($f^*(x)\,=\,f(-x)$, [see definition here &#10142;](2_4_the_fourier_transform.ipynb#math:sec:fourier_transforms_of_real_valued_and_hermetian_functions) <!--\ref{math:sec:fourier_transforms_of_real_valued_and_hermetian_functions}-->). According to [Sect. 2.4.6 &#10142;](2_4_the_fourier_transform.ipynb#math:sec:fourier_transforms_of_real_valued_and_hermetian_functions)<!--\ref{math:sec:fourier_transforms_of_real_valued_and_hermetian_functions}-->, this means that the Fourier transform is a <b>real-valued</b> function (because it is the Fourier transform of a Hermetian function) and also Hermetian (because it is the Fourier transform of a real-valued function). Hence it is also <b>even</b> ($f^*(x)\,=\,f(x) \,\land\, f^*(x)\,=\,f(-x)\,\Rightarrow\,f(x)\,=\,f(-x)$). Real-valued means that the complex part of $f$ is $0$.
+The function is real-valued ($f^*(x)\,=\,f(x)$) and even ($f(x)\,=\,f(-x)$), so it is Hermetian ($f^*(x)\,=\,f(-x)$, [see definition here &#10142;](2_4_the_fourier_transform.myst#math:sec:fourier_transforms_of_real_valued_and_hermetian_functions) <!--\ref{math:sec:fourier_transforms_of_real_valued_and_hermetian_functions}-->). According to [Sect. 2.4.6 &#10142;](2_4_the_fourier_transform.myst#math:sec:fourier_transforms_of_real_valued_and_hermetian_functions)<!--\ref{math:sec:fourier_transforms_of_real_valued_and_hermetian_functions}-->, this means that the Fourier transform is a <b>real-valued</b> function (because it is the Fourier transform of a Hermetian function) and also Hermetian (because it is the Fourier transform of a real-valued function). Hence it is also <b>even</b> ($f^*(x)\,=\,f(x) \,\land\, f^*(x)\,=\,f(-x)\,\Rightarrow\,f(x)\,=\,f(-x)$). Real-valued means that the complex part of $f$ is $0$.
 
 +++ {"deletable": true, "editable": true}
 
@@ -213,7 +213,7 @@ $$
 
 +++ {"deletable": true, "editable": true}
 
-The solution to part two, using the definition as given in [Sect. 2.4.6 &#10142;](2_2_important_functions.ipynb#math:sec:boxcar_and_rectangle_function)<!--\ref{math:sec:boxcar_and_rectangle_function}-->
+The solution to part two, using the definition as given in [Sect. 2.4.6 &#10142;](2_2_important_functions.myst#math:sec:boxcar_and_rectangle_function)<!--\ref{math:sec:boxcar_and_rectangle_function}-->
 
 +++ {"deletable": true, "editable": true}
 
@@ -227,7 +227,7 @@ $$
 
 +++ {"deletable": true, "editable": true}
 
-requires a little calculation, but is straightforward. Using the [definition of the boxcar function &#10142;](2_2_important_functions.ipynb#math:sec:boxcar_and_rectangle_function) <!--\ref{math:sec:boxcar_and_rectangle_function}--> and the [definition of the convolution &#10142;](2_5_convolution.ipynb#math:sec:definition_of_the_convolution) <!--\ref{math:sec:definition_of_the_convolution}-->, one can see:
+requires a little calculation, but is straightforward. Using the [definition of the boxcar function &#10142;](2_2_important_functions.myst#math:sec:boxcar_and_rectangle_function) <!--\ref{math:sec:boxcar_and_rectangle_function}--> and the [definition of the convolution &#10142;](2_5_convolution.myst#math:sec:definition_of_the_convolution) <!--\ref{math:sec:definition_of_the_convolution}-->, one can see:
 
 +++ {"deletable": true, "editable": true}
 
@@ -257,7 +257,7 @@ and, accordingly
 
 +++ {"deletable": true, "editable": true}
 
-This is identical to [above piece-wise definition &#10549;](2_y_exercises.ipynb#math:sec:math:eq:y_001).
+This is identical to [above piece-wise definition &#10549;](2_y_exercises.myst#math:sec:math:eq:y_001).
 
 +++ {"deletable": true, "editable": true}
 
@@ -265,7 +265,7 @@ This is identical to [above piece-wise definition &#10549;](2_y_exercises.ipynb#
 
 +++ {"deletable": true, "editable": true}
 
-We know that ([convolution theorem &#10142;](2_7_fourier_theorems.ipynb#math:sec:convolution_theorem)<!--\ref{math:sec:convolution_theorem}-->, [similarity theorem &#10142;](2_7_fourier_theorems.ipynb#math:sec:similarity_theorem)<!--\ref{math:sec:similarity_theorem}-->, [definition of the triangle function &#10549;](#math:eq:y_002)<!--\ref{math:eq:y_002}-->, [Fourier transform of the rectangle boxcar function &#10142;](2_4_the_fourier_transform.ipynb#math:sec:fourier_transform_of_the_rectangle_and_the_sinc_function)<!--\ref{math:sec:convolution_theorem}-->):
+We know that ([convolution theorem &#10142;](2_7_fourier_theorems.myst#math:sec:convolution_theorem)<!--\ref{math:sec:convolution_theorem}-->, [similarity theorem &#10142;](2_7_fourier_theorems.myst#math:sec:similarity_theorem)<!--\ref{math:sec:similarity_theorem}-->, [definition of the triangle function &#10549;](#math:eq:y_002)<!--\ref{math:eq:y_002}-->, [Fourier transform of the rectangle boxcar function &#10142;](2_4_the_fourier_transform.myst#math:sec:fourier_transform_of_the_rectangle_and_the_sinc_function)<!--\ref{math:sec:convolution_theorem}-->):
 
 +++ {"deletable": true, "editable": true}
 
@@ -489,7 +489,7 @@ $$
 
 +++
 
-We have to evaluate the integral (see [definition of the convolution &#10142;](2_5_convolution.ipynb#math:sec:definition_of_the_convolution) <!--\ref{math:sec:definition_of_the_convolution}-->):
+We have to evaluate the integral (see [definition of the convolution &#10142;](2_5_convolution.myst#math:sec:definition_of_the_convolution) <!--\ref{math:sec:definition_of_the_convolution}-->):
 
 +++
 
@@ -702,4 +702,4 @@ plotrectntriaconv()
 
 ***
 
-* Next: [3. Positional Astronomy](3_0_introduction.ipynb)
+* Next: [3. Positional Astronomy](3_0_introduction.myst)

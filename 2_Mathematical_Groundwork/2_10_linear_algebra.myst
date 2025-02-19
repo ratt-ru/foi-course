@@ -13,11 +13,11 @@ kernelspec:
 
 ***
 
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
-* 2. [Mathematical Background](2_0_introduction.ipynb)
-    * Previous: [2.9 Sampling Theory](2_9_sampling_theory.ipynb)
-    * Next: [2.11 Least-squares Minimization](2_11_least_squares.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* 2. [Mathematical Background](2_0_introduction.myst)
+    * Previous: [2.9 Sampling Theory](2_9_sampling_theory.myst)
+    * Next: [2.11 Least-squares Minimization](2_11_least_squares.myst)
 
 ***
 
@@ -375,7 +375,7 @@ The pdf allows us to assign a likelihood to any specific realisation of $\epsilo
 
 $$ \chi^2 = ({\bf Ax} - {\bf b})^H {\bf W} ({\bf Ax} - {\bf b}), $$
 
-where $W = \Sigma^{-1}$ is called the weight matrix. Note that the minimum of $\chi^2$ occurs at the same value of ${\bf \bar{x}}$ as the maximum in the likelihood. This allows us to use numerical minimisation schemes (of which you will hear more of in the next section [2.11 Least-squares Minimization &#10142;](2_11_least_squares.ipynb)) to find ${\bf \bar{x}}$. Actually, when the system is of full rank, there is a simpler analytic way to find ${\bf \bar{x}}$. This is because a Gaussian pdf has only a single stationary point. You should remember (from first year calculus) how to find this stationary point i.e. take the derivative and set it to zero. The only (hopefully) slightly tricky part is taking the gradient of $\chi^2$ w.r.t. ${\bf x}$ (i.e. finding the Jacobian). The expression for the Jacobian is
+where $W = \Sigma^{-1}$ is called the weight matrix. Note that the minimum of $\chi^2$ occurs at the same value of ${\bf \bar{x}}$ as the maximum in the likelihood. This allows us to use numerical minimisation schemes (of which you will hear more of in the next section [2.11 Least-squares Minimization &#10142;](2_11_least_squares.myst)) to find ${\bf \bar{x}}$. Actually, when the system is of full rank, there is a simpler analytic way to find ${\bf \bar{x}}$. This is because a Gaussian pdf has only a single stationary point. You should remember (from first year calculus) how to find this stationary point i.e. take the derivative and set it to zero. The only (hopefully) slightly tricky part is taking the gradient of $\chi^2$ w.r.t. ${\bf x}$ (i.e. finding the Jacobian). The expression for the Jacobian is
 
 $$ \partial_x \chi^2 = \mathbb{J} = {\bf A}^H {\bf W} ({\bf b} - {\bf Ax}). $$
 
@@ -391,7 +391,7 @@ When the Hessian matrix $\mathbb{H} = {{\bf A}^H{\bf W A}}$ is non-singular (i.e
 
 $$ {\bf \bar{x}} = \left( {{\bf A}^H {\bf W A} } \right)^{-1} {{\bf A}^H{\bf W b}}. $$
 
-This is very useful since many different problems can be written in linear form. Note that, when the Hessian matrix $\mathbb{H} = {{\bf A}^H{\bf W A}}$ is singular (as is the case in interferometric imaging), or we are looking for the solution to a non-linear system (as is the case in interferometric calibration), or the noise is not expected to be Gaussian, we have to resort to approximate and/or iterative methods. Iterative minimisation techniques are discussed in the next section [2.11 Least-squares Minimization &#10142;](2_11_least_squares.ipynb). Next we demonstrate the above by doing a familiar example viz. fitting a straight line to data.   
+This is very useful since many different problems can be written in linear form. Note that, when the Hessian matrix $\mathbb{H} = {{\bf A}^H{\bf W A}}$ is singular (as is the case in interferometric imaging), or we are looking for the solution to a non-linear system (as is the case in interferometric calibration), or the noise is not expected to be Gaussian, we have to resort to approximate and/or iterative methods. Iterative minimisation techniques are discussed in the next section [2.11 Least-squares Minimization &#10142;](2_11_least_squares.myst). Next we demonstrate the above by doing a familiar example viz. fitting a straight line to data.   
 
 +++
 
@@ -485,7 +485,7 @@ plt.legend()
 
 +++
 
-You should see that the weighted regression produces more accurate results. In interferometric imaging weighting functions can be applied for reasons other than accounting for uncertainty. We will see examples of this in $\S$  [5.4](../5_Imaging/5_4_imaging_weights.ipynb).   
+You should see that the weighted regression produces more accurate results. In interferometric imaging weighting functions can be applied for reasons other than accounting for uncertainty. We will see examples of this in $\S$  [5.4](../5_Imaging/5_4_imaging_weights.myst).   
 
 +++
 
@@ -531,7 +531,7 @@ so that $\psi$ are the eigenvalues and ${\bf v}$ the eigenvectors of ${\bf C}$. 
 
 ***
 
-Next: [2.11 Least-squares Minimization](2_11_least_squares.ipynb)
+Next: [2.11 Least-squares Minimization](2_11_least_squares.myst)
 
 +++
 

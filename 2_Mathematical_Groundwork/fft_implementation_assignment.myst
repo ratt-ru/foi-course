@@ -34,15 +34,15 @@ import cmath
 
 +++ {"deletable": true, "editable": true}
 
-This assignment is to implement a python-based Fast Fourier Transform (FFT). Building on [$\S$ 2.8 &#10142;](2_8_the_discrete_fourier_transform.ipynb) we will implement a 1-D radix-2 Cooley-Tukey-based FFT using decimation in time (DIT) an $N = 2^n$ input function, and then generalize the function to take any input.
+This assignment is to implement a python-based Fast Fourier Transform (FFT). Building on [$\S$ 2.8 &#10142;](2_8_the_discrete_fourier_transform.myst) we will implement a 1-D radix-2 Cooley-Tukey-based FFT using decimation in time (DIT) an $N = 2^n$ input function, and then generalize the function to take any input.
 
 +++ {"deletable": true, "editable": true}
 
-From [$\S$ 2.8.2 &#10142;](2_8_the_discrete_fourier_transform.ipynb) the discrete Fourier transform (DFT) is defined as:
+From [$\S$ 2.8.2 &#10142;](2_8_the_discrete_fourier_transform.myst) the discrete Fourier transform (DFT) is defined as:
 
 $$ \mathscr{F}_{\rm D}\{y\}_k = Y_k =  \sum_{n\,=\,0}^{N-1} y_n\,e^{-\imath 2\pi \frac{nk}{N}}, $$
 
-That is, the $k^{th}$ element of the Fourier transformed spectrum $Y$ is a sum over all $n$ elements of the function $y$, each multipled by a complex twiddle factor $e^{-\imath 2\pi \frac{nk}{N}}$. In [$\S$ 2.8.5 &#10142;](2_8_the_discrete_fourier_transform.ipynb) two methods for computing the DFT for a size $N = 2^n$ discrete function. A double loop to compute all elements of the Fourier-transformed spectrum, and a matrix multiplication by generating the Fourier kernel $K$. The compute time to perform the DFT is $\mathcal{O}(N^2)$, this is it takes $cN^2$ operations where $c > 1$ is a constant factor. Though as note in [$\S$ 2.8.5 &#10142;](2_8_the_discrete_fourier_transform.ipynb) the matrix implementation is much fast that the loop because this algorithm takes advantage of fast vector math libraries.
+That is, the $k^{th}$ element of the Fourier transformed spectrum $Y$ is a sum over all $n$ elements of the function $y$, each multipled by a complex twiddle factor $e^{-\imath 2\pi \frac{nk}{N}}$. In [$\S$ 2.8.5 &#10142;](2_8_the_discrete_fourier_transform.myst) two methods for computing the DFT for a size $N = 2^n$ discrete function. A double loop to compute all elements of the Fourier-transformed spectrum, and a matrix multiplication by generating the Fourier kernel $K$. The compute time to perform the DFT is $\mathcal{O}(N^2)$, this is it takes $cN^2$ operations where $c > 1$ is a constant factor. Though as note in [$\S$ 2.8.5 &#10142;](2_8_the_discrete_fourier_transform.myst) the matrix implementation is much fast that the loop because this algorithm takes advantage of fast vector math libraries.
 
 The DFT code is replicated here as it will be used to compare our implementation of the FFT:
 
@@ -80,7 +80,7 @@ def matrix_DFT(x):
 
 +++ {"deletable": true, "editable": true}
 
-In [$\S$ 2.8.6 &#10142;](2_8_the_discrete_fourier_transform.ipynb) the fast Fourier transform was introduced as using recursion to implement a Fourier transform in $\mathcal{O}(N\log_2N)$ computations, significantly reducing the computational cost of computing the Fourier transform, especially for large $N$. A 'one layer' fast Fourier transform was presented which split the input function into two, and applied the twiddle factor to all values in the layer before calling the matrix-based DFT. This code is replicated below.
+In [$\S$ 2.8.6 &#10142;](2_8_the_discrete_fourier_transform.myst) the fast Fourier transform was introduced as using recursion to implement a Fourier transform in $\mathcal{O}(N\log_2N)$ computations, significantly reducing the computational cost of computing the Fourier transform, especially for large $N$. A 'one layer' fast Fourier transform was presented which split the input function into two, and applied the twiddle factor to all values in the layer before calling the matrix-based DFT. This code is replicated below.
 
 ```{code-cell} ipython2
 :deletable: true

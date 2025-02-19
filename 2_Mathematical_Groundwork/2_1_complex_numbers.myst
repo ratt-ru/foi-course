@@ -1,24 +1,24 @@
 ---
 jupytext:
   text_representation:
-    extension: .md
+    extension: .myst
     format_name: myst
     format_version: 0.13
     jupytext_version: 1.16.7
 kernelspec:
-  display_name: Python 2
+  display_name: Python 3 (ipykernel)
   language: python
-  name: python2
+  name: python3
 ---
 
 +++ {"deletable": true, "editable": true}
 
 ***
 
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
-* [2. Mathematical Groundwork](2_0_introduction.ipynb)  
-    * Next: [2.2 Important functions](2_2_important_functions.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [2. Mathematical Groundwork](2_0_introduction.myst)  
+    * Next: [2.2 Important functions](2_2_important_functions.myst)
 
 ***
 
@@ -246,7 +246,7 @@ $$
 
 +++ {"deletable": true, "editable": true}
 
-This is the most common convention. 
+This is the most common convention.
 
 +++ {"deletable": true, "editable": true}
 
@@ -363,4 +363,4 @@ In this section we used the conventional symbols $t$ and $\omega$ usually employ
 
 ***
 
-* Next: [2.2 Important functions](2_2_important_functions.ipynb)
+* Next: [2.2 Important functions](2_2_important_functions.myst)

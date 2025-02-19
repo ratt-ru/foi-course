@@ -15,11 +15,11 @@ kernelspec:
 
 ***
 
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
-* [2. Mathematical Groundwork](2_0_introduction.ipynb)
-    * Previous: [2.6 Cross-correlation and Auto-correlation](2_6_cross_correlation_and_auto_correlation.ipynb)
-    * Next: [2.8 The Discrete Fourier Transform (DFT) and the Fast Fourier Transform (FFT)](2_8_the_discrete_fourier_transform.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [2. Mathematical Groundwork](2_0_introduction.myst)
+    * Previous: [2.6 Cross-correlation and Auto-correlation](2_6_cross_correlation_and_auto_correlation.myst)
+    * Next: [2.8 The Discrete Fourier Transform (DFT) and the Fast Fourier Transform (FFT)](2_8_the_discrete_fourier_transform.myst)
 ***
 
 +++ {"deletable": true, "editable": true}
@@ -57,7 +57,7 @@ pass
 Fourier theorems will serve as an important tool box for the rest of the course. While they are presented without context at the beginning of our introduction, we hope that the reader will eventually realise their tremendous impact not only in radio interferometry but in general. In fact, had Fourier lived to see the first dynamite explosion, he would probably have received 2 or 3 Nobel prizes. 
 
 For all functions $ f:\,\mathbb{R} \rightarrow \mathbb{C} $ we assume that they are (Lebesgue-) integrable (i.e. $\int_{-\infty}^{+\infty} \lvert f(x) \rvert \,dx \in \mathbb{R}$) so that their Fourier transform 
-$\mathscr{F}\{f\} = F$ exists. The Fourier transform has been introduced in [$\S$ 2.4](2_4_the_fourier_transform.ipynb#math:sec:the_fourier_transform) <!--\ref{math:sec:the_fourier_transform}-->. Functions in the "Fourier domain" are denoted by capital letters, funcions in the "original domain" by lower case letters.
+$\mathscr{F}\{f\} = F$ exists. The Fourier transform has been introduced in [$\S$ 2.4](2_4_the_fourier_transform.myst#math:sec:the_fourier_transform) <!--\ref{math:sec:the_fourier_transform}-->. Functions in the "Fourier domain" are denoted by capital letters, funcions in the "original domain" by lower case letters.
 
 +++ {"deletable": true, "editable": true}
 
@@ -358,7 +358,7 @@ $$
 
 +++ {"deletable": true, "editable": true}
 
-where we have used the [Euler equations &#10142;](2_1_complex_numbers.ipynb#math:sec:eulers_formula) <!--\ref{math:sec:eulers_formula}-->, [linearity &#10142;](#math:sec:linearity_of_the_fourier_transform)<!--\ref{math:sec:linearity_of_the_fourier_transform}--> and the [shift theorem &#10142;](#math:sec:shift_theorem)<!--\ref{math:sec:shift_theorem}-->.
+where we have used the [Euler equations &#10142;](2_1_complex_numbers.myst#math:sec:eulers_formula) <!--\ref{math:sec:eulers_formula}-->, [linearity &#10142;](#math:sec:linearity_of_the_fourier_transform)<!--\ref{math:sec:linearity_of_the_fourier_transform}--> and the [shift theorem &#10142;](#math:sec:shift_theorem)<!--\ref{math:sec:shift_theorem}-->.
 
 Occasionally, the inverse version of the [shift theorem &#10142;](#math:sec:shift_theorem)<!--\ref{math:sec:shift_theorem}--> is also called the modulation theorem. Because of their similarity this is, to some extent, justified. However, we will always refer to the above theorem as the modulation theorem.
 
@@ -404,7 +404,7 @@ $$
 
 +++ {"deletable": true, "editable": true}
 
-where we have used the result pertaining to the [Fourier transform of complex conjugate functions &#10142;](2_4_the_fourier_transform.ipynb#math:sec:fourier_transforms_of_complex_conjugate_functions) <!--\ref{math:sec:fourier_transforms_of_complex_conjugate_functions}--> and the convolution theorem in going from line two to three.
+where we have used the result pertaining to the [Fourier transform of complex conjugate functions &#10142;](2_4_the_fourier_transform.myst#math:sec:fourier_transforms_of_complex_conjugate_functions) <!--\ref{math:sec:fourier_transforms_of_complex_conjugate_functions}--> and the convolution theorem in going from line two to three.
 
 +++ {"deletable": true, "editable": true}
 
@@ -445,7 +445,7 @@ Note that this is just a special case of the [power theorem &#10142;](#math:sec:
 
 +++ {"deletable": true, "editable": true}
 
-The Fourier transform of the [cross-correlation &#10142;](2_6_cross_correlation_and_auto_correlation.ipynb#math:sec:cross_correlation) <!--\ref{math:sec:cross_correlation}--> between function $f$ and function $g$ satisfies
+The Fourier transform of the [cross-correlation &#10142;](2_6_cross_correlation_and_auto_correlation.myst#math:sec:cross_correlation) <!--\ref{math:sec:cross_correlation}--> between function $f$ and function $g$ satisfies
 
 +++ {"deletable": true, "editable": true}
 
@@ -471,7 +471,7 @@ $$
 
 +++ {"deletable": true, "editable": true}
 
-where we have used the [convolution theorem &#10142;](#math:sec:convolution_theorem)<!--\ref{math:sec:convolution_theorem}--> and the [Fourier transform of complex conjugate functions &#10142;](2_4_the_fourier_transform.ipynb#math:sec:fourier_transforms_of_complex_conjugate_functions)<!--\ref{math:sec:fourier_transforms_of_complex_conjugate_functions}-->.
+where we have used the [convolution theorem &#10142;](#math:sec:convolution_theorem)<!--\ref{math:sec:convolution_theorem}--> and the [Fourier transform of complex conjugate functions &#10142;](2_4_the_fourier_transform.myst#math:sec:fourier_transforms_of_complex_conjugate_functions)<!--\ref{math:sec:fourier_transforms_of_complex_conjugate_functions}-->.
 
 +++ {"deletable": true, "editable": true}
 
@@ -479,7 +479,7 @@ where we have used the [convolution theorem &#10142;](#math:sec:convolution_theo
 
 +++ {"deletable": true, "editable": true}
 
-The Fourier transform of the [auto-correlation &#10142;](2_6_cross_correlation_and_auto_correlation.ipynb#math:sec:auto_correlation) of a function $f$ satisfies
+The Fourier transform of the [auto-correlation &#10142;](2_6_cross_correlation_and_auto_correlation.myst#math:sec:auto_correlation) of a function $f$ satisfies
 
 +++ {"deletable": true, "editable": true}
 
@@ -560,4 +560,4 @@ $$
 
 ***
 
-* Next: [2.8 The Discrete Fourier Transform (DFT) and the Fast Fourier Transform (FFT)](2_8_the_discrete_fourier_transform.ipynb)
+* Next: [2.8 The Discrete Fourier Transform (DFT) and the Fast Fourier Transform (FFT)](2_8_the_discrete_fourier_transform.myst)

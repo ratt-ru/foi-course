@@ -13,11 +13,11 @@ kernelspec:
 
 ***
 
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
-* [8. Calibration ](8_0_introduction.ipynb)
-    * Previous: [8. Calibration](8_0_introduction.ipynb)
-    * Next: [8.2 1GC calibration](8_2_1gc.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [8. Calibration ](8_0_introduction.myst)
+    * Previous: [8. Calibration](8_0_introduction.myst)
+    * Next: [8.2 1GC calibration](8_2_1gc.myst)
 
 ***
 
@@ -66,7 +66,7 @@ HTML('../style/code_toggle.html')
 
 +++
 
-In this section we discuss the procedure that is generally used in practice to perform calibration. We will use the unpolarized RIME in this section instead of the full-polarized RIME (see [$\S$ 7 &#10142;](../7_Observing_Systems/7_0_introduction.ipynb)). It provides us with a much simpler framework with which we can grasp the basics of calibration. Moreover, we assume for the sake of simplicity that the observed data are only corrupted by the instrument's antenna gains. This assumption results in a idealised treatment as there are many other factors that do in fact corrupt radio interferometric data (see [$\S$ 7 &#10142;](../7_Observing_Systems/7_0_introduction.ipynb)).
+In this section we discuss the procedure that is generally used in practice to perform calibration. We will use the unpolarized RIME in this section instead of the full-polarized RIME (see [$\S$ 7 &#10142;](../7_Observing_Systems/7_0_introduction.myst)). It provides us with a much simpler framework with which we can grasp the basics of calibration. Moreover, we assume for the sake of simplicity that the observed data are only corrupted by the instrument's antenna gains. This assumption results in a idealised treatment as there are many other factors that do in fact corrupt radio interferometric data (see [$\S$ 7 &#10142;](../7_Observing_Systems/7_0_introduction.myst)).
 
 The unpolarized RIME is given by the following:
 
@@ -82,7 +82,7 @@ where $d_{pq}(t)$ and $\tilde{d}_{pq}(t)$ denote the corrupted observed and unco
 denote the complex gain of antenna $p$ and $q$. The term $\epsilon_{pq}$ is a zero mean (Gaussian)
 noise term, representing thermal noise.
 
-We begin this section by generating the $uv$-tracks of a fictitious instrument in [$\S$ 8.1.1 &#10549;](#cal:sec:uv)<!--\ref{cal:sec:uv}-->. In [$\S$ 8.1.2 &#10549;](#cal:sec:RIME_un)<!--\ref{cal:sec:RIME_un}--> we phrase the calibration problem (for the antenna gains) as a least squares minimization problem. Then in [$\S$ 8.1.3 &#10549;](#cal:sec:sim)<!--\ref{cal:sec:sim}--> we simulate "realistic" visibility data for the $uv$-tracks by including gain errors and adding noise to the resulting visibilities (similar to adding noise to a simple sinusoid as seen in [$\S$ 2.11 &#10142;](../2_Mathematical_Groundwork/2_11_least_squares.ipynb)). We then vectorize the problem in [$\S$ 8.1.4 &#10549;](#cal:sec:LM)<!--\ref{cal:sec:LM}-->, enabling us to use the built in `scipy` *Levenberg-Marquardt* algorithm to calibrate the data produced in [$\S$ 8.1.3 &#10549;](#cal:sec:sim)<!--\ref{cal:sec:sim}-->. We implement the aforementioned steps via a wrapper ipython function called `create_G_LM`. We finish [$\S$ 8.1.4 &#10549;](#cal:sec:LM)<!--\ref{cal:sec:LM}--> by using `create_G_LM` to estimate the antenna gains corrupting the simulated data we produced in [$\S$ 8.1.3 &#10549;](#cal:sec:sim)<!--\ref{cal:sec:sim}-->. The estimated antenna gains are then used to correct the corrupted data in [$\S$ 8.1.5 &#10549;](#cal:sec:cor)<!--\ref{cal:sec:cor}-->.
+We begin this section by generating the $uv$-tracks of a fictitious instrument in [$\S$ 8.1.1 &#10549;](#cal:sec:uv)<!--\ref{cal:sec:uv}-->. In [$\S$ 8.1.2 &#10549;](#cal:sec:RIME_un)<!--\ref{cal:sec:RIME_un}--> we phrase the calibration problem (for the antenna gains) as a least squares minimization problem. Then in [$\S$ 8.1.3 &#10549;](#cal:sec:sim)<!--\ref{cal:sec:sim}--> we simulate "realistic" visibility data for the $uv$-tracks by including gain errors and adding noise to the resulting visibilities (similar to adding noise to a simple sinusoid as seen in [$\S$ 2.11 &#10142;](../2_Mathematical_Groundwork/2_11_least_squares.myst)). We then vectorize the problem in [$\S$ 8.1.4 &#10549;](#cal:sec:LM)<!--\ref{cal:sec:LM}-->, enabling us to use the built in `scipy` *Levenberg-Marquardt* algorithm to calibrate the data produced in [$\S$ 8.1.3 &#10549;](#cal:sec:sim)<!--\ref{cal:sec:sim}-->. We implement the aforementioned steps via a wrapper ipython function called `create_G_LM`. We finish [$\S$ 8.1.4 &#10549;](#cal:sec:LM)<!--\ref{cal:sec:LM}--> by using `create_G_LM` to estimate the antenna gains corrupting the simulated data we produced in [$\S$ 8.1.3 &#10549;](#cal:sec:sim)<!--\ref{cal:sec:sim}-->. The estimated antenna gains are then used to correct the corrupted data in [$\S$ 8.1.5 &#10549;](#cal:sec:cor)<!--\ref{cal:sec:cor}-->.
 
 +++
 
@@ -90,7 +90,7 @@ We begin this section by generating the $uv$-tracks of a fictitious instrument i
 
 +++
 
-We know from [$\S$ 4.4.1.B.3 &#10142;](../4_Visibility_Space/4_5_1_uv_coverage_uv_tracks.ipynb#vis:sec:ew) that when we work with an east-west interferometer things simplify to a large degree. Firstly: $XYZ = [0~|\mathbf{b}|~0]^T$, where $|\mathbf{b}|$ is the baseline length.
+We know from [$\S$ 4.4.1.B.3 &#10142;](../4_Visibility_Space/4_5_1_uv_coverage_uv_tracks.myst#vis:sec:ew) that when we work with an east-west interferometer things simplify to a large degree. Firstly: $XYZ = [0~|\mathbf{b}|~0]^T$, where $|\mathbf{b}|$ is the baseline length.
 
 Moreover, we have that:
 
@@ -183,7 +183,7 @@ v_m[0,2,:] = v[2,:]
 
 +++
 
-As explained in [$\S$ 7.2 &#10142;](../7_Observing_Systems/7_2_rime.ipynb) the RIME assumes that our observed signal is polarized. For the sake
+As explained in [$\S$ 7.2 &#10142;](../7_Observing_Systems/7_2_rime.myst) the RIME assumes that our observed signal is polarized. For the sake
 of simplicity, however, we will now introduce the calibration problem with the underlying assumption that the observed signal is unpolarized. Unpolarized calibration is achieved by solving the following minimization problem:
 <p class=conclusion>
   <font size=4> <b>Unpolarized Calibration</b></font>
@@ -335,7 +335,7 @@ visibilities as a function of timeslots for baseline 01, 02 and 12 respectively.
 We are now ready to use least squares to calibrate $\boldsymbol{\mathcal{D}}$ (see [<cite data-cite='Yatawatta2012'>GPU accelerated nonlinear optimization in radio interferometric calibration</cite> &#10548;](http://ieeexplore.ieee.org/xpl/freeabs_all.jsp?arnumber=6339610&abstractAccess=no&userType=inst)).
 
 We first present a brief review of least squares minimization. Suppose we wish to fit a model $\mathbf{f}\left( \mathbf{m},\breve{\mathbf{g}}\right)$, where $\mathbf{m}$ and $\breve{\mathbf{g}}$ denote
-the model input values and a vector of unknown variables respectively, to some data $\left\{\mathbf{d}_{i},\mathbf{m}_{i}\right\}$. The vector of unknown variables $\breve{\mathbf{g}}$ parametrize the model. A standard method for determining which parameter vector $\breve{\mathbf{g}}$ best fits the data is to minimize the sum of the squared residuals. This technique is referred to as least squares minimization. The residual vector is denoted by $\mathbf{r}(\mathbf{m},\mathbf{d},\breve{\mathbf{g}}) = \mathbf{d} - \mathbf{f}\left( \mathbf{m},\breve{\mathbf{g}}\right)$. The objective function (the function we wish to minimize) associated with least squares is: $\sum_i \mathbf{r}_i^2$. The function `optimize.leastsq` is `scipy`'s built-in least squares solver and employs the *Levenberg-Marquardt* algorithm in the background. The Levenberg-Marquardt algorithm is discussed in more detail in [$\S$ 2.11 &#10142;](../2_Mathematical_Groundwork/2_11_least_squares.ipynb). To use `optimize.leastsq` one needs a function, here called `err_func`, that calculates the residual vector $\mathbf{r}$. An initial guess of the parameter vector $\breve{\mathbf{g}}$ is also required.
+the model input values and a vector of unknown variables respectively, to some data $\left\{\mathbf{d}_{i},\mathbf{m}_{i}\right\}$. The vector of unknown variables $\breve{\mathbf{g}}$ parametrize the model. A standard method for determining which parameter vector $\breve{\mathbf{g}}$ best fits the data is to minimize the sum of the squared residuals. This technique is referred to as least squares minimization. The residual vector is denoted by $\mathbf{r}(\mathbf{m},\mathbf{d},\breve{\mathbf{g}}) = \mathbf{d} - \mathbf{f}\left( \mathbf{m},\breve{\mathbf{g}}\right)$. The objective function (the function we wish to minimize) associated with least squares is: $\sum_i \mathbf{r}_i^2$. The function `optimize.leastsq` is `scipy`'s built-in least squares solver and employs the *Levenberg-Marquardt* algorithm in the background. The Levenberg-Marquardt algorithm is discussed in more detail in [$\S$ 2.11 &#10142;](../2_Mathematical_Groundwork/2_11_least_squares.myst). To use `optimize.leastsq` one needs a function, here called `err_func`, that calculates the residual vector $\mathbf{r}$. An initial guess of the parameter vector $\breve{\mathbf{g}}$ is also required.
 
 For calibration the above variables become:
 
@@ -455,7 +455,7 @@ The superscript $(\cdot)^{-1}$ denotes matrix inversion, while $(\cdot)^{-H}$ de
 We calculate the corrected visibilities below.<br><br>
 
 <div class=advice>
-<b>Advice:</b> The matrix and vector operations (like $\odot$) and operators used in this section are discussed in more detail in [$\S$ 2.10 &#10142;](../2_Mathematical_Groundwork/2_10_linear_algebra.ipynb)
+<b>Advice:</b> The matrix and vector operations (like $\odot$) and operators used in this section are discussed in more detail in [$\S$ 2.10 &#10142;](../2_Mathematical_Groundwork/2_10_linear_algebra.myst)
 </div>
 
 ```{code-cell} ipython3
@@ -522,7 +522,7 @@ The images above contain the real part of the corrected (green) and uncorrupted 
 
 ***
 
-Next: [8.2 1GC calibration](8_2_1gc.ipynb)
+Next: [8.2 1GC calibration](8_2_1gc.myst)
 
 ```{code-cell} ipython3
 

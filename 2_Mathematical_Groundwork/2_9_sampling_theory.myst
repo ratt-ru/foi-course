@@ -13,11 +13,11 @@ kernelspec:
 
 ***
 
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
-* [2. Mathematical Groundwork](2_0_introduction.ipynb)
-    * Previous: [2.8 The Discrete Fourier Transform (DFT) and the Fast Fourier Transform (FFT)](2_8_the_discrete_fourier_transform.ipynb)
-    * Next: [2.10 Linear Algrebra](2_10_linear_algebra.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [2. Mathematical Groundwork](2_0_introduction.myst)
+    * Previous: [2.8 The Discrete Fourier Transform (DFT) and the Fast Fourier Transform (FFT)](2_8_the_discrete_fourier_transform.myst)
+    * Next: [2.10 Linear Algrebra](2_10_linear_algebra.myst)
 
 ***
 
@@ -76,7 +76,7 @@ where $\Delta t$ is the sampling interval, the index $n$ labels the samples and 
 
 $$ f(t_n) = \sum_{n = 0}^{N-1} f(t) \delta(t - n\Delta t - t_0), \quad \mbox{where} \quad \Delta t = \frac{t_f - t_0}{N-1}, \quad \mbox{and} \quad t_n = t_0 + n\Delta t. $$
 
-So far we have done nothing fancy, we have just expressed the act of sampling in terms of a continuous mathematical function. We can go a step further and write it purely in terms of the special functions introduced in ([$\S$ 2.2](2_2_important_functions.ipynb)) as
+So far we have done nothing fancy, we have just expressed the act of sampling in terms of a continuous mathematical function. We can go a step further and write it purely in terms of the special functions introduced in ([$\S$ 2.2](2_2_important_functions.myst)) as
 
 $$f(t_n)= f(t)\frac{1}{\Delta t}III(\frac{t}{\Delta t})\sqcap_{t_0,t_f}(t), $$
 
@@ -407,4 +407,4 @@ An ideal anti-aliasing filter filters out all frequencies above the Nyquist freq
 
 ***
 
-* Next: [2.10 Linear Algrebra](2_10_linear_algebra.ipynb)
+* Next: [2.10 Linear Algrebra](2_10_linear_algebra.myst)

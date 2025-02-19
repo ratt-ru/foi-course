@@ -13,11 +13,11 @@ kernelspec:
 
 ***
 
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
 * [2. Mathematical Groundwork]()
-    * Previous: [2.11 Least-squares Minimization](2_11_least_squares.ipynb)
-    * Next: [2.13 Spherical Trigonometry](2_13_spherical_trigonometry.ipynb)
+    * Previous: [2.11 Least-squares Minimization](2_11_least_squares.myst)
+    * Next: [2.13 Spherical Trigonometry](2_13_spherical_trigonometry.myst)
 
 ***
 
@@ -135,4 +135,4 @@ d\Omega = \frac{\rho^2 \sin \theta d\theta d\phi}{\rho^2}=\sin \theta d\theta d\
 
 ***
 
-* Next: [2.x Further Reading and References](2_x_further_reading_and_references.ipynb)
+* Next: [2.x Further Reading and References](2_x_further_reading_and_references.myst)

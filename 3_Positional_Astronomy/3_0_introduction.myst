@@ -15,10 +15,10 @@ kernelspec:
 
 ***
 
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
 * [Positional Astronomy](#)
-    * Next: [Equatorial Coordinates](3_1_equatorial_coordinates.ipynb)
+    * Next: [Equatorial Coordinates](3_1_equatorial_coordinates.myst)
 
 ***
 
@@ -65,7 +65,7 @@ In this chapter we present the positional astronomy we will need to comprehend i
 astronomical catalogues, so that we can easily locate celestial objects in the night sky.
 <br><br>
 &bull; the <em>horizontal coordinate system</em> in <a class='pos_sec_hoz_intro'></a>: the horizontal coordinate system is used to point a telescope to a specific location in an observer's local sky. <br><br> 
-&bull; the <em>direction cosine coordinate system</em> in <a class='pos_sec_dir_intro'></a>: the direction cosine coordinate system is used to make local sky-maps around a direction of interest. It is also important in radio interferometry as it allows us to define a Fourier relationship between the sky brightness and interferometric measurements (see <a href='../4_Visibility_Space/4_0_introduction.ipynb'>$\S$ 4 &#10142;</a>).
+&bull; the <em>direction cosine coordinate system</em> in <a class='pos_sec_dir_intro'></a>: the direction cosine coordinate system is used to make local sky-maps around a direction of interest. It is also important in radio interferometry as it allows us to define a Fourier relationship between the sky brightness and interferometric measurements (see <a href='../4_Visibility_Space/4_0_introduction.myst'>$\S$ 4 &#10142;</a>).
 </p>
 
 There are two additional concepts that are also discussed: *hour angle* and *local sidereal time*. 
@@ -90,11 +90,11 @@ In general, we do not explicitly reference any outside material in this chapter,
 
 #### Chapter Sections
 
-* [Equatorial Coordinates](3_1_equatorial_coordinates.ipynb)
-* [Hour Angle and Local Sidereal Time](3_2_hour_angle.ipynb)
-* [Horizontal Coordinates](3_3_horizontal_coordinates.ipynb)
-* [Direction Cosine Coordinates](3_4_direction_cosine_coordinates.ipynb)
-* [Further Reading](3_x_further_reading_and_references.ipynb)
+* [Equatorial Coordinates](3_1_equatorial_coordinates.myst)
+* [Hour Angle and Local Sidereal Time](3_2_hour_angle.myst)
+* [Horizontal Coordinates](3_3_horizontal_coordinates.myst)
+* [Direction Cosine Coordinates](3_4_direction_cosine_coordinates.myst)
+* [Further Reading](3_x_further_reading_and_references.myst)
 
 +++ {"deletable": true, "editable": true}
 
@@ -129,7 +129,7 @@ In general, we do not explicitly reference any outside material in this chapter,
 
 ***
 
-Next: [Equatorial Coordinates](3_1_equatorial_coordinates.ipynb)
+Next: [Equatorial Coordinates](3_1_equatorial_coordinates.myst)
 
 +++ {"deletable": true, "editable": true}
 

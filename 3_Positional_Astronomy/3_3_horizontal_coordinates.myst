@@ -15,11 +15,11 @@ kernelspec:
 
 ***
 
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
-* [Positional Astronomy](3_0_introduction.ipynb)
-    * Previous: [Hour Angle and Local Sidereal Time](3_2_hour_angle.ipynb)
-    * [Direction Cosine Coordinates](3_4_direction_cosine_coordinates.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [Positional Astronomy](3_0_introduction.myst)
+    * Previous: [Hour Angle and Local Sidereal Time](3_2_hour_angle.myst)
+    * [Direction Cosine Coordinates](3_4_direction_cosine_coordinates.myst)
 
 ***
 
@@ -95,8 +95,8 @@ The equations below allow us to convert between equatorial and horizontal coordi
 
 +++ {"deletable": true, "editable": true}
 
-The above equations were derived by applying the spherical trigonometric identities in <a href='../2_Mathematical_Groundwork/2_13_spherical_trigonometry.ipynb'>$\S$ 2.13 &#10142;</a> to 
-the triangle $\Delta PSZ$ which is depicted in <a class="pos_fig_conversion_hz"></a> <!--\ref{pos:fig:conversion}--> (see [Appendix &#10142;](../0_Introduction/2_Appendix.ipynb)).
+The above equations were derived by applying the spherical trigonometric identities in <a href='../2_Mathematical_Groundwork/2_13_spherical_trigonometry.myst'>$\S$ 2.13 &#10142;</a> to 
+the triangle $\Delta PSZ$ which is depicted in <a class="pos_fig_conversion_hz"></a> <!--\ref{pos:fig:conversion}--> (see [Appendix &#10142;](../0_Introduction/2_Appendix.myst)).
 
 +++ {"deletable": true, "editable": true}
 
@@ -111,7 +111,7 @@ fundamental plane of the celestial coordinate system. <span style="background-co
 
 <div class=advice>
 <b>Note:</b> The parallactic angle <span style="background-color:cyan">KT:GM:The parallactic angle needs to be in italics since this is its first appearance?</span> $q$ associated with a specific location on the celestial sphere $S$ is the angle between two great circles; the hour circle of $S$ and the great circle that passes through zenith and $S$. The parallactic angle $q$ is depicted in <a class="pos_fig_conversion_hz"></a> <!--\ref{pos:fig:conversion}--> 
-The parallactic angle, and how it pertains to radio interferometry is discussed in more detail in <span style="background-color:cyan">KT:LF:Link to dead notebook</span> <a href='../7_Observing_Systems/7_7_antenna_mounts_and_parallactic_angle.ipynb'>$\S$ 7.7 &#10142;</a>.
+The parallactic angle, and how it pertains to radio interferometry is discussed in more detail in <span style="background-color:cyan">KT:LF:Link to dead notebook</span> <a href='../7_Observing_Systems/7_7_antenna_mounts_and_parallactic_angle.myst'>$\S$ 7.7 &#10142;</a>.
 </div>
 
 +++ {"deletable": true, "editable": true}
@@ -353,4 +353,4 @@ ax.grid('on')
 
 ***
 
-Next: [Direction Cosine Coordinates](3_4_direction_cosine_coordinates.ipynb)
+Next: [Direction Cosine Coordinates](3_4_direction_cosine_coordinates.myst)

@@ -13,11 +13,11 @@ kernelspec:
 
 ***
 
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
-* [8. Calibration](8_0_introduction.ipynb)  
-    * Previous: [8.4 3GC Calibration](8_4_3GC.ipynb)  
-    * Next: [9. Pracrical Advice for Reducing a Data Set and Recognizing Errors](../9_Practical/9_0_introduction.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [8. Calibration](8_0_introduction.myst)  
+    * Previous: [8.4 3GC Calibration](8_4_3GC.myst)  
+    * Next: [9. Pracrical Advice for Reducing a Data Set and Recognizing Errors](../9_Practical/9_0_introduction.myst)
 
 ***
 
@@ -47,21 +47,21 @@ HTML('../style/code_toggle.html')
 
 +++
 
-We summarize all the references and the further reading material which we have already mentioned in a dispersed manner througout the chapter here. We started the chapter by showing that calibration is usually performed by using the Levenberg-Marquedt gradient method in [Sec. 8.1 &#10142;](../8_Calibration/8_1_Calibration_Least_Squares_Problem.ipynb). The relevant references and further reading material for [Sec. 8.1 &#10142;](../8_Calibration/8_1_Calibration_Least_Squares_Problem.ipynb) is given in the following summary block:
+We summarize all the references and the further reading material which we have already mentioned in a dispersed manner througout the chapter here. We started the chapter by showing that calibration is usually performed by using the Levenberg-Marquedt gradient method in [Sec. 8.1 &#10142;](../8_Calibration/8_1_Calibration_Least_Squares_Problem.myst). The relevant references and further reading material for [Sec. 8.1 &#10142;](../8_Calibration/8_1_Calibration_Least_Squares_Problem.myst) is given in the following summary block:
 
 **Calibration as a least squares problem**
 
 * [<cite data-cite='Yatawatta2012'>GPU accelerated nonlinear optimization in radio interferometric calibration</cite> &#10548;](http://ieeexplore.ieee.org/xpl/freeabs_all.jsp?arnumber=6339610&abstractAccess=no&userType=inst)
 * [<cite data-cite='Smirnov2015'>Radio interferometric gain calibration as a complex optimization problem</cite> &#10548;](http://arxiv.org/abs/1502.06974)
 
-In [Sec. 8.2 &#10142;](../8_Calibration/8_2_1GC.ipynb) we discussed 1GC calibration, which is when we use the calibration solutions we obtained from a calibrator observation to correct our target field observation. The relevant external material associated with this section can be found in the following summary block:
+In [Sec. 8.2 &#10142;](../8_Calibration/8_2_1GC.myst) we discussed 1GC calibration, which is when we use the calibration solutions we obtained from a calibrator observation to correct our target field observation. The relevant external material associated with this section can be found in the following summary block:
 
 **1GC**
 
 * [<cite data-cite='Thompson2008'>Interferometry and synthesis in radio astronomy</cite> &#10548;](https://books.google.co.za/books?hl=en&lr=&id=S99Z7kNBYzAC&oi=fnd&pg=PP2&dq=Interferometry+synthesis+and+radio+astronomy&ots=mGUC2Fe6nr&sig=1g43eD2Q0wKO9ATN8a8T4a1_xGk#v=onepage&q=Interferometry%20synthesis%20and%20radio%20astronomy&f=false)<br>
 * [<cite data-cite='Taylor1999'>Synthesis imaging in radio astronomy II</cite> &#10548;](http://adsabs.harvard.edu/abs/1999sira.conf.....T)
 
-We then described the method of self-calibration (2GC calibration) in [Sec. 8.3 &#10142;](../8_Calibration/8_3_2GC.ipynb), which entails using the field that we are observing to also calibrate the observation. Some of the most important articles that pertain to 2GC calibration can be found below:
+We then described the method of self-calibration (2GC calibration) in [Sec. 8.3 &#10142;](../8_Calibration/8_3_2GC.myst), which entails using the field that we are observing to also calibrate the observation. Some of the most important articles that pertain to 2GC calibration can be found below:
 
 **2GC**
 
@@ -73,7 +73,7 @@ We then described the method of self-calibration (2GC calibration) in [Sec. 8.3 
 * [<cite data-cite='Ekers1984'>The almost serendipitous discovery of self-calibration</cite> &#10548;](http://adsabs.harvard.edu/abs/1984sdra.conf..154E)
 * [<cite data-cite='Pearson1984'>Image formation by self-calibration in radio astronomy</cite> &#10548;](http://adsabs.harvard.edu/full/1984ARA%26A..22...97P)
 
-We ended the chapter by briefly looking at 3GC calibration (see [Sec 8.4 &#10142;](../8_Calibration/8_3_3GC.ipynb)). In wide-field observations we can no longer afford to ignore direction dependent effects, i.e. effects like pointing error. The 3GC calibration algorithms can in general be divided into physics-based and heuristic approaches (depending on whether a physical model that can accurately describe the direction dependent effect exists or not). The approaches belonging to these two broad categories are summarized below:
+We ended the chapter by briefly looking at 3GC calibration (see [Sec 8.4 &#10142;](../8_Calibration/8_3_3GC.myst)). In wide-field observations we can no longer afford to ignore direction dependent effects, i.e. effects like pointing error. The 3GC calibration algorithms can in general be divided into physics-based and heuristic approaches (depending on whether a physical model that can accurately describe the direction dependent effect exists or not). The approaches belonging to these two broad categories are summarized below:
 
 **3GC: Physics-based approaches**
 
@@ -94,7 +94,7 @@ Correcting for a direction dependent effect is tricky in its own right, some of 
 * *Facetting*: [<cite data-cite='Cornwell1992'>Radio-interferometric imaging of very large fields-The problem of non-coplanar arrays</cite> &#10548;](http://adsabs.harvard.edu/abs/1992A%26A...261..353C)
 * *AW-projection*: [<cite data-cite='Batnagar2008'>Correcting direction-dependent gains in the deconvolution of radio interferometric images</cite> &#10548;](http://arxiv.org/abs/0805.0834)
 
-We also briefly mentioned the developments which have been made with regards to the calibration solver itself (see [Sec 8.4 &#10142;](../8_Calibration/8_3_3GC.ipynb)); some of the most recent developments in this regard can be found below: 
+We also briefly mentioned the developments which have been made with regards to the calibration solver itself (see [Sec 8.4 &#10142;](../8_Calibration/8_3_3GC.myst)); some of the most recent developments in this regard can be found below: 
 
 **Solver Development**
 
@@ -118,4 +118,4 @@ Good literature reviews on 3GC can be found in:
 
 ***
 
-Next: [9. Pracrical Advice for Reducing a Data Set and Recognizing Errors](../9_Practical/9_0_introduction.ipynb)
+Next: [9. Pracrical Advice for Reducing a Data Set and Recognizing Errors](../9_Practical/9_0_introduction.myst)

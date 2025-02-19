@@ -15,11 +15,11 @@ kernelspec:
 
 ***
 
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
-* [Positional Astronomy](3_0_introduction.ipynb)
-    * Previous: [Horizontal Coordinates](3_3_horizontal_coordinates.ipynb)
-    * Next: [Further Reading](3_x_further_reading_and_references.ipynb) 
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [Positional Astronomy](3_0_introduction.myst)
+    * Previous: [Horizontal Coordinates](3_3_horizontal_coordinates.myst)
+    * Next: [Further Reading](3_x_further_reading_and_references.myst) 
 
 ***
 
@@ -60,7 +60,7 @@ There is another useful astronomical coordinate system that we ought to introduc
 
 <div class=advice>
 <b>Note:</b> The direction cosine coordinate system is useful for another reason, when we use
-it to image interferometric data, then it becomes evident that there exists a Fourier relationship between the sky brightness function and the measurements that an interferometer makes (see <a href='../4_Visibility_Space/4_0_introduction.ipynb'>Chapter 4 &#10142;</a>).
+it to image interferometric data, then it becomes evident that there exists a Fourier relationship between the sky brightness function and the measurements that an interferometer makes (see <a href='../4_Visibility_Space/4_0_introduction.myst'>Chapter 4 &#10142;</a>).
 </div><br>
 We use three coordinates in the direction cosine coordinate system, namely $l$, $m$ and $n$. The coordinates $l$, $m$ and $n$ are dimensionless direction cosines, i.e.
 
@@ -119,12 +119,12 @@ m &=& \sin \theta \cos \psi = \sin \delta \cos \delta_0 - \cos \delta \sin \delt
 +++ {"deletable": true, "editable": true}
 
 <div class=advice>
-<b>Note:</b> See <a href='../0_Introduction/2_Appendix.ipynb'>Appendix &#10142;</a> for the derivation of the above relations.
+<b>Note:</b> See <a href='../0_Introduction/2_Appendix.myst'>Appendix &#10142;</a> for the derivation of the above relations.
 </div>
 
 +++ {"deletable": true, "editable": true}
 
-We can obtain the conversion relations above by applying the spherical trigonemetric identities in <a href='../2_Mathematical_Groundwork/2_13_spherical_trigonometry.ipynb'>$\S$ 2.13 &#10142;</a> to the triangle depicted in <a class='pos_fig_dirconversion_dir'></a><!--\ref{pos:fig:dirconversion}--> (the one formed by the source the field center and the NCP).
+We can obtain the conversion relations above by applying the spherical trigonemetric identities in <a href='../2_Mathematical_Groundwork/2_13_spherical_trigonometry.myst'>$\S$ 2.13 &#10142;</a> to the triangle depicted in <a class='pos_fig_dirconversion_dir'></a><!--\ref{pos:fig:dirconversion}--> (the one formed by the source the field center and the NCP).
 
 +++ {"deletable": true, "editable": true}
 
@@ -238,7 +238,7 @@ plt.grid()
 
 ***
 
-Next: [Further Reading](3_x_further_reading_and_references.ipynb)
+Next: [Further Reading](3_x_further_reading_and_references.myst)
 
 +++ {"deletable": true, "editable": true}
 

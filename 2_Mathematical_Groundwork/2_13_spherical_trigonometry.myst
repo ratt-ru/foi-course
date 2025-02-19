@@ -13,11 +13,11 @@ kernelspec:
 
 ***
 
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
-* [2. Mathematical Groundwork](2_0_introduction.ipynb)
-    * Previous: [2.12 Solid Angle](2_12_solid_angle.ipynb)  
-    * Next: [2.14 CLEAN in 1D](2_14_CLEAN_in_1D.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [2. Mathematical Groundwork](2_0_introduction.myst)
+    * Previous: [2.12 Solid Angle](2_12_solid_angle.myst)  
+    * Next: [2.14 CLEAN in 1D](2_14_CLEAN_in_1D.myst)
 
 ***
 
@@ -57,7 +57,7 @@ Most people have a basic understanding of planar trigonometry. In this section w
 The first two rules are analogous to the planar sine and cosine rule. The sides and angles used in the above expressions are graphically depicted in  [Fig. 2.13.1 &#10549;](#math:fig:spher_trig) <!--\ref{math:fig:spher_trig}-->.
 
 <div class=advice>
-<b>Advice:</b> We use spherical trigonometry to convert between different astronomical coordinate systems (see [Appendix &#10142;](../0_Introduction/2_Appendix.ipynb)).
+<b>Advice:</b> We use spherical trigonometry to convert between different astronomical coordinate systems (see [Appendix &#10142;](../0_Introduction/2_Appendix.myst)).
 </div>
 
 +++
@@ -72,4 +72,4 @@ The first two rules are analogous to the planar sine and cosine rule. The sides 
 
 ***
 
-Next: [2.14 CLEAN in 1D](2_14_CLEAN_in_1D.ipynb)
+Next: [2.14 CLEAN in 1D](2_14_CLEAN_in_1D.myst)

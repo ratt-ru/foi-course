@@ -15,11 +15,11 @@ kernelspec:
 
 ***
 
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
-* [2. Mathematical Groundwork](2_0_introduction.ipynb)
-    * Previous: [2.4 The Fourier Transform](2_4_the_fourier_transform.ipynb)
-    * Next: [2.6 Cross-correlation and auto-correlation](2_6_cross_correlation_and_auto_correlation.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [2. Mathematical Groundwork](2_0_introduction.myst)
+    * Previous: [2.4 The Fourier Transform](2_4_the_fourier_transform.myst)
+    * Next: [2.6 Cross-correlation and auto-correlation](2_6_cross_correlation_and_auto_correlation.myst)
 
 ***
 
@@ -63,7 +63,7 @@ HTML('../style/code_toggle.html')
 
 +++ {"deletable": true, "editable": true}
 
-The convolution is an operation connecting two functions, with the result of a mutual broadening. In signal processing, the convolution is often used to represent instrumental broadening of a signal. For any observation, the signal received is "filtered" by an instrumental function. The signal is smeared out. The mathematical description for this effect is the convolution of the function representing the original signal with the instrumental function. In this section, we give a detailed description. Note, the Convolution Theorem, an essential theorem in Fourier analysis and aperture synthesis is discussed in [Section 2.7.4 &#10142;](2_7_fourier_theorems.ipynb).
+The convolution is an operation connecting two functions, with the result of a mutual broadening. In signal processing, the convolution is often used to represent instrumental broadening of a signal. For any observation, the signal received is "filtered" by an instrumental function. The signal is smeared out. The mathematical description for this effect is the convolution of the function representing the original signal with the instrumental function. In this section, we give a detailed description. Note, the Convolution Theorem, an essential theorem in Fourier analysis and aperture synthesis is discussed in [Section 2.7.4 &#10142;](2_7_fourier_theorems.myst).
 
 +++ {"deletable": true, "editable": true}
 
@@ -142,7 +142,7 @@ The last two rules can be easily verified.
 
 ### 2.5.3 Convolution Theorem<a id='math:sec:convolution_theorem_link'></a>
 
-See [Section 2.7.4 &#10142;](2_7_fourier_theorems.ipynb)
+See [Section 2.7.4 &#10142;](2_7_fourier_theorems.myst)
 
 +++
 
@@ -587,4 +587,4 @@ Would it be the sensitivity at a certain position, the convolution would *not* b
 
 ***
 
-* Next [2.6 Cross-correlation and auto-correlation](2_6_cross_correlation_and_auto_correlation.ipynb)
+* Next [2.6 Cross-correlation and auto-correlation](2_6_cross_correlation_and_auto_correlation.myst)

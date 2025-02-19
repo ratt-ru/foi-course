@@ -13,11 +13,11 @@ kernelspec:
 
 ***
 
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
-* [2. Mathematical Groundwork](2_0_introduction.ipynb)
-    * Previous: [2.2 Important functions](2_2_important_functions.ipynb)
-    * Next: [2.4 The Fourier Transform](2_4_the_fourier_transform.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [2. Mathematical Groundwork](2_0_introduction.myst)
+    * Previous: [2.2 Important functions](2_2_important_functions.myst)
+    * Next: [2.4 The Fourier Transform](2_4_the_fourier_transform.myst)
 
 ***
 
@@ -95,7 +95,7 @@ with the Fourier coefficients $a_m$
 
 +++
 
-The same convergence criteria apply and one realisation can be transformed to the other. Making use of [Euler's formula &#10142;](2_1_complex_numbers.ipynb#math:sec:eulers_formula) <!--\ref{math:sec:eulers_formula}-->, one gets
+The same convergence criteria apply and one realisation can be transformed to the other. Making use of [Euler's formula &#10142;](2_1_complex_numbers.myst#math:sec:eulers_formula) <!--\ref{math:sec:eulers_formula}-->, one gets
 
 +++
 
@@ -165,7 +165,7 @@ The series again converges under the same criteria as before and the relations b
 
 +++
 
-One nice example is the complex, scaled Fourier series of the scaled [shah function &#10142;](2_2_important_functions.ipynb#math:sec:shah_function) <!--\ref{math:sec:shah_function}--> $III_{T^{-1}}(x)\,=III\left(\frac{x}{T}\right)\,=\sum_{l=-\infty}^{+\infty} T \delta\left(x-l T\right)$. Obviously, the period of this function is $T$. The Fourier coefficients (matched to a period of $T$) is calculated as
+One nice example is the complex, scaled Fourier series of the scaled [shah function &#10142;](2_2_important_functions.myst#math:sec:shah_function) <!--\ref{math:sec:shah_function}--> $III_{T^{-1}}(x)\,=III\left(\frac{x}{T}\right)\,=\sum_{l=-\infty}^{+\infty} T \delta\left(x-l T\right)$. Obviously, the period of this function is $T$. The Fourier coefficients (matched to a period of $T$) is calculated as
 
 +++
 
@@ -283,4 +283,4 @@ interact(lambda m,T:inter_FS(x=np.linspace(-1.0,1.0,N),m=m,func=square_wave,T=T)
 
 ***
 
-* Next: [2.4 The Fourier Transform](2_4_the_fourier_transform.ipynb)
+* Next: [2.4 The Fourier Transform](2_4_the_fourier_transform.myst)

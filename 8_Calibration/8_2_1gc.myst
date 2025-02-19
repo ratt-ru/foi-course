@@ -13,11 +13,11 @@ kernelspec:
 
 ***
 
-* [Outline](../0_introduction/0_introduction.ipynb)
-* [Glossary](../0_introduction/1_glossary.ipynb)
-* [8. Calibration](8_0_introduction.ipynb)
-    * Previous: [8.1 Calibration as a least-squares problem](8_1_calibration_least_squares_problem.ipynb)
-    * Next: [8.3 2GC Calibration](8_3_2gc.ipynb)
+* [Outline](../0_introduction/0_introduction.myst)
+* [Glossary](../0_introduction/1_glossary.myst)
+* [8. Calibration](8_0_introduction.myst)
+    * Previous: [8.1 Calibration as a least-squares problem](8_1_calibration_least_squares_problem.myst)
+    * Next: [8.3 2GC Calibration](8_3_2gc.myst)
 
 ***
 
@@ -84,7 +84,7 @@ Below is a schematic representation of how an observation might be broken up. No
 
 +++
 
-One point has been neglected in the above discussion: how do we actually calibrate using the calibrator observations? The answer is, fortunately, relatively simple. As you have seen in [$\S$ 8.1 &#10142;](../8_Calibration/8_1_calibration_least_squares_problem.ipynb#cal:sec:cal_ls)<!--\ref{cal:sec:cal_ls}-->, it is possible to treat calibration as a least-squares problem. 1GC is no exception. One helpful fact is that the model will usually contain only a single source. For a point source at the centre of the field, the model reduces to the amplitude of the calibrator multiplied by the antenna gains. For more complicated calibrator sources, this will not be the case. However, given a sufficiently accurate source model, complicated calibrators can still be used.
+One point has been neglected in the above discussion: how do we actually calibrate using the calibrator observations? The answer is, fortunately, relatively simple. As you have seen in [$\S$ 8.1 &#10142;](../8_Calibration/8_1_calibration_least_squares_problem.myst#cal:sec:cal_ls)<!--\ref{cal:sec:cal_ls}-->, it is possible to treat calibration as a least-squares problem. 1GC is no exception. One helpful fact is that the model will usually contain only a single source. For a point source at the centre of the field, the model reduces to the amplitude of the calibrator multiplied by the antenna gains. For more complicated calibrator sources, this will not be the case. However, given a sufficiently accurate source model, complicated calibrators can still be used.
 
 Once the calibrator solutions have been found, the final obstacle is transferring the solution to the target field. In the simplest case, this can be done by applying the results from a calibrator observation to the subsequent target field observation/s. It is also possible to do more complicated solution transfers by interpolating between values or fitting curves across the solutions.
 
@@ -205,4 +205,4 @@ As for the case of closure phase, we can eliminate the contribution of the gains
 
 ***
 
-Next: [8.3 2GC Calibration](8_3_2gc.ipynb)
+Next: [8.3 2GC Calibration](8_3_2gc.myst)

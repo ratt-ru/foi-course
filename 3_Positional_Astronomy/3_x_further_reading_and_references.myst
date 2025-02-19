@@ -15,11 +15,11 @@ kernelspec:
 
 ***
 
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
-* [Positional Astronomy](3_0_introduction.ipynb)  
-    * Previous: [Direction Cosine Coordinates](3_4_direction_cosine_coordinates.ipynb) 
-    * Next: [Chapter 4: Visibility Space](../4_Visibility_Space/4_0_introduction.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [Positional Astronomy](3_0_introduction.myst)  
+    * Previous: [Direction Cosine Coordinates](3_4_direction_cosine_coordinates.myst) 
+    * Next: [Chapter 4: Visibility Space](../4_Visibility_Space/4_0_introduction.myst)
 
 ***
 
@@ -72,4 +72,4 @@ The second aim is to get the reader more excited about astronomy in general. We 
 
 ***
 
-Next: [Chapter 4: Visibility Space](../4_Visibility_Space/4_0_introduction.ipynb)
+Next: [Chapter 4: Visibility Space](../4_Visibility_Space/4_0_introduction.myst)

@@ -13,10 +13,10 @@ kernelspec:
 
 ***
 
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
-* [8. Calibration ](8_0_introduction.ipynb) 
-    * Next: [8.1 Calibration as a Least Squares Problem](8_1_calibration_least_squares_problem.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [8. Calibration ](8_0_introduction.myst) 
+    * Next: [8.1 Calibration as a Least Squares Problem](8_1_calibration_least_squares_problem.myst)
 
 ***
 
@@ -34,13 +34,13 @@ kernelspec:
 
 +++
 
-Calibration is an important, as yet under-discussed, part of radio interferometry. As the previous chapter on observation systems has shown, there are many effects which can introduce errors into the signal measured by a radio interferometer. While some of these effects can be corrected by electronics and *a priori* information, some effects require explicit calibration. Calibration involves the determination of a number of parameters which can be used to correct the received signal. The numerical method most commonly used for this purpose is discussed in [$\S$ 8.1 &#10142;](../8_Calibration/8_1_calibration_least_squares_problem.ipynb).
+Calibration is an important, as yet under-discussed, part of radio interferometry. As the previous chapter on observation systems has shown, there are many effects which can introduce errors into the signal measured by a radio interferometer. While some of these effects can be corrected by electronics and *a priori* information, some effects require explicit calibration. Calibration involves the determination of a number of parameters which can be used to correct the received signal. The numerical method most commonly used for this purpose is discussed in [$\S$ 8.1 &#10142;](../8_Calibration/8_1_calibration_least_squares_problem.myst).
 
-Calibration is often divided into three generations: first, second and third generation calibration (1GC, 2GC and 3GC respectively). 1GC is the oldest method of calibration and is still in common use. It exploits observations of sources with known parameters to calibrate for a variety of effects. The basic idea behind 1GC is to observe a known calibrator source (it need not be in the target field); we then use this calibrator observation to obtain calibration solutions which we then use to correct our target field observation, i.e. we *transfer* the solutions to the target field. This is discussed further in [$\S$ 8.2 &#10142;](../8_Calibration/8_2_1gc.ipynb). This section also introduces the notion of closure quantities, which are useful diagnostics of the performance of an interferometer.
+Calibration is often divided into three generations: first, second and third generation calibration (1GC, 2GC and 3GC respectively). 1GC is the oldest method of calibration and is still in common use. It exploits observations of sources with known parameters to calibrate for a variety of effects. The basic idea behind 1GC is to observe a known calibrator source (it need not be in the target field); we then use this calibrator observation to obtain calibration solutions which we then use to correct our target field observation, i.e. we *transfer* the solutions to the target field. This is discussed further in [$\S$ 8.2 &#10142;](../8_Calibration/8_2_1gc.myst). This section also introduces the notion of closure quantities, which are useful diagnostics of the performance of an interferometer.
 
-2GC is used to describe the method of self-calibration. This is an iterative procedure which makes use of successive sky model updates via deconvolution to calibrate using the target field. This is particularly useful as it accounts for effects unique to the target field rather than relying solely on the calibrator observations of 1GC. 2GC is the subject of [$\S$ 8.3 &#10142;](../8_Calibration/8_3_2gc.ipynb).
+2GC is used to describe the method of self-calibration. This is an iterative procedure which makes use of successive sky model updates via deconvolution to calibrate using the target field. This is particularly useful as it accounts for effects unique to the target field rather than relying solely on the calibrator observations of 1GC. 2GC is the subject of [$\S$ 8.3 &#10142;](../8_Calibration/8_3_2gc.myst).
 
-The last section of the chapter, [$\S$ 8.4 &#10142;](../8_Calibration/8_4_3gc.ipynb) deals with the most recent advances of calibration and the methods of third generation calibration. 3GC deals specifically with the calibration of *direction-dependent effects*. As these effects are not uniform across the field of view, special care needs to be taken to remove them. Many of these methods are extensions of 2GC self-calibration ideas.
+The last section of the chapter, [$\S$ 8.4 &#10142;](../8_Calibration/8_4_3gc.myst) deals with the most recent advances of calibration and the methods of third generation calibration. 3GC deals specifically with the calibration of *direction-dependent effects*. As these effects are not uniform across the field of view, special care needs to be taken to remove them. Many of these methods are extensions of 2GC self-calibration ideas.
 
 Finally, we provide an overview of references and further literature.
 
@@ -48,11 +48,11 @@ Finally, we provide an overview of references and further literature.
 
 #### Chapter Sections
 
-1. [Calibration as a Least Squares Problem](8_1_calibration_least_squares_problem.ipynb)
-2. [First Generation Calibration (1GC)](8_2_1gc.ipynb)
-2. [Second Generation Calibration (2GC)](8_3_2gc.ipynb)
-3. [Third Generation Calibration (3GC)](8_4_3gc.ipynb)
-4. [Further Reading and References](8_5_further_reading_and_references.ipynb)
+1. [Calibration as a Least Squares Problem](8_1_calibration_least_squares_problem.myst)
+2. [First Generation Calibration (1GC)](8_2_1gc.myst)
+2. [Second Generation Calibration (2GC)](8_3_2gc.myst)
+3. [Third Generation Calibration (3GC)](8_4_3gc.myst)
+4. [Further Reading and References](8_5_further_reading_and_references.myst)
 
 +++
 
@@ -83,4 +83,4 @@ Finally, we provide an overview of references and further literature.
 
 ***
 
-Next: [8.1 Calibration as a Least Squares Problem](8_1_calibration_least_squares_problem.ipynb)
+Next: [8.1 Calibration as a Least Squares Problem](8_1_calibration_least_squares_problem.myst)

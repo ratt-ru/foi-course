@@ -13,11 +13,11 @@ kernelspec:
 
 ***
 
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
-* 2. [Mathematical Background](2_0_introduction.ipynb)
-    * Previous: [2.13 Spherical Trigonometry](2_13_sampling_theory.ipynb)
-    * Next: [2.x Further Reading and References](2_x_further_reading_and_references.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* 2. [Mathematical Background](2_0_introduction.myst)
+    * Previous: [2.13 Spherical Trigonometry](2_13_sampling_theory.myst)
+    * Next: [2.x Further Reading and References](2_x_further_reading_and_references.myst)
 
 ***
 
@@ -40,7 +40,7 @@ from ipywidgets import interact
 
 +++
 
-Here we give the mathematical details behind the implementation of the CLEAN algorithm. In particular we present deconvolution as an iterative $\chi^2$ minimisation of a linear system of equations. You should review the notation for linear systems given in [$\S$ 2.10.3 &#10142;](2_10_linear_algebra.ipynb). Although, by this stage, you should have the necessary mathematics to understand this section, it is meant to supplement the material given in [$\S$ 6 &#10142;](../6_Deconvolution) and is best read after you have become familiar with the basic concepts behind imaging and deconvolution. 
+Here we give the mathematical details behind the implementation of the CLEAN algorithm. In particular we present deconvolution as an iterative $\chi^2$ minimisation of a linear system of equations. You should review the notation for linear systems given in [$\S$ 2.10.3 &#10142;](2_10_linear_algebra.myst). Although, by this stage, you should have the necessary mathematics to understand this section, it is meant to supplement the material given in [$\S$ 6 &#10142;](../6_Deconvolution) and is best read after you have become familiar with the basic concepts behind imaging and deconvolution. 
 
 +++
 
@@ -453,4 +453,4 @@ interact(lambda R:inter_PSF(S=S2,F=F2psf,u=u[Sindices],R=R,l=lpsf),
 
 ***
 
-Next: [2.x Further Reading and References](2_x_further_reading_and_references.ipynb)
+Next: [2.x Further Reading and References](2_x_further_reading_and_references.myst)

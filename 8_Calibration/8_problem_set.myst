@@ -13,9 +13,9 @@ kernelspec:
 
 ***
 <a id='beginning'></a> <!--\label{beginning}-->
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
-* [8. Calibration](8_0_introduction.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [8. Calibration](8_0_introduction.myst)
 ***
 
 +++

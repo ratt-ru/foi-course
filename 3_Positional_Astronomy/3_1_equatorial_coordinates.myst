@@ -15,11 +15,11 @@ kernelspec:
 
 ***
 
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
-* [Positional Astronomy](3_0_introduction.ipynb)  
-    * Previous: [Introduction](3_0_introduction.ipynb) 
-    * Next: [Hour Angle and Local Sidereal Time](3_2_hour_angle.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [Positional Astronomy](3_0_introduction.myst)  
+    * Previous: [Introduction](3_0_introduction.myst) 
+    * Next: [Hour Angle and Local Sidereal Time](3_2_hour_angle.myst)
 
 ***
 
@@ -227,7 +227,7 @@ location of Pictor A from first principles. The equatorial coordinates of Pictor
 
 ***
 
-Next: [Hour Angle and Local Sidereal Time](3_2_hour_angle.ipynb)
+Next: [Hour Angle and Local Sidereal Time](3_2_hour_angle.myst)
 
 +++ {"deletable": true, "editable": true}
 

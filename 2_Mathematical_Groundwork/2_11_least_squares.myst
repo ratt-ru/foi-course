@@ -13,11 +13,11 @@ kernelspec:
 
 ***
 
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
-* [2. Mathmatical Groundwork](2_0_introduction.ipynb)  
-    * Previous: [2.10 Linear Algrebra](2_10_linear_algebra.ipynb)
-    * Next: [2.12 Solid Angle](2_12_solid_angle.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [2. Mathmatical Groundwork](2_0_introduction.myst)  
+    * Previous: [2.10 Linear Algrebra](2_10_linear_algebra.myst)
+    * Next: [2.12 Solid Angle](2_12_solid_angle.myst)
 
 ***
 
@@ -365,4 +365,4 @@ With a better initial estimate, the built-in method converges without issue and 
 +++
 
 ***
-* Next: [2.12 Solid Angle](2_12_solid_angle.ipynb)
+* Next: [2.12 Solid Angle](2_12_solid_angle.myst)

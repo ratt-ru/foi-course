@@ -13,11 +13,11 @@ kernelspec:
 
 ***
 
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
-* [2. Mathematical Groundwork](2_0_introduction.ipynb)
-    * Previous: [2.7 Fourier Theorems](2_7_fourier_theorems.ipynb)
-    * Next: [2.9 Sampling Theory](2_9_sampling_theory.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [2. Mathematical Groundwork](2_0_introduction.myst)
+    * Previous: [2.7 Fourier Theorems](2_7_fourier_theorems.myst)
+    * Next: [2.9 Sampling Theory](2_9_sampling_theory.myst)
 
 ***
 
@@ -61,7 +61,7 @@ In such cases the discrete equivalent of the Fourier transform, called the discr
 
 +++
 
-We start by introducing the discrete time Fourier transform (DTFT). The DTFT of a set $\left\{y_n \in \mathbb{C}\right\}_{n ~ \in ~ \mathbb{Z}}$ results in a Fourier series (see [$\S$ 2.3 &#10142;](../2_Mathematical_Groundwork/2_3_fourier_series.ipynb)) of the form
+We start by introducing the discrete time Fourier transform (DTFT). The DTFT of a set $\left\{y_n \in \mathbb{C}\right\}_{n ~ \in ~ \mathbb{Z}}$ results in a Fourier series (see [$\S$ 2.3 &#10142;](../2_Mathematical_Groundwork/2_3_fourier_series.myst)) of the form
 
 +++
 
@@ -81,7 +81,7 @@ $$
 
 +++
 
-where $t_n$ is a time coordinate and the subscript $f_s$ denotes the period of $Y_{f_s}(f)$. As we will see in [$\S$ 2.9 &#10142;](../2_Mathematical_Groundwork/2_9_sampling_theory.ipynb) the DTFT (more correctly the DFT introduced below) arises naturally when we take the Fourier transform of a sampled continuous function.
+where $t_n$ is a time coordinate and the subscript $f_s$ denotes the period of $Y_{f_s}(f)$. As we will see in [$\S$ 2.9 &#10142;](../2_Mathematical_Groundwork/2_9_sampling_theory.myst) the DTFT (more correctly the DFT introduced below) arises naturally when we take the Fourier transform of a sampled continuous function.
 
 +++
 
@@ -97,7 +97,7 @@ The idea behind periodic summation is to construct a periodic function, $g_{\tau
 $$ g_\tau(t) = \sum_{n=-\infty}^{\infty} g(t + n\tau) = \sum_{n=-\infty}^{\infty} g(t - n\tau). $$
 Clearly $g_\tau(t)$ has period $\tau$ and looks like an infinite number of copies of the function $g(t)$ for $t$ in the interval $0 \leq t \leq \tau$. We call $g_\tau(t)$ a periodic summation of $g(t)$. Note that we recover $g(t)$ when $n = 0$ and that a similar construction is obviously possible in the frequency domain. Actually the DTFT naturally results in a periodic function of the form
 $$Y_{f_s}(f) = \sum_{k = -\infty}^{\infty} Y(f - k f_s), $$
-such that $Y_{f_s}(f)$ is the periodic summation of $Y(f)$. As we will see later, the period $f_s$ is set by the number of samples $N$ at which we have the signal. In [$\S$ 2.9 &#10142;](../2_Mathematical_Groundwork/2_9_sampling_theory.ipynb) we will find it useful to think of $Y(f)$ as the spectrum of a bandlimited signal, $y(t)$ say. When the maximum frequency present in the signal is below a certain threshold the $Y_{f_s}(f)$ with $k \neq 0$ are exact copies of $Y(f)$ which we call aliases. This will become clearer after we have proved the Nyquist-Shannon sampling theorem.  
+such that $Y_{f_s}(f)$ is the periodic summation of $Y(f)$. As we will see later, the period $f_s$ is set by the number of samples $N$ at which we have the signal. In [$\S$ 2.9 &#10142;](../2_Mathematical_Groundwork/2_9_sampling_theory.myst) we will find it useful to think of $Y(f)$ as the spectrum of a bandlimited signal, $y(t)$ say. When the maximum frequency present in the signal is below a certain threshold the $Y_{f_s}(f)$ with $k \neq 0$ are exact copies of $Y(f)$ which we call aliases. This will become clearer after we have proved the Nyquist-Shannon sampling theorem.  
 
 +++
 
@@ -271,7 +271,7 @@ where mod denotes the modulo operation. Just like the ordinary convolution, the 
 
 +++
 
-The convolution theorem (i.e. that convolution in one domain is the pointwise product in the other domain) is also valid for the DFT and the discrete convolution operator. We state the theorem here without proof (it is similar to the proof for the continuous case). Let $(y \odot z)_n \underset{def}{=} y_n ~ z_n$ (this is the Hadamard or component-wise product, we will encounter it again in [$\S$ 2.10 &#10142;](../2_Mathematical_Groundwork/2_10_linear_algebra.ipynb)). Then, for Fourier pairs $Y_k$ and $y_n$, and $Z_k$ and $z_n$, we have 
+The convolution theorem (i.e. that convolution in one domain is the pointwise product in the other domain) is also valid for the DFT and the discrete convolution operator. We state the theorem here without proof (it is similar to the proof for the continuous case). Let $(y \odot z)_n \underset{def}{=} y_n ~ z_n$ (this is the Hadamard or component-wise product, we will encounter it again in [$\S$ 2.10 &#10142;](../2_Mathematical_Groundwork/2_10_linear_algebra.myst)). Then, for Fourier pairs $Y_k$ and $y_n$, and $Z_k$ and $z_n$, we have 
 
 +++
 
@@ -417,7 +417,7 @@ Here we see that the three main peaks correspond to the frequencies contained in
 * the DFT of a real valued signal is Hermitian (see [Hermitian property of real valued signals &#10549;](#math:eq:8_009)<!--\ref{math:eq:8_009}-->) so that $Y_{-k} = Y_k^*$, 
 * the DFT is periodic with period $N$ (see [Periodicity of the DFT &#10549;](#math:eq:8_007)<!--\ref{math:eq:8_007}-->) so that $Y_{k} = Y_{k+N}$. <br>
 
-When used together the above facts imply that $Y_{N-k} = Y_k^*$. This will be important in [$\S$ 2.9 &#10142;](../2_Mathematical_Groundwork/2_9_sampling_theory.ipynb) when we discuss aliasing. Note that these additional frequency peaks contain no new information. For this reason it is only necessary to store the first $\frac{N}{2} + 1$ samples when taking the DFT of a real valued signal.
+When used together the above facts imply that $Y_{N-k} = Y_k^*$. This will be important in [$\S$ 2.9 &#10142;](../2_Mathematical_Groundwork/2_9_sampling_theory.myst) when we discuss aliasing. Note that these additional frequency peaks contain no new information. For this reason it is only necessary to store the first $\frac{N}{2} + 1$ samples when taking the DFT of a real valued signal.
 
 +++
 
@@ -426,7 +426,7 @@ We have not explained some of the features of the signal viz.
    * Why are there non-zero components of $Y_k$ at frequencies that are not present in the input signal?
    * Why do the three main peaks not contain the same amount of power? This is a bit unexpected since all three components of the input signal have the same amplitude.
 
-As we will see in [$\S$ 2.9 &#10142;](../2_Mathematical_Groundwork/2_9_sampling_theory.ipynb), these features result from the imperfect sampling of the signal. This is unavoidable in any practical application involving the DFT and will be a reoccurring theme throughout this course. You are encouraged to play with the parameters (eg. the minimum $t_{min}$ and maximum $t_{max}$ values of the time coordinate, the number of samples $N$ (do not use $N > 10^5$ points or you might be here for a while), the frequencies of the input components etc.) to get a feel for what does and does not work. In particular try setting the number of samples to $N = 32$ and see if you can explain the output. It might also be a good exercise to and implement the inverse DFT.
+As we will see in [$\S$ 2.9 &#10142;](../2_Mathematical_Groundwork/2_9_sampling_theory.myst), these features result from the imperfect sampling of the signal. This is unavoidable in any practical application involving the DFT and will be a reoccurring theme throughout this course. You are encouraged to play with the parameters (eg. the minimum $t_{min}$ and maximum $t_{max}$ values of the time coordinate, the number of samples $N$ (do not use $N > 10^5$ points or you might be here for a while), the frequencies of the input components etc.) to get a feel for what does and does not work. In particular try setting the number of samples to $N = 32$ and see if you can explain the output. It might also be a good exercise to and implement the inverse DFT.
 
 +++
 
@@ -489,4 +489,4 @@ Today's implementations of DFTs make use of many other clever tricks for further
 
 ***
 
-* Next: [2.9 Sampling Theory](2_9_sampling_theory.ipynb)
+* Next: [2.9 Sampling Theory](2_9_sampling_theory.myst)

@@ -15,11 +15,11 @@ kernelspec:
 
 ***
 
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
-* [2. Mathematical Groundwork](2_0_introduction.ipynb)
-    * Previous: [2.5 Convolution](2_5_convolution.ipynb)
-    * Next: [2.7 Fourier Theorems](2_7_fourier_theorems.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [2. Mathematical Groundwork](2_0_introduction.myst)
+    * Previous: [2.5 Convolution](2_5_convolution.myst)
+    * Next: [2.7 Fourier Theorems](2_7_fourier_theorems.myst)
 
 ***
 
@@ -51,7 +51,7 @@ pass
 
 +++ {"deletable": true, "editable": true}
 
-6. [Cross-correlation and Auto-correlation](2_6_cross_correlation_and_auto_correlation.ipynb)
+6. [Cross-correlation and Auto-correlation](2_6_cross_correlation_and_auto_correlation.myst)
     1. [Cross-correlation](#math:sec:cross_correlation)
     2. [Auto-correlation](#math:sec:auto_correlation)
 
@@ -66,7 +66,7 @@ Auto- and cross-correlation are less frequently used than the Fourier transform 
 
 +++ {"deletable": true, "editable": true}
 
-The cross-correlation $\star$ is an operation acting on two complex-valued functions (remember the definition of the convolution $\circ$ in [$\S$ 2.5](2_5_convolution.ipynb#math:sec:convolution) <!--\ref{math:sec:convolution}-->).
+The cross-correlation $\star$ is an operation acting on two complex-valued functions (remember the definition of the convolution $\circ$ in [$\S$ 2.5](2_5_convolution.myst#math:sec:convolution) <!--\ref{math:sec:convolution}-->).
 
 +++ {"deletable": true, "editable": true}
 
@@ -145,4 +145,4 @@ It is often easier to measure the auto-correlation of a function than to measure
 
 ***
 
-* Next: [2.7 Fourier Theorems](2_7_fourier_theorems.ipynb)
+* Next: [2.7 Fourier Theorems](2_7_fourier_theorems.myst)
