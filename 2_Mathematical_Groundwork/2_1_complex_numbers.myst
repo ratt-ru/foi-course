@@ -1,0 +1,366 @@
+---
+jupytext:
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.16.7
+kernelspec:
+  display_name: Python 2
+  language: python
+  name: python2
+---
+
++++ {"deletable": true, "editable": true}
+
+***
+
+* [Outline](../0_Introduction/0_introduction.ipynb)
+* [Glossary](../0_Introduction/1_glossary.ipynb)
+* [2. Mathematical Groundwork](2_0_introduction.ipynb)  
+    * Next: [2.2 Important functions](2_2_important_functions.ipynb)
+
+***
+
++++ {"deletable": true, "editable": true}
+
+## 2.1. Complex numbers<a id='math:sec:complex_numbers'></a><!--\label{math:sec:complex_numbers}-->
+We briefly recap complex numbers. Through Euler's formulae, the usage of complex numbers is a crucial tool to describe periodic functions, e.g. plane waves and harmonic oscillations. Most textbooks spend only a few words on how this is done, while here we want to give an elaborate introduction.
+
++++ {"deletable": true, "editable": true}
+
+### 2.1.1. The field of complex numbers<a id='math:sec:the_field_of_complex_numbers'></a><!--\label{math:sec:the_field_of_complex_numbers}-->
+
++++ {"deletable": true, "editable": true}
+
+The complex numbers are a field $\mathbb{C}$ of numbers
+
++++ {"deletable": true, "editable": true}
+
+<a id='math:eq:0001'></a><!--\label{math:eq:0001}-->$$z = x+\imath y \mathrm,$$
+
++++ {"deletable": true, "editable": true}
+
+where $x \in \mathbb{R}$ and $y \in \mathbb{R}$ are real numbers, with the following definitions for addition $+$ and multiplication $-$:
+
++++ {"deletable": true, "editable": true}
+
+$$
+\begin{align}
+z_i    &= x_i+\imath y_i\qquad i=1, 2\\
+z_1+z_2&=(x_1+x_2)+\imath (y_1+y_2)\\
+z_1\cdot z_2&= (x_1 x_2-y_1 y_2)+\imath (x_1 y_2+y_1 x_2) .\\
+\end{align}
+$$<a id='math:eq:0002'></a><!--\label{math:eq:0002}-->
+
++++ {"deletable": true, "editable": true}
+
+The *real part* $\Re\left\{z\right\} \in \mathbb{R}$, *imaginary part* $\Im\left\{z\right\} \in \mathbb{R}$, *complex conjugate* $z^* \in \mathbb{C}$, and *magnitude* or *modulus* $|z| \in \mathbb{R}$ of a complex number $z \in \mathbb C$ are definded via
+
++++ {"deletable": true, "editable": true}
+
+<a id='math:eq:0003'></a><!--\label{math:eq:0003}-->$$ 
+\begin{split}
+z &=\, x + \imath y &\\
+&\Rightarrow\\
+\Re{\left\{z\right\}} &=\, x & \\
+\Im\left\{z\right\} &=\, y & \\
+z^*   &=\, x + \imath( -y)  &= x - \imath y 
+\quad\left[\Rightarrow \, z_1^*\,{z_2}^* =\, (z_1\,z_2)^*\right]\\
+\lvert z\rvert   &=\, \sqrt{zz^\ast}       &=\, \sqrt{x^2+y^2} \in \mathbb{R}
+\end{split}
+$$
+
++++ {"deletable": true, "editable": true}
+
+The field of real numbers can be interpreted as a subfield of the complex numbers with the definition
+
++++ {"deletable": true, "editable": true}
+
+<a id='math:eq:0004'></a><!--\label{math:eq:0004}-->
+$$ x \in \mathbb{R}, \qquad z_x \in \mathbb{C}\\
+z_x = x \Leftrightarrow z_x = x +\imath 0 $$
+
++++ {"deletable": true, "editable": true}
+
+and the imaginary unit $\imath$ can be interpreted as a number, the square root of the real number $-1$.
+
++++ {"deletable": true, "editable": true}
+
+$$\imath = \sqrt{-1} $$<a id='math:eq:0005'></a><!--\label{math:eq:0005}-->
+**Equation 2.1.1**
+
++++ {"deletable": true, "editable": true}
+
+We leave it to the reader to show that with this the complex numbers are a field.
+
++++ {"deletable": true, "editable": true}
+
+### 2.1.2. Euler's formula<a id='math:sec:eulers_formula'></a><!--\label{math:sec:eulers_formula}--><!--\label{math:sec:eulers_formula}-->
+
++++ {"deletable": true, "editable": true}
+
+Euler's formula, named after [<cite data-cite='euler'>Leonhard Euler&#10548;</cite>](https://en.wikipedia.org/wiki/Leonhard_Euler) (1707-1783), states that, for any real number $\phi \in \mathbb{R}$,
+
++++ {"deletable": true, "editable": true}
+
+<a id='math:eq:001'></a><!--\label{math:eq:001}-->$$
+\exp(\imath \phi) = e^{\imath \phi}=\cos \phi+\imath\sin \phi\mathrm,
+$$
+**Equation 2.1.2**
+
++++ {"deletable": true, "editable": true}
+
+where $e$ is the base of the natural logarithm, $\cos$ and $\sin$ are the trigonometric functions cosine and sine respectively. Euler's formula can be proven by simply expanding the terms in the formula into a [<cite data-cite='wiki:taylorseries'>Taylor series&#10548;</cite>](https://en.wikipedia.org/wiki/Taylor_series).
+
++++ {"deletable": true, "editable": true}
+
+With the function $exp(\imath \phi), \phi \in \mathbb{R}$ one hence describes the position of a point on the unit circle in the complex plane:
+
++++ {"deletable": true, "editable": true}
+
+<img width=400 src="figures/Euler's_formula.svg">
+
+**Figure 2.1.1** *Unit circle in the complex plane. Credit: [<cite data-cite='wiki:eulersformula'>Wikipedia&#10548;</cite>](https://en.wikipedia.org/w/index.php?title=Euler%27s_formula&oldid=700599758)*
+
++++ {"deletable": true, "editable": true}
+
+Remembering that for any angle $\phi \in \mathbb{R}$
+
++++ {"deletable": true, "editable": true}
+
+<a id='math:eq:0011'></a><!--\label{math:eq:0011}-->$$
+\cos^2 \phi + \sin^2 \phi = 1
+$$
+
++++ {"deletable": true, "editable": true}
+
+This means that any complex number $z \in \mathbb{C}$ can be written in the form
+
++++ {"deletable": true, "editable": true}
+
+<a id='math:eq:0012'></a><!--\label{math:eq:0012}-->
+$$
+z = \lvert z\rvert\exp{(\imath\phi)} \qquad ,
+$$
+
++++ {"deletable": true, "editable": true}
+
+where $\phi \in \mathbb{R}$ is called the *argument* of $z$. Note also that $\lvert z \rvert \in \mathbb{R}$ and $\lvert \exp{(\imath\phi)}\rvert$=1
+
++++ {"deletable": true, "editable": true}
+
+### 2.1.3 Periodic functions and complex numbers<a id='math:sec:periodic_functions_and_complex_numbers'></a> <!--\label{math:sec:periodic_functions_and_complex_numbers ss:pacn:pfacn}-->
+
++++ {"deletable": true, "editable": true}
+
+Using Euler's formula ([$\S$ 2.1.2](#math:sec:eulers_formula)<!--\ref{math:sec:eulers_formula}-->), one finds that a (co-)sinusoidal real function
+
++++ {"deletable": true, "editable": true}
+
+<a id='math:eq:002'></a><!--\label{math:eq:002}-->$$
+f(t)=a\,\cos (\omega t+\phi)
+$$
+
++++ {"deletable": true, "editable": true}
+
+can be re-written as
+
++++ {"deletable": true, "editable": true}
+
+<a id='math:eq:1_003'></a><!--\label{math:eq:1_003}-->$$
+\begin{split}
+f(t) & = a\,\cos (\omega t+\phi) \\
+     & =  z \, e^{\imath\omega t} + z^* \, e^{-\imath\omega t}
+\end{split}
+ ,
+$$
+
++++ {"deletable": true, "editable": true}
+
+where
+
++++ {"deletable": true, "editable": true}
+
+<a id='math:eq:004'></a><!--\label{math:eq:004}-->$$
+\begin{split}
+z     & = z_1 + \imath \,z_2 \\
+z_1 & =  \frac{a}{2} \cos \phi\\
+z_2 & =  \frac{a}{2} \sin \phi
+\end{split}
+,
+$$
+**Equation: 2.1.3**
+
++++ {"deletable": true, "editable": true}
+
+with $z_1\in \mathbb{R}$ and $z_2 \in \mathbb{R}$. Inverting the relation leads to (assuming $a>0$):
+
++++ {"deletable": true, "editable": true}
+
+<a id='math:eq:005'></a><!--\label{math:eq:005}-->$$
+\begin{split}
+a        & = 2\sqrt{z_1^2 + z_2^2} \\
+          & = 2\lvert z \rvert\\
+\phi & =  atan2(z_1,z_2) &= \left \{
+  \begin{array}{lll}
+    \arctan{\frac{z_2}{z_1}}&,&z_1 > 0\\
+    \arctan{\frac{z_2}{z_1}} - sign(z_2)\pi&,&z_1 < 0\\
+    sign(z_2)\frac{\pi}{2}&,&z_1 = 0 \land z_2 \neq 0
+\end{array} \right.
+\end{split}
+$$
+
++++ {"deletable": true, "editable": true}
+
+We leave it to the reader to calculate this for a sine periodic function.
+
+Another possibility to express a real periodic function in terms of a product of a complex number and an exponential is to identify $a$ with the complex number $z_a$:
+
++++ {"deletable": true, "editable": true}
+
+<a id='math:eq:006'></a><!--\label{math:eq:006}-->$$
+\begin{split}
+\Re\left\{z_a\right\} & = a\\
+\Im\left\{z_a\right\} & = 0
+\end{split}
+,
+$$
+
++++ {"deletable": true, "editable": true}
+
+and hence (see [Eq 2.1.1  &#10549;](#math:eq:0004) <!--\ref{math:eq:0004}-->)
+
++++ {"deletable": true, "editable": true}
+
+<a id='math:eq:007'></a><!--\label{math:eq:007}-->$$
+\begin{split}\
+f(t) & = a\,\cos (\omega t+\phi) \\
+     & =  \Re \left\{{z_a \, e^{\imath(\omega t+\phi)}}\right\}\\
+     & =  \Re \left\{{a \, e^{\imath(\omega t+\phi)}}\right\}\\
+     & =  a \Re \left\{{e^{\imath(\omega t+\phi)}}\right\}
+\end{split}
+\qquad .
+$$
+**Equation 2.1.4**
+
++++ {"deletable": true, "editable": true}
+
+This is the most common convention. 
+
++++ {"deletable": true, "editable": true}
+
+To translate from one format to the other just use [Eq 2.1.3  &#10549;](#math:eq:004) <!--\ref{math:eq:004}-->:
+
++++ {"deletable": true, "editable": true}
+
+<a id='math:eq:008'></a><!--\label{math:eq:008}-->$$
+\begin{aligned}
+z     & = z_1 + \imath\,z_2  && \\
+z_1 & = \frac{a}{2} \cos \phi && = \frac{z_a}{2} \cos \phi  \\
+z_2 & = \frac{a}{2} \sin \phi  && = \frac{z_a}{2} \sin \phi 
+\end{aligned}
+\qquad .
+$$
+
++++ {"deletable": true, "editable": true}
+
+[Eq 2.1.4  &#10549;](#math:eq:007) <!--\ref{math:eq:007}--> can be made more general, in that $a \in \mathbb{R}$ can be replaced by any complex number $z^\prime$ with the same absolute value but different argument, in other words $a$ (or $z_a$) multiplied with a number on the unit circle $x$:
+
++++ {"deletable": true, "editable": true}
+
+<a id='math:eq:009'></a><!--\label{math:eq:009}-->$$
+\begin{split}
+f(t) & = a\,\cos (\omega t+\phi) \\
+     & =  \Re \left \{{z^\prime \, e^{\imath(\omega t+\phi)}}\right\}\\
+   z^\prime &= z^\prime_1 + \imath z^\prime_2\\
+                   &=x \cdot a\\
+                   &= (x_1 + \imath\,x_2) \cdot a\\
+\lvert z^\prime \rvert & = \lvert a \rvert  \Rightarrow \\
+\lvert x \rvert & = 1 \Rightarrow \\
+x &= e^{\imath\alpha}\\
+x_1 &= \cos \alpha\\
+x_2 &= \imath\,\sin \alpha\\
+z^\prime_1 &= a \cdot \cos \alpha\\
+z^\prime_2 &= \imath\,a\cdot\sin \alpha
+\end{split}
+\qquad .
+$$
+
++++ {"deletable": true, "editable": true}
+
+Again, to figure out $\alpha$:
+
++++ {"deletable": true, "editable": true}
+
+<a id='math:eq:010'></a><!--\label{math:eq:010}-->$$
+\begin{split}
+a        & > 0 \Rightarrow \\
+\alpha & =  atan2(z^\prime_1,z^\prime_2) &= \left \{
+  \begin{array}{lll}
+    \arctan{\frac{z^\prime_2}{z_1}}&,&z^\prime_1 > 0\\
+    \arctan{\frac{z^\prime_2}{z^\prime_1}} - sign(z^\prime_2)\pi&,&z^\prime_1 < 0\\
+    sign(z^\prime_2)\frac{\pi}{2}&,&z^\prime_1 = 0 \land z^\prime_2 \neq 0
+\end{array} \right.
+\end{split}
+\qquad .
+$$
+
+**Equation 2.1.5**
+
++++ {"deletable": true, "editable": true}
+
+Then, [Eq 2.1.4  &#10549;](#math:eq:007) <!--\ref{math:eq:007}--> becomes, by simply implementing the identity:
+
++++ {"deletable": true, "editable": true}
+
+$$\begin{split}
+f(t) & = a\,\cos (\omega t+\phi) \\
+     & =  \Re \left \{{a \, e^{i(\omega t+\phi)}}\right\}\\
+     & =  \Re \left \{{a \cdot 1 \cdot e^{i(\omega t+\phi)}}\right\}\\
+     & =  \Re \left \{{a (\, x \, x^*) \, e^{i(\omega t+\phi)}}\right\}\\
+     & =  \Re \left \{{z^\prime \left ({x^* \, e^{i(\omega t+\phi)}}\right)} \right\}\\
+     & =  \Re \left \{{z^\prime \left ({e^{-i\,\alpha} \, e^{i(\omega t+\phi)}}\right)} \right\}\\
+     & =  \Re \left \{{z^\prime \, e^{i(\omega t+\phi-\alpha)}} \right\}\\
+     & =  \Re \left \{{z^\prime \, e^{i(\omega t+\widehat{\phi})}} \right\}
+\end{split}
+\qquad .
+$$
+
++++ {"deletable": true, "editable": true}
+
+For any complex number $z^\prime$ with $\lvert a \rvert = \lvert z^\prime \rvert $, one can hence formulate:
+
++++ {"deletable": true, "editable": true}
+
+<a id='math:eq:012'></a><!--\label{math:eq:012}-->$$
+\begin{split}
+f(t) & = a\,\cos (\omega t+\phi) \\
+     & =  \Re \left \{{z \, e^{\imath(\omega t+\phi^\prime)}}\right\}
+\end{split}
+\qquad ,
+$$
+
++++ {"deletable": true, "editable": true}
+
+with
+<a id='math:eq:013'></a><!--\label{math:eq:013}-->$$
+\begin{split}
+\phi^\prime & = \phi - \alpha \\
+\end{split}
+\qquad ,
+$$
+
++++ {"deletable": true, "editable": true}
+
+and $\alpha$ calculated according to [Eq 2.1.5  &#10549;](#math:eq:010) <!--\ref{math:eq:010}-->. The most common convention is to enforce $\Im\left\{z^\prime\right\} = 0$, and hence [Eq 2.1.4  &#10549;](#math:eq:007) <!--\ref{math:eq:007}-->.
+
++++ {"deletable": true, "editable": true}
+
+In this section we used the conventional symbols $t$ and $\omega$ usually employed for time and angular frequency for the case of an oscillation in time. This can of course be adapted to other periodic functions or other arguments. The equations above do not change when we replace the term $\omega t$ with $2\pi \nu t$ or $2\pi \frac{t}{T}$ or $\bf{k}\cdot\bf{x}-\omega t$ or $2\pi(\frac{l}{\lambda}x+\frac{m}{\lambda}y+\frac{n}{\lambda}z- \nu t)$
+
++++ {"deletable": true, "editable": true}
+
+***
+
+* Next: [2.2 Important functions](2_2_important_functions.ipynb)
