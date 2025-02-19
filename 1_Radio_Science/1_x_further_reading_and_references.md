@@ -1,0 +1,43 @@
+---
+jupytext:
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.16.7
+kernelspec:
+  display_name: Python 3
+  language: python
+  name: python3
+---
+
+***
+
+* [Outline](../0_Introduction/0_introduction.ipynb)
+* [Glossary](../0_Introduction/1_glossary.ipynb)
+* [1. Radio Science using Interferometric Arrays](1_0_introduction.ipynb)  
+    * Previous: [1.11 Modern interferometric arrays](1_11_modern_interferometric_arrays.ipynb)
+    * Next: [Chapter 2: Mathematical Groundwork](../2_Mathematical_Groundwork/2_0_introduction.ipynb)
+***
+
++++
+
+Section status: <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
++++
+
+## 1.12 Further Reading and References <a id='science:sec:refs'></a>
+
++++
+
+The standard reference books for radio interferometry are [<cite data-cite='1999ASPC..180.....T'>Synthesis Imaging in Radio Astronomy II</cite> &#10548;](http://adsabs.harvard.edu/abs/1999ASPC..180.....T) (colloquially known as 'the white book') and [<cite data-cite='2007isra.book.....T'>Interferometry and Synthesis in Radio Astronomy</cite> &#10548;](http://adsabs.harvard.edu/abs/2007isra.book.....T).
+
+For technical aspects of this chapter, especially emission mechanisms, see [<cite data-cite='1981PEPI...25..432L'>Radiative Processes in Astrophysics</cite> &#10548;](http://adsabs.harvard.edu/abs/1985rpa..book.....R) and [<cite data-cite='2012tra..book.....W'>Tools of Radio Astronomy</cite> &#10548;](http://adsabs.harvard.edu/abs/2012tra..book.....W).
+
+For an excellent account of the astronomical processes taking place in Cygnus A, see [<cite data-cite='1996A&ARv...7....1C'>Cygnus A</cite> &#10548;](https://ned.ipac.caltech.edu/level5/Carilli/Car_contents.html).
+
++++
+
+***
+
+Next: [Chapter 2: Mathematical Groundwork](../2_Mathematical_Groundwork/2_0_introduction.ipynb)

@@ -1,0 +1,515 @@
+---
+jupytext:
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.16.7
+kernelspec:
+  display_name: Python 3
+  language: python
+  name: python3
+---
+
+***
+
+* [Outline](../0_Introduction/0_introduction.ipynb)
+* [Glossary](../0_Introduction/1_glossary.ipynb)
+* [1. Radio Science using Interferometric Arrays](1_0_introduction.ipynb)  
+    * Previous: [1.10 The Limits of Single Dish Astronomy](1_10_limits_of_single_dishes.ipynb)
+    * Next: [1.x Further reading and references](1_x_further_reading_and_references.ipynb)
+   
+***
+
++++
+
+Section status: <span style="background-color:yellow">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+Import standard modules:
+
+```{code-cell} ipython3
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+from IPython.display import HTML 
+HTML('../style/course.css') #apply general CSS
+```
+
+Import section specific modules:
+
+```{code-cell} ipython3
+import matplotlib.image as mpimg
+from IPython.display import Image
+```
+
+```{code-cell} ipython3
+HTML('../style/code_toggle.html')
+```
+
+## 1.11 Modern Interferometric Arrays
+
++++
+
+In the previous sections of this chapter we have covered the motivation for using interferometry to make measurements, the observable astrophysics and cosmology in the radio regime, and why interferometry is used in radio astronomy. This final section provides an overview of some of the interferometric arrays currently in use, the science goals of these projects, and future arrays in development.
+
+As the scale and cost of science in physics has grown, there is a drive for international collaboration to pool resources in order to build large, multi-purpose arrays. These arrays are meant to run as long term observatories, with astronomers requesting time for proposed projects. The prime example of this type of array is the future Square Kilometre Array (SKA). Another example is very-long baseline interferometry (VLBI) where single dish telescopes (or beamformed arrays) from all over the world are combined (via a signal recorder) for an observation. The recorded signals are later sent to a correlator to create an interferometric observation. There are also experiment-driven arrays which are focused on a single experimental outcome with a limited lifetime. Many of the Epoch of Reionization (EoR) arrays follow this model.
+
++++
+
+### 1.11.1 Karoo Array Telescope (MeerKAT/KAT-7)
+
++++
+
+MeerKAT, and its precursor KAT-7, are South African developed observatories located in the Northern Cape of South Africa. MeerKAT will be a one of the premier telescope arrays and be central to the development of the Square Kilometre Array (SKA).
+
+The Karoo Array Telescope, or KAT-7, is a 7 dish interferometric array. It was designed as a prototype system for the MeerKAT array. KAT-7 was constructed from 2009 to 2011, and will remain running for the near future. Although it was originally designed primarily as an engineering prototype it has also been used for science observations. Much of this book uses KAT-7 examples as it is simple enough to understand yet was designed with modern technology. The current status and specifications for the array can be found [here &#10142;](http://public.ska.ac.za/kat-7).
+
+```{code-cell} ipython3
+Image(filename='figures/arrays/kat7_dish_2013.jpg')
+```
+
+**Figure 1.11.1:** *KAT-7 prime-focus telescope. Credit: [SARAO&#10548;](https://www.sarao.ac.za/wp-content/uploads/2016/06/2013_kat7_04-1030x686.jpg)*
+
++++
+
+Each of the elements is a 12 metre, prime-focus (the receiver is at the focal point of the dish) parabolic dish. If only a single element of the array is used for an observation we could only achieve a resolution of about one degree at the frequency that the receivers operate at. The important dish specifications are in the table below.
+
+| Dish Specifications ||
+|:---:|:---:|
+| Optics | Prime Focus |
+| Diameter | 12 m|
+| $\Delta \theta_{1.4 GHz}$ | 1.22 deg |
+
+**Table 1.11.1** *Dish specifications for KAT-7*
+
+The resolution of the dish $\Delta \theta_{1.4 GHz}$ (also called the primary beam) is presented at 1.4 GHz i.e. at the 21 cm Hydrogen hyperfine transition line. This is a common observing frequency so it will be used as a comparison between many of the arrays in this section.
+
+The KAT-7 receiver band covers the observing frequency range between 1.2 GHz and 1.95 GHz. The digital hardware is capable of processing 256 MHz of this band instantaneously, i.e. at any given time. This frequency range is called L-band in reference to the radio communication spectrum allocation labels. The L-band receiver feed is a dual-polarization linear system (polarization will be covered in [$\S$ 7.6 &#10142;](../7_Observing_Systems/7_6_polarization.ipynb)). The receiver specifications are in the table below.
+
+| Receivers ||
+|:---|:---:|
+| Band | L |
+| $T_{sys}$ | $< 35 K$ |
+| Start Frequency | 1200 MHz |
+| Stop Frequency | 1950 MHz |
+| Total Bandwidth | 750 MHz |
+| Instantaneous Bandwidth | 256 MHz |
+| Fractional Bandwidth | 0.14 - 0.19 |
+| Polarization | Dual Linear |
+
+**Table 1.11.2** *Receiver specifications for KAT-7*
+
+A common method to describe the bandwidth of a receiver system is to use the fractional bandwidth $\nu_{\textrm{frac}}$ is 
+
+$$\nu_{\textrm{frac}} = \frac{\nu_f - \nu_0}{\nu_c}, \quad \nu_c = \frac{\nu_f + \nu_0}{2},$$
+
+where $\nu_f$ is the highest frequency of the band and $\nu_0$ the lowest frequency. The center frequency $\nu_c$ is the average of $\nu_f$ and $\nu_0$. The fractional bandwidth is often used to compare receivers at different frequencies since $\nu_{\textrm{frac}}$ is independent of frequency.
+
+The instantaneous bandwidth is split into frequency channels (or sub-bands) in digital hardware. The specifics of this channelization and band selection depend on the science observation. But for a typical 'wideband' observation the frequency channels have a bandwidth of 390 kHz.
+
+The system temperature $T_{sys}$ is an average measure of the sensitivity of the telescope, the lower the temperature the better, this is discussed in [$\S$ 7 &#10142;](../7_Observing_Systems)).
+
+The array layout is what would be called 'compact' because the telescopes are relatively close to each other. The synthesized KAT-7 telescope therefore has limited resolution. As there are only 7 elements in the array the visibility sampling (*uv* coverage) is sparse. The telescopes are randomly distributed to partially compensate for the sparseness. The topics of *uv* coverage and distribution will be covered in later chapters.
+
+```{code-cell} ipython3
+Image(filename='figures/arrays/kat7_2016_aerial.jpg')
+```
+
+**Figure 1.11.2:** *KAT-7 array layout, located in the Northern Cape of South Africa. Credit: [SARAO&#10548;](https://www.sarao.ac.za/wp-content/uploads/2016/06/2013_kat7_04-1030x686.jpg)*
+
++++
+
+If we think of the array as a synthesized telescope, then we can think of that telescope as having a maximum resolution based on the maximum baseline length. In the case of KAT-7 the maximum baseline length is 185 metres which, at 1.4 GHz, translates (via the Rayleigh criterion) to a resolution of 4.7 arcminutes. Interestingly, we can also think of the array as having a *minimum* resolution based on the minimum baseline length. Two elements can never be closer then their size, otherwise they would need to physically overlap. The effect of a minimum baseline, as we will see in later chapters, is that interferometric arrays are not sensitive to 'large-scale' structure (e.g. galactic synchrotron structures). A single element telescope, which is not limited by this minimum resolution effect, can be used to complement interferometric observations (see [<cite data-cite='2002ASPC..278..375S'>Short-Spacings Correction from the Single-Dish Perspective</cite> &#10548;](http://adsabs.harvard.edu/abs/2002ASPC..278..375S) for example).
+
+| Array Specifications ||
+|:---:|:---:|
+| Number of Elements | 7 |
+| Min Baseline | 26 m |
+| Min $\Delta \theta_{1.4 GHz}$ | 0.56 deg |
+| Max Baseline | 185 m |
+| Max $\Delta \theta_{1.4 GHz}$ | 4.7' (0.08 deg) |
+
+**Table 1.11.3** *Array specifications for KAT-7*
+
++++
+
+Although the main goals of KAT-7 were engineering-driven, a number of science results have also come from observations with the array. KAT-7 projects came to a close as MeerKAT was being built and commissioned. The MeerKAT array was inaugurated in 2018, and is currently operational for science. ([Check here &#10548;](https://skaafrica.atlassian.net/wiki/spaces/ESDKB/overview?homepageId=41025669) for the current status and main scientific project plan).
+
+```{code-cell} ipython3
+Image(filename='figures/arrays/meerkat_dish_2015.jpg')
+```
+
+**Figure 1.11.3:** *MeerKAT offset-Gregorian telescope, without the feed system installed. Credit: [SARAO&#10548;](https://www.sarao.ac.za/wp-content/uploads/2016/06/2015_meerkat_03-1030x685.jpg)*
+
++++
+
+The 13.5 metre MeerKAT dish is markedly different from the prime-focus KAT-7 design. The MeerKAT dish has offset Gregorian optics which results in a better beam pattern. Different optics and beam patterns are discussed in [$\S$ 7 &#10142;](../7_Observing_Systems). This design will also be the basis for the mid-frequency SKA dishes.
+
+| **Dish specifications** ||
+|-|-|
+| Optics    | Offset Gregorian |
+| Diameter | 13.5 m |
+| $\Delta \theta_{1.4 GHz}$ | 1.09 deg |
+
+**Table 1.11.4** *Dish specifications for MeerKAT*
+
+There are currently two tested receiver bands for MeerKAT viz. an L-Band receiver similar to KAT-7 and a lower frequency Ultra High Frequency (UHF) receiver. Both receiver bandwidths are fully sampled by the digital hardware leading to an instantaneous bandwidth which is larger than the total bandwidth. Of course we confine ourselves to the total bandwidth as the digital bandwidth will sample no signal (since it would have been filtered out) outside the total frequency band. 
+
+| **Receiver specification** |||
+|:---|:---:|:---:|
+| Band | UHF | L |
+| $T_{sys}$ | $< 38 K$ | $< 30 K$ |
+| Start Frequency | 580 MHz | 900 MHz |
+| Stop Frequency | 1015 MHz | 1670 MHz |
+| Total Bandwidth | 435 MHz | 770 MHz |
+| Instantaneous Bandwidth | 544 MHz | 856 MHz |
+| Fractional Bandwidth | 0.55 | 0.6 |
+| Polarization | Dual Linear | Dual Linear |
+
+**Table 1.11.5** *Receiver specifications for MeerKAT*
+
+The MeerKAT array layout follows a random distribution with a dense core. The randomness improves the $uv$ coverage while the dense core is desirable for many of the science goals. The array core, shown below, is currently being populated with dishes and receiver systems.
+
+```{code-cell} ipython3
+Image(filename='figures/arrays/meerkat_2016_aerial.jpg')
+```
+
+**Figure 1.11.4:** *MeerKAT array core layout, located in the Northern Cape of South Africa. Credit: [SARAO&#10548;](https://www.sarao.ac.za/wp-content/uploads/2018/04/2017_aerial_02-1030x579.jpg)*
+
++++
+
+The MeerKAT array consist of 64 dishes, with a shortest baseline similar to KAT-7, but with a maximum baseline of 8 km! This allows for high resolution measurements up to 6.6 arcsecond.
+
+| Array Specifications ||
+|:---|:---|
+| Number of Elements | 64 |
+| Min Baseline | 29 m |
+| Min $\Delta \theta_{1.4 GHz}$ | 0.51 deg |
+| Max Baseline | 8 km |
+| Max $\Delta \theta_{1.4 GHz}$ | 6.6" |
+
+**Table 1.11.6** *Array specifications for MeerKAT*
+
+MeerKAT is a general purpose interferometric observatory. As such there are a number of different [planned science surveys&#10548;](http://public.ska.ac.za/meerkat/meerkat-large-survey-projects).
+
++++
+
+### 1.11.2 Jansky Very Large Array (JVLA)
+
++++
+
+The [Karl G. Jansky Very Large Array (JVLA)&#10548;](http://www.vla.nrao.edu/) is the latest upgrade (2011) to the original Very Large Array (1975). The 27 element array is located in New Mexico, USA and operated by the NRAO.  The JVLA is the quintessential radio interferometric array and is the standard against which other arrays are measured. It is typical to see an interferometric array with sensitivities and resolution quoted as a fraction of the JVLA. Details on the array specifications, such as resolution, sensitivity, correlation configuration, etc. can be found [here&#10548;](https://science.nrao.edu/facilities/vla).
+
+```{code-cell} ipython3
+Image(filename='figures/arrays/vla_dish_2007.jpg')
+```
+
+**Figure 1.11.5:** *JVLA cassegrain-focus telescope. In the foreground are tracks used to move telescopes to different positions. Credit: [Wikipedia Commons&#10548;](https://en.wikipedia.org/wiki/File:Very_large_array_clouds.jpg)*
+
++++
+
+The 25 metre JVLA dishes use a Cassegrain optical system for most of the receivers (though a low-frequency receiver is at the focal point). Cassegrain optics uses a secondary reflector at the focal point to redirect the signal to the receivers at the base of the dish.
+
+| Dish Specifications ||
+|:---:|:---:|
+| Optics | Cassegrain |
+| Diameter | 25 m|
+| $\Delta \theta_{1.4 GHz}$ | 0.59 deg |
+
+**Table 1.11.7** *Dish specifications for JVLA*
+
+There are numerous [receiver systems&#10548;](https://science.nrao.edu/facilities/vla/project-status/receivers), all circular polarization, on each telescope which are cycled through depending on the observation and configuration schedule. The receivers cover most of the [frequency range&#10548;](https://science.nrao.edu/facilities/vla/docs/manuals/oss2013b/performance/bands) between 58 MHz and 50 GHz. Correlation of visibilities is done with the flexible [WIDAR&#10548;](https://science.nrao.edu/facilities/vla/docs/manuals/oss/widar) correlator. As there are many frequency bands and different correlation options, the bandwidth parameters are not included in the table below.
+
+| Receivers |||||||||||
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| Band | 4 | P | L | S | C | X | Ku | K | Ka | Q |
+| SEFD | 10000+ Jy | 2790 Jy | 420 Jy | 370 Jy | 310 Jy | 250 Jy | 350 Jy | 560 Jy | 710 Jy | 1260 Jy |
+| Start Frequency | 58 MHz | 230 MHz | 1 GHz | 2 GHz | 4 GHz | 8 GHz | 12 GHz | 18 GHz | 26.5 GHz | 40 GHz |
+| Stop Frequency | 84 MHz | 470 MHz | 2 GHz | 4 GHz | 8 GHz | 12 GHz | 18 GHz | 26.5 GHz| 40 GHz | 50 GHz |
+| Total Bandwidth | 26 MHz | 240 MHz | 1 GHz | 2 GHz | 4 GHz | 4 GHz | 6 GHz | 8.5 GHz | 13.5 GHz | 10 GHz |
+| Polarization | Dual Circular | Dual Circular | Dual Circular | Dual Circular | Dual Circular | Dual Circular | Dual Circular | Dual Circular | Dual Circular | Dual Circular |
+
+**Table 1.11.8** *Receiver specifications for JVLA*
+
+The [sensitivity&#10548;](https://science.nrao.edu/facilities/vla/docs/manuals/oss/performance/sensitivity) of receivers is presented in *System Equivalent Flux Density* (SEFD) which is a function of the system temperature $T_{sys}$ and the efficiency of the telescope $\eta$. The efficiency of the dish relates to its reflectivity. At higher frequencies the reflectivity drops off and the dish becomes less efficient. This accounts for the increase in SEFD at the higher frequency receivers. The extreme increase in SEFD at the lower end is because the sky temperature increases at low frequencies (mainly due to synchrotron radiation). Sensitivity is discussed further in [$\S$ 7 &#10142;](../7_Observing_Systems).
+
+```{code-cell} ipython3
+Image(filename='figures/arrays/vla_aerial.jpg')
+```
+
+**Figure 1.11.6:** *JVLA array layout in the densest (D) configuration. Credit: [NRAO/AUI&#10548;](http://images.nrao.edu/Telescopes/VLA/307)*
+
++++
+
+The JVLA elements are laid out on a 'Y'-shape, each arm of the 'Y' is made of two sets of rail tracks which allow the elements to be repositioned into different [configurations&#10548;](https://science.nrao.edu/facilities/vla/docs/manuals/propvla/array_configs) to obtain different [resolution&#10548;](https://science.nrao.edu/facilities/vla/docs/manuals/oss/performance/resolution) measurements. The four configurations (A, B, C, D) are set configurations which vary the maximum and minimum baseline length (shown in the table below). The A configuration has the highest resolution, but is limited in low resolution, while D configuration is the densest layout and has most sensitivity at low resolutions. The same field in the sky can be observed with different configurations, the measured visibilities can be combined to form an image sensitive to all resolutions scales from A to D configuration. These configurations are cycled through in a typical schedule.
+
+| Array Specifications | A | B | C | D |
+|:---:|:---:|:---:|:---:|:---:|
+| Number of Elements | 27 | 27 | 27 | 27 |
+| Min Baseline | 680 m | 210 m | 35 m | 35 m |
+| Min $\Delta \theta_{1.4 GHz}$ | 1.3' | 4.2' | 25.2' | 25.2' |
+| Max Baseline | 36.4 km | 11.1 km | 3.4 km | 1.03 km |
+| Max $\Delta \theta_{1.4 GHz}$ | 1.5" | 4.8" | 15.5" | 51.3" |
+
+**Table 1.11.9** *Array specifications for JVLA*
+
+The JVLA, having been around for decades (in one form or another), has produced an enormous amount of scientific research. We will not even attempt an overview of the work that has been produced. However, as an entry point, one of the defining surveys using the VLA is given in [<cite data-cite='1998AJ....115.1693C'>The NRAO VLA Sky Survey (NVSS)</cite> &#10548;](http://adsabs.harvard.edu/abs/1998AJ....115.1693C). This is a classic radio catalogue.
+
++++
+
+### 1.11.3 Australian Square Kilometre Array Pathfinder (ASKAP)
+
++++
+
+On the path to developing the SKA, along with MeerKAT, the Australian Square Kilometre Array Pathfinder (ASKAP) is under construction in western Australia. This array uses a phased-array feed (PAF) receiver which effectively expands the field of view, allowing for a number of scientific advantages. As PAFs are a new technology, ASKAP will act as an engineering testing ground while also doing scientific observations. The up to date system specifications can be found [here&#10548;](http://www.atnf.csiro.au/projects/askap/specs.html).
+
+```{code-cell} ipython3
+Image(filename='figures/arrays/askap_dish_2015.jpg')
+```
+
+**Figure 1.11.7:** *ASKAP phased-array feed telescope. Credit: [CSIRO&#10548;](https://www.skatelescope.org/wp-content/uploads/2015/12/ASKAP_MkI_MkII1.jpg)*
+
++++
+
+At the prime focus of each dish is a PAF which is used to form multiple 'beams' and increase the effective field of view of the dish. The dish mount has a 'third-axis' which corrects for the rotation of the PAF due to change in parallactic angle. This axis is necessary to keep the PAF 'beams' fixed to a position in the sky. The details of PAFs are not covered in this book, for those interested see the [<cite data-cite='mailloux2005phased'>Phased Array Antenna Handbook</cite> &#10548;](https://books.google.co.za/books/about/Phased_Array_Antenna_Handbook.html?id=v-htQgAACAAJ).
+
+| Dish Specifications ||
+|:---:|:---:|
+| Optics | Prime Focus |
+| Diameter | 12 m|
+| $\Delta \theta_{1.4 GHz}$ | 1.22 deg |
+
+**Table 1.11.10** *Dish specifications for ASKAP*
+
+The PAFs operate at L-band, they have a higher system temperature and smaller bandwidth coverage compared to MeerKAT, but can make up for this in survey science by covering a larger field of view for a fixed time.
+
+| Receivers ||
+|:---:|:---:|
+| Band | L |
+| $T_{sys}$ | $50 K$ |
+| Start Frequency | 700 MHz |
+| Stop Frequency | 1800 MHz |
+| Total Bandwidth | 1100 MHz |
+| Instantaneous Bandwidth | 300 MHz |
+| Fractional Bandwidth | 0.18 - 0.35 |
+| Polarization | Dual Linear |
+
+**Table 1.11.11** *Receiver specifications for ASKAP*
+
+The phased-array feeds have been upgraded to a second generation version which has greatly reduced the system temperature. Below is a close-up of the first generation 'checker board' PAF. The  green panel is an active component which is used to form multiple digital beams.
+
+```{code-cell} ipython3
+Image(filename='figures/arrays/askap_paf_2010.jpg')
+```
+
+**Figure 1.11.8:** *Close up of the mark-I phased-array feed on ASKAP. Credit: [CSIRO/David McClenaghan&#10548;](http://www.scienceimage.csiro.au/image/11278/csiro-s-prototype-phased-array-feed-in-position-on-an-antenna-for-testing/)*
+
++++
+
+ASKAP is made up of 36 elements, with a similar minimum and maximum baseline distribution to MeerKAT. The layout of the array can be found [here&#10548;](http://www.atnf.csiro.au/projects/askap/config.html).
+
+| Array Specifications ||
+|:---:|:---:|
+| Number of Elements | 36 |
+| Min Baseline | 37 m |
+| Min $\Delta \theta_{1.4 GHz}$ | 0.39 deg |
+| Max Baseline | 6 km |
+| Max $\Delta \theta_{1.4 GHz}$ | 8.8" |
+
+**Table 1.11.12** *Array specifications for ASKAP*
+
+Again, similar to MeerKAT, there are a number of [survey science projects&#10548;](http://www.atnf.csiro.au/projects/askap/ssps.html) planned for when the array has been commissioned.
+
++++
+
+### 1.11.4 The Low-Frequency Array (LOFAR)
+
++++
+
+Stepping away from traditional dish-based interferometry we will take a look at the [Low-Frequency Array (LOFAR)&#10548;](http://www.lofar.org/) which was designed and build by the Dutch national astronomy research foundation ASTRON. This is a unique array as it is made up of stations instead of dish telescopes. Each station is made up of simple antenna elements and beamformed to act as a single telescope. These stations are called *aperture arrays*. They have the advantage of being 'electronically-steerable' which means that without any physical moving parts the aperture array can be 'pointed' in any direction in the sky. This is possible using the station's digital electronics. This technique allows the aperture array to be pointed in multiple locations at the same time, something which is not possible with traditional dish optics systems. LOFAR operates at a low frequency (< 250 MHz) compared to the arrays we have discussed so far. As such it has opened up a new region of the observable parameter space.
+
+```{code-cell} ipython3
+Image(filename='figures/arrays/lofar_uk_station.jpg')
+```
+
+**Figure 1.11.9:** *Aperture array [LOFAR-UK&#10548;](http://www.lofar-uk.org/) international station at Chilbolton Observatory. The High-Band Array (black flat structure in the top-left) made up of 96 tiles, each tile is composed of 16 'bowtie' dual-polarization dipole elements. The Low-Band Array (square patches in the foreground) is made up of 96 dual-polarization 'droopy' dipole elements (see figure below). The digital electronics to 'point' the stations is located in the small grey bunker. Credit: [LOFAR-UK/D. McKay-Bukowski&#10548;](http://www.lofar-uk.org/images/view_123b.jpg)*
+
++++
+
+Each station contains two arrays. The High-Band Array (HBA), which operates from 100 MHz to 250 MHz, and is made up of 'tile' elements. These tile elements are themselves made up of 16 'bowtie' dipole antenna elements. The signals from each bowtie is combined via an electronic beamformer, the titles are then further beamformed into a single signal. This signal is sent to a central correlation and computing cluster in the Netherlands. The Low-Band Array (LBA) operates from 0 to 100 MHz and is made up of 'droopy' dipole elements (shown below). Similar to the HBA the signal from all the elements is beamformed and sent to the main computing centre. The station can also act as an independent array and interferometry can be done using only the station elements.
+
+```{code-cell} ipython3
+Image(filename='figures/arrays/lofar_lba_element.jpg')
+```
+
+**Figure 1.11.10:** *Low-Band Array (LBA) 'droopy' dipole antenna elements. These elements are combined as an aperture array to function as an electronically-steerable telescope. Credit: [ASTRON&#10548;](https://www.astron.nl/sites/astron.nl/files/cms/LOFAR%20LBA%20cs302.jpg)*
+
++++
+
+LOFAR operates in different [observing modes&#10548;](https://www.astron.nl/radio-observatory/observing-capabilities/depth-technical-information/major-observing-modes/major-obs) depending on the project. The station configuration varies depending on if the station is located in the core, the Netherlands, or at international locations. Details on the station layout can be found [here&#10548;](https://www.astron.nl/radio-observatory/astronomers/users/technical-information/lofar-stations/lofar-stations-description-).
+
+At low frequencies the system temperature is dominated by the sky temperature. This allows for cheap, room temperature components to be used as this results in a relatively small increase in the system noise. The response of the antenna elements varies over the large fractional observing bandwidth, which results in a [sensitivity&#10548;](https://www.astron.nl/radio-observatory/astronomers/lofar-imaging-capabilities-sensitivity/sensitivity-lofar-array/sensiti) which depends on observing frequency and pointing.
+
+| Receivers ||
+|:---:|:---:|
+| Band | LBA | HBA-Low | HBA-High |
+| Start Frequency | 0 MHz | 100 MHz | 200 MHz |
+| Stop Frequency | 100 MHz | 200 MHz | 250 MHz |
+| Total Bandwidth | 100 MHz |100 MHz | 50 MHz |
+| Instantaneous Bandwidth | 96 MHz | 96 MHz | 96 MHz |
+| Fractional Bandwidth | 2 | 0.67 | 0.22 |
+| Polarization | Dual Linear | Dual Linear | Dual Linear |
+
+**Table 1.11.13** *Receiver specifications for LOFAR*
+
+As of February 2016 45 stations were operational ([see here for current array status](https://science.astron.nl/telescopes/lofar/lofar-system-overview/technical-specification/lofar-array-configuration/#headline-flex-5). However the modular station design allows for more stations to be added in the future. The majority of the stations (38) are located in the Netherlands (see figure below). The international stations (14 in total spread accross Germany (6), the UK (1), France (1), Sweden (1), Poland (3), Ireland (1) and Latvia (1)) allow for high resolution interferometric observations.
+
+```{code-cell} ipython3
+Image(filename='figures/arrays/lofar_station_map_oct_2015.png')
+```
+
+**Figure 1.11.11:** *LOFAR station locations and status as of October 2015. The core and superterp are located near Exloo, Netherlands. Credit: ASTRON/George Heald*. An up-to-date interactive station map can be found [here](https://www.astron.nl/lofartools/lofarmap.html).
+
++++
+
+LOFAR is a unique array as it operates in a frequency band which has not been thoroughly observed in the past. It complements higher frequency arrays (like the JVLA). Information on the selected LOFAR key science projects can be found [here&#10548;](https://science.astron.nl/telescopes/lofar/science-with-lofar/key-science-projects/). In 2024, LOFAR, ceased active science operations in order to prepare for an array systems upgrade that will dramatically increase the computing power of the array stations and double the field of view of the telescope.
+
++++
+
+### 1.11.5 Atacama Large Millimeter/submillimeter Array (ALMA)
+
++++
+
+Going in the other frequency direction to LOFAR, the [Atacama Large Millimeter/submillimeter Array (ALMA)&#10548;](https://almascience.eso.org/) is a high frequency array located in the Atacama Desert in Chile at around 5000 metres altitude. This elevation is useful for high frequency (> 50 GHz) radio astronomy as the water vapor in the atmosphere and tropospheric effects have detrimental effects on observations at such high frequencies. ALMA is a collaboration between the NRAO in the US, NAOJ in Japan, and ESO in Europe.
+
+```{code-cell} ipython3
+Image(filename='figures/arrays/alma_dishes.jpg')
+```
+
+**Figure 1.11.12:** *The four types of ALMA antennas: European, North American and Japanese 12 metre telescope, along with a 7 metre diameter one. Credit: [ALMA (ESO/NAOJ/NRAO), W. Garnier (ALMA)&#10548;](http://www.almaobservatory.org/en/visuals/images/?g2_itemId=3933)*
+
++++
+
+ALMA consists of two dish sizes (12 m and 7 m). The smaller dishes make up the compact core at the centre of the array. As the array operates at very high frequency the dish surfaces must be of very high quality to have an acceptable reflector efficiencies. Many of the dishes can also be moved around and this requires accurate knowledge of the telescope positioning.
+
+| Dish Specifications |||
+|:---:|:---:|:---:|
+| Optics | Prime Focus | Prime Focus |
+| Diameter | 12 m | 7 m|
+| $\Delta \theta_{\textrm{Band 9}}$ | 9.3" | 16" |
+
+**Table 1.11.14** *Dish specifications for ALMA*
+
+Like the JVLA, ALMA operates across a wide range of frequencies (broken into bands). The lowest frequency bands 1-3 are planned but not yet built. The ALMA bands start around the highest frequencies of the JVLA and go up to near the limit of heterodyne detectors in the far-infrared. Although the bands cover large frequency ranges compared to the lower frequency arrays, many of the bands have similar fractional bandwidth. The instantaneous bandwidth is limited by the correlator system to 8 GHz (it is an impressive correlator).
+
+| Receivers |||||||||||
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| Band | 1\* | 2\* | 3\* | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+| $T_{sys}$ | 17 | 30 | 37 | 51 | 65 | 83 | 147 | 196 | 175 | 230 | 
+| Start Frequency | 31 GHz | 67 GHz | 84 GHz | 125 GHz | 162 GHz | 211 GHz | 275 GHz | 385 GHz | 602 GHz | 787 GHz |
+| Stop Frequency | 35 GHz | 90 GHz | 116 GHz | 163 GHz | 211 GHz | 275 GHz | 373 GHz | 500 GHz | 720 GHz | 950 GHz |
+| Total Bandwidth | 4 GHz | 23 GHz | 32 GHz | 38 GHz | 49 GHz | 64 GHz | 98 GHz | 115 GHz | 118 GHz | 163 GHz | 
+| Instantaneous Bandwidth | 8 GHz | 8 GHz | 8 GHz | 8 GHz | 8 GHz | 8 GHz | 8 GHz | 8 GHz | 8 GHz | 8 GHz |
+| Fractional Bandwidth | 0.12 | 0.29 | 0.32 | 0.26 | 0.24 | 0.26 | 0.30 | 0.26 | 0.18 | 0.19 |
+
+**Table 1.11.15** *Receiver specifications for ALMA*
+
+
+ALMA consists of 66 dishes, with short wavelength observing frequencies and long baselines the array can resolve milli-arcsecond structure.
+
+| Array Specifications ||
+|:---:|:---:| 
+| Number of Elements | 66 | 
+| Min Baseline | ~150 m (compact config) |
+| Min $\Delta \theta_{\textrm{Band 9}}$ | 0.7" |
+| Max Baseline | ~16 km (extended config) |
+| Max $\Delta\theta_{\textrm{Band 9}}$ | 6 mas |
+
+**Table 1.11.16** *Array specifications for ALMA*
+
+```{code-cell} ipython3
+Image(filename='figures/arrays/alma_core_layout.jpg')
+```
+
+**Figure 1.11.13:** *ALMA core layout on the Chajnantor Plateau in Chile, made up of 12 m and 7 m telescopes, some of the telescopes can be repositioned to change the visibility sampling, similar to the VLA. Credit: [ALMA (ESO/NAOJ/NRAO), O. Dessibourg&#10548;](http://almaobservatory.org/gallery2/main.php?g2_view=core.DownloadItem&g2_itemId=4583)*
+
++++
+
+Although much of this book focuses on lower frequency interferometry, the same principles generally apply at higher frequency arrays like ALMA. The fundamentals remain true for all interferometric arrays but the details change.
+
++++
+
+### 1.11.6 VLBI Networks
+
++++
+
+Moving beyond the purpose built arrays we have covered so far there are also interferometry networks. The idea behind a network is that multiple telescopes, which normally operate in a single-dish observation mode, can observe the same position in the sky and record the signals at the same time. These signals are then sent to a central location where they are correlated to produce visibilities. This *ad-hoc* network design is most widely used in very long baseline interferometry (VLBI) which uses telescopes from all over the world to create a synthesized telescope on the scales of the Earth. In principle, VLBI can be used to perform the highest resolution astronomy. One very ambitious example is trying to determine the size-scale of super-massive black holes at the centre of galaxies ([Event Horizon Telescope&#10548;](http://www.eventhorizontelescope.org/), [BlackHoleCam&#10548;](http://blackholecam.org/)).
+
+VLBI is incredibly difficult as it requires very accurate knowledge about time and positions of the telescopes. These telescopes are on different parts of the world which move at rates of millimetres per year. These movements are taken into account with VLBI observations along with many other details. It is truly an impressive engineering and scientific feat.
+
+There are multiple VLBI networks, and they vary in size from the size of a country ([eMERLIN&#10548;](http://www.e-merlin.ac.uk/)) to super-continental ([EVN&#10548;](http://www.jive.nl/), [VLBA&#10548;](https://science.nrao.edu/facilities/vlba)). For example, the European VLBI Network (EVN) includes most major radio telescopes in Europe but also includes telescopes in Africa, Asia, and North America (see figure below).
+
+```{code-cell} ipython3
+Image(filename='figures/arrays/evn_map.png')
+```
+
+**Figure 1.11.14:** *Locations of telescopes in the European VLBI Network. Credit: [EVN&#10548;](https://www.evlbi.org/telescopes)*
+
++++
+
+Now, given the fact that the Earth has a finite size, one might think that there is a hard limit on the maximum distance between two telescopes. However, it is possible to do longer baseline interferometry by putting telescopes in orbit to do Space VLBI. [RadioAstron&#10548;](http://www.asc.rssi.ru/radioastron/) is an ongoing project to use a space-based radio telescope to do interferometry with ground-based telescopes. Space-based interferometry will happen at some point in the future. In the context of very low-frequency (< 10 MHz) radio astronomy it will be a necessity due to ionospheric reflection.
+
++++
+
+### 1.11.7 Epoch of Reionization Arrays
+
++++
+
+The interferometric arrays discussed thus far are multi-purpose arrays. Although they may have specific key science goals, these arrays can be used for many different types of observations. There are also purpose built arrays which are primarily designed for a specific experiment. Such is the case with Epoch of Reionization (EoR) arrays. These are low-frequency (observing at > 200 MHz) arrays which are being used to detect the redshifted Hydrogen 21 cm line, which is a tracer of the evolution of the universe during the epoch of reionization. These arrays tend to be made of simple elements, similar to LOFAR (one of the key science programs with LOFAR is EoR science). For example, the [PAPER experiment&#10548;](http://reionization.org/) (shown in the figure below) is made up of a highly redundant array of dipoles to detect an EoR power spectrum signature. Other experiments such as the [Murchison Widefield Array&#10548;](http://www.mwatelescope.org/) (MWA) and [Large Aperture Experiment to Detect the Dark Ages&#10548;](http://www.tauceti.caltech.edu/leda/) (LEDA) use similar techniques to constrain the EoR.
+
+```{code-cell} ipython3
+Image(filename='figures/arrays/paper_2013.jpg')
+```
+
+**Figure 1.11.15:** *PAPER Epoch of Reionization experiment redundant array configuration, located in the Northern Cape, South Africa. Each element is a dual-polarization dipole with a mesh reflecting surface. Credit: [SARAO&#10548;](https://www.sarao.ac.za/science/paper/)*
+
++++
+
+### 1.11.8 Baryon Acoustic Oscillations Arrays
+
++++
+
+Another type of experiment-driven arrays are Baryonic Acoustic Oscillations (BAO) intensity mapping arrays. Similar to EoR arrays, these arrays will attempt to use the redshifted Hydrogen 21 cm line as a tracer. Where the EoR experiments aim to use the 21 cm line to measure the evolution of the universe during the epoch of reionization, the BAO experiments will use the 21 cm line to detect the presence of Baryonic Acoustic Oscillations, a feature which is imprinted onto baryonic matter during the early stages of the Universe. This is typically done in the 400 MHz to 800 MHz band. These experiments are still mostly in the planning stage but [Canadian Hydrogen Intensity Mapping Experiment (CHIME)&#10548;](https://chime-experiment.ca/en) has finished construction and is undergoing commissioning. CHIME uses a series of cylinders (a design which has seen a renewed interest recently) to have a significant collecting area while not being overly expensive. As the BAOs are large scale structures which are present in every direction in the sky the actual pointing does not matter when attempting a statistical measurement.
+
+```{code-cell} ipython3
+Image(filename='figures/arrays/chime_array.jpg')
+```
+
+**Figure 1.11.16:** *CHIME BAO intensity mapping array near Penticton, Canada. The four cylinders are digitally beamformed and correlated. The array operates between 400 MHz and 800 MHz which is redshift 2.5 to 0.8 for the 21 cm line. Credit: [Canadian Astronomical Society&#10548;](http://casca.ca/wp-content/uploads/2015/09/Figure1Chime.jpg)*
+
++++
+
+### 1.11.9 The Square Kilometre Array (SKA)
+
++++
+
+The [Square Kilometre Array (SKA)&#10548;](https://www.skao.int/en) is an ambitious future radio telescope array which is being designed to access the next generation of radio science by covering a large frequency range and having a total collecting area of one square kilometre (for reference MeerKAT and the JVLA are about 1% of this collecting area). This project is a collaborative effort between multiple national science foundations. The SKA will consist of multiple arrays, with different elements, operating at different frequencies. LOFAR has proven the effectiveness of aperture array stations at low frequencies, this type of technology will be used for the low-frequency band of the SKA, currently being built in Western Australia. MeerKAT will form the core of the mid-frequency dish array built in the Northern Cape of South Africa.
+
+As the SKA is a massive undertaking which will require many years to develop, building the array will go through phases of progressively larger scales. Many of the current arrays (e.g. MeerKAT, ASKAP) are seen as precursor arrays which will likely be incorporated into the SKA. Future phases are planned to include a mid-frequency aperture array in South Africa and a phased-array feed-based survey array in Australia.
+
+The key science goals (see [<cite data-cite='ska2015advancing'>Advancing Astrophysics with the Square Kilometre Array</cite> &#10548;](http://pos.sissa.it/cgi-bin/reader/conf.cgi?confid=215) for example) of the SKA have been determined and drive the engineering and technological development of the project. The sheer scale of the SKA will require scientific efforts to be done by large, multi-national groups over many years.
+
+This section has provided a brief overview of some of the interferometric arrays currently in use, and those planned for the future. This is by no means meant to be a complete overview, but rather a sample of some of the highlights. We have written this introductory chapter to provide an overview of radio interferometry; where interferometry comes from, what science is done with interferometry, how radio interferometry works, and what some of the arrays currently being used look like. Over the remaining chapters we will focus on the fundamental aspects of interferometry covering [positional astronomy &#10142;](../3_Positional_Astronomy), [visibility space &#10142;](../4_Visibility_Space), [imaging &#10142;](../5_Imaging), [deconvolution &#10142;](../6_Deconvolution), [observing systems &#10142;](../7_Observing_Systems), [calibration &#10142;](../8_Calibration), and [practical &#10142;](../9_Practical) information for working with interferometric data. The [next chapter  &#10142;](../2_Mathematical_Groundwork) provides an overview of important mathematical concepts used throughout the book. This chapter should be used more as a reference, leading into the details of interferometry which begins in [Chapter 3 &#10142;](../3_Positional_Astronomy) with its foundations in positional astronomy.
+
++++
+
+*** 
+
+* Next: [1.x Further reading and references](1_x_further_reading_and_references.ipynb)
+
++++
+
+<div class=warn><b>Future Additions:</b></div>
+
+* science examples from each array
+* ask experts to add content to each array section
