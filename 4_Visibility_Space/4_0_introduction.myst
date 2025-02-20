@@ -1,0 +1,120 @@
+---
+jupytext:
+  text_representation:
+    extension: .myst
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.16.7
+kernelspec:
+  display_name: Python 3 (ipykernel)
+  language: python
+  name: python3
+---
+
++++ {"deletable": true, "editable": true}
+
+***
+<a id='beginning'></a> <!--label{beginning}-->
+   * [Outline](../0_Introduction/0_introduction.ipynb)
+   * [Glossary](../0_Introduction/1_glossary.ipynb)
+   * [4. The Visibility space](#)
+       * Previous Chapter: [3. Positional Astronomy](../3_Positional_Astronomy/3_0_introduction.ipynb)
+    
+       * Next: [4.1 Periodic Functions and Fourier Analysis](4_1_periodic_functions_and_fourier_analysis.ipynb)
+    
+***
+
++++ {"deletable": true, "editable": true}
+
+Import standard modules:
+
+```{code-cell} ipython3
+:deletable: true
+:editable: true
+
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+from IPython.display import HTML, SVG
+HTML('../style/course.css') #apply general CSS
+```
+
++++ {"deletable": true, "editable": true}
+
+Import section specific modules:
+
++++ {"deletable": true, "editable": true}
+
+# Chapter 4: The Visibility Space<a id='visibility:sec:intro'></a>
+
++++ {"deletable": true, "editable": true}
+
+An interferometric array consists of a collection of individual elements, each pair of elements is cross-correlated to make a baseline measurement. Interferometry is a powerful technique as it enables us to indirectly and accurately measure astrometric positions of the components in the sky. Interferometeters also indirectly provide us with information about the spatial characteristics of sky components. Using aperture synthesis, one can perform synthesis imaging from these measurements.
+
+In this chapter, we define the quantities that are measured by an interferometer and how it relates to the original that we observed.
+The questions we want to address in this chapter are:
+
+  * What is measured in radio interferometry?
+  * How can I determine what quantity I measure with a baseline of an interferometer?,
+  * How the interferometric measurements can be used to determine the structure of the observed sky?
+
+```{code-cell} ipython3
+SVG("figures/basic_block.svg")
+```
+
+Before addressing these questions, we will spend some time in [$\S$ 4.1 &#10142;](4_1_periodic_functions_and_fourier_analysis.ipynb) discussing the relationship between the image plane and the Fourier plane: this is fundamental to understanding interferometry. Then, in [$\S$ 4.2 &#10142;](4_2_the_baseline_and_its_representation_in_space.ipynb), we will define the *baseline* and its representation in various reference frames.
+
+The notion of baseline is necessary to adequately describe the 2-element interferometer, as done in [$\S$ 4.3 &#10142;](4_3_the_2-element_interferometer.ipynb). This simple interferometer can be seen as a tool that samples the visibility function [$\S$ 4.4 &#10142;](4_4_the_visibility_function.ipynb), which is associated with the intensity distribution of the sky. Depending on the location of the interferometer on Earth, this function can be probed along $uv$ tracks defined in [$\S$ 4.5.1 &#10142;](4_5_1_uv_Coverage_uv_tracks.ipynb). In [$\S$ 4.5.2 &#10142;](4_5_2_uv_coverage_improving_your_coverage.ipynb), we investigate how the $uv$ coverage of an interferometric array can be improved to better sample the visibility function.
+
+In the final section [$\S$ 4.6 &#10142;](4_6_The_Fourier_Approximation_VanCittert-Zernike_Theorem.ipynb), we describe the van Cittert-Zernike theorem, which, given some assertions, links the intensity distribution of the sky to the interforometric measurements by a Fourier relationship.
+
++++
+
+<img src='~/workspace/foi-course/4_Visibility_Space/figures/basic_block.svg
+
++++ {"deletable": true, "editable": true}
+
+#### Chapter Outline
+
+1. <span style="background-color:red">&nbsp;&nbsp;&nbsp;&nbsp;</span>[Periodic Functions and Fourier Analysis](4_1_periodic_functions_and_fourier_analysis.ipynb)
+2. <span style="background-color:yellow">&nbsp;&nbsp;&nbsp;&nbsp;</span> [The Baseline and Its Representation in Space](4_2_the_baseline_and_its_representation_in_space.ipynb)
+3. <span style="background-color:yellow">&nbsp;&nbsp;&nbsp;&nbsp;</span> [The 2-element Interferometer](4_3_the_2-element_interferometer.ipynb)
+4. <span style="background-color:yellow">&nbsp;&nbsp;&nbsp;&nbsp;</span>[The Visibility Function](4_4_the_visibility_function.ipynb)
+5. <span style="background-color:yellow">&nbsp;&nbsp;&nbsp;&nbsp;</span>UV Coverage
+    1. [$uv$ Tracks](4_5_1_uv_coverage_uv_tracks.ipynb)
+    2. [Improving Your Coverage](4_5_2_uv_coverage_improving_your_coverage.ipynb)
+6. <span style="background-color:red">&nbsp;&nbsp;&nbsp;&nbsp;</span>[The Van Cittert-Zernike Theorem](4_6_the_fourier_approximation_van_cittert-zernike_theorem.ipynb)
+7. <span style="background-color:red">&nbsp;&nbsp;&nbsp;&nbsp;</span>[Further Reading and References](4_x_further_reading_and_references.ipynb)
+
++++ {"deletable": true, "editable": true}
+
+#### Chapter Editors
+
+* Landman Bester (2016)
+* Griffin Foster (2016)
+* Trienko Grobler (2016, 2017)
+* Modhurita Mitra (2016)
+
++++ {"deletable": true, "editable": true}
+
+#### Chapter Contributors
+
++++ {"deletable": true, "editable": true}
+
+* Julien Girard (**4.0**, 4.1, **4.2**, **4.3**, **4.4**, **4.5**,**4.6**)
+* Etienne Bonnassieux (4.0, **4.1**, 4.2, 4.3, 4.4, 4.5, 4.6)
+
++++ {"deletable": true, "editable": true}
+
+#### Format status:
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : LF: Date
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : NC: Date
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : RF: Date
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : HF: Date
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : GM: Date
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : CC: Date
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : CL: Date
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : ST: Date
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : FN: Date
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : TC: Date
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : XX: Date

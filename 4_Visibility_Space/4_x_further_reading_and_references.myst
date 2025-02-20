@@ -1,0 +1,43 @@
+---
+jupytext:
+  text_representation:
+    extension: .myst
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.16.7
+kernelspec:
+  display_name: Python 3 (ipykernel)
+  language: python
+  name: python3
+---
+
+***
+<a id='beginning'></a> <!--\label{beginning}-->
+
+* [Outline](../0_Introduction/0_introduction.ipynb)
+* [Glossary](../0_Introduction/1_glossary.ipynb)
+* [4. The Visibility space](4_0_introduction.ipynb)
+    * Previous: [4.5 The Fourier Approximation & the van Cittert-Zernike theorem](4_5_The_Fourier_Approximation_VanCittert-Zernike_Theorem.ipynb)
+    * Next Chapter: [5. Imaging](../5_Imaging/5_0_introduction.ipynb)
+
+***
+
++++
+
+## 4.x Further Reading and References <a id='visib:sec:refs'></a>
+
++++
+
+<span style="background-color:red">TLG:AC: Proper expansion. Summary, References and Further reading.</span>
+
++++
+
+1. [<cite data-cite='taylor1999synthesis'>Synthesis Imaging in Radio Astronomy II (Lecture 1, 2) </cite> &#10548;](http://adsabs.harvard.edu/abs/1999sira.conf.....T) : general introduction.
+2. [<cite data-cite='thompson2008interferometry'>Interferometry and Synthesis in Radio Astronomy (Chapter 1.3, 12, 14) </cite> &#10548;](http://onlinelibrary.wiley.com/book/10.1002/9783527617845) : a complimentary chapter to Lecture 1 and 2 of *Synthesis Imaging in Radio Astronomy II*.
+3. [<cite data-cite='1966raas.book.....K'>Radio Astronomy (Chapters 6-10) &#10548;</cite>](http://adsabs.harvard.edu/abs/1966raas.book.....K): general overview of radio astronomy.
+
++++
+
+***
+
+* Next: [5. Imaging](../5_Imaging/5_0_introduction.ipynb)

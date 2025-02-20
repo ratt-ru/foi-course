@@ -1,0 +1,312 @@
+---
+jupytext:
+  text_representation:
+    extension: .myst
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.16.7
+kernelspec:
+  display_name: Python 3 (ipykernel)
+  language: python
+  name: python3
+---
+
+***
+<a id='beginning'></a> <!--\label{beginning}-->
+* [Outline](../0_Introduction/0_introduction.ipynb)
+* [Glossary](../0_Introduction/1_glossary.ipynb)
+* [4. The Visibility Space](4_0_introduction.ipynb)
+***
+
++++
+
+Import standard modules:
+
+```{code-cell} ipython3
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+from IPython.display import HTML, Image, SVG 
+HTML('../style/course.css') #apply general CSS
+```
+
+Import section specific modules:
+
+```{code-cell} ipython3
+from IPython.display import Image
+```
+
+```{code-cell} ipython3
+HTML('../style/code_toggle.html')
+```
+
+## Visibility Space Problem Set
+
++++
+
+### 1. Position of Orion
+
+The positions of the stars in the Orion constellation can be found in the figure below.
+
+```{code-cell} ipython3
+Image('figures/orion_fig.png')
+```
+
+**Figure:** Schematic sky map of the Orion consellation.
+
++++
+
+Betelgeuse and Rigel are the brightest stars in this constellation. The equatorial coordinates of the constellation's centre, Betelgeuse, and Rigel are:
+
+| Name | Right Ascension ($\alpha$) | Declination ($\delta$) |
+|:---:|:---:|:---:|
+| Center | 5h 30m $(\alpha_0)$ | $0^{\circ}$ $(\delta_0)$ |
+| Betelgeuse | 5h 55m 10.3053s | $7^{\circ}~24'~25.42''$ |
+| Rigel | 5h 14m 32.272s | $-8^{\circ}~12'~5.898''$ |
+
++++
+
+(1) Calculate the $l$ and $m$ coordinates of Orion's center, Betelgeuse and Rigel? Assume that your field center was chosen to coincide with Orion's center. [specify your answers in degrees ($^{\circ}$)]. [5] **Hint:**
+\begin{eqnarray}
+    \Delta \alpha &=& \alpha-\alpha_0\nonumber\\
+    l &=& \cos \delta \sin \Delta \alpha \nonumber\\
+    m &=& \sin \delta \cos \delta_0 - \cos \delta \sin \delta_0\cos \Delta \alpha\nonumber
+\end{eqnarray}
+
++++
+
+(2) What is the distance from the field center to Betelgeuse in the projected $lm$-plane? [1] **Hint:** $l^2+m^2 = d^2$.
+
++++
+
+(3) What is the angular distance from the field center to Betelgeuse on the celestial sphere? [1] **Hint:** $l^2+m^2 = \sin^2 \theta$.
+
++++
+
+(4) Verify the previous question by using the equatorial coordinates directly (stay on the celestial sphere)? [1] **Hint:** Use the spherical Pythagorean theorem.
+
++++
+
+(5) Why do we measure $l$ and $m$ in $^{\circ}$ if they are direction cosines and therefore by definition unit-less? [1] **Hint:** Use the previous three results to answer this question.
+
++++
+
+(6) What will the hour angle of Orion's center be when it appear above the horizon? In which direction will Orion's center appear? [1] **Hint:** Remember Orion's center is at $\delta = 0^{\circ}$. It is the same declination the sun has when it lies on one of the equinoxes.
+
++++
+
+**Subtotal 10**
+
++++
+
+### 2. Papino and Paperino
+
+We will be using a fictitious piece of sky (containing only two radio sources) in the remainder of the assignment. The equatorial coordinates of this fictitious sky are:
+
+| Name | Flux | Right Ascension ($\alpha$) | Declination $\delta$ |
+|:---:|:---:|:---:|:---:|
+| Papino | 1Jy | -4h 44m 6.686s $(\alpha_0)$ | $-74^{\circ}39'37.481''$ $(\delta_0)$ |
+| Paperino | 0.2Jy | -4h 44m 6.686 | $-73^{\circ}39'37.298''$ |
+
++++
+
+(1) Calculate the $l$ and $m$ coordinates of Papino and Paperino? Assume Papino and the field-center coincide.  Express your answer in *radians*. [3]
+
++++
+
+(2) Write down an equation that completely describes this fictitious sky by assuming Papino and Paperino are perfect point sources (i.e. $I(l,m)$)? [3] **Hint:** A point source can be represented with a delta-function, the amplitude of the delta function is equal to the flux of the point source and the translation parameters describe the position of the point source.
+
++++
+
+(3) Find the expression of the complex visibilities $V(u,v)$ that we would observe with an ideal interferometer (an interferometer that could sample the entire *uv*-plane). [2] **Hint:** Take the Fourier transform of $I(l,m)$. The unit of $v$ is rad$^{-1}$ (per radian).
+
++++
+
+(4) Calculate $V(v)=V(0,v)$, i.e. the cross section of $V(u,v)$ with the plane $u=0$. [2]
+
++++
+
+**Subtotal 10**
+
++++
+
+### 3. KAT-7 Observation of Papino and Paperino
+
+KAT-7 is a radio interferometer that consists out of 7 dishes and is located in the Karoo, South Africa. The ENU (east-north-up) coordinates of this telescope is listed in the table below. We will assume that we observed the fictitious field from the problem 2. The main aim of this section is to enable you to derive the *uv*-tracks of an interferometer and to improve your understanding of visibilities.
+
+The ENU coordinates of KAT-7:
+
+| Antenna | E ($x$) | N ($y$) | U ($z$) |
+|:---:|:---:|:---:|:---:|
+| Antenna 1 | 25.095 m ($x_1$) | -9.095 m ($y_1$) | 0.045 m ($z_1$) |
+| Antenna 2 | 90.284 m | 26.380 m | -0.226 m |
+| Antenna 3 | 3.985 m | 26.893 m | 0.000 m |
+| Antenna 4 | -21.605 m | 25.494 m | 0.019 m |
+| Antenna 5 | -38.272 m | -2.592 m | 0.391 m |
+| Antenna 6 | -61.595 m | -79.699 m | 0.702 m |
+| Antenna 7 | -87.988 m | 75.754 m | 0.138\m |
+
+The observation parameters are:
+
+| Name | Value |
+|:---:|:---:|
+| Latitude $L$ | $-30^{\circ}43'17.34''$ |
+| Starting hour angle $H_0$ | -4h |
+| Stopping hour angle $H_1$ | 4h |
+| Field center $\delta_0$ | $-74^{\circ}39'37.481''$ |
+| Field center $\alpha_0$ | -4h~44m~6.686s |
+| Observational Frequency $\nu$ | 1.4 GHz |
+
+```{code-cell} ipython3
+antennas = np.array([[ 25.095, -9.095,  0.045], #LOADING KAT7 ANTENNAS
+            [ 90.284, 26.380, -0.226],
+            [  3.985, 26.839,  0.000],
+            [-21.605, 25.494,  0.019],
+            [-38.272, -2.582,  0.391],
+            [-61.595,-79.699,  0.792],
+            [-87.988, 75.754,  0.138]])
+```
+
+```{code-cell} ipython3
+plt.scatter(antennas[:,0], antennas[:,1])
+plt.grid('on')
+plt.xlabel('E-W [m]')
+plt.ylabel('N-S [m]')
+plt.title('KAT7 Array Layout')
+plt.show()
+```
+
+(1) Calculate the ENU baseline difference vector $\boldsymbol{b}_{12}^{xyz}$ of baseline 12? [1] **Hint:** $\boldsymbol{b}_{12}^{xyz} = (x_2-x_1,y_2-y_1,z_2-z_1)$.
+
++++
+
+(2) Calculate the length $D_{12}$ of $\boldsymbol{b}_{12}^{xyz}$. [1]
+
++++
+
+(3) Calculate the azimuth angle $\mathcal{A}_{12}$ and the elevation (altitude) angle $\mathcal{E}_{12}$ of $\boldsymbol{b}_{12}^{xyz}$? [2] **Hint:** Remember the azimuth angle is measured from the north towards the east.
+
++++
+
+(4) Calculate $\boldsymbol{b}_{12}^{XYZ}=\begin{bmatrix}X_{12}\\Y_{12}\\Z_{12}\end{bmatrix}$? [3] **Hint:** Recall that
+\begin{equation}
+\begin{bmatrix}X_{12}\\Y_{12}\\Z_{12}\end{bmatrix}=D_{12}
+ \begin{bmatrix}
+ \cos L_a \sin \mathcal{E}_{12} - \sin L_a \cos \mathcal{E}_{12} \cos \mathcal{A}_{12}\nonumber\\ 
+ \cos \mathcal{E}_{12} \sin \mathcal{A}_{12} \nonumber\\
+ \sin L_a \sin \mathcal{E}_{12} + \cos L_a \cos \mathcal{E}_{12} \cos \mathcal{A}_{12}
+ \end{bmatrix}
+ \end{equation}
+
++++
+
+(5) Calculate the observational wavelength $\lambda$? [1] **Hint:** $\lambda f=c$.
+
++++
+
+(6) Calculate $\sqrt{X_{12}^2 + Y_{12}^2}\lambda^{-1}$, $|\sin \delta_0| \sqrt{X_{12}^2 + Y_{12}^2}\lambda^{-1}$ and $\cos\delta_0 Z_{12}\lambda^{-1}$ [3].
+
++++
+
+(7) Draw the *uv*-tracks of baseline 12 and 21 that are generated; during a 24h observation? [2] **Hint:** The baseline vector of an interferometer trace out an elliptical locus (after 24 hours it will complete one entire revolution). The values calculated in the previous question determine the shape of the elliptical locus. Moreover, $\boldsymbol{b}_{12}^{xyz}=-\boldsymbol{b}_{21}^{xyz}$.
+
++++
+
+(8) Generate the coordinate pair (*u,v*) associated with baseline 12 and $H_0=$ -4h. [2] **Hint:** Recall that
+ \begin{equation}
+ \begin{bmatrix}
+ u_{12}\\
+ v_{12}
+ \end{bmatrix} =\lambda^{-1}
+ \begin{bmatrix}
+ \sin H & \cos H & 0\\
+ -\sin \delta_0 \cos H & \sin \delta_0 \sin H & \cos \delta_0
+ \end{bmatrix}
+ \begin{bmatrix}
+ X_{12}\\
+ Y_{12}\\
+ Z_{12}
+\end{bmatrix}
+\end{equation}
+
++++
+
+(9)  Why is *u* and *v* unit-less? Why then do we measure *u* and *v* in rad$^{-1}$? [1] **Hint:** In what unit do we measure length and wavelength? What is the unit of the ratio of these two quantities?
+
++++
+
+(10) Generate the coordinate pair (*u,v*) associated with baseline 12 and $H_1=$ 4h. [2]
+
++++
+
+(11) Draw the *uv*-tracks of baseline 12 and 21 for -4h $\leq H \leq$ 4h. [2]
+
++++
+
+(12) Assume we observe the exact same sky as we calculated in the previous section (i.e. the *l* and *m* coordinates of our skymodel stay the same), but now let $\delta_0 = 0^{\circ}$ (Papino lies on the celestial equator). Calculate the *uv*-coverage of baseline 12 with -4h < H < 4h. Also, plot the visibilities that we would observe as a function of timeslots - (we obtained the visibilities at 600 different (*u,v*) pairs on the elliptical locus)? [5]
+
++++
+
+**Subtotal 25**
+
++++
+
+### 4. Basic Properties of an Interferometric Array
+
+In the table below we have some of the basic properties of an interferometric array, with these basic properties we can determine some of the array's secondary properties. For all the questions that follow, assume we are *observing at 1.4 GHz* ($\nu_0$). **Note:** Assume that all the angles in the formulae given are in *radians*. Express all your answers, those that are angles, in degrees, arcminutes and arcseconds.
+
+| Property | Value |
+|:---:|:---:|
+| Antennas $N_{\textrm{ant}}$ | 7 |
+| Dish diameter $D$ | 12 m |
+| Longest baseline length $b_{\textrm{max}}$ | 185 m |
+| Channel bandwidth $\Delta \nu$ | 92.9121 MHz |
+| Frequency range | 1.4 - 1.95 GHz |
+
+```{code-cell} ipython3
+f0 = 1.4*10**9
+D = 12
+bmax = 185
+cB = 92.9121*10**6
+Na = 7
+```
+
+(1) How many baselines does the interferometric array have? [1] **Hint:** $\frac{N_{\textrm{ant}}^2-N_{\textrm{ant}}}{2}$.
+
++++
+
+(2) Determine the approximate size of the primary beam (full width half maximum beamwidth) of the interferometric array. [2] **Hint:** $\theta_p \approx \frac{\lambda_0}{D}$.
+
++++
+
+(3) Determine the angular resolution of the interferometric array. [1] **Hint:** $\theta_s \approx \frac{\lambda_0}{b_{\textrm{max}}}$.
+
++++
+
+(4) Determine the maximum angular radius $\Delta \theta$ a source can be from the field center and not be heavily attenuated by the fringe washing function. [1] **Hint:** $\Delta \theta \Delta \nu << \theta_s \nu_0$.
+
++++
+
+(5) Determine the maximum integration time $\Delta t$ length if you want to prevent time smearing (within the maximum angular radius given by your fringe washing function). [1] **Hint:** $\frac{2\pi\Delta \theta\Delta t}{P} <<\theta_s$.
+
++++
+
+(6) Determine the field of view $\Delta \theta_F$ in which we may assume that the $w$-term is negligible. [1] **Hint:** $\Delta \theta_F < \frac{1}{3}\sqrt{\theta_s}$
+
++++
+
+(7) Represent $\theta_p$, $\theta_s$, $\Delta \theta$ and $\Delta \theta_F$ graphically (in one figure). [3] **Hint:** Draw concentric circles and use the angles as radii or diameters.
+
++++
+
+**Subtotal 10**
+
++++
+
+**Total Marks 55**  
+**Full Marks 50**
+
++++
+
+***
+Return: [4. The Visibility Space](4_0_introduction.ipynb)

@@ -1,0 +1,856 @@
+---
+jupytext:
+  text_representation:
+    extension: .myst
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.16.7
+kernelspec:
+  display_name: Python 3 (ipykernel)
+  language: python
+  name: python3
+---
+
+***
+<a id='beginning'></a> <!--\label{beginning}-->
+* [Outline](../0_Introduction/0_introduction.ipynb)
+* [Glossary](../0_Introduction/1_glossary.ipynb)
+* [4. The Visibility Space](4_0_introduction.ipynb)
+    * Previous: [4.4 The Visibility Function](4_4_the_visibility_function.ipynb)
+    * Next: [4.5.2 UV Coverage: Improving Your Coverage](4_5_2_uv_coverage_improving_your_coverage.ipynb)
+
+***
+
++++
+
+Import standard modules:
+
+```{code-cell} ipython3
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+from IPython.display import HTML, SVG, Image 
+HTML('../style/course.css') #apply general CSS
+```
+
+Import section specific modules:
+
+```{code-cell} ipython3
+from mpl_toolkits.mplot3d import Axes3D
+import plotBL
+```
+
+```{code-cell} ipython3
+HTML('../style/code_toggle.html')
+```
+
+### 4.5.1 UV coverage : UV tracks
+
++++
+
+The objective of [$\S$ 4.5.1 &#10549;](4_5_1_uv_coverage_uv_tracks.ipynb) and [$\S$ 4.5.2 &#10142;](4_5_2_uv_coverage_improving_your_coverage.ipynb) is to give you a glimpse into the process of *aperture synthesis*. <span style="background-color:cyan">TLG:GM: Check if the italic words are in the glossary. </span> An interferometer measures components of the Fourier Transform of the sky by sampling the visibility function, $\mathcal{V}$. This collection of samples lives in ($u$, $v$, $w$) space, and are often projected onto the so-called $uv$-plane.
+In [$\S$ 4.5.1 &#10549;](4_5_1_uv_coverage_uv_tracks.ipynb), we will focus on the way the visibility function is sampled. This sampling is a function of the interferometer's configuration, the direction of the source and the observation time.
+In [$\S$ 4.5.2 &#10142;](4_5_2_uv_coverage_improving_your_coverage.ipynb), we will see how this sampling can be improved by using certain observing techniques.
+
++++
+
+#### 4.5.1.1 The projected baseline with time: the $uv$ track
+
++++
+
+A projected baseline depends on a baseline's coordinates, and the direction being observed in the sky. It corresponds to the baseline as seen from the source. The projected baseline is what determines the spatial frequency of the sky that the baseline will measure. As the Earth rotates, the projected baseline and its corresponding spatial frequency (defined by the baseline's ($u$, $v$)-coordinates) vary slowly in time, generating a path in the $uv$-plane.
+
+We will now generate test cases to see what locus the path takes, and how it can be predicted depending on the baseline's geometry.
+
++++
+
+##### 4.5.1.1.1 Baseline projection as seen from the source
+
++++
+
+Let's generate one baseline from two antennas Ant$_1$ and Ant$_2$.
+
+```{code-cell} ipython3
+ant1 = np.array([-500e3,500e3,0])   # in m
+ant2 = np.array([500e3,-500e3,+10]) # in m
+```
+
+Let's express the corresponding physical baseline in ENU coordinates.
+
+```{code-cell} ipython3
+b_ENU = ant2-ant1                # baseline 
+D = np.sqrt(np.sum((b_ENU)**2))  # |b|
+print(str(D/1000)+" km")
+```
+
+Let's place the interferometer at a latitude $L_a=+45^\circ00'00''$.
+
+```{code-cell} ipython3
+L = (np.pi/180)*(45+0./60+0./3600)      # Latitude in radians
+```
+
+```{code-cell} ipython3
+A = np.arctan2(b_ENU[0],b_ENU[1])
+print("Baseline Azimuth="+str(np.degrees(A))+"°")
+
+E = np.arcsin(b_ENU[2]/D)
+print("Baseline Elevation="+str(np.degrees(E))+"°")
+```
+
+```{code-cell} ipython3
+plotBL.sphere(ant1,ant2,A,E,D,L)
+```
+
+**Figure 4.5.1**: A baseline located at +45$^\circ$ as seen from the sky. This plot is interactive and can be rotated in 3D to see different baseline projections, depending on the position of the source w.r.t. the physical baseline.
+
++++
+
+On the interactive plot above, we represent a baseline located at +45$^\circ$. It is aligned with the local south-west/north-east axis, as seen from the sky frame of reference. By rotating the sphere westward, you can simulate the variation of the projected baseline as seen from a source in apparent motion on the celestial sphere.
+
++++
+
+##### 4.5.1.1.2  Coordinates of the baseline in the ($u$,$v$,$w$) plane
+
++++
+
+We will now simulate an observation to study how a projected baseline will change with time. We will position this baseline at a South African latitude. We first need the expression of the physical baseline in a convenient reference frame, attached to the source in the sky.
+
++++
+
+In [$\S$ 4.2 &#10142;](4_2_the_baseline_and_its_representation_in_space.ipynb), we linked the equatorial coordinates of the baseline to the ($u$,$v$,$w$) coordinates through the transformation matrix:
+\begin{equation}
+\begin{pmatrix}
+u\\
+v\\
+w
+\end{pmatrix}
+=
+\frac{1}{\lambda}
+\begin{pmatrix}
+\sin H_0 & \cos H_0 & 0\\ 
+-\sin \delta_0 \cos H_0 & \sin\delta_0\sin H_0 & \cos\delta_0\\
+\cos \delta_0 \cos H_0 & -\cos\delta_0\sin H_0 & \sin\delta_0\\
+\end{pmatrix} 
+\begin{pmatrix}
+X\\
+Y\\
+Z
+\end{pmatrix}
+\end{equation}
+
++++
+
+<a id="vis:eq:451"></a>
+\begin{equation}
+\begin{bmatrix}
+X\\
+Y\\
+Z
+\end{bmatrix}
+=|\mathbf{b}|
+\begin{bmatrix}
+\cos L_a \sin \mathcal{E} - \sin L_a \cos \mathcal{E} \cos \mathcal{A}\nonumber\\ 
+\cos \mathcal{E} \sin \mathcal{A} \nonumber\\
+\sin L_a \sin \mathcal{E} + \cos L_a \cos \mathcal{E} \cos \mathcal{A}\\
+\end{bmatrix}
+\end{equation}
+
++++
+
+**Equation 4.5.1**
+
++++
+
+This expression of $\mathbf{b}$ is a function of ($\mathcal{A}$,$\mathcal{E}$), and therefore of ($X$,$Y$,$Z$) in the equatorial frame of reference.
+
++++
+
+##### 4.5.1.1.2 Observation parameters
+
+Let's define an arbitrary set of observation parameters to mimic a real observation.
+
+* Latitude of the baseline: $L_a=-30^\circ43'17.34''$
+* Declination of the observation: $\delta=-74^\circ39'37.481''$
+* Duration of the observation: $\Delta \text{HA}=[-4^\text{h},4^\text{h}]$
+* Time steps: 600
+* Frequency: 1420 MHz
+
+```{code-cell} ipython3
+# Observation parameters
+c = 3e8                                        # Speed of light
+f = 1420e9                                     # Frequency
+lam = c/f                                      # Wavelength 
+dec = (np.pi/180)*(-30-43.0/60-17.34/3600)     # Declination
+
+time_steps = 600                               # Time Steps
+h = np.linspace(-4,4,num=time_steps)*np.pi/12  # Hour angle window
+```
+
+##### 4.5.1.1.3 Computing of the projected baselines in ($u$,$v$,$w$) coordinates as a function of time
+
+As seen previously, we convert the baseline coordinates using the previous matrix transformation.
+
+```{code-cell} ipython3
+ant1 = np.array([25.095,-9.095,0.045])
+ant2 = np.array([90.284,26.380,-0.226])
+b_ENU = ant2-ant1
+D = np.sqrt(np.sum((b_ENU)**2))
+L = (np.pi/180)*(-30-43.0/60-17.34/3600)
+
+A=np.arctan2(b_ENU[0],b_ENU[1])
+print("Azimuth=",A*(180/np.pi))
+E=np.arcsin(b_ENU[2]/D)
+print("Elevation=",E*(180/np.pi))
+
+X = D*(np.cos(L)*np.sin(E)-np.sin(L)*np.cos(E)*np.cos(A))
+Y = D*np.cos(E)*np.sin(A)
+Z = D*(np.sin(L)*np.sin(E)+np.cos(L)*np.cos(E)*np.cos(A))
+```
+
+As the $u$, $v$, $w$ coordinates explicitly depend on $H$, we must evaluate them for each observational time step. We will use the equations defined in [$\S$ 4.2.2 &#10142;](4_2_the_baseline_and_its_representation_in_space.ipynb#):
+
++++
+
+* $\lambda u = X \sin H + Y \cos H$
+* $\lambda v= -X \sin \delta \cos H + Y \sin\delta\sin H + Z \cos\delta$
+* $\lambda w= X \cos \delta \cos H -Y \cos\delta\sin H + Z \sin\delta$
+
+```{code-cell} ipython3
+u = lam**(-1)*(np.sin(h)*X+np.cos(h)*Y)/1e3
+v = lam**(-1)*(-np.sin(dec)*np.cos(h)*X+np.sin(dec)*np.sin(h)*Y+np.cos(dec)*Z)/1e3
+w = lam**(-1)*(np.cos(dec)*np.cos(h)*X-np.cos(dec)*np.sin(h)*Y+np.sin(dec)*Z)/1e3
+```
+
+We now have everything that describes the $uvw$-track of the baseline (over an 8-hour observational period). It is hard to predict which locus the $uvw$ track traverses given only the three mathematical equations from above. Let's plot it in $uvw$ space and its projection in $uv$ space.
+
+```{code-cell} ipython3
+plotBL.UV(u,v,w)
+```
+
+**Figure 4.5.2**: $uvw$ track derived from the simulation and projection in the $uv$-plane.
+
++++
+
+The track in $uvw$ space are curves and the projection in the $uv$ plane are arcs. Let us focus on the track's projection in this plane. To get observation-independent knowledge of the track we can try to combine the three equations of $u$, $v$ and $w$, the aim being to eliminate $H$ from the equation. We end up with an equation linking $u$, $v$, $X$ and $Y$ (the full derivation can be found in [$\S$ A.3 &#10142;](../0_Introduction/2_Appendix.ipynb)):
+
+$$\boxed{u^2 + \left[ \frac{v -\frac{Z}{\lambda} \cos \delta}{\sin \delta} \right]^2 = \left[ \frac{X}{\lambda} \right]^2 + \left[ \frac{Y}{\lambda} \right]^2}$$
+
+One can note that in this particular case, the $uv$ track takes on the form of an *ellipse*.
+
+<span style="background-color:cyan">TLG:GM: Check if the italic words are in the glossary. </span>
+
+This ellipse is centered at $(0,\frac{Z}{\lambda} \cos \delta)$ in the ($u$,$v$) plane.
+
+The major axis is  $a=\frac{\sqrt{X^2 + Y^2}}{\lambda}$.
+
+The minor axis (along the axis $v$) will be a function of $Z$, $\delta$ and $a$.
+We can check this by plotting the theoretical ellipse over the observed portion of the track. (You can fall back to the duration of the observation to see that the track is mapping this ellipse exactly).
+
+```{code-cell} ipython3
+%matplotlib inline
+from matplotlib.patches import Ellipse
+
+# parameters of the UVtrack as an ellipse
+a=np.sqrt(X**2+Y**2)/lam/1e3 # major axis  
+b=a*np.sin(dec)              # minor axis
+v0=Z/lam*np.cos(dec)/1e3     # center of ellipse
+
+plotBL.UVellipse(u,v,w,a,b,v0)
+```
+
+**Figure 4.5.3**: The blue (resp. the red) curve is the $uv$ track of the baseline $\mathbf{b}_{12}$ (resp. $\mathbf{b}_{21}$). As $I_\nu$ is real, the real part of the visibility $\mathcal{V}$ is even and the imaginary part is odd making $\mathcal{V}(-u,-v)=\mathcal{V}^*$. It implies that one baseline automatically provides a measurement of a visibility and its complex conjugate at ($-u$,$-v$).
+
++++
+
+#### 4.5.1.2 Special cases
+
++++
+
+##### 4.5.1.2.1 The Polar interferometer
+
++++
+
+Let settle one baseline at the North pole. The local zenith corresponds to the North Celestial Pole (NCP) at $\delta=90^\circ$. As seen from the NCP, the baseline will rotate and the projected baseline will correspond to the physical baseline. This configuration is the only case where this happens.
+
+If $\mathbf{b}$ rotates, we can guess that the $uv$ tracks will be perfect circles. Let's check:
+
+```{code-cell} ipython3
+L=np.radians(90.)
+ant1 = np.array([25.095,-9.095,0.045])
+ant2 = np.array([90.284,26.380,-0.226])
+b_ENU = ant2-ant1
+D = np.sqrt(np.sum((b_ENU)**2))
+
+A=np.arctan2(b_ENU[0],b_ENU[1])
+print("Azimuth=",A*(180/np.pi))
+E=np.arcsin(b_ENU[2]/D)
+print("Elevation=",E*(180/np.pi))
+
+X = D*(np.cos(L)*np.sin(E)-np.sin(L)*np.cos(E)*np.cos(A))
+Y = D*np.cos(E)*np.sin(A)
+Z = D*(np.sin(L)*np.sin(E)+np.cos(L)*np.cos(E)*np.cos(A))
+```
+
+Let's compute the $uv$ tracks of an observation of the NCP ($\delta=90^\circ$):
+
+```{code-cell} ipython3
+dec=np.radians(90.)
+
+uNCP = lam**(-1)*(np.sin(h)*X+np.cos(h)*Y)/1e3
+vNCP = lam**(-1)*(-np.sin(dec)*np.cos(h)*X+np.sin(dec)*np.sin(h)*Y+np.cos(dec)*Z)/1e3
+wNCP = lam**(-1)*(np.cos(dec)*np.cos(h)*X-np.cos(dec)*np.sin(h)*Y+np.sin(dec)*Z)/1e3
+
+# parameters of the UVtrack as an ellipse
+aNCP=np.sqrt(X**2+Y**2)/lam/1e3 # major axis  
+bNCP=aNCP*np.sin(dec)              # minor axi
+v0NCP=Z/lam*np.cos(dec)/1e3     # center of ellipse
+```
+
+Let's compute the uv tracks when observing a source at $\delta=30^\circ$:
+
+```{code-cell} ipython3
+dec=np.radians(30.)
+
+u30 = lam**(-1)*(np.sin(h)*X+np.cos(h)*Y)/1e3
+v30 = lam**(-1)*(-np.sin(dec)*np.cos(h)*X+np.sin(dec)*np.sin(h)*Y+np.cos(dec)*Z)/1e3
+w30 = lam**(-1)*(np.cos(dec)*np.cos(h)*X-np.cos(dec)*np.sin(h)*Y+np.sin(dec)*Z)/1e3
+
+a30=np.sqrt(X**2+Y**2)/lam/1e3 # major axis  
+b30=a*np.sin(dec)              # minor axi
+v030=Z/lam*np.cos(dec)/1e3     # center of ellipse
+```
+
+```{code-cell} ipython3
+%matplotlib inline
+plotBL.UVellipse(u30,v30,w30,a30,b30,v030)
+plotBL.UVellipse(uNCP,vNCP,wNCP,aNCP,bNCP,v0NCP)
+```
+
+**Figure 4.5.4**: $uv$ track for a baseline at the pole observing at $\delta=90^\circ$ (NCP) and at $\delta=30^\circ$ with the same color conventions as the previous figure.
+
++++
+
+When observing a source at declination $\delta$, we still have an elliptical shape but centered at (0,0). In the case of a polar interferometer, the full $uv$ track can be covered in 12 hours only due to the symmetry of the baseline.
+
++++
+
+##### 4.5.1.2.2 The Equatorial interferometer
+
++++
+
+Let's consider the other extreme scenario: this time, we position the interferometer at the equator. The local zenith is crossed by the Celestial Equator at $\delta=0^\circ$. As seen from the celestial equator, the baseline will not rotate and the projected baseline will no longer correspond to the physical baseline. This configuration is the only case where this happens.
+
+If $\mathbf{b}$ is not rotating, we can intuitively guess that the $uv$ tracks will be straight lines.
+
+```{code-cell} ipython3
+L=np.radians(90.)
+X = D*(np.cos(L)*np.sin(E)-np.sin(L)*np.cos(E)*np.cos(A))
+Y = D*np.cos(E)*np.sin(A)
+Z = D*(np.sin(L)*np.sin(E)+np.cos(L)*np.cos(E)*np.cos(A))
+
+# At local zenith == Celestial Equator
+dec=np.radians(0.)
+
+uEQ = lam**(-1)*(np.sin(h)*X+np.cos(h)*Y)/1e3
+vEQ = lam**(-1)*(-np.sin(dec)*np.cos(h)*X+np.sin(dec)*np.sin(h)*Y+np.cos(dec)*Z)/1e3
+wEQ = lam**(-1)*(np.cos(dec)*np.cos(h)*X-np.cos(dec)*np.sin(h)*Y+np.sin(dec)*Z)/1e3
+
+# parameters of the UVtrack as an ellipse
+aEQ=np.sqrt(X**2+Y**2)/lam/1e3 # major axis  
+bEQ=aEQ*np.sin(dec)              # minor axi
+v0EQ=Z/lam*np.cos(dec)/1e3     # center of ellipse
+
+# Close to Zenith
+dec=np.radians(10.)
+
+u10 = lam**(-1)*(np.sin(h)*X+np.cos(h)*Y)/1e3
+v10 = lam**(-1)*(-np.sin(dec)*np.cos(h)*X+np.sin(dec)*np.sin(h)*Y+np.cos(dec)*Z)/1e3
+w10 = lam**(-1)*(np.cos(dec)*np.cos(h)*X-np.cos(dec)*np.sin(h)*Y+np.sin(dec)*Z)/1e3
+
+a10=np.sqrt(X**2+Y**2)/lam/1e3 # major axis  
+b10=a*np.sin(dec)              # minor axi
+v010=Z/lam*np.cos(dec)/1e3     # center of ellipse
+```
+
+```{code-cell} ipython3
+%matplotlib inline
+plotBL.UVellipse(u10,v10,w10,a10,b10,v010)
+plotBL.UVellipse(uEQ,vEQ,wEQ,aEQ,bEQ,v0EQ)
+```
+
+**Figure 4.5.5**: $uv$ track for a baseline at the equator observing at $\delta=0^\circ$ and at $\delta=10^\circ$, with the same color conventions as the previous figure.
+
++++
+
+An equatorial interferometer observing its zenith will see radio sources crossing the sky on straight, linear paths. Therefore, they will produce straight $uv$ coordinates.
+
++++
+
+##### 4.5.1.1.3 The East-West array <a id='vis:sec:ew'></a>
+
++++
+
+The East-West array is the special case of an interferometer with physical baselines aligned with the East-West direction in the ground-based frame of reference. They have the convenient property of giving a $uv$ coverage which lies entirely on a plane.
+
++++
+
+If the baseline is aligned with the East-West direction, then the Elevation $\mathcal{E}$ of the baseline is zero and the Azimuth $\mathcal{A}$ is $\frac{\pi}{2}$. [Eq. 4.5.1 &#10549;](#vis:eq:451) then simplifies considerably:
+
++++
+
+The only non-zero component of the baseline will be its $Y$-component.
+
++++
+
+\begin{equation}
+\frac{1}{\lambda}
+\begin{bmatrix}
+X\\
+Y\\
+Z
+\end{bmatrix}
+=
+|\mathbf{b_\lambda}|
+\begin{bmatrix}
+\cos L_a \sin 0 - \sin L_a \cos 0 \cos \frac{\pi}{2}\nonumber\\ 
+\cos 0 \sin \frac{\pi}{2} \nonumber\\
+\sin L_a \sin 0 + \cos L_a \cos 0 \cos \frac{\pi}{2}\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+0\\
+|\mathbf{b_\lambda}|\\
+0 \\
+\end{bmatrix}
+\end{equation}
+
++++
+
+If we observe a source at declination $\delta_0$ with varying Hour Angle, $H$, we obtain:
+
+\begin{equation}
+\begin{pmatrix}
+u\\
+v\\
+w\\
+\end{pmatrix}
+=
+\begin{pmatrix}
+\sin H & \cos H & 0\\ 
+-\sin \delta_0 \cos H & \sin\delta_0\sin H & \cos\delta_0\\
+\cos \delta_0 \cos H & -\cos\delta_0\sin H & \sin\delta_0\\
+\end{pmatrix} 
+\begin{pmatrix}
+0\\
+|\mathbf{b_\lambda}| \\
+0
+\end{pmatrix}
+\end{equation}
+
+\begin{equation}
+\begin{pmatrix}
+u\\
+v\\
+w\\
+\end{pmatrix}
+=
+\begin{pmatrix}
+|\mathbf{b_\lambda}| \cos H \\ 
+|\mathbf{b_\lambda}| \sin\delta_0 \sin H\\
+-|\mathbf{b_\lambda}|\cos\delta_0\sin H\\
+\end{pmatrix} 
+\end{equation}
+
+when $H = 6^\text{h}$ (West)
+
+\begin{equation}
+\begin{pmatrix}
+u\\
+v\\
+w\\
+\end{pmatrix}
+=
+\begin{pmatrix}
+0 \\ 
+|\mathbf{b_\lambda}|\sin\delta_0\\
+|\mathbf{b_\lambda}|\cos\delta_0\\
+\end{pmatrix} 
+\end{equation}
+
+when $H = 0^\text{h}$ (South)
+\begin{equation}
+\begin{pmatrix}
+u\\
+v\\
+w\\
+\end{pmatrix}
+=
+\begin{pmatrix}
+|\mathbf{b_\lambda}| \\ 
+0\\
+0\\
+\end{pmatrix} 
+\end{equation}
+
+when $H = -6^\text{h}$ (East)
+
+\begin{equation}
+\begin{pmatrix}
+u\\
+v\\
+w\\
+\end{pmatrix}
+=
+\begin{pmatrix}
+0 \\ 
+-|\mathbf{b_\lambda}|\sin\delta_0\\
+-|\mathbf{b_\lambda}|\cos\delta_0
+\end{pmatrix} 
+\end{equation}
+
++++
+
+In this case, one can notice that we always have a relationship between $u$, $v$ and $|\mathbf{b_\lambda}|$:
+
+$$ u^2+\left( \frac{v}{\sin\delta_0}\right) ^2=|\mathbf{b_\lambda}|^2$$
+
++++
+
+<b>Warning:</b> The $\sin\delta_0$ factor, appearing in the previous equation, can be interpreted as a compression factor.
+
++++
+
+#### 4.5.1.3 Sampling the visibility plane with $uv$-tracks
+
++++
+
+##### 4.5.1.3.1 Simulating a baseline
+
++++
+
+When we have an EW baseline, some equations simplify.
+
+Firstly, $XYZ = [0~d~0]^T$, where $d$ is the baseline length measured in wavelengths.
+
+Secondly, we have the following relationships: $u = d\cos(H)$, $v = d\sin(H)\sin(\delta)$,
+
+where $H$ is the hour angle of the field center and $\delta$ its declination.
+
+In this section, we will plot the $uv$-coverage of an EW-baseline whose field center is at two different declinations.
+
+```{code-cell} ipython3
+H = np.linspace(-6,6,600)*(np.pi/12) #Hour angle in radians
+d = 100 #We assume that we have already divided by wavelength
+
+delta = 60*(np.pi/180) #Declination in degrees
+u_60 = d*np.cos(H)
+v_60 = d*np.sin(H)*np.sin(delta)
+```
+
+<span style="background-color:red">TLG:AC: Add the following figures. This is specifically for an EW array. They will add some more insight. </span>
+
+```{code-cell} ipython3
+SVG('figures/EW_1_d.svg')
+```
+
+```{code-cell} ipython3
+SVG('figures/EW_2_d.svg')
+```
+
+```{code-cell} ipython3
+SVG('figures/EW_3_d.svg')
+```
+
+##### 4.5.1.3.2 Simulating the sky
+
++++
+
+Let us populate our sky with three sources, with positions given in RA ($\alpha$) and DEC ($\delta$):
+* Source 1: (5h 32m 0.4s,60$^{\circ}$-17' 57'') - 1 Jy
+* Source 2: (5h 36m 12.8s,-61$^{\circ}$ 12' 6.9'') - 0.5 Jy
+* Source 3: (5h 40m 45.5s,-61$^{\circ}$ 56' 34'') - 0.2 Jy
+
+We place the field center at $(\alpha_0,\delta_0) = $ (5h 30m,60$^{\circ}$).
+
+```{code-cell} ipython3
+RA_sources = np.array([5+30.0/60,5+32.0/60+0.4/3600,5+36.0/60+12.8/3600,5+40.0/60+45.5/3600])
+DEC_sources = np.array([60,60+17.0/60+57.0/3600,61+12.0/60+6.9/3600,61+56.0/60+34.0/3600])
+Flux_sources_labels = np.array(["","1 Jy","0.5 Jy","0.2 Jy"])
+Flux_sources = np.array([1,0.5,0.1]) #in Jy
+step_size = 200
+print("Phase center     Source 1     Source 2     Source3")
+print(repr("RA="+str(RA_sources)).ljust(2))
+print("DEC="+str(DEC_sources))
+```
+
+We then convert the ($\alpha$,$\delta$) to $l,m$: <span style="background-color:red">TLG:AC:Point to Chapter 3.</span>
+* $l = \cos \delta \sin \Delta \alpha$
+* $m = \sin \delta\cos\delta_0 -\cos \delta\sin\delta_0\cos\Delta \alpha$
+* $\Delta \alpha = \alpha - \alpha_0$
+
+```{code-cell} ipython3
+RA_rad = np.array(RA_sources)*(np.pi/12)
+DEC_rad = np.array(DEC_sources)*(np.pi/180)
+RA_delta_rad = RA_rad-RA_rad[0]
+
+l = np.cos(DEC_rad)*np.sin(RA_delta_rad)
+m = (np.sin(DEC_rad)*np.cos(DEC_rad[0])-np.cos(DEC_rad)*np.sin(DEC_rad[0])*np.cos(RA_delta_rad))
+print("l=",l*(180/np.pi))
+print("m=",m*(180/np.pi))
+
+point_sources = np.zeros((len(RA_sources)-1,3))
+point_sources[:,0] = Flux_sources
+point_sources[:,1] = l[1:]
+point_sources[:,2] = m[1:]
+```
+
+The source and phase centre coordinates are now given in degrees.
+
+```{code-cell} ipython3
+%matplotlib inline
+fig = plt.figure(figsize=(10,10))
+ax = fig.add_subplot(111)
+plt.xlim([-4,4])
+plt.ylim([-4,4])
+plt.xlabel("$l$ [degrees]")
+plt.ylabel("$m$ [degrees]")
+plt.plot(l[0],m[0],"bx")
+plt.plot(l[1:]*(180/np.pi),m[1:]*(180/np.pi),"ro") 
+counter = 1
+for xy in zip(l[1:]*(180/np.pi)+0.25, m[1:]*(180/np.pi)+0.25):                                              
+    ax.annotate(Flux_sources_labels[counter], xy=xy, textcoords='offset points',horizontalalignment='right',
+                verticalalignment='bottom')  
+    counter = counter + 1
+        
+plt.grid()
+```
+
+**Figure 4.5.6**: Distribution of the simulated sky in the $l$,$m$ plane.
+
++++
+
+##### 4.5.1.3.3 Simulating an observation
+
++++
+
+We will now create a fully-filled $uv$-plane, and sample it using the EW-baseline track we created in the first section. We will be ignoring the $w$-term for the sake of simplicity.
+
+```{code-cell} ipython3
+u = np.linspace(-1*(np.amax(np.abs(u_60)))-10, np.amax(np.abs(u_60))+10, num=step_size, endpoint=True)
+v = np.linspace(-1*(np.amax(abs(v_60)))-10, np.amax(abs(v_60))+10, num=step_size, endpoint=True)   
+uu, vv = np.meshgrid(u, v)
+zz = np.zeros(uu.shape).astype(complex)
+```
+
+We create the dimensions of our visibility plane.
+
+```{code-cell} ipython3
+s = point_sources.shape
+for counter in range(1, s[0]+1):
+    A_i = point_sources[counter-1,0]
+    l_i = point_sources[counter-1,1]
+    m_i = point_sources[counter-1,2]
+    zz += A_i*np.exp(-2*np.pi*1j*(uu*l_i+vv*m_i))
+zz = zz[:,::-1]
+```
+
+We create our fully-filled visibility plane. With a "perfect" interferometer, we could sample the entire $uv$-plane. Since we only have a finite amount of antennas, this is never possible in practice. Recall that our sky brightness $I(l,m)$ is related to our visibilites $V(u,v)$ via the Fourier transform. For a bunch of point sources we can therefore write:
+
+$$V(u,v)=\mathcal{F}\{I(l,m)\} = \mathcal{F}\{\sum_k A_k \delta(l-l_k,m-m_k)\} = \sum_k A_k e^{-2\pi i (ul_i+vm_i)}$$
+
+Let's compute the total visibilities for our simulated sky.
+
+```{code-cell} ipython3
+u_track = u_60
+v_track = v_60
+z = np.zeros(u_track.shape).astype(complex)       
+
+s = point_sources.shape
+for counter in range(1, s[0]+1):
+    A_i = point_sources[counter-1,0]
+    l_i = point_sources[counter-1,1]
+    m_i = point_sources[counter-1,2]
+    z += A_i*np.exp(-1*2*np.pi*1j*(u_track*l_i+v_track*m_i))
+```
+
+Below we sample our visibility plane on the $uv$-track derived in the first section, i.e. $V(u_t,v_t)$.
+
+```{code-cell} ipython3
+plt.figure(figsize=(12,6))
+
+plt.subplot(121)
+plt.imshow(zz.real,extent=[-1*(np.amax(np.abs(u_60)))-10, np.amax(np.abs(u_60))+10,-1*(np.amax(abs(v_60)))-10, \
+                           np.amax(abs(v_60))+10])
+plt.plot(u_60,v_60,"k")
+plt.xlim([-1*(np.amax(np.abs(u_60)))-10, np.amax(np.abs(u_60))+10])
+plt.ylim(-1*(np.amax(abs(v_60)))-10, np.amax(abs(v_60))+10)
+plt.xlabel("u")
+plt.ylabel("v")
+plt.title("Real part of visibilities")
+
+plt.subplot(122)
+plt.imshow(zz.imag,extent=[-1*(np.amax(np.abs(u_60)))-10, np.amax(np.abs(u_60))+10,-1*(np.amax(abs(v_60)))-10, \
+                           np.amax(abs(v_60))+10])
+plt.plot(u_60,v_60,"k")
+plt.xlim([-1*(np.amax(np.abs(u_60)))-10, np.amax(np.abs(u_60))+10])
+plt.ylim(-1*(np.amax(abs(v_60)))-10, np.amax(abs(v_60))+10)
+plt.xlabel("u")
+plt.ylabel("v")
+plt.title("Imaginary part of visibilities")
+```
+
+**Figure 4.5.7**: Real and imaginary parts of the visibility function. The black curve is the portion of the $uv$ track crossing the visibility.
+
++++
+
+We now plot the sampled visibilites as a function of time-slots, i.e $V(u_t(t_s),v_t(t_s))$.
+
+```{code-cell} ipython3
+plt.figure(figsize=(12,6))
+plt.subplot(121)
+plt.plot(z.real)
+plt.xlabel("Timeslots")
+plt.ylabel("Jy")
+plt.title("Real: sampled visibilities")
+
+plt.subplot(122)
+plt.plot(z.imag)
+plt.xlabel("Timeslots")
+plt.ylabel("Jy")
+plt.title("Imag: sampled visibilities")
+```
+
+**Figure 4.5.8**: Real and imaginary parts of the visibility sampled by the black curve in Fig. 4.5.7, plotted as a function of time.
+
+```{code-cell} ipython3
+plt.figure(figsize=(12,6))
+plt.subplot(121)
+plt.imshow(abs(zz),
+    extent=[-1*(np.amax(np.abs(u_60)))-10,
+            np.amax(np.abs(u_60))+10,
+            -1*(np.amax(abs(v_60)))-10,
+            np.amax(abs(v_60))+10])
+plt.plot(u_60,v_60,"k")
+plt.xlim([-1*(np.amax(np.abs(u_60)))-10, np.amax(np.abs(u_60))+10])
+plt.ylim(-1*(np.amax(abs(v_60)))-10, np.amax(abs(v_60))+10)
+plt.xlabel("u")
+plt.ylabel("v")
+plt.title("Amplitude of visibilities")
+
+plt.subplot(122)
+plt.imshow(np.angle(zz),
+    extent=[-1*(np.amax(np.abs(u_60)))-10,
+            np.amax(np.abs(u_60))+10,
+            -1*(np.amax(abs(v_60)))-10,
+            np.amax(abs(v_60))+10])
+plt.plot(u_60,v_60,"k")
+plt.xlim([-1*(np.amax(np.abs(u_60)))-10, np.amax(np.abs(u_60))+10])
+plt.ylim(-1*(np.amax(abs(v_60)))-10, np.amax(abs(v_60))+10)
+plt.xlabel("u")
+plt.ylabel("v")
+plt.title("Phase of visibilities")
+```
+
+**Figure 4.5.9**: Amplitude and Phase of the visibility function. The black curve is the portion of the $uv$ track crossing the visibility.
+
+```{code-cell} ipython3
+plt.figure(figsize=(12,6))
+plt.subplot(121)
+plt.plot(abs(z))
+plt.xlabel("Timeslots")
+plt.ylabel("Jy")
+plt.title("Abs: sampled visibilities")
+
+plt.subplot(122)
+plt.plot(np.angle(z))
+plt.xlabel("Timeslots")
+plt.ylabel("Jy")
+plt.title("Phase: sampled visibilities")
+```
+
+**Figure 4.5.10**: Amplitude and Phase of the visibility sampled by the black curve in Fig. 4.5.7, plotted as a function of time.
+
++++
+
+##### 4.5.1.3.4 "Real-life" visibility
+
++++
+
+In the following figure, we present a collection of visibility measurements taken with different baselines, as a function of time. These measurements come from a real LOFAR dataset observing Cygnus A ([Fig. 4.4.11 &#10549;](#vis:fig:4411)), a powerful radiosource.
+Each color corresponds to a different baseline measurement, and consequently, a different sampling of the same visibility function along different uv-track.
+
++++
+
+<a id="vis:fig:4411"></a>
+
+```{code-cell} ipython3
+Image('figures/cygnusA.jpg')
+```
+
+**Figure 4.5.11**: Cygnus A at 21 cm.
+
++++
+
+<a id="vis:fig:4412"></a>
+
+```{code-cell} ipython3
+Image('figures/baselines.jpg')
+```
+
+**Figure 4.5.12**: Visibility amplitude as a function of time.
+
++++
+
+[Fig. 4.5.12 &#10549;](#vis:fig:4412) shows a plot of the amplitudes of all the visibility samples from our observation of Cygnus A. The large number of antennas makes its interpretation difficult. Even the inspection of single visibility's amplitude (i.e. a single $uv$ track) is hard to interpret due to the source's intrinsic complexity. Let us see what happens if we  plot the same information as a function of the $uv$-distance, $r_{uv}$.
+
++++
+
+<a id="vis:fig:4413"></a>
+
+```{code-cell} ipython3
+Image('figures/baseline-uvdist.jpg')
+```
+
+**Figure 4.5.13**: Visibility amplitude as a function of $r_{uv}$.
+
++++
+
+[Fig. 4.5.13 &#10549;](#vis:fig:4413) display the same information as [Fig. 4.5.12 &#10549;](#vis:fig:4412) this time as a function of $r_{uv}$. It should be quite clear that, as in [$\S$ 4.4 &#10142;](4_4_the_visibility_function.ipynb), we are stacking the radial plots of the visibility function. The interpretation of these radial plots provides us with information about the size of the source. For [Fig. 4.5.13 &#10549;](#vis:fig:4413) in particular, when the amplitude of the visibility goes to zero, one characteristic size of the source has been resolved.
+
++++
+
+From these plots, it is clear that the more baselines we have, the better the sampling of the visibility function.
+In the next section, we discuss how astronomers improve their $uv$ coverage.
+
++++
+
+  <font size=4><b>Important things to remember</b></font>
+  <br>
+  <br>
+
+&bull; Each individual baseline samples the visibility function along a single $uv$ track.<br>
+&bull; The $uv$ tracks are ellipses whose parameters depends on the latitude and declination of observation.<br>
+&bull; The polar (resp. equatorial) interferometer gives circular (linear) $uv$ tracks.<br>
+&bull; Accumulating samples over time enhances the sampling of the visibility function, thus improving our knowledge of the source.<br>
+
++++
+
+***
+
+* Next: [4.5.2 UV Coverage: Improving Your Coverage](4_5_2_uv_coverage_improving_your_coverage.ipynb)
+
++++
+
+#### Format status:
+
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : LF: 09/02/2017
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : NC: 09/02/2017
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : RF: 09/02/2017
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : HF: 09/02/2017
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : GM: 09/02/2017
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : CC: 09/02/2017
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : CL: 09/02/2017
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : ST: 09/02/2017
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : FN: 09/02/2017
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : TC: 09/02/2017
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : XX: 09/02/2017

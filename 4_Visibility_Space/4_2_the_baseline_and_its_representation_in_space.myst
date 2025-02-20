@@ -1,0 +1,406 @@
+---
+jupytext:
+  text_representation:
+    extension: .myst
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.16.7
+kernelspec:
+  display_name: Python 3 (ipykernel)
+  language: python
+  name: python3
+---
+
+***
+
+* [Outline](../0_Introduction/0_introduction.ipynb)
+* [Glossary](../0_Introduction/1_glossary.ipynb)
+* [4. The Visibility Space](4_0_introduction.ipynb)
+    * Previous: [4.1 Periodic Functions and Fourier Analysis](4_1_periodic_functions_and_fourier_analysis.ipynb)
+    * Next: [4.3 The 2-element Interferometer](4_3_the_2-element_interferometer.ipynb)
+
+***
+
++++
+
+Import standard modules:
+
+```{code-cell} ipython3
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+from IPython.display import HTML, SVG
+HTML('../style/course.css') #apply general CSS
+```
+
+Import section specific modules:
+
+```{code-cell} ipython3
+from IPython.display import HTML
+HTML('../style/code_toggle.html')
+```
+
+# 4.2 The Baseline and Its Representation in Space
+
++++
+
+In the last section, we briefly summarised the mathematical tools we will need in this section. This section is intended to explain the physics underpinning interferometry. Before we can dig into what actually interests us - i.e. **physics** - we will therefore have to describe interferometers more explicitly.
+
+Before we can get into the details of the relationship between the *visibilities* measured by each baseline and the *sky brightness* astronomers are interested in, we will need to define some key concepts. We will begin with the *baseline*: is the separation vector between two antenna elements in an interferometric array. It is a fundamental concept in interferometry: a baseline directly measures a point in Fourier space.
+
+An interferometric array consists of several baselines (formed by every pair of antennas in the array). The baselines are thus determined by the array's configuration. In this chapter, we will introduce *projected baselines*, and derive expressions for the baseline vector in various coordinate systems.
+
+<span style="background-color:cyan">TLG:GM: Check if the italic words are in the glossary.</span>
+
++++
+
+Let us start by defining the notation and vector definitions we will use throughout this course. They are designed to take us from the *local* and *instantaneous* observer frame of reference (local $x$,$y$, $z$ on Earth) to the sky coordinates in the equatorial frame ($H$, $\delta$) through a series of coordinate changes:
+
+1. From local ($x$,$y$,$z$) to the (**E**ast, **N**orth, **U**p) 
+2. From local  **E**, **N**, **U** to local azimuth/elevation ($\mathcal{A}$, $\mathcal{E}$) 
+3. From local ($\mathcal{A}$, $\mathcal{E}$) to equatorial (($H$, $\delta$), or equivalently, ($X$, $Y$, $Z$)) 
+4. From the equatorial ($X$, $Y$, $Z$) to the ($u$, $v$, $w$)-space
+
+<span style="background-color:cyan">TLG:GM: Check if the italic words are in the glossary.</span>
+
++++
+
+<a id="vis:sec:421"></a>
+### 4.2.1 The physical baseline
+
+The physical baseline is a geometric construct based on the separation between two antenna elements in 3-D space, whereas the projected baseline is the mapping of this 3-D physical baseline onto a 2-D plane (determined by the direction of the observation). While the physical baseline is a constant in the terrestrial reference frame (the acronym ITRF - In Terrestrial Reference Frame - is commonly used), the projected baseline changes as the Earth rotates (in the frame of reference of a source fixed in the sky - a.ka. the "sky frame of reference").
+
++++
+
+#### 4.2.1.1 Local definition of the baseline vector  <a id="vis:sec:4211"></a>
+
++++
+
+A position can be described in 3-D with a vector. Let us define an origin $O$, an orthogonal basis $\mathcal{B}$ and a local Cartesian reference frame attached to the ground $\mathcal{R}$ ($O$, $\mathcal{B}$($\mathbf{\hat{e}_x}, \mathbf{\hat{e}_y}, \mathbf{\hat{e}_z}$)) (see [Fig. 4.2.1 &#10549;](#vis:fig:421)).
+
+
+Let us now consider two antennas in this frame of reference. They are defined by their position in  $\mathcal{B}$:
+
+$$\textbf{a}_1=\vec{OA}_1=x_1 \mathbf{\hat{e}_x} + y_1 \mathbf{\hat{e}_y} + z_1 \mathbf{\hat{e}_z}$$
+
+$$\textbf{a}_2=\vec{OA}_2=x_2\mathbf{\hat{e}_x} + y_2 \mathbf{\hat{e}_y} + z_2 \mathbf{\hat{e}_z}$$
+
+In other words, all the information on the position of our antennas is given by ($x_1$,$y_1$,$z_1$) and ($x_2$,$y_2$,$z_2$), which are defined in the basis $\mathcal{B}$.
+
+Let us assume that the distance between the antennas is small enough to consider the curve of the Earth between them to be flat. The Earth then becomes a plane, on which the basis vectors can be translated without any rotation. The *local physical baseline* in Cartesian coordinates is defined as the difference vector
+
+$$\mathbf{b} = \mathbf{a}_2 - \mathbf{a}_1 = \vec{A_1A_2} $$
+
+It is important to note that the physical baseline is a **vector**: it depends only on the **relative positions** of two antenna elements, and is **independent of the origin** of the reference frame.
+
++++
+
+<a id="vis:fig:421"></a>
+
+```{code-cell} ipython3
+SVG("figures/vectorxyz.svg")
+```
+
+**Figure 4.2.1:** Vectors $a_1$ and $a_2$ in a local 3-dimensional Cartesian coordinate system.
+
++++
+
+<a id="vis:sec:4212"></a>
+#### 4.2.1.2 The (East, North, Up) Reference Frame: A Global Definition of the Baseline Vector
+
++++
+
+Unfortunately, in our formulation thus far, the directions of $\mathbf{\hat{e}_x}, \mathbf{\hat{e}_y}, \mathbf{\hat{e}_z}$ are arbitrary. We can do better: let us attach our coordinate basis to an "absolute" point of reference on Earth. To do this, we use a *terrestrial reference frame*: a new Cartesian basis defined by the cardinal points. Thus:
+
+* We define the origin $O$ at some point on Earth. This origin can be arbitrary, but it is convenient to choose either the 'centre' of the array or the position of one of the array elements.
+* A **global** right-handed orthonormal basis $\mathcal{B}'$($\mathbf{\hat{e}_E}, \mathbf{\hat{e}_N}, \mathbf{\hat{e}_U}$) pointing, respectively, towards the geographical **East**, geographical **North**, and towards the local vertical (pointing to the Zenith away from the Earth, i.e. **Up**).
+
+The baseline vector is still expressed in a local reference frame, chosen to coincide with the geographical North and East (see [Fig. 4.2.2 &#10549;](#vis:fig:422)).
+<span style="background-color:cyan">TLG:GM: Check if the italic words are in the glossary. Remember italic words can only be glossary definitions. </span>
+
++++
+
+#### 4.2.1.3 Expression in Horizontal Coordinates ($\mathcal{A}$, $\mathcal{E}$)
+
++++
+
+As seen in [$\S$ 3.4 &#10142;](../3_Positional_Astronomy/3_3_horizontal_coordinates.ipynb), an observer located somewhere on Earth can define a direction in the sky in terms of local *azimuth*  $\mathcal{A}$ and *elevation*  $\mathcal{E}$. A baseline can similarly be expressed in these coordinates.
+
+Let us set Antenna 1 as the origin of the reference frame on the ground. The North, East and Up axes are defined as per [$\S$ 4.2.1.2 &#10549;](#vis:sec:4212).
+
+The *azimuth* is the angle contained in the plane of the local ground measured clock-wise from North to East. The *elevation* is the angle measured from the horizon to the local zenith.
+<span style="background-color:cyan">TLG:GM: Check if the italic words are in the glossary. Remember italic words can only be glossary definitions. </span>
+
++++
+
+<a id="vis:fig:422"></a>
+
+```{code-cell} ipython3
+SVG('figures/enu_alt_az.svg')
+```
+
+**Figure 4.2.2**: Relation between the horizontal frame ($\mathcal{A}$, $\mathcal{E}$) and the ($E$, $N$, $U$) Cartesian frame.
+
++++
+
+The baseline vector is expressed in the basis $\mathcal{B}'$:
+
+\begin{equation}
+\mathbf{b}_{\text{ENU}}
+=
+\lvert \mathbf{b} \rvert
+\begin{bmatrix}
+\sin \mathcal{A} \cos \mathcal{E}\\
+\cos \mathcal{A} \cos \mathcal{E}\\
+\sin \mathcal{E}
+\end{bmatrix}
+\end{equation}
+
++++
+
+<b>Note:</b> If Antenna 2 and Antenna 1 share the same component along $\mathbf{\hat{e}_U}$ (e.g. Antenna 1 and Antenna 2 are lying on the ground plane), then the elevation of the baseline is $\mathcal{E}=0^\circ$.
+
++++
+
+<b>Warnings:</b><br>
+
+Geographers and the Astronomers use different conventions for the origin and variation of the azimuth. We will use the Astronomer convention as defined in [$\S$ 3 &#10142;](../3_Positional_Astronomy/3_0_introduction.ipynb).
+The horizontal coordinate system behaves like a 2D spherical coordinates system, with a slight difference in convention choices (angle chosen as origin and direction of variation).
+The latitude $L_a$ was not expressed here but will become important later in the chapter.
+
++++
+
+#### 4.2.1.4 Expression in the Equatorial (X,Y,Z) Frame
+
++++
+
+The baseline is fully described in the $ENU$ system using the azimuth $\mathcal{A}$ and elevation $\mathcal{E}$. As shown in [$\S$ 3.1 &#10142;](../3_Positional_Astronomy/3_1_equatorial_coordinates.ipynb), for an observer located at latitude $L_a$, the extension of the direction of the baseline defines a position on the sky. This position can be associated with Equatorial coordinates ($H$, $\delta$), where $H$ is the hour angle and $\delta$ the declination.
+
+To generalize the baseline further (and to ease subsequent derivations), we need to define a set of reference frames which will map the baseline onto sky coordinates on the celestial sphere. To do so, we define an intermediate frame of reference $XYZ$ with basis ($\mathbf{\hat{e}_X}$,$\mathbf{\hat{e}_Y}$,$\mathbf{\hat{e}_Z}$). We attach this frame of reference to the Earth. We can now position these axes with respect to the Equatorial coordinates $(H; \delta)$. Let us define the axes of the $XYZ$ frame as:
+
+* the $X$-axis points towards $(H=0^\textrm{h}, \delta = 0^{\circ})$ ($\gamma$ is the point where the vernal equinox crosses the local meridian)
+* the $Y$-axis towards $(H=-6^\textrm{h}, \delta = 0^{\circ})$ (East)
+* the $Z$-axis towards the North Celestial Pole (NCP).
+
+[Fig. 4.2.3 &#10549;](#vis:fig:413) shows that the plane associated with the array elements (red) can be related to the plane of the celestial sphere (blue) via a coordinate transformation.
+
++++
+
+<a id="vis:fig:413"></a>
+
+```{code-cell} ipython3
+SVG('figures/conversion.svg')
+```
+
+**Figure 4.2.3**: The (X,Y,Z) Reference frame. $T$: local zenith. ($X$,$Y$) = Celestial plane (blue) $\perp$ to the NCP. ($N$,$S$,$E$,$W$) Antenna plane (red) $\perp$ to the local zenith (T).
+
++++
+
+<b>Warning:</b>
+Although we use Equatorial coordinates to define the $XYZ$-coordinate system, it represents a <em>terrestrial</em> reference frame, as the $X$, $Y$ and $Z$ axes never change orientation for a local observer on Earth.
+
+However, as the declination refers to the celestial equator, the latitude of the observer $L_a$ is required.
+
+We can convert ($\mathcal{A}$, $\mathcal{E}$, $L_a$) into $(H, \delta)$ in this new frame:
+
+\begin{equation}
+\begin{bmatrix}
+X\\
+Y\\
+Z
+\end{bmatrix}
+=
+\begin{bmatrix}
+\lvert \mathbf{b} \rvert \cos \delta \cos H\\
+-\lvert \mathbf{b} \rvert \cos \delta \sin H\\
+\lvert \mathbf{b} \rvert \sin \delta
+\end{bmatrix}
+= \lvert \mathbf{b} \rvert
+\begin{bmatrix}
+\cos L_a \sin \mathcal{E} - \sin L_a \cos \mathcal{E} \cos \mathcal{A}\nonumber\\ 
+\cos \mathcal{E} \sin \mathcal{A} \nonumber\\
+\sin L_a \sin \mathcal{E} + \cos L_a \cos \mathcal{E} \cos \mathcal{A}\\
+\end{bmatrix}
+\end{equation}
+<a id="vis:eq:3_1"></a>
+
+**Equation 3.1**: Conversion from baseline vector $\mathcal{E},\mathcal{A}$ to $XYZ$ . $\mathbf{b}$: amplitude of baseline vector. $H$: Hour angle, $\delta$: Declination, $L_a$: latitude of the array. 
+
+<b>Note:</b> The complete derivation of [Eq. 3.1 &#10142;](#vis:eq:3_1)  from the spherical triangle <b>ZTS</b> can be found in [$\S$ A.1 &#10142;](../0_Introduction/2_Appendix.ipynb).
+
++++
+
+### 4.2.2 The ($u$,$v$,$w$) Space
+
++++
+
+Now that we have defined a baseline in a terrestrial XYZ frame we are ready for the final transformation to the celestial *uvw* reference frame. Let ($H_0$, $\delta_0$) be the point on the celestial sphere in the direction of a source $\mathbf{s_0}$. We now define a new set of axes:
+
+* the $u$-axis lies in the celestial equatorial plane, and points toward the hour angle $H_0-6^\text{h}$.
+* the $v$-axis lies in the plane of the great circle with hour angle $H_0$, and points toward the declination $\frac{\pi}{2}-\delta_0$.
+* the $w$-axis points in the direction of $\mathbf{s_0}$.
+
+The ($u$,$v$) axes form a 2-D plane perpendicular to $\mathbf{s_0}$.
+
++++
+
+The transformation from the ($X$,$Y$,$Z$) frame to the ($u$, $v$, $w$) frame requires two succesive rotations applied to the equatorial coordinates of the baseline:
+
+1. $\mathcal{R}_\text{Z}^{\frac{\pi}{2}-H_0}$:  the rotation of the $X$,$Y$ axes around the $Z=Z'$ axis of angle $\frac{\pi}{2}-H_0$ making the new axes $X'$, $Y'$ (Green axes in [Fig. 4.2.4 &#10549;](#vis:fig:414))
+2. $\mathcal{R}_\text{X'}^{\frac{\pi}{2}-\delta_0}$:  the rotation of the $Y'$,$Z'$ axes around the $X'=u$ axis of angle $\frac{\pi}{2}-\delta_0$ making the new axes $u$, $v$ (red axes in [Fig. 4.2.4 &#10549;](#vis:fig:414)).
+
++++
+
+<a id="vis:fig:414"></a>
+
+```{code-cell} ipython3
+SVG('figures/coordinates2b.svg')
+```
+
+**Figure 4.2.4**: Relation of the (X,Y,Z) frame to the ($u$,$v$,$w$) frame. $Z$: local zenith. ($X$,$Y$) = Celestial plane $\perp$ to the NCP.
+
++++
+
+The conversion from $XYZ$ to $uvw$ is expressed as following:
+\begin{equation}
+\begin{pmatrix}
+u\\
+v\\
+w
+\end{pmatrix}
+=
+\mathcal{R}_\text{X'}^{\frac{\pi}{2}-\delta_0}
+\mathcal{R}_\text{Z}^{\frac{\pi}{2}-H_0}
+\begin{pmatrix}
+X\\
+Y\\
+Z
+\end{pmatrix}
+\end{equation}
+
++++
+
+where
+\begin{equation}
+\mathcal{R}_\text{X'}^{\frac{\pi}{2}-\delta_0}
+=
+\begin{pmatrix}
+1& 0& 0\\
+0 & \cos (\frac{\pi}{2}- \delta_0) & \sin (\frac{\pi}{2}- \delta_0)  \\
+0 &-\sin (\frac{\pi}{2}- \delta_0) & \cos (\frac{\pi}{2}- \delta_0) \\
+\end{pmatrix} 
+=
+\begin{pmatrix}
+1& 0& 0\\
+0 & \sin \delta_0 & \cos \delta_0  \\
+0 &-\cos \delta_0 & \sin \delta_0 \\
+\end{pmatrix} 
+\end{equation}
+
++++
+
+and 
+\begin{equation}
+\mathcal{R}_\text{Z}^{\frac{\pi}{2}-H_0}
+=
+\begin{pmatrix}
+\cos (\frac{\pi}{2}- H_0) & \sin (\frac{\pi}{2}- H_0) & 0 \\
+-\sin (\frac{\pi}{2}- H_0) & \cos (\frac{\pi}{2}- H_0) & 0 \\
+0 & 0 & 1
+\end{pmatrix} 
+=
+\begin{pmatrix}
+\sin H_0 & \cos H_0 & 0 \\
+-\cos H_0 & \sin H_0 & 0 \\
+0 & 0 & 1
+\end{pmatrix} 
+\end{equation}
+
++++
+
+<b>Warning:</b> The sequence of operations applied to vectors should be read from right to left, as is the rule in linear algebra.
+
++++
+
+This results in the following transformation matrix:
+\begin{equation}
+\begin{pmatrix}
+u\\
+v\\
+w
+\end{pmatrix}
+=
+\begin{pmatrix}
+\sin H_0 & \cos H_0 & 0\\ 
+-\sin \delta_0 \cos H_0 & \sin\delta_0\sin H_0 & \cos\delta_0\\
+\cos \delta_0 \cos H_0 & -\cos\delta_0\sin H_0 & \sin\delta_0\\
+\end{pmatrix} 
+\begin{pmatrix}
+X\\
+Y\\
+Z
+\end{pmatrix}
+\end{equation}
+
++++
+
+<b>Warning:</b>
+We usually express the components ($u$, $v$, $w$) in units of wavelength (of the observation) by dividing the baseline vector by $\lambda$:<br>
+
+\begin{equation}
+\mathbf{b_\lambda}
+= 
+\frac{\mathbf{b}}{\lambda}
+= 
+\begin{pmatrix}
+u\\
+v\\
+w
+\end{pmatrix}
+=
+\frac{1}{\lambda}
+\begin{pmatrix}
+\sin H_0 & \cos H_0 & 0\\ 
+-\sin \delta_0 \cos H_0 & \sin\delta_0\sin H_0 & \cos\delta_0\\
+\cos \delta_0 \cos H_0 & -\cos\delta_0\sin H_0 & \sin\delta_0\\
+\end{pmatrix} 
+\begin{pmatrix}
+X\\
+Y\\
+Z
+\end{pmatrix}
+\end{equation}
+
+In the following sections and chapters, we will drop the $\lambda$ subscript, as we will always assume that the $u$, $v$, $w$ components are given in units of wavelengths.
+
++++
+
+### 4.2.3 Conclusion
+
++++
+
+This section was dedicated to writing a mathematical expression the baseline vector in astronomy-friendly reference frames. This will later allow us to quickly link the physical length of a baseline between two receivers to a quantity measured on the celestial sphere. 
+In [$\S$ 4.3 &#10142;](4_3_the_2-element_interferometer.ipynb), we will focus on a simple one dimensional 2-element interferometer. We will address the correlation of two signals collected from a remote point source, and construct the corresponding visibility function which will be described in greater detail in [$\S$ 4.4 &#10142;](4_4_the_visibility_function.ipynb).
+
+Do not worry too much about the relevance of $uvw$ space - it will be made clear in [$\S$4.4](4_Visibility_Space/4_4_the_visibility_function.ipynb). For now, suffice to say that this derivation will be useful to us later on.
+
++++
+
+#### Format status:
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : LF: 2017/02/06
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : NC: 2017/02/06
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : RF: 2017/02/06
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : HF: 2017/02/06
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : GM: 2017/02/06
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : CL: 2017/02/06
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : ST: 2017/02/06
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : FN: 2017/02/06
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : SP: 2017/02/06
+* <span style="background-color:red">&nbsp;&nbsp;&nbsp;&nbsp;</span> : TC: Date
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : XX: 2017/02/06
+
++++
+
+***
+
+* Next: [4.3 The 2-element Interferometer](4_3_the_2-element_interferometer.ipynb)
