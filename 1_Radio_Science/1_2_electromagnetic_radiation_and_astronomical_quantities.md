@@ -1,0 +1,237 @@
+---
+jupytext:
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.16.7
+kernelspec:
+  display_name: Python 2
+  language: python
+  name: python2
+---
+
+***
+
+* [Outline](../0_Introduction/0_introduction.ipynb)
+* [Glossary](../0_Introduction/1_glossary.ipynb)
+* [1. Radio Science using Interferometric Arrays](1_0_introduction.ipynb)  
+    * Previous: [1.1 A Brief Introduction to Basic Astrophysics](1_1_a_brief_introduction_to_basic_astrophysics.ipynb) 
+    * Next: [1.3 Radiative Transport](1_3_radiative_transport.ipynb)
+
+***
+
++++
+
+Section status: <span style="background-color:yellow">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+Import standard modules:
+
+```{code-cell} ipython2
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+from IPython.display import HTML 
+HTML('../style/course.css') #apply general CSS
+```
+
+Import section specific modules:
+
+```{code-cell} ipython2
+from IPython.display import Image
+```
+
+## 1.2.1 Electromagnetic Waves
+
+As astronomers we are interested in the light from celestial objects: we are interested in the electromagnetic waves these objects emit. Light is tricky because it behaves both as a wave (EM wave) and a particle (photon); this behaviour is best explored in a particle physics course. When it comes to radio astronomy, the light we observe is sufficiently low-energy that it is best treated as a wave rather than a particle; the wave-particle dichotomy will thus not be covered here, and we will treat light purely as a transverse wave in the EM field.
+
+### 1.2.1.1 Derivation of electromagnetic waves
+
+The wavelike nature of light is a trivial development from Maxwell's laws of electrodynamics. Maxwell's equations  are as follows:
+
+(1) <center> <large> $ \nabla \cdot E = \frac{\rho}{\epsilon_0} $ </center> </large>
+
+(2) <center> <large> $ \nabla \cdot B = 0 $        </center> </large>                
+
+(3) <center> <large> $ \nabla \times E  = - \frac{\partial B}{\partial t}$ </center> </large>
+
+(4) <center> <large> $ \nabla \times B  =  \frac{J}{\epsilon_0 c^2} + \frac{1}{c^2} \frac{\partial E}{\partial t}$ </center> </large>
+
+where
+
+$ J = \sigma E $, $\sigma$ is the electrical conductivity, and $\epsilon_0$ is a constant known as vacuum permittivity. $c_0^{-2}=\mu_0 \epsilon_0$, where $\mu_0$ is a constant known as vacuum permeability.
+
+These equations can be simplified by considering a region with no charges ($\rho=0$) and no current ($J=0$). Let us do so, and take the curl (i.e. matrix product with $\nabla$) of equations (3) and (4):
+
+(5)<center> <large> $\nabla \times (\nabla \times E) = \nabla \times (-\frac{\partial}{\partial t} B) = -\frac{\partial}{\partial t} (\nabla \times B) $ </center> </large>
+
+(6)<center> <large> $\nabla \times (\nabla \times B) = \nabla \times (\mu_0 \epsilon_0 \frac{\partial}{\partial t} E) = \mu_0 \epsilon_0 \frac{\partial}{\partial t} (\nabla \times E)$ </center> </large>
+
+Note that we have put the $\nabla$ operator within the $\frac{\partial}{\partial t}$, since the two operators commute. Let us now perform the time-honoured trick of physics professors everywhere, and pluck a convenient vector identity from the ether to turn a thorny problem into an elegant formula:
+
+(7)<center> <large> $\nabla \times (\nabla \times X) = \nabla (\nabla \cdot X) - \nabla^2 X) $  </center> </large>
+
+This allows us to write our last two lines as follows:
+
+(8)<center> <large> $\nabla(\nabla \cdot E) - \nabla^2 E = -\frac{\partial}{\partial t} (\nabla \times B)$ </center> </large>
+
+(9)<center> <large> $\nabla(\nabla \cdot B) - \nabla^2 B = \mu_0 \epsilon_0 \frac{\partial}{\partial t} (\nabla \times E) $ </center> </large>
+
+From Eqs (1) and (2), we know that $\nabla \cdot E = \nabla \cdot B = 0$. Our expressions are thus
+
+(10)<center> <large> $ -\nabla^2 E = -\frac{\partial}{\partial t} (\nabla \times B)$ </center> </large>
+
+(11)<center> <large> $ -\nabla^2 B = \mu_0 \epsilon_0 \frac{\partial}{\partial t} (\nabla \times E) $ </center> </large>
+
+We are nearly done! Now, all that remains is to substitute equations (4) and (3) into equations (10) and (11) respectively:
+
+(10)<center> <large> $ -\nabla^2 E = -\frac{\partial}{\partial t} (\frac{1}{c^2} \frac{\partial E}{\partial t})$ </center> </large>
+
+(11)<center> <large> $ -\nabla^2 B = \mu_0 \epsilon_0 \frac{\partial}{\partial t} (- \frac{\partial B}{\partial t}) $ </center> </large>
+
+which gives us (as $c_0^{-2}=\mu_0 \epsilon_0$) a set of two second-order differential equations:
+
+(12) <center> <large> $\frac{1}{c^2_0} \frac{\partial^2 E}{\partial t^2} - \nabla^2 E = 0$ </center> </large>
+
+(13) <center> <large> $\frac{1}{c^2_0} \frac{\partial^2 B}{\partial t^2} - \nabla^2 B = 0$ </center> </large>
+
+One particular solution to this form of differential equation should be well-known to you:
+
+(14) <center> <large> $ E = const.\sin(c_0t + r + const.)$ </center> </large>
+
+### 1.2.1.2 Complex Form of EM Wave
+
+The form given above is annoying to work with as a physicist, since the argument of the sine here has units of $r$! Assigning physical meaning to the constants of integration therefore begins with returning to a dimensionless value within the sine. Our particular solution thus becomes:
+
+(15) <center> <large> $ E(r,t) = E_0 \cos(\omega t -  k \cdot r + \phi_0 ) $ </center> </large>
+
+where $\omega$ is the angular frequency of our wave, $k=\frac{\omega}{c}$ is the wave vector, and $\phi_0$ is the phase angle. This solution can be checked by inspection. Note that the magnetic field (B-field) has a similar solution, with $B_0$ substituted for $E_0$.
+
+The last physical concern we have with this solution is that it varies in time and space: since we want to encode conservation of energy into our equation, we would prefer a form with 
+
+(16) <center> <large> $|E(r,t)| = const.$</center> </large>
+
+We thus tend to write our wave equation as a complex wave, of the following form:
+
+(15) <center> <large> $ E(r,t) = E_0 e^{i(\omega t -  k \cdot r + \phi_0 )} $ </center> </large>
+
+This elegantly encodes the fact that the actual E-field oscillation associated with a given photon is varies in time and space, but that its *energy* is finite and constant in time and space.
+
+We have thus shown that the very nature of Maxwell's equations imply that electromagnetic waves must exist, a result reached by Maxwell himself. He also noted that the speed he predicted - based on measuring permittivity and permeability - was in perfect agreement with the value of the speed of light, which was already known due to an independent measurement by astronomer Ole Rømer! This was a strong indication - later vindicated in an experiment by Heinrich Hertz - that radio waves (and therefore light) were oscillations of an electric field.
+
+### 1.2.1.3 Polarisation information
+
+
+The final step to fully represent the signal our antennas monitor is to encode polarisation information into our EM wave. We will only briefly touch on the concepts required to provide a mathematical description of EM waves.
+
+Polarisation describes the situation where the frame of reference of an EM-wave (e.g. $E_x,E_y$) is rotated with respect to the frame of reference of your E-field ($E_{0x},E_{0y}$). This can occur when light travels through interstellar magnetic fields, such as ones found in ionised plasma.
+
+Polarisation information is encoded in our final wave-function using **Jones calculus**. Although this is not the most general framework in which to treat polarisation it will suffice for our needs (for keen readers, Mueller calculus is an extension of Jones calculus which allows a more complete treatment of polarisation).
+
+The idea is basically to characterise the polarisation as phase shifts ($\phi_0$ in Eq (15)) from the frame of reference of your E-field. In other words, the complex amplitude of E becomes: 
+
+<center>$\begin{pmatrix} E_x(t) \\ E_y(t) \\ E_z(t) \end{pmatrix} = \begin{pmatrix} E_{0x}e^{i(kz-\omega t +\phi_x)} \\  E_{0y}e^{i(kz-\omega t +\phi_y)} \\ 0 \end{pmatrix} = \begin{pmatrix} E_{0x}e^{i\phi_x} \\ E_{0y}e^{i\phi_y} \\ 0 \end{pmatrix} e^{i(kz-\omega t)} $</center>
+
+This framework will be extended [7.1. Jones notation](../7_Observing_Systems/7_1_jones_notation.ipynb).
+
+Having shown that radio waves are electromagnetic waves, we will now consider how they are analysed.
+
++++
+
+## 1.2.2.Electromagnetic Radiation and Astronomical Quantities
+
++++
+
+Astronomical observations are all about measuring the radiation from astronomical sources to infer the physical properties of these sources. Thus we start by discussing how measurements of radiation from astronomical sources gets quantified.
+
+The luminosity (typically denoted as $L$) of a source is the total energy emitted per unit time. This has units of Watts per second - or ergs per second if you prefer CGS units. This is the energy added over all the frequencies at which the source emits radiation (astronomical sources do not usually emit radiation at only a single frequency). This is also known as the 'bolometric luminosity'. More often, however, the luminosity of a source at a particular frequency is given. This is the 'spectral luminosity' of the source, denoted as $L_{\nu}$ (*$\nu$ will denote frequency, throughout the book*). The suffix is to remind us that :
+$$L = \int L_{\nu}\, d\nu $$
+
+The spectral luminosity gets an extra $Hz^{-1}$ (Hertz) unit, since it is power (energy per unit time) at a given frequency. 
+
+Unfortunately it is not always possible to measure the true luminosity of a source since only a fraction of the total energy can be intercepted by a telescope. As a result we are forced to make certain assumptions about the nature of the radiation field (and indeed of the geometry of space-time itself). In particular we typically assume that the source is emitting isotropically. Furthermore, the amount of power received by the telescope (and hence the measured luminosity) depends on the size of its collecting surface. Since we do not want physics to depend on the apparatus used to study it, we ideally want to work with a quantity which is more independent of the means we use to measure it. For this reason the (spectral) power flux or flux density (sometimes flux is used synonymously) $S_\nu$ is more appropriate. The flux density of a point source emitting isotropically can be written as: 
+
+$$ S_{\nu} = \frac{L_{\nu}}{4\pi \, D^{2}} $$
+
+where $D$ is the distance to the source. The inverse is trivially always true:
+
+$$ 
+\begin{align}
+L_{\nu} \,&=\, \int S_{\nu}(R, \theta, \phi)\,d\Omega\\
+&=\, \int S_{\nu}(R, \theta, \phi) \sin{\theta} \,d\phi d\theta \\
+\end{align}
+$$
+
+where R is a constant distance and $S_\nu(R,\, \theta,\, \phi)$ denotes the flux density generated by the source at the position described by $R$, $\theta$, and $\phi$.
+
+The flux density has units of ${\rm W}\,{\rm m}^{-2} \,{\rm Hz}^{-1}$. However, since radio signals from astrophysical sources are usually rather weak, radio astronomers prefer to measure the flux density in units of Jansky, denoted by the symbol 'Jy' and related to the SI units according to: 
+
+$$1 \, {\rm Jy}\, =\, 10^{-26}\, {\rm W}\, {\rm m}^{-2}\, {\rm Hz}^{-1} $$ 
+ 
+For example, Cygnus A, the closest extragalactic radio source, has a flux of $1590$ Jy at $1.4$ GHz (see [Photometric Data for Cygnus A &#10548;](https://ned.ipac.caltech.edu/cgi-bin/datasearch?search_type=Photo_id&objid=56031&objname=Cygnus%20A&img_stamp=YES&hconst=73.0&omegam=0.27&omegav=0.73&corr_z=1&of=table) for example).
+
+Note that flux density measures the spectral flux of a single source but it does not provide any information about the direction from which the radiation originates or about the internal structure of the source. Such additional information needs to be obtained and recorded by some other means. The specific intensity or brightness specifies the flux density per solid angle from a certain direction of the sky. It is defined in terms of the infinitesimal power $dP$ permeating an infinitesimal surface $dA$ from the direction of the solid angle element $d\Omega$ over the infinitesimal frequency range $d\nu$
+
+```{code-cell} ipython2
+Image(filename='figures/solid_angle_1.png', width=500)
+```
+
+$$
+\begin{align}
+dP \,&=\, I_\nu(\theta,\,\phi) \,dA_{\rm eff}\,d\nu\,d\Omega\\
+&=\, I_\nu(\theta,\,\phi)\,\cos{\theta}\,dA\,d\nu\,d\Omega\qquad {\rm ,}\\
+\end{align}
+$$
+
+where $\theta$ and $\phi$ are polar coordinates. Note that $\theta$ is the angle between the solid angle element and the normal of the surface element and $A_{\rm eff}$ the surface cross-section in the direction of the observed solid angle element.
+
+The remarkable thing about specific intensity is that it does not change with distance to the source (as long as the radiation is neither emitted nor absorbed on it path). This can be shown by considering the power flux through two infinitesimal surface elements $dA_1$ and $dA_2$. Suppose that the normals to these surface elements make angles of $\theta_1$ and $\theta_2$ with the connecting line. 
+
+```{code-cell} ipython2
+Image(filename='figures/solid_angle_2.png', width=500)
+```
+
+For a distance r, the two surface elements appear under solid angle elements $d\Omega_1$ and $d\Omega_2$
+
+$$
+d\Omega_1 = \frac{cos{\theta_2}\,dA_2}{r^{2}}\\
+d\Omega_2 = \frac{cos{\theta_1}\,dA_1}{r^{2}}
+$$
+
+The power flux through both surfaces is equal when the intensity is integrated over the apparent solid angle under which the mutual surface elements appear. Inserting the definition of the intensity gives
+
+$$
+\begin{align}
+dP\,&=\,I_\nu^1\,\cos{\theta_1}\,dA_1\,d\Omega_1\,d\nu\\
+&=\,I_\nu^1\,r^2\,d\Omega_2\,d\Omega_1\,d\nu\\
+&=\,I_\nu^2\,r^2\,d\Omega_2\,d\Omega_1\,d\nu\\
+&=\,I_\nu^2\,\cos{\theta_2}\,dA_2\,d\Omega_2\,d\nu\qquad ,\\
+\end{align}
+$$
+
+and hence $I_\nu^1\,=\,I_\nu^2$. In other words, given that intensity is not absorbed or generated along the way, it is independent of the distance from the source. The next chapter briefly explains what happens when there is emission or absorption. 
+
+Specific intensity is also known as the brightness, spectral radiance, spectral intensity etc. The units of spectral intensity are $ {\rm W} {\rm m}^{-2} {\rm Hz}^{-1} {\rm sr}^{-1}$ or more usually in radio astronomy, ${\rm Jy} \,{\rm sr}^{-1}$ and it is denoted generally as $I_{\nu}$. It is not uncommon that the intensity is normalised to the effective solid angle of an instrumental function, the "beam". In that case, the units of intensity become ${\rm Jy}\, {\rm beam}^{-1}$, where "beam" can be substituted by the effective solid angle of the observation.
+
+Specific intensity is the quantity which is *mapped* in radio interferometric images of radio sources. How exactly this is done is discussed in [$\S$ 5 &#10142;](../5_Imaging/5_0_introduction.ipynb).
+
+<!-- connect intensity to spectral energy density -->
+
+In the next section, we'll discuss how electromagnetic radiation is generated, especially in astrophysical scenarios.
+
++++
+
+***
+
+* Next: [1.3 Radiative Transport](1_3_radiative_transport.ipynb)
+
++++
+
+<div class=warn><b>Future Additions:</b></div>
+
+* add citations + references in wave section
+* interactive: change the phase and wavelength/frequency of light
+
+```{code-cell} ipython2
+
+```

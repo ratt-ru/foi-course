@@ -1,0 +1,133 @@
+---
+jupytext:
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.16.7
+kernelspec:
+  display_name: Python 3
+  language: python
+  name: python3
+---
+
+***
+
+* [Outline](../0_Introduction/0_introduction.ipynb)
+* [Glossary](../0_Introduction/1_glossary.ipynb)
+* [1. Radio Science using Interferometric Arrays](#)  
+    * Next: [1.1 Basic remarks on astrophysics](1_1_a_brief_introduction_to_basic_astrophysics.ipynb)
+
+***
+
++++
+
+Section status: <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+Import standard modules:
+
+```{code-cell} ipython3
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+from IPython.display import HTML 
+HTML('../style/course.css') #apply general CSS
+```
+
+Import section specific modules:
+
+```{code-cell} ipython3
+pass
+```
+
+```{code-cell} ipython3
+HTML('../style/code_toggle.html')
+```
+
+# Chapter 1: Radio Science using Interferometric Arrays<a id='science:sec:intro'></a>
+
++++
+
+Using interferometric arrays for astronomy is often talked about as 'black magic' that is more art than science. There are reference books which require a working knowledge of the subject to use, or there is a small section of introduction to radio astronomy books which gloss over the concepts of actually using interferometric arrays. But, the challenge of introducing radio interferometry has not been properly addressed. When synthesis imaging and interferometry is taught it is usually in a whirlwind one or two week workshop which a flood of new concepts are introduced by a range of lecturers. This leads to confusion and contradictions which leave the students, from our experience as students and lecturers, broadly with the idea that the whole process of producing science from interferometric arrays is a type of magic left to a privileged few to understand.
+
+**But, this should not be the case.**
+
+Granted, the topics can be difficult given that they are particular to the field, but they are based on universal mathematical and physical concepts. Like any topic, intuition comes with time. The best we can hope to do it to teach the fundamentals in a reasonable and throughout way. Hopefully, this will speed up the process of intuition building and diffuse confusion. The focus of this book is to start from a point of interest in the subject and get us to a place where we are comfortable enough in the fundamentals that we can move onto the unique complexities that arise in doing interferometry.
+
+Throughout this book, it is important to remember that interferometry is generally used to produce a 'synthesized' image of the sky by combining many individual telescopes into a single 'synthesized' telescope. This is different than what we typically think of as astronomy with telescopes because in the radio domain there are a number of engineering and physical limitations at work which require different solutions. But, a synthesised telescope is closely related to a typical telescope, though the details often obscure this.
+
+This work has been an effort of many people ranging from new masters students up to professors. Our prime goal is to make radio interferometry understandable in the easiest way possible. This is our attempt, and it is by no means perfect. We ask (beg) the reader, whether they are new to the topic or an expert, to please contribute to the improvement of this work in any way, that could be as simple as spelling and grammar corrections up to grand changes to entire structure and motivation of the book. We hope this can be a community-based effort.
+
+As for the layout of what is to follow we start with the theoretical concepts and build up to the practical. We start with the [mathematical concepts &#10142;](../2_Mathematical_Groundwork/2_0_introduction.ipynb)<!--2_Mathematical_Groundwork/2_0_introduction.ipynb--> used as the basis for interferometry and synthesis imaging. Then we move on to [positional astronomy &#10142;](../3_Positional_Astronomy/3_0_Introduction.ipynb)<!--3_Positional_Astronomy/3_0_Introduction.ipynb--> and common coordinate systems (which are relavent to all astronomy). Using the positional astronomy we introduce the concepts of the [visibility space &#10142;](../4_Visibility_Space/4_0_introduction.ipynb)<!--4_Visibility_Space/4_0_introduction.ipynb--> and baseline measurements. These measurements can then be transformed into an image using [imaging &#10142;](../5_Imaging)<!--5_Imaging/5_0_introduction.ipynb--> and [deconvolution &#10142;](../6_Deconvolution/6_0_introduction.ipynb)<!--6_Deconvolution/6_0_introduction.ipynb-->. From there we will move towards understanding real systems by discussing the radio telescope [observing system &#10142;](../7_Observing_Systems/7_0_introduction.ipynb)<!--7_Observing_Systems/7_0_introduction.ipynb--> and how it affects measurements during an observation. Any real instrument, in our case an array of radio telescopes, need to be properly calibrated to make a sensible measurement. Following the introduction<!--ing--> of the observing system, we will discuss how this [calibration &#10142;](../8_Calibration/8_0_Introduction.ipynb)<!--8_Calibration/8_0_Introduction.ipynb--> is done. Finally, the book will conclude with [practical details &#10142;](../9_Practical/9_1_visualisation-inspection.ipynb)<!--9_Practical/9_0_introduction.ipynb--> about doing interferometry with the standard software and tools used today.
+
++++
+
+Before we introduce the fundamental concepts of interferometry we will lay some ground work to motivate the topic. In this chapter we will provide a survey of the type of science done with interferometers, the advantage to using interferometric arrays, and the types of arrays currently in use.
+
+Before embarking on a more detailed study of radio interferometry, let's briefly examine what sort of science do we plan to study with radio interferometry. Sections 1.1 - 1.8 very briefly introduce astrophysics, radio astronomy, and the basic phenomena studied in radio astrophysics. After giving an overview of the field of astronomy, we introduce the relevant terminology and basics of electromagnetic radiation and radiation transport. The next set of sections deals with examples of emission mechanisms which produce electromagnetic radiation at radio frequencies. These are not exhaustive, but they are meant to give a flavour of different types of emission mechanisms: thermal and non-thermal emission, continuum vs. spectral line emission. A complete survey of astronomical radio science is obviously out of the scope of this book; however references for literature which is specifically devoted to radio science are given in the glossary and the further reading section.
+
+The latter sections of this first chapter are dedicated to motivating the usage of radio interferometers, introducing examples from the early development of interferometers and then taking a first look at modern radio interferometers. After this introduction, the reader is *hopefully* curious enough to dive into the depths of the concepts of radio interferometry.
+
++++
+
+#### Chapter Outline
+
++++
+
+1.  [Basic remarks on astrophysics](../1_Radio_Science/1_1_a_brief_introduction_to_basic_astrophysics.ipynb)
+2.  [Electromagnetic radiation and astronomical quantities](../1_Radio_Science/1_2_electromagnetic_radiation_and_astronomical_quantities.ipynb)
+3.  [Radiative transport](../1_Radio_Science/1_3_radiative_transport.ipynb)
+4.  [Radio regime](../1_Radio_Science/1_4_radio_regime.ipynb)
+5.  [Black body radiation](../1_Radio_Science/1_5_black_body_radiation.ipynb)
+6.  [Synchrotron emission](../1_Radio_Science/1_6_synchrotron_emission.ipynb)
+7.  [Line emission](../1_Radio_Science/1_7_line_emission.ipynb)
+8.  [Astronomical radio sources](../1_Radio_Science/1_8_astronomical_radio_sources.ipynb)
+9.  [A brief introduction to interferometry](../1_Radio_Science/1_9_a_brief_introduction_to_interferometry.ipynb)
+10. [Limits of single dishes](../1_Radio_Science/1_10_limits_of_single_dishes.ipynb)
+11. [Modern interferometric arrays](../1_Radio_Science/1_11_modern_interferometric_arrays.ipynb)
+12. [Further reading and references](../1_Radio_Science/1_x_further_reading_and_references.ipynb)
+
++++
+
+### Chapter Editors
+* Alexander Akoto-Danso 
+* Ermias Abebe Kassaye
+* Tariq Blecher
+* Griffin Foster
+* Kshitij Thorat
+* Landman Bester
+* Kelachukwu Iheanetu
+
+#### Chapter Contributors
+
+* Griffin Foster (**1.0**, **1.10**, **1.11**)
+* Julien Girard (**1.10**)
+* Gyula Jozsa (**1.1**, **1.2**, **1.3**, **1.4**, **1.5**, **1.6**, **1.7**, **1.8**)
+* Oleg Smirnov (**1.9**)
+* Kshitij Thorat (**1.1**, **1.2**, **1.3**, **1.4**, **1.5**, **1.6**, **1.7**, **1.8**)
+
+#### Format status:
+
+* <span style="background-color:yellow">&nbsp;&nbsp;&nbsp;&nbsp;</span> : LF: Date
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : NC: Date
+* <span style="background-color:yellow">&nbsp;&nbsp;&nbsp;&nbsp;</span> : RF: Date
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : HF: Date
+* <span style="background-color:yellow">&nbsp;&nbsp;&nbsp;&nbsp;</span> : GM: Date
+* <span style="background-color:yellow">&nbsp;&nbsp;&nbsp;&nbsp;</span> : CC: Date
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : CL: Date
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : ST: Date
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : FN: Date
+* <span style="background-color:red">&nbsp;&nbsp;&nbsp;&nbsp;</span> : TC: Date
+* <span style="background-color:yellow">&nbsp;&nbsp;&nbsp;&nbsp;</span> : XX: Date
+
++++
+
+***
+
+* Next: [1.1 Basic remarks on astrophysics](../1_Radio_Science/1_1_a_brief_introduction_to_basic_astrophysics.ipynb)
+
++++
+
+<div class=warn><b>Future Additions:</b></div>
+
+* start book with an overview of what happens in aperture synthesis, start with the measurement equation. end the book, the final chapter on returning to this first section but now with all the foundations provided in between.

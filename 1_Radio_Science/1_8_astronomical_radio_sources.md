@@ -1,0 +1,126 @@
+---
+jupytext:
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.16.7
+kernelspec:
+  display_name: Python 2
+  language: python
+  name: python2
+---
+
++++ {"deletable": true, "editable": true}
+
+***
+
+* [Outline](../0_Introduction/0_introduction.ipynb)
+* [Glossary](../0_Introduction/1_glossary.ipynb)
+* [1. Radio Science using Interferometric Arrays](1_0_introduction.ipynb)
+    * Previous: [1.7 Line emission](1_7_line_emission.ipynb)
+    * Next: [1.9 A brief introduction to interferometry](1_9_a_brief_introduction_to_interferometry.ipynb)
+***
+
++++ {"deletable": true, "editable": true}
+
+Section status: <span style="background-color:yellow">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+
+Import standard modules:
+
+```{code-cell} ipython2
+:deletable: true
+:editable: true
+
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+from IPython.display import HTML 
+HTML('../style/course.css') #apply general CSS
+```
+
++++ {"deletable": true, "editable": true}
+
+Import section specific modules:
+
+```{code-cell} ipython2
+:deletable: true
+:editable: true
+
+from IPython.display import Image
+```
+
++++ {"deletable": true, "editable": true}
+
+## 1.8 Astronomical radio sources<a id='science:sec:astronomical_radio_sources'></a>
+
++++ {"deletable": true, "editable": true}
+
+The field of radio astronomy is extremely broad, with applications in many areas of science. However, when studying astronomical sources, it is important to have information at as large a frequency range as possible. Radio astronomy should therefore be combined with observations at other wavelengths (eg. infra-red, optical and x-ray) to fully investigate the nature of astronomical sources. Below we give an incomplete list of some sources that have been studied extensively in the radio band. 
+
++++ {"deletable": true, "editable": true}
+
+### 1.8.1 The Sun
+The Sun is the brightest radio object observed from earth. The radio emission from the Sun can be divided into two parts: emission from the so-called "quiet Sun" and that from solar activities like coronal mass ejections.
+The emission from the "quiet Sun" is a mixture of thermal and non-thermal emission. However, the strongest radio emission from the Sun comes from coronal mass ejections and solar flares. The flux associated with these events can reach as high as $10^9\ \mathrm{Jy}$.
+
+The Sun is observed in radio by radio interferometers such as the [Owens valley Solar Array](http://www.ovsa.njit.edu/) and the [Nancay Heliograph](http://secchirh.obspm.fr/nrh.php). Solar observations are also one of the key science projects of the [LOFAR array](http://www.lofar.org/astronomy/solar-ksp/solar-physics-and-space-weather). The upcoming SKA telescope will be able to study radio emission from the Sun with unprecedented resolution and sensitivity. 
+
++++ {"deletable": true, "editable": true}
+
+### 1.8.2 Planets
+The planets in our solar system also emit in the radio band. The radio emission from the planets is mostly thermal in origin. 
+
+<span style="background-color:red"> LB:AC: This contradicts what is said [here](http://astronomyonline.org/Stars/PlanetaryEmission.asp). I don't see the point of adding this section if we are going to write one sentence in it.  </span>
+
++++ {"deletable": true, "editable": true}
+
+### 1.8.3  The cosmic microwave background
+The cosmic microwave background (CMB) radiation is the most famous example of thermal emission in radio astronomy. See [$\S$ 1.5  &#10142;](1_5_black_body_radiation.ipynb) for the details on the temperature and spectrum of CMB (not to be confused with the power spectrum of CMB temperature fluctuations).
+
+<span style="background-color:yellow"> LB:AC: We can really give a bit more history here. Mention how the CMB was discovered by accident for example. </span>
+
++++ {"deletable": true, "editable": true}
+
+### 1.8.4 Radio Galaxies
+Radio galaxies are extra-galactic radio sources which are believed to be powered by supermassive black holes at their centres (most elliptical galaxies are believed to be of this kind). Radio emission may extend up to Mpc scales, many times larger than the optical extent of the galaxy. Synchrotron emission is the dominant type of radio emission from these sources. The figure below shows the Fornax A radio galaxy. As can be seen from the figure, the visible (in optical) part of the galaxy is much smaller than the radio counterpart. 
+
+```{code-cell} ipython2
+:deletable: true
+:editable: true
+
+Image(filename='figures/fornax_a_lo.jpg', width=300)
+```
+
++++ {"deletable": true, "editable": true}
+
+**Figure 1.8.1:** *Fornax A radio galaxy* (Image credit:  Image courtesy of NRAO/AUI and J. M. Uson)
+
++++ {"deletable": true, "editable": true}
+
+### 1.8.4 Star Forming Galaxies:
+Star forming galaxies are "normal" galaxies which are undergoing active star formation. The process of star formation produces radio emission (predominantly in spiral galaxies) which is a mix of synchrotron emission from supernova remnants and free-free emission from ionized hydrogen (HII) regions. The figure below shows M82, a starburst galaxy. The bright spots in the image show both supernova remnants and HII regions.
+
+```{code-cell} ipython2
+:deletable: true
+:editable: true
+
+Image(filename='figures/m82.png', width=300)
+```
+
++++ {"deletable": true, "editable": true}
+
+**Figure 1.8.2:** *The starburst galaxy M82* (Image credit: Josh Marvil (NM Tech/NRAO), Bill Saxton (NRAO/AUI/NSF), NASA)
+
++++ {"deletable": true, "editable": true}
+
+***
+
+* Next: [1.9 A brief introduction to interferometry](1_9_a_brief_introduction_to_interferometry.ipynb)
+
++++ {"deletable": true, "editable": true}
+
+<div class=warn><b>Future Additions:</b></div>
+
+* For each class of objects above described, we need to include the general method of observation and observing frequency.

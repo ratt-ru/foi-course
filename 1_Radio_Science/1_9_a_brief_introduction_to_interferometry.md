@@ -1,0 +1,558 @@
+---
+jupytext:
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.16.7
+kernelspec:
+  display_name: Python 3
+  language: python
+  name: python3
+---
+
+***
+
+* [Outline](../0_Introduction/0_introduction.ipynb)
+* [Glossary](../0_Introduction/1_glossary.ipynb)
+* [1. Radio Science using Interferometric Arrays](1_0_introduction.ipynb)
+    * Previous: [1.8 Astronomical radio sources](1_8_astronomical_radio_sources.ipynb)
+    * Next: [1.10 The Limits of Single Dish Astronomy](1_10_limits_of_single_dishes.ipynb)
+***
+
++++
+
+Section status: <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+Import standard modules:
+
+```{code-cell} ipython3
+import numpy as np
+import matplotlib.pyplot as plt
+from IPython.display import HTML
+
+HTML('../style/course.css') #apply general CSS
+```
+
+Import section specific modules:
+
+```{code-cell} ipython3
+from IPython.display import display
+from ipywidgets import interact, fixed, FloatSlider
+from matplotlib import ticker
+```
+
+```{code-cell} ipython3
+HTML('../style/code_toggle.html')
+```
+
+## 1.9 A brief introduction to interferometry and its history
+
++++
+
+### 1.9.1 The double-slit experiment
+
+The basics of interferometry date back to Thomas Young's [double-slit experiment &#10142;](https://en.wikipedia.org/wiki/Double-slit_experiment) of 1801. In this experiment, a plate pierced by two parallel slits is illuminated by a monochromatic source of light. Due to the wave-like nature of light, the waves passing through the two slits *interfere*, resulting in an *interference pattern*, or *fringe*, projected onto a screen behind the slits:
+
+<img src="figures/514px-Doubleslit.svg.png" width="50%"/>
+**Figure 1.9.1:** *Schematic diagram of Young's double-slit experiment. Credit: Unknown.*
+
+The position on the screen $P$ determines the phase difference between the two arriving wavefronts. Waves arriving in phase interfere constructively and produce bright strips in the interference pattern. Waves arriving out of phase interfere destructively and result in dark strips in the pattern.
+
+In this section we'll construct a toy model of a dual-slit experiment. Note that this model is not really physically accurate, it is literally just a "toy" to help us get some intuition for what's going on. A proper description of interfering electromagnetic waves will follow later. 
+
+Firstly, a monochromatic electromagnetic wave of wavelength $\lambda$ can be described at each point in time and space as a complex quantity i.e. having an amplitude $A$, and a phase $\phi$, i.e. $A\mathrm{e}^{\imath\phi}$. For simplicity, let us assume a constant amplitude $A$, but allow the phase to vary as a function of time and position.
+
+Now, if the same wave travels along two paths of different lengths and recombines at a point $P$, the resulting electric field is a sum of the two components:
+
+$E=E_1+E_2 = A\mathrm{e}^{\imath\phi}+A\mathrm{e}^{\imath(\phi-\phi_0)},$
+
+where the phase delay $\phi_0$ corresponds to the path length difference $\tau_0$:
+
+$\phi_0 = 2\pi\tau_0/\lambda.$
+
+What is actually "measured" on the screen, the ***brightness***, is, physically, a time-averaged electric field intensity $EE^*$, where the $^*$ represents complex conjugation (this is exactly what our eyes, or a photographic plate, or a detector in the camera perceive as "brightness"). We can work this out as
+
+$
+EE^* = (E_1+E_2)(E_1+E_2)^* = E_1 E_1^* + E_2 E_2^* + E_1 E_2^* + E_2 E_1^* = A^2 + A^2 
++ A^2 \mathrm{e}^{\imath\phi_0}
++ A^2 \mathrm{e}^{-\imath\phi_0} =
+2A^2 + 2A^2 \cos{\phi_0}.
+$
+
+Note how the phase term, $\phi$, has dropped out, and the only thing that's left is the phase delay $\phi_0$. The first part of the sum is constant, while the second part, the ***interfering term***, varies with phase difference $\phi_0$, which in turn depends on position on the screen $P$. It is easy to see that the resulting intensity $EE^*$ is a purely real quantity that varies from 0 to $4A^2$. This is exactly what produces the alternating bright and dark stripes on the screen.
+
++++
+
+### 1.9.2 A toy double-slit simulator
+
+Let us write a short Python function to (very simplistically) simulate a double-slit experiment. Note, understanding the code presented is not a requirement to understand the experiment. Those not interested in the code implementation should feel free to look only at the results.
+
+```{code-cell} ipython3
+def double_slit(positions=[0], intensities=[1], baseline=1, d1=5, d2=5, 
+                wavelength=0.1, maxint=None):
+    """
+    Renders a toy dual-slit experiment.
+
+    Parameters
+    ----------
+    positions : float or array-like, optional
+        Array of source positions (drawn along the vertical axis), by default [0].
+        Scalar input is treated as a one dimensional array.
+    intensities : list, optional
+        Array of source intensities , by default [1]. Scalar input is treated
+        as a one dimensional array.
+    baseline : float, optional
+        Distance between the slits, by default 1.
+    d1, d2 : float, optional
+        Distances between source and plate, and plate and screen respectively,
+        by default 5.
+    wavelength : float, optional
+        Wavelength of incident light in the same units as `baseline`, by default 0.1
+    maxint : float, optional
+        The maximum intensity scale use to render the fringe pattern, by default
+        None. If None, the pattern is auto-scaled. Maxint is useful if you want
+        to render fringes from multiple invocations of double_slit() into the
+        same intensity scale, i.e. for comparison.
+    """
+    
+    p0 = np.atleast_1d(positions)
+    a0 = np.atleast_1d(intensities)
+    
+    # setup figure and axes
+    fig, ax = plt.subplots(figsize=(20, 5))
+    ax.set(xlim=(-d1 - 0.1, d2 + 2), ylim=(-1, 1))
+    ax.set_axis_off()
+    ax.axhline(0, ls=':')
+    baseline /= 2.
+    
+    # draw representation of slits
+    arrow_style = dict(lw=0, width=0.1, head_width=0.1, length_includes_head=True)
+    ax.arrow(0, 1, 0, baseline-1, **arrow_style)
+    ax.arrow(0, -1, 0, 1 - baseline, **arrow_style)
+    ax.arrow(0, 0, 0,  baseline,  **arrow_style)
+    ax.arrow(0, 0, 0, -baseline,  **arrow_style)
+    
+    # draw representation of lightpath from slits to centre of screen
+    ax.arrow(0, baseline, d2, -baseline, length_includes_head=True)
+    ax.arrow(0, -baseline, d2, baseline, length_includes_head=True)
+    
+    # draw representation of sinewave from the central position
+    xw = np.arange(-d1, -d1 + (d1 + d2) / 4, 0.01)
+    yw = np.sin(2 * np.pi * xw / wavelength) * 0.1 + (positions[0] + positions[-1]) / 2
+    ax.plot(xw, yw, 'b')
+
+    # 'xs' is a vector of x cordinates on the screen
+    # and we accumulate the interference pattern for each source into 'pattern'
+    xs = np.arange(-1, 1, 0.01)
+    pattern = 0
+    total_intensity = 0
+    # compute contribution to pattern from each source position p
+    
+    for p, a in np.broadcast(p0, a0):
+        ax.plot(-d1, p, marker='o', ms=10, mfc='red', mew=0)
+        total_intensity += a
+        if p == p0[0] or p == p0[-1]:
+            ax.arrow(-d1, p, d1, baseline - p, length_includes_head=True)
+            ax.arrow(-d1, p, d1, -baseline - p, length_includes_head=True)
+        
+        # compute the two path lenghts
+        path1 = np.sqrt(d1 ** 2 + (p - baseline) ** 2) + np.sqrt(d2 ** 2 + (xs - baseline) ** 2)
+        path2 = np.sqrt(d1 ** 2 + (p + baseline) ** 2) + np.sqrt(d2 ** 2 + (xs + baseline) ** 2)
+        diff = path1 - path2
+        # accumulate interference pattern from this source
+        pattern = pattern + a * np.cos(2 * np.pi * diff / wavelength)
+    
+    maxint = maxint or total_intensity
+    
+    # add fake axis to interference pattern just to make it a "wide" image
+    pattern_image = pattern[:, np.newaxis] + np.zeros((1, 10))
+    ax.imshow(pattern_image, extent=(d2, d2 + 1, -1, 1), cmap=plt.gray(), 
+              vmin=-maxint, vmax=maxint)
+    # make a plot of the interference pattern
+    ax.plot(d2 + 1.5 + pattern / (maxint * 2), xs, 'r')
+
+
+# show pattern for one source at 0
+double_slit()
+```
+
+This function draws a double-slit setup, with a light source at position $p$ (in fact the function can render multiple sources, but we'll only use it for one source for the moment). The dotted blue line shows the optical axis ($p=0$). The sine wave (schematically) shows the wavelength. (Note that the units here are arbitrary, since it is only geometry relative to wavelength that determines the results). The black lines show the path of the light waves through the slits and onto the screen at the right. The strip on the right schematically renders the resulting interference pattern, and the red curve shows a cross-section through the pattern.
+
+Inside the function, we simply compute the path length difference along the two paths, convert it to phase delay, and render the corresponding interference pattern. 
+
+<div class=warn>
+<b>Warning:</b> Once again, let us stress that this is just a "toy" rendering of an interferometer. It serves to demonstrate the basic principles, but it is not physically accurate. In particular, it does not properly model diffraction or propagation. Also, since astronomical sources are effectively infinitely distant (compared to the size of the interferometer), the incoming light rays should be parallel (or equivalently, the incoming wavefront should be planar, as in the first illustration in this chapter).
+</div>
+
++++
+
+### 1.9.3 Playing with the baseline
+
+First of all, note how the properties of the interference pattern vary with *baseline* $B$ (the distance between the slits) and wavelength $\lambda$. Use the sliders below to adjust both. Note how increasing the baseline increases the frequency of the fringe, as does reducing the wavelength. 
+
+```{code-cell} ipython3
+# setup default values for the experiment
+defaults = dict(positions=[0], intensities=[1], baseline=1, d1=5, d2=5, wavelength=0.1, maxint=None)
+defaults = dict(zip(defaults, map(fixed, defaults.values())))
+
+z = interact(double_slit,
+             **{**defaults,
+                **dict(baseline=(0.1, 2 , 0.01),
+                       wavelength=(0.05, 0.2, 0.01))});
+```
+
+### 1.9.4 From the double-slit box to an interferometer
+
+The original double-slit experiment was conceived as a demonstration of the wave-like nature of light. The role of the light source in the experiment was simply to illuminate the slits. Let us now turn it around and ask ourselves, given a working dual-slit setup, could we use it to obtain some information about the light source? Could we use the double-slit experiment as a measurement device, i.e. an *interferometer*?
+
+#### 1.9.4.1 Measuring source position
+
+Obviously, we could measure source intensity -- but that's not very interesting, since we can measure that by looking at the source directly. Less obviously, we could measure the source position. Observe what happens when we move the source around, and repeat this experiment for longer and shorter baselines:
+
+```{code-cell} ipython3
+interact(double_slit,
+         **{**defaults,
+            **dict(baseline=(0.1, 2 , 0.01),
+                   wavelength=(0.05, 0.2, 0.01),
+                   positions=FloatSlider(min=-1, max=1, step=0.01, description='position'))});
+```
+
+Note that long baselines are very sensitive to change in source position, while short baselines are less sensitive. As we'll learn in Chapter 4, the spatial resolution (i.e. the distance at which we can distinguish sources) of an interferometer is given by $\lambda/B$ , while the spatial resolution of a conventional telescope is given by $\lambda/D$, where $D$ is the dish (or mirror) aperture. This is a fortunate fact, as in practice it is much cheaper to build long baselines than large apertures!
+
+On the other hand, due to the periodic nature of the interference pattern, the position measurement of a long baseline is ambiguous. Consider that two sources at completely different positions produce the same interference pattern:
+
+```{code-cell} ipython3
+double_slit([0], baseline=1.5, wavelength=0.1)
+double_slit([0.69], baseline=1.5, wavelength=0.1)
+```
+
+On the other hand, using a shorter baseline resolves the ambiguity:
+
+```{code-cell} ipython3
+double_slit([0], baseline=0.5, wavelength=0.1)
+double_slit([0.69], baseline=0.5, wavelength=0.1)
+```
+
+Modern interferometers exploit this by using an array of elements, which provides a whole range of possible baselines. 
+
++++
+
+#### 1.9.4.2 Measuring source size
+
+Perhaps less obviously, we can use an interferometer to measure source size. Until now we have been simulating only point-like sources. First, consider what happens when we add a second source to the experiment (fortunately, we wrote the function above to accommodate such a scenario). The interference pattern from two (independent) sources is the sum of the individual interference patterns. This seems obvious, but will be shown more formally later on. Here we add a second source, with a slider to control its position and intensity. Try to move the second source around, and observe how the superimposed interference pattern can become attenuated or even cancel out. 
+
+```{code-cell} ipython3
+interact(lambda position, intensity, baseline, wavelength:
+             double_slit([0, position], [1, intensity], baseline=baseline, wavelength=wavelength),
+         position=(-1, 1, 0.01), intensity=(0.2, 1, 0.01), baseline=(0.1, 2, 0.01), wavelength=(0.01, 0.2, 0.01));
+```
+
+So we can already use our double-slit box to infer something about the structure of the light source. Note that with two sources of equal intensity, it is possible to have the interference pattern almost cancel out on any one baseline -- but never on all baselines at once:
+
+```{code-cell} ipython3
+double_slit(positions=[0, 0.25], baseline=1, wavelength=0.1)
+double_slit(positions=[0, 0.25], baseline=1.5, wavelength=0.1)          
+```
+
+Now, let us simulate an extended source, by giving the simulator an array of closely spaced point-like sources. Try playing with the extent slider. What's happening here is that the many interference patterns generated by each little part of the extended source tend to "wash out" each other, resulting in a net loss of amplitude in the pattern. Note also how each particular baseline length is sensitive to a particular range of source sizes.
+
+```{code-cell} ipython3
+interact(lambda extent, baseline, wavelength:
+             double_slit(np.arange(-extent, extent + 0.01, 0.01), baseline=baseline, wavelength=wavelength),
+         extent=(0, 1, 0.01), baseline=(0.1, 2, 0.01), wavelength=(0.01, 0.2, 0.01));
+```
+
+We can therefore measure source size by measuring the reduction in the amplitude of the interference pattern:
+
+```{code-cell} ipython3
+double_slit(positions=[0], baseline=1, wavelength=0.1)
+double_slit(positions=np.arange(-0.2, 0.21, 0.01), baseline=1, wavelength=0.1)
+```
+
+In fact historically, this was the first application of interferometry in astronomy. In a famous experiment in 1920, a *Michelson interferometer* installed at Mount Wilson Observatory was used to measure the diameter of the red giant star Betelgeuse. 
+
+***
+
+<div class=advice>
+The historical origins of the term <em><b>visibility</b></em>, which you will become intimately familiar with in the course of these lectures, actually lie in the experiment described above. Originally, "visibility" was defined as just that, i.e. a measure of the contrast between the light and dark stripes of the interference pattern.
+</div>
+
+<div class=advice>
+Modern interferometers deal in terms of <em><b>complex visibilities</b></em>, i.e. complex quantities. The amplitude of a complex visibility, or <em>visibility amplitude</em>, corresponds to the intensity of the interference pattern, while the <em>visibility phase</em> corresponds to its relative phase (in our simulator, this is the phase of the fringe at the centre of the screen). This one complex number is all the information we have about the light source. Note that while our double-slit experiment shows an entire pattern, the variation in that pattern across the screen is entirely due to the geometry of the experimental setup (generically, this is the instrument used to make the measurement) -- the informational content, as far as the light source is concerned, is just the amplitude and the phase!
+</div>
+
+<div class=advice>
+In the single-source simulations above, you can clearly see that amplitude encodes source shape (and intensity), while phase encodes source position. <b>Visibility phase measures position, amplitude measures shape and intensity.</b> This is a recurring theme in radio interferometry, one that we'll revisit again and again in subsequent lectures.  
+</div>
+
+***
+
+Note that a size measurement is a lot simpler than a position measurement. The phase of the fringe pattern gives us a very precise measurement of the position of the source *relative to the optical axis of the instrument*. To get an absolute position, however, we would need to know where the optical axis is pointing in the first place -- for practical reasons, the precision of this is a lot less. The amplitude of the fringe pattern, on the other hand, is not very sensitive to errors in the instrument pointing. It is for this reason that the first astronomical applications of interferometry dealt with size measurements.
+
++++
+
+#### 1.9.4.3 Measuring instrument geometry
+
+Until now, we've only been concerned with measuring source properties. Obviously, the interference pattern is also quite sensitive to instrument geometry. We can easily see this in our toy simulator, by playing with the position of the slits and the screen:
+
+```{code-cell} ipython3
+interact(lambda d1, d2, position, extent: 
+             double_slit(np.arange(position - extent, position + extent + 0.01, 0.01), d1=d1, d2=d2),
+         d1=(1, 5, 0.1), d2=(1, 5, 0.1), position=(-1, 1, 0.01), extent=(0, 1, 0.01));
+```
+
+This simple fact has led to many other applications for interferometers, from geodetic VLBI (where continental drift is measured by measuring extremely accurate antenna positions via radio interferometry of known radio sources), to the recent gravitational wave detection by LIGO (where the light source is a laser, and the interference pattern is used to measure miniscule distortions in space-time -- and thus the geometry of the interferometer -- caused by gravitational waves).
+
++++
+
+### 1.9.5 Practical interferometers
+
+If you were given the job of constructing an interferometer for astronomical measurements, you would quickly find that the double-slit experiment does not translate into a very practical design. The baseline needs to be quite large; a box with slits and a screen is physically unwieldy. A more viable design can be obtained by playing with the optical path.
+
+The basic design still used in optical interferometry to this day is the *Michelson stellar interferometer* mentioned above. This is schematically laid out as follows:
+
+<IMG SRC="figures/471px-Michelson_stellar_interferometer.svg.png" width="50%"/>
+**Figure 1.9.2:** *Schematic of a Michelson interferometer. Credit: Unknown.*
+
+The outer set of mirrors plays the role of slits, and provides a baseline of length $d$, while the rest of the optical path serves to bring the two wavefronts together onto a common screen. The first such interferometer, used to carry out the Betelgeuse size measurement, looked like this:
+
+<IMG SRC="figures/Hooker_interferometer.jpg" width="50%"/>
+**Figure 1.9.3:** *100-inch Hooker Telescope at Mount Wilson Observatory in southern California, USA. Credit: Unknown.*
+
+In modern optical interferometers using the Michelson layout, the role of the "outer" mirrors is played by optical telescopes in their own right. For example, the Very Large Telescope operated by ESO can operate as an interferometer, combining four 8.2m and four 1.8m individual telescopes:
+
+<IMG SRC="figures/Hard_Day's_Night_Ahead.jpg" width="100%"/>
+**Figure 1.9.4:** *The Very Large Telescope operated by ESO. Credit: European Southern Observatory.*
+
+In the radio regime, the physics allow for more straightforward designs. The first radio interferometric experiment was the sea-cliff interferometer developed in Australia during 1945-48. This used reflection off the surface of the sea to provide a "virtual" baseline, with a single antenna measuring the superimposed signal:
+
+<IMG SRC="figures/sea_int_medium.jpg" width="50%"/>
+**Figure 1.9.5:** *Schematic of the sea-cliff single antenna interferometer developed in Australia post-World War 2. Credit: Unknown.*
+
+In a modern radio interferometer, the "slits" are replaced by radio dishes (or collections of antennas called *aperture arrays*) which sample and digitize the incoming wavefront. The part of the signal path between the "slits" and the "screen" is then completely replaced by electronics. The digitized signals are combined in a *correlator*, which computes the corresponding complex visibilities. We will study the details of this process in further lectures. 
+
+In contrast to the delicate optical path of an optical interferometer, digitized signals have the advantage of being endlessly and losslessly replicable. This has allowed us to construct entire interferometric *arrays*. An example is the the Jansky Very Large Array (JVLA, New Mexico, US) consisting of 27 dishes:
+
+<IMG SRC="figures/USA.NM.VeryLargeArray.02.jpg" width="50%"/>
+**Figure 1.9.6:** *Telescope elements of the Jansky Very Large Array (JVLA) in New Mexico, USA. Credit: Unknown.*
+
+The MeerKAT telescope coming online in the Karoo, South Africa, will consist of 64 dishes. This is an aerial photo showing the dish foundations being prepared:
+
+<IMG SRC="figures/2014_core_02.jpg" width="50%"/>
+**Figure 1.9.7:** *Layout of the core of the MeerKAT array in the Northern Cape, South Africa. Credit: Unknown.*
+
+**Figure 1.9.6:** *Layout of the core of the MeerKAT array in the Northern Cape, South Africa. Credit: Unknown.*
+
+In an interferometer array, each pair of antennas form a different baseline. With $N$ antennas, the correlator can then simultaneously measure the visibilities corresponding to $N(N-1)/2$ baselines, with each pairwise antenna combination yielding a unique baseline.
+
+#### 1.9.5.1 Additive vs. multiplicative interferometers
+
+The double-slit experiment, the Michelson interferometer, and the sea-cliff interferometer are all examples of *additive* interferometers, where the fringe pattern is formed up by adding the two interfering signals $E_1$ and $E_2$:
+
+$$
+EE^* = (E_1+E_2)(E_1+E_2)^* = E_1 E_1^* + E_2 E_2^* + E_1 E_2^* + E_2 E_1^* 
+$$
+
+As we already discussed above, the first two terms in this sum are constant (corresponding to the total intensity of the two signals), while the cross-term $E_1 E_2^*$ and its complex conjugate is the *interfering* term that is responsible for fringe formation. 
+
+Modern radio interferometers are *multiplicative*. Rather than adding the signals, the antennas measure $E_1$ and $E_2$ and feed these measurements into a *cross-correlator*, which directly computes the $E_1 E_2^*$ term.  
+
++++
+
+### 1.9.6 Aperture synthesis vs. targeted experiments
+
+Interferometry was born as a way of conducting specific, targeted, and rather exotic experiments. The 1920 Betelgeuse size measurement is a typical example. In contrast to a classical optical telescope, which could directly obtain an image of the sky containing information on hundreds to thousands of objects, an interferometer was a very delicate apparatus for indirectly measuring a single physical quantity (the size of the star in this case). The spatial resolution of that single measurement far exceeded anything available to a conventional telescope, but in the end it was always a specific, one-off measurement. The first interferometers were not capable of directly imaging the sky at that improved resolution.
+
+In radio interferometry, all this changed in the late 1960s with the development of the *aperture synthesis* technique by Sir Martin Ryle's group in Cambridge. The crux of this technique lies in combining the information from multiple baselines. 
+
+To understand this point, consider the following. As you saw from playing with the toy double-slit simulator above, for each baseline length, the interference pattern conveys a particular piece of information about the sky. For example, the following three "skies" yield exactly the same interference pattern on a particular baseline, so a single measurement would be unable to distinguish between them:
+
+```{code-cell} ipython3
+double_slit(positions=[0], intensities=[0.4], maxint=2)
+double_slit(positions=[0, 0.25], intensities=[1, 0.6], maxint=2)
+double_slit(positions=np.arange(-0.2, 0.21, 0.01), intensities=0.05, maxint=2)
+```
+
+However, as soon as we take a measurement on another baseline, the difference becomes apparent:
+
+```{code-cell} ipython3
+double_slit(positions=[0], intensities=[0.4], baseline=0.5, maxint=2)
+double_slit(positions=[0, 0.25], intensities=[1, 0.6], baseline=0.5, maxint=2)
+double_slit(positions=np.arange(-0.0, 0.21, 0.01), intensities=0.05,  baseline=0.5, maxint=2)
+```
+
+With a larger number of baselines, we can gather enough information to reconstruct an image of the sky. This is because each baseline essentially measures one *Fourier component* of the sky brightness distribution (Chapter 4 will explain this in more detail); and once we know the Fourier components, we can compute a Fourier transform in order to recover the sky image. The advent of sufficiently powerful computers in the late 1960s made this technique practical, and turned radio interferometers from exotic contraptions into generic imaging instruments. With a few notable exceptions, modern radio interferometry ***is*** aperture synthesis.
+
+This concludes our introduction to radio interferometry; the rest of this course deals with aperture synthesis in detail. The remainder of this notebook consists of a few more interactive widgets that you can use to play with the toy dual-slit simulator.
+
++++
+
+### Appendix: Recreating the Michelson interferometer
+For completeness, let us modify the function above to make a more realistic interferometer. We'll implement two changes:
+
+* we'll put the light source infinitely far away, as an astronomical source should be
+
+* we'll change the light path to mimic the layout of a Michelson interferometer.
+
+```{code-cell} ipython3
+class DegreeFormatter(ticker.Formatter):
+    """Format axes tick labels in degrees."""
+
+    def __init__(self, fov):
+        self.fov = float(fov)
+
+    def __call__(self, x, pos=None):
+        return np.round(x * self.fov, 6)
+
+
+def michelson(positions=[0], intensities=[1], baseline=50, maxbaseline=100,
+              extent=0, d1=9, d2=1, d3=0.2, wavelength=0.1, fov=5, maxint=None):
+    """
+    Renders a toy Michelson interferometer with an infinitely distant (astronomical) source
+
+    Parameters
+    ----------
+    positions : list, optional
+        Source positions (as angles, in degrees), by default [0].
+    intensities : list, optional
+        Source intensities, by default [1].
+    baseline : int, optional
+        The baseline, in lambdas, by default 50.
+    maxbaseline : int, optional
+        The max baseline to which the plot is scaled , by default 100.
+    extent : int, optional
+        source extents, in degrees, by default 0.
+    d1 : int, optional
+        The plotted distance between the "sky" and the interferometer arms, by
+        default 9.
+    d2 : int, optional
+        The plotted distance between arms and screen, in plot units, by default 1.
+    d3 : float, optional
+        The plotted distance between inner mirrors, in plot units, by default 0.2.
+    wavelength : float, optional
+        Wavelength of incident light, used for scale, by default 0.1.
+    fov : int, optional
+        The notionally rendered field of view radius (in degrees), by default 5.
+    maxint : float, optional
+        The maximum intensity scale use to render the fringe pattern, by default
+        None. If None, the pattern is auto-scaled. Maxint is useful if you want
+        to render fringes from multiple invocations of michelson() into the same
+        intensity scale, i.e. for comparison.
+
+    """
+
+    # ensure arrays
+    p0 = np.atleast_1d(positions)
+    a0 = np.atleast_1d(intensities)
+
+    # setup figure and axes
+    fig, ax = plt.subplots(figsize=(20, 5))
+    ax.set(xlim=(-d1 - 0.1, d2 + 2), ylim=(-1, 1),
+           ylabel='Angle of Arrival (degrees)',
+           frame_on=False)
+
+    # label Y axis with degrees
+    ax.yaxis.set_major_formatter(DegreeFormatter(fov))
+    ax.xaxis.set_visible(False)
+    ax.axhline(0, ls=':')
+
+    # draw representation of arms and light path
+    maxbaseline = max(maxbaseline, baseline)
+    bl2 = baseline / float(maxbaseline)    # coordinate of half a baseline, in plot units
+    ax.plot([0, 0], [-bl2, bl2], 'o', ms=10)
+    ax.plot([0, d2/2., d2/2., d2], [-bl2, -bl2, -d3/2., 0], '-k')
+    ax.plot([0, d2/2., d2/2., d2], [bl2, bl2, d3/2., 0], '-k')
+    ax.text(0, 0, f'$b={baseline:.2f}\lambda$', ha='right', va='bottom', size='xx-large')
+
+    # draw representation of sine wave from the central position
+    xw = np.arange(-d1, -d1 + (d1 + d2) / 4, 0.01)
+    yw = np.sin(2 * np.pi * xw / wavelength) * 0.1 + (p0[0] + p0[-1]) / (2. * fov)
+    ax.plot(xw, yw, 'b')
+
+    # 'xs' is a vector of x cordinates on the screen
+    xs = np.arange(-1, 1, 0.01)
+    # xsdiff is corresponding path length difference
+    xsdiff = (np.sqrt(d2 ** 2 + (xs - d3) ** 2) - np.sqrt(d2 ** 2 + (xs + d3) ** 2))
+
+    # and we accumulate the interference pattern for each source into 'pattern'
+    pattern = 0
+    total_intensity = 0
+    # compute contribution to pattern from each source position p
+    for pos, ampl in np.broadcast(p0, a0):
+        total_intensity += ampl
+        pos1 = pos/float(fov)
+        if extent:  # simulate extent by plotting 100 sources of 1/100th intensity
+            positions = np.arange(-1, 1.01, 0.01) * extent / fov + pos1
+        else:
+            positions = [pos1]
+            
+        # draw arrows indicating lightpath
+        ax.arrow(-d1, bl2 + pos1, d1, -pos1, head_width=0.1, fc='k', length_includes_head=True)
+        ax.arrow(-d1, -bl2 + pos1, d1, -pos1, head_width=0.1, fc='k', length_includes_head=True)
+       
+        for p in positions:
+            # compute the path length difference between slits and position on screen
+            ax.plot(-d1, p, marker='o', ms=10 * ampl, color='r')
+            # add pathlength difference at slits
+            diff = xsdiff + (baseline * wavelength) * np.sin(p * fov * np.pi / 180)
+            # accumulate interference pattern from this source
+            pattern = pattern + (ampl / len(positions)) * np.cos(2 * np.pi * diff / wavelength)
+
+    maxint = maxint or total_intensity
+    # add fake axis to interference pattern just to make it a "wide" image
+    pattern_image = pattern[:, np.newaxis] + np.zeros((1, 10))
+    ax.imshow(pattern_image, extent=(d2, d2 + 1, -1, 1), cmap=plt.gray(), vmin=-maxint, vmax=maxint)
+    
+    # make a plot of the interference pattern
+    ax.plot(d2 + 1.5 + pattern / (maxint * 2), xs, 'r')
+
+    print('visibility (Imax-Imin)/(Imax+Imin):', np.ptp(pattern) / (total_intensity * 2))
+
+
+# show patern for one source at 0
+michelson()
+```
+
+We have modified the setup as follows. First, the source is now infinitely distant, so we define the source position in terms of the angle of arrival of the incoming wavefront (with 0 meaning on-axis, i.e. along the vertical axis). We now define the baseline in terms of wavelengths. The *phase difference* of the wavefront arriving at the two arms of the interferometer is completely defined in terms of the angle of arrival. The two "rays" entering the outer arms of the interferometer indicate the angle of arrival.
+
+The rest of the optical path consists of a series of mirrors to bring the two signals together. Note that the *frequency* of the fringe pattern is now completely determined by the internal geometry of the instrument (i.e. the distances between the inner set of mirrors and the screen); however the relative *phase* of the pattern is determined by source angle. Use the sliders below to get a feel for this.
+
+Note that we've also modified the function to print the "visibility", as originally defined by Michelson.
+
+```{code-cell} ipython3
+# single source
+interact(lambda position, intensity, baseline: 
+            michelson(positions=[position], intensities=[intensity], baseline=baseline, maxint=2),
+         position=(-5, 5, 0.01), intensity=(0.2, 1, 0.01), baseline=(10, 100, 0.01));
+```
+
+And here's the same experiment for two sources:
+
+```{code-cell} ipython3
+interact(lambda position1, position2, intensity1, intensity2, baseline: 
+            michelson(positions=[position1, position2], intensities=[intensity1, intensity2], baseline=baseline, maxint=2),
+         position1=(-5, 5, 0.01), position2=(-5, 5, 0.01), intensity1=(0.2, 1, 0.01), intensity2=(0.2, 1, 0.01),
+         baseline=(10, 100, 0.01));
+```
+
+#### A.1 The Betelgeuse size measurement
+For fun, let us use our toy to re-create the Betelgeuse size measurement of 1920 by A.A. Michelson and F.G. Pease. Their experiment was set up as follows. The interferometer they constructed had movable outside mirrors, giving it a baseline that could be adjusted from a maximum of 6m downwards. Red light has a wavelength of ~650n; this gave them a maximum baseline of 10 million wavelengths.
+
+For the experiment, they started with a baseline of 1m (1.5 million wavelengths), and verified that they could see fringes from Betelgeuse with the naked eye. They then adjusted the baseline up in small increments, until at 3m the fringes disappeared. From this, they inferred the diameter of Betelgeuse to be about 0.05".
+
+You can repeat the experiment using the sliders below. You will probably find your toy Betelgeuse to be somewhat larger than 0.05". This is because our simulator is too simplistic -- in particular, it assumes a monochromatic source of light, which makes the fringes a lot sharper.
+
+```{code-cell} ipython3
+arcsec = 1 / 3600.
+interact(lambda extent_arcsec, baseline: 
+             michelson(positions=[0], intensities=[1], extent=extent_arcsec*arcsec, maxint=1, 
+                       baseline=baseline, fov=arcsec),
+         extent_arcsec=(0, 0.1, 0.001), 
+         baseline=(1e4, 1e7, 1e4)
+        );
+```
+
+***
+
+* Next: [1.10 The Limits of Single Dish Astronomy](1_10_limits_of_single_dishes.ipynb)
