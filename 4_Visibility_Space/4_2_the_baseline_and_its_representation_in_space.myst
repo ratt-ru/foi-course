@@ -13,11 +13,11 @@ kernelspec:
 
 ***
 
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
-* [4. The Visibility Space](4_0_introduction.ipynb)
-    * Previous: [4.1 Periodic Functions and Fourier Analysis](4_1_periodic_functions_and_fourier_analysis.ipynb)
-    * Next: [4.3 The 2-element Interferometer](4_3_the_2-element_interferometer.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [4. The Visibility Space](4_0_introduction.myst)
+    * Previous: [4.1 Periodic Functions and Fourier Analysis](4_1_periodic_functions_and_fourier_analysis.myst)
+    * Next: [4.3 The 2-element Interferometer](4_3_the_2-element_interferometer.myst)
 
 ***
 
@@ -124,7 +124,7 @@ The baseline vector is still expressed in a local reference frame, chosen to coi
 
 +++
 
-As seen in [$\S$ 3.4 &#10142;](../3_Positional_Astronomy/3_3_horizontal_coordinates.ipynb), an observer located somewhere on Earth can define a direction in the sky in terms of local *azimuth*  $\mathcal{A}$ and *elevation*  $\mathcal{E}$. A baseline can similarly be expressed in these coordinates.
+As seen in [$\S$ 3.4 &#10142;](../3_Positional_Astronomy/3_3_horizontal_coordinates.myst), an observer located somewhere on Earth can define a direction in the sky in terms of local *azimuth*  $\mathcal{A}$ and *elevation*  $\mathcal{E}$. A baseline can similarly be expressed in these coordinates.
 
 Let us set Antenna 1 as the origin of the reference frame on the ground. The North, East and Up axes are defined as per [$\S$ 4.2.1.2 &#10549;](#vis:sec:4212).
 
@@ -164,7 +164,7 @@ The baseline vector is expressed in the basis $\mathcal{B}'$:
 
 <b>Warnings:</b><br>
 
-Geographers and the Astronomers use different conventions for the origin and variation of the azimuth. We will use the Astronomer convention as defined in [$\S$ 3 &#10142;](../3_Positional_Astronomy/3_0_introduction.ipynb).
+Geographers and the Astronomers use different conventions for the origin and variation of the azimuth. We will use the Astronomer convention as defined in [$\S$ 3 &#10142;](../3_Positional_Astronomy/3_0_introduction.myst).
 The horizontal coordinate system behaves like a 2D spherical coordinates system, with a slight difference in convention choices (angle chosen as origin and direction of variation).
 The latitude $L_a$ was not expressed here but will become important later in the chapter.
 
@@ -174,7 +174,7 @@ The latitude $L_a$ was not expressed here but will become important later in the
 
 +++
 
-The baseline is fully described in the $ENU$ system using the azimuth $\mathcal{A}$ and elevation $\mathcal{E}$. As shown in [$\S$ 3.1 &#10142;](../3_Positional_Astronomy/3_1_equatorial_coordinates.ipynb), for an observer located at latitude $L_a$, the extension of the direction of the baseline defines a position on the sky. This position can be associated with Equatorial coordinates ($H$, $\delta$), where $H$ is the hour angle and $\delta$ the declination.
+The baseline is fully described in the $ENU$ system using the azimuth $\mathcal{A}$ and elevation $\mathcal{E}$. As shown in [$\S$ 3.1 &#10142;](../3_Positional_Astronomy/3_1_equatorial_coordinates.myst), for an observer located at latitude $L_a$, the extension of the direction of the baseline defines a position on the sky. This position can be associated with Equatorial coordinates ($H$, $\delta$), where $H$ is the hour angle and $\delta$ the declination.
 
 To generalize the baseline further (and to ease subsequent derivations), we need to define a set of reference frames which will map the baseline onto sky coordinates on the celestial sphere. To do so, we define an intermediate frame of reference $XYZ$ with basis ($\mathbf{\hat{e}_X}$,$\mathbf{\hat{e}_Y}$,$\mathbf{\hat{e}_Z}$). We attach this frame of reference to the Earth. We can now position these axes with respect to the Equatorial coordinates $(H; \delta)$. Let us define the axes of the $XYZ$ frame as:
 
@@ -226,7 +226,7 @@ Z
 
 **Equation 3.1**: Conversion from baseline vector $\mathcal{E},\mathcal{A}$ to $XYZ$ . $\mathbf{b}$: amplitude of baseline vector. $H$: Hour angle, $\delta$: Declination, $L_a$: latitude of the array. 
 
-<b>Note:</b> The complete derivation of [Eq. 3.1 &#10142;](#vis:eq:3_1)  from the spherical triangle <b>ZTS</b> can be found in [$\S$ A.1 &#10142;](../0_Introduction/2_Appendix.ipynb).
+<b>Note:</b> The complete derivation of [Eq. 3.1 &#10142;](#vis:eq:3_1)  from the spherical triangle <b>ZTS</b> can be found in [$\S$ A.1 &#10142;](../0_Introduction/2_Appendix.myst).
 
 +++
 
@@ -380,9 +380,9 @@ In the following sections and chapters, we will drop the $\lambda$ subscript, as
 +++
 
 This section was dedicated to writing a mathematical expression the baseline vector in astronomy-friendly reference frames. This will later allow us to quickly link the physical length of a baseline between two receivers to a quantity measured on the celestial sphere. 
-In [$\S$ 4.3 &#10142;](4_3_the_2-element_interferometer.ipynb), we will focus on a simple one dimensional 2-element interferometer. We will address the correlation of two signals collected from a remote point source, and construct the corresponding visibility function which will be described in greater detail in [$\S$ 4.4 &#10142;](4_4_the_visibility_function.ipynb).
+In [$\S$ 4.3 &#10142;](4_3_the_2-element_interferometer.myst), we will focus on a simple one dimensional 2-element interferometer. We will address the correlation of two signals collected from a remote point source, and construct the corresponding visibility function which will be described in greater detail in [$\S$ 4.4 &#10142;](4_4_the_visibility_function.myst).
 
-Do not worry too much about the relevance of $uvw$ space - it will be made clear in [$\S$4.4](4_Visibility_Space/4_4_the_visibility_function.ipynb). For now, suffice to say that this derivation will be useful to us later on.
+Do not worry too much about the relevance of $uvw$ space - it will be made clear in [$\S$4.4](4_Visibility_Space/4_4_the_visibility_function.myst). For now, suffice to say that this derivation will be useful to us later on.
 
 +++
 
@@ -403,4 +403,4 @@ Do not worry too much about the relevance of $uvw$ space - it will be made clear
 
 ***
 
-* Next: [4.3 The 2-element Interferometer](4_3_the_2-element_interferometer.ipynb)
+* Next: [4.3 The 2-element Interferometer](4_3_the_2-element_interferometer.myst)

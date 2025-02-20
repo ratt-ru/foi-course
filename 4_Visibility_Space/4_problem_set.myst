@@ -13,9 +13,9 @@ kernelspec:
 
 ***
 <a id='beginning'></a> <!--\label{beginning}-->
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
-* [4. The Visibility Space](4_0_introduction.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [4. The Visibility Space](4_0_introduction.myst)
 ***
 
 +++
@@ -309,4 +309,4 @@ Na = 7
 +++
 
 ***
-Return: [4. The Visibility Space](4_0_introduction.ipynb)
+Return: [4. The Visibility Space](4_0_introduction.myst)

@@ -14,11 +14,11 @@ kernelspec:
 ***
 
 <a id='beginning'></a>
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
-* [4. The Visibility space](4_0_introduction.ipynb)
-    * Previous: [4.5.1 UV Coverage: UV tracks](4_5_1_uv_coverage_uv_tracks.ipynb)
-    * Next: [4.6 The Fourier Approximation & the van Cittert-Zernike theorem](4_6_the_fourier_approximation_van_cittert-zernike_theorem.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [4. The Visibility space](4_0_introduction.myst)
+    * Previous: [4.5.1 UV Coverage: UV tracks](4_5_1_uv_coverage_uv_tracks.myst)
+    * Next: [4.6 The Fourier Approximation & the van Cittert-Zernike theorem](4_6_the_fourier_approximation_van_cittert-zernike_theorem.myst)
 
 ***
 
@@ -55,7 +55,7 @@ HTML('../style/code_toggle.html')
 
 +++
 
-In [$\S$ 4.5.1 &#10142;](4_5_1_uv_coverage_uv_tracks.ipynb), we have explored the ways in which the visibility function is sampled. Depending on the interferometer's location (in latitude), the projected baseline w.r.t. the observed source, and the time and frequency of our observation, the $uv$ plane is sampled along tracks which can be derived from the projected baseline in the ($u$,$v$,$w$) reference frame. These $uv$ tracks are portions of ellipses. Over the course of an observation, samples are accumulated along these tracks and form the *$uv$ coverage*.
+In [$\S$ 4.5.1 &#10142;](4_5_1_uv_coverage_uv_tracks.myst), we have explored the ways in which the visibility function is sampled. Depending on the interferometer's location (in latitude), the projected baseline w.r.t. the observed source, and the time and frequency of our observation, the $uv$ plane is sampled along tracks which can be derived from the projected baseline in the ($u$,$v$,$w$) reference frame. These $uv$ tracks are portions of ellipses. Over the course of an observation, samples are accumulated along these tracks and form the *$uv$ coverage*.
 To accurately measure the sky, we need a good knowledge of its attendant visibility function: we therefore need to sample the $uv$-plane as fully as possible.
 
 <span style="background-color:cyan">TLG:GM: Check if the italic words are in the glossary. </span>
@@ -223,13 +223,13 @@ With an increasing number of time steps, you can start to see each individual ba
 
 +++
 
-We have seen in [$\S$ 4.3 &#10142;](4_2_The_2-element_Interferometer.ipynb) that the $u$, $v$, $w$ coordinates are usually normalized by $\lambda$. As a consequence, observing with the *same* interferometer at a *different* frequency gives a different set of spatial frequencies. Sampling the ($u,v$)-plane with the same baseline and two diffe frequencies is equivalent to **rescaling** the projected baseline. Indeed, for the same snapshot $uv$ coverage at wavelength $\lambda_1$, the $uv$ coverage at $\lambda_2 < \lambda_1$ will be a shrunk version of that a $\lambda_1$. 
+We have seen in [$\S$ 4.3 &#10142;](4_2_The_2-element_Interferometer.myst) that the $u$, $v$, $w$ coordinates are usually normalized by $\lambda$. As a consequence, observing with the *same* interferometer at a *different* frequency gives a different set of spatial frequencies. Sampling the ($u,v$)-plane with the same baseline and two diffe frequencies is equivalent to **rescaling** the projected baseline. Indeed, for the same snapshot $uv$ coverage at wavelength $\lambda_1$, the $uv$ coverage at $\lambda_2 < \lambda_1$ will be a shrunk version of that a $\lambda_1$. 
 
 If the distribution of our sampling frequencies is (quasi) continuous, e.g. if the observing system operates in a bandwidth [$f_\text{min}$,$f_\text{max}$], with $N_\text{freqs}$ channels, we can contiguously sample portions of the $uv$ plane with $\frac{N(N-1)}{2}\times N_\text{freqs}$ independent measurements. For each baseline, a radial track will be generated due to the frequency scaling effect of $u$ and $v$.
 
 +++
 
-<b>Warning:</b> It is only possible to do this up to a point: see *bandwidth smearing* in [$\S$ 9.3 &#10142;](../9_Practical/9_3_observing_smearing.ipynb)) for more details on the limits of this technique.
+<b>Warning:</b> It is only possible to do this up to a point: see *bandwidth smearing* in [$\S$ 9.3 &#10142;](../9_Practical/9_3_observing_smearing.myst)) for more details on the limits of this technique.
 <span style="background-color:cyan">TLG:GM: Check if the italic words are in the glossary. </span>
 
 +++
@@ -277,16 +277,16 @@ The $uv$ plane is what an interferometers actually measures.
 
 In an ideal case, this plane is equivalent to the visibility function, which what we **want** to measure. The $uv$-coverage of an observation tells us which parts of the visibility function has been sampled.
 
-In [$\S$ 4.5.1 &#10142;](4_5_1_uv_coverage_uv_tracks.ipynb), we showed that sampling the $uv$-plane with a single baseline amounts to sampling along an elliptical track due to the rotation of the Earth. The track's parameters can be predicted if we know the location of the interferometer on Earth, the direction of the source and the baseline characteristics. The $uv$-track is thus the set of spatial frequencies (i.e.$uv$ points) which a single baseline will sample over the course of an observation.
+In [$\S$ 4.5.1 &#10142;](4_5_1_uv_coverage_uv_tracks.myst), we showed that sampling the $uv$-plane with a single baseline amounts to sampling along an elliptical track due to the rotation of the Earth. The track's parameters can be predicted if we know the location of the interferometer on Earth, the direction of the source and the baseline characteristics. The $uv$-track is thus the set of spatial frequencies (i.e.$uv$ points) which a single baseline will sample over the course of an observation.
 
-In [$\S$ 4.5.2 &#10549;](4_5_2_uv_coverage_improving_your_coverage.ipynb), we discussed three different ways of improving your $uv$ coverage. Firstly, we can increase the number of antennas and alter their distribution: this improves the *instantaneous* spatial coverage. Second, we can use the fact that the observed source is moving with the Celestial Sphere (i.e. the Earth spins). The continuous variation of the projected baseline - and therefore its $u,v$-coordinates - allow us to sample portions of elliptical $uv$ tracks. 
+In [$\S$ 4.5.2 &#10549;](4_5_2_uv_coverage_improving_your_coverage.myst), we discussed three different ways of improving your $uv$ coverage. Firstly, we can increase the number of antennas and alter their distribution: this improves the *instantaneous* spatial coverage. Second, we can use the fact that the observed source is moving with the Celestial Sphere (i.e. the Earth spins). The continuous variation of the projected baseline - and therefore its $u,v$-coordinates - allow us to sample portions of elliptical $uv$ tracks. 
 
 A long integration time allows astronomers to easily improve their $uv$-plane coverage at little cost. Note that maximising using this technique to improve $uv$-coverage will require taking more measurements in time, thus increasing computational costs.
 
 Thirdly, by using broadband receivers, we can sample the visibilities at various frequencies and compute the cross-correlations in different frequency channels. By doing so, the $uv$-coverage is improved along radial $uv$ tracks.
-Of course, these methods cannot extend our $uv$-coverage arbitrarily. They are limited by both the instrument sensitivity and the instrument's point source response (see [$\S$ 9.3 &#10142;](../9_Practical/9_3_Observing_smearing.ipynb)).
+Of course, these methods cannot extend our $uv$-coverage arbitrarily. They are limited by both the instrument sensitivity and the instrument's point source response (see [$\S$ 9.3 &#10142;](../9_Practical/9_3_Observing_smearing.myst)).
 
-In [$\S$ 4.6  &#10142;](4_6_the_fourier_approximation_van_cittert-zernike_theorem.ipynb) we will explicitly enunciate the underlying hypotheses we relied on in the previous section. This section is required before we can begin to treat the topic of *imaging* in [$\S$ 5 &#10142;](../5_Imaging/5_0_introduction.ipynb).
+In [$\S$ 4.6  &#10142;](4_6_the_fourier_approximation_van_cittert-zernike_theorem.myst) we will explicitly enunciate the underlying hypotheses we relied on in the previous section. This section is required before we can begin to treat the topic of *imaging* in [$\S$ 5 &#10142;](../5_Imaging/5_0_introduction.myst).
 
 +++
 
@@ -317,4 +317,4 @@ In [$\S$ 4.6  &#10142;](4_6_the_fourier_approximation_van_cittert-zernike_theore
 
 ***
 
-* Next: [4.6 The Fourier Approximation & the van Cittert-Zernike theorem](4_6_the_fourier_approximation_van_cittert-zernike_theorem.ipynb)
+* Next: [4.6 The Fourier Approximation & the van Cittert-Zernike theorem](4_6_the_fourier_approximation_van_cittert-zernike_theorem.myst)

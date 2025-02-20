@@ -13,11 +13,11 @@ kernelspec:
 
 ***
 <a id='beginning'></a> <!--\label{beginning}-->
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
-* [4. The Visibility space](4_0_introduction.ipynb)
-    * Previous: [4.3 The 2-Element Interferometer](4_3_the_2-element_interferometer.ipynb)
-    * Next: [4.5.1 UV Coverage: UV Tracks](4_5_1_uv_coverage_uv_tracks.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [4. The Visibility space](4_0_introduction.myst)
+    * Previous: [4.3 The 2-Element Interferometer](4_3_the_2-element_interferometer.myst)
+    * Next: [4.5.1 UV Coverage: UV Tracks](4_5_1_uv_coverage_uv_tracks.myst)
 
 ***
 
@@ -51,7 +51,7 @@ So far, we've treated each individual measured visibility as a single measuremen
 
 +++
 
-Based on what we have defined in [$\S$ 4.3 &#10142;](4_3_the_2-element_interferometer.ipynb), we will focus on the visibility function, which is a caracteristic of the sky as seen through an interferometer. It is related to the contrast in the fringe pattern created by the combination of signals received by the antennas on each baseline.
+Based on what we have defined in [$\S$ 4.3 &#10142;](4_3_the_2-element_interferometer.myst), we will focus on the visibility function, which is a caracteristic of the sky as seen through an interferometer. It is related to the contrast in the fringe pattern created by the combination of signals received by the antennas on each baseline.
 
 +++
 
@@ -63,7 +63,7 @@ Based on what we have defined in [$\S$ 4.3 &#10142;](4_3_the_2-element_interfero
 
 +++
 
-As seen in [$\S$ 1.2 &#10142;](../1_Radio_Science/1_2_electromagnetic_radiation_and_astronomical_quantities.ipynb), the *specific intensity* $I_\nu$ (or the *surface brightness*) is defined as the received power per unit solid angle, per unit frequency interval, per unit collecting area:
+As seen in [$\S$ 1.2 &#10142;](../1_Radio_Science/1_2_electromagnetic_radiation_and_astronomical_quantities.myst), the *specific intensity* $I_\nu$ (or the *surface brightness*) is defined as the received power per unit solid angle, per unit frequency interval, per unit collecting area:
 $$ dP_{\nu} = I_{\nu} d\Omega d\nu d A_{\text{eff}} $$
 where $dP_{\nu}$ is in units of W and $I_{\nu}$ is in units of W m$^{-2}$ sr$^{-1}$ Hz$^{-1}$.
 
@@ -117,7 +117,7 @@ $$\boxed{\boxed{\mathcal{ V_{\mathbf{b}} } = \int_{\Omega}I_\nu(\boldsymbol{\sig
 
 +++
 
-In [$\S$ 4.2 &#10142;](../4_Visibility_Space/4_2_the_baseline_and_its_representation_in_space.ipynb), we defined various coordinates systems to represent the baseline in a sky-friendly reference frame. We will now use them to have an explicit expression of the visibility $\mathcal{V}_{\mathbf{b}}$.
+In [$\S$ 4.2 &#10142;](../4_Visibility_Space/4_2_the_baseline_and_its_representation_in_space.myst), we defined various coordinates systems to represent the baseline in a sky-friendly reference frame. We will now use them to have an explicit expression of the visibility $\mathcal{V}_{\mathbf{b}}$.
 
 $\boldsymbol{\sigma}$ is the direction difference vector defined as $\boldsymbol{\sigma}= \mathbf{s} - \mathbf{s_0}$.
 
@@ -221,7 +221,7 @@ $$ \mathcal{V}(u,v,w \sim 0) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \
 
 +++
 
-The [Eq. 4.4.3 &#10549;](#vis:eq:443) is no longer a function of $w$, and it now takes the shape of a 2-D Fourier transform (see [$\S$ 2.4 &#10142;](../2_Mathematical_Groundwork/2_4_the_fourier_transform.ipynb)) with $(u,v)$ being the Fourier pairs of $(l,m)$.
+The [Eq. 4.4.3 &#10549;](#vis:eq:443) is no longer a function of $w$, and it now takes the shape of a 2-D Fourier transform (see [$\S$ 2.4 &#10142;](../2_Mathematical_Groundwork/2_4_the_fourier_transform.myst)) with $(u,v)$ being the Fourier pairs of $(l,m)$.
 
 The inverse transform can be written as:
 
@@ -229,7 +229,7 @@ $$ \frac{A(l,m) I_\nu(l,m)}{\sqrt{1 - l^2 - m^2}} = \int_{-\infty}^{\infty} \int
 
 $$ \mathcal{V}(u,v) \sim \mathscr{F} \{I_\nu \}(u,v) $$
 
-We will come back to the consequences of this form in [$\S$ 4.6 &#10142;](../4_Visibility_Space/4_6_the_fourier_approximation_van_cittert-zernike_Theorem.ipynb)
+We will come back to the consequences of this form in [$\S$ 4.6 &#10142;](../4_Visibility_Space/4_6_the_fourier_approximation_van_cittert-zernike_Theorem.myst)
 
 +++
 
@@ -253,7 +253,7 @@ In the earlier days of interferometry, only few samples where available and the 
 $$ r_{uv} = \sqrt{u^2+v^2}$$
 
 
-Instead of exploiting the Fourier Transform properties linking the visibility function to the brightness distribution, we will simply compute this integral numerically on a simple case. The Fourier Transform will be more extensively used in [$\S$ 5.1 &#10142;](../5_Imaging/5_1_spatial_frequencies.ipynb) for imaging.
+Instead of exploiting the Fourier Transform properties linking the visibility function to the brightness distribution, we will simply compute this integral numerically on a simple case. The Fourier Transform will be more extensively used in [$\S$ 5.1 &#10142;](../5_Imaging/5_1_spatial_frequencies.myst) for imaging.
 
 +++
 
@@ -305,7 +305,7 @@ From [Eq. 4.4.3 &#10549;](#vis:eq:443), for a single projected baseline with coo
 
 +++
 
-Consider a 2-element interferometer projecting a baseline ($u$,$v=0$,$w=0$) associated with a set of fringes along the $m$ axis (for simplification). This is possible with an East-West baseline (see [$\S$  4.5.1 &#10142;](4_5_1_uv_coverage_uv_tracks.ipynb)). 
+Consider a 2-element interferometer projecting a baseline ($u$,$v=0$,$w=0$) associated with a set of fringes along the $m$ axis (for simplification). This is possible with an East-West baseline (see [$\S$  4.5.1 &#10142;](4_5_1_uv_coverage_uv_tracks.myst)). 
 
 We assume that the sky is only composed of a single extended source represented by a disk of unit brightness. For simplicity, this interferometer will observe this source at the phase center when the source is at transit.
 
@@ -501,7 +501,7 @@ SVG('figures/fringes.svg')
 ##### 4.4.2.4.2 Estimating of the Right Ascension ($\alpha$)
 
 The Right Ascension can be determined if the transit time can be measured with high accuracy. The transit time can be derived from the maximum of the fringe enveloppe, which corresponds to the maximum elevation of the source multiplied by to the maximum antenna response of antennas pointing at the local meridian. <span style="background-color:red">TLG:RC: Please rewrite last sentence.</span><span style="background-color:red">EB:RC: I think that's what he meant? Not actually sure..</span>
-The transit time correspond to the moment when the LST is equal to the RA (according to [$\S$ 3.2 &#10142;](../3_Positional_Astronomy/3_2_Hour_Angle.ipynb)). In our example, the RA is $\sim$$13^\text{h}07^\text{m}$.
+The transit time correspond to the moment when the LST is equal to the RA (according to [$\S$ 3.2 &#10142;](../3_Positional_Astronomy/3_2_Hour_Angle.myst)). In our example, the RA is $\sim$$13^\text{h}07^\text{m}$.
 
 +++
 
@@ -576,7 +576,7 @@ Having described the properties of the visibility function, we will address the 
 
 +++
 
-We have shown how a baseline can be expressed in a 3-D reference frame, and will next discuss how that baseline can be projected down to 2-D. Imagine being on the celestial sphere, looking down on to the baseline distribution. From this frame, the baselines look projected to a 2-D plane. Later in the chapter we will discuss the [$\S$ 4.6 &#10142;](4_6_the_fourier_approximation_van_cittert_zernike_theorem.ipynb) which allows us to construct an image of the sky from an approximate 2-D Fourier transform between the baseline visibility sampling and the sky. There are many caveats to this theorem, which will be discussed in good time. For now, the important thing to understand is: for a given point on the celestial sphere, the 3-D baselines can be projected onto a 2-D plane, and as the Earth rotates (and the Celestial sphere stays fixed), this changes the projection of each baseline. This change in projection is key to the practice of radio interferometric observation, and will come up again when we discuss [$\S$ 4.5.1 &#10142;](4_5_1_uv_coverage_uv_tracks.ipynb).
+We have shown how a baseline can be expressed in a 3-D reference frame, and will next discuss how that baseline can be projected down to 2-D. Imagine being on the celestial sphere, looking down on to the baseline distribution. From this frame, the baselines look projected to a 2-D plane. Later in the chapter we will discuss the [$\S$ 4.6 &#10142;](4_6_the_fourier_approximation_van_cittert_zernike_theorem.myst) which allows us to construct an image of the sky from an approximate 2-D Fourier transform between the baseline visibility sampling and the sky. There are many caveats to this theorem, which will be discussed in good time. For now, the important thing to understand is: for a given point on the celestial sphere, the 3-D baselines can be projected onto a 2-D plane, and as the Earth rotates (and the Celestial sphere stays fixed), this changes the projection of each baseline. This change in projection is key to the practice of radio interferometric observation, and will come up again when we discuss [$\S$ 4.5.1 &#10142;](4_5_1_uv_coverage_uv_tracks.myst).
 
 +++
 
@@ -607,4 +607,4 @@ We have shown how a baseline can be expressed in a 3-D reference frame, and will
 
 ***
 
-* Next: [4.5.1 UV Coverage: UV Tracks](4_5_1_uv_coverage_uv_tracks.ipynb)
+* Next: [4.5.1 UV Coverage: UV Tracks](4_5_1_uv_coverage_uv_tracks.myst)

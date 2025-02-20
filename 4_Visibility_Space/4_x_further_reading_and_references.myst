@@ -14,11 +14,11 @@ kernelspec:
 ***
 <a id='beginning'></a> <!--\label{beginning}-->
 
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
-* [4. The Visibility space](4_0_introduction.ipynb)
-    * Previous: [4.5 The Fourier Approximation & the van Cittert-Zernike theorem](4_5_The_Fourier_Approximation_VanCittert-Zernike_Theorem.ipynb)
-    * Next Chapter: [5. Imaging](../5_Imaging/5_0_introduction.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [4. The Visibility space](4_0_introduction.myst)
+    * Previous: [4.5 The Fourier Approximation & the van Cittert-Zernike theorem](4_5_The_Fourier_Approximation_VanCittert-Zernike_Theorem.myst)
+    * Next Chapter: [5. Imaging](../5_Imaging/5_0_introduction.myst)
 
 ***
 
@@ -40,4 +40,4 @@ kernelspec:
 
 ***
 
-* Next: [5. Imaging](../5_Imaging/5_0_introduction.ipynb)
+* Next: [5. Imaging](../5_Imaging/5_0_introduction.myst)

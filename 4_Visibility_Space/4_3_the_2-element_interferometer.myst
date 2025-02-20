@@ -13,11 +13,11 @@ kernelspec:
 
 ***
 <a id='beginning'></a>
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
-* [4. The Visibility space](4_0_introduction.ipynb)
-    * Previous: [4.2 The Baseline and Its Representation in Space](4_2_the_baseline_and_its_representation_in_space.ipynb)
-    * Next: [4.4 The Visibility Function](4_4_the_visibility_function.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [4. The Visibility space](4_0_introduction.myst)
+    * Previous: [4.2 The Baseline and Its Representation in Space](4_2_the_baseline_and_its_representation_in_space.myst)
+    * Next: [4.4 The Visibility Function](4_4_the_visibility_function.myst)
 
 ***
 
@@ -47,8 +47,8 @@ HTML('../style/code_toggle.html')
 
 +++
 
-To understand the practicalities of interferometry, we must spend some time on the simple 2-element interferometer. Here, we will treat it in 1-D. Similar to [$\S$ 1.9 &#10142;](../1_Radio_Science/1_9_a_brief_introduction_to_interferometry.ipynb), we will derive the response of an ideal 1D interferometer and its link to the intensity distribution of a source. 
-In [$\S$ 4.3.1 &#10549;](#vis:sec:431), we establish the link between interferometry on a optical bench and radio interferometry. From the derivation of the cross-correlation of antenna signals, we will derive a spatial fringe pattern - the radio counterpart to the optical fringe pattern. In [$\S$ 4.3.2 &#10549;](#vis:sec:432) we define  two classical interferometers in a 1D regime: the $\sum$ and $\Pi$ interferometers. Finally, in [$\S$ 4.3.3 &#10549;](#vis:sec:433), we build the complex interferometer and introduce the idea of a *visibility*, which will be further detailed in [$\S$ 4.4 &#10142;](4_4_the_visibility_function.ipynb).
+To understand the practicalities of interferometry, we must spend some time on the simple 2-element interferometer. Here, we will treat it in 1-D. Similar to [$\S$ 1.9 &#10142;](../1_Radio_Science/1_9_a_brief_introduction_to_interferometry.myst), we will derive the response of an ideal 1D interferometer and its link to the intensity distribution of a source. 
+In [$\S$ 4.3.1 &#10549;](#vis:sec:431), we establish the link between interferometry on a optical bench and radio interferometry. From the derivation of the cross-correlation of antenna signals, we will derive a spatial fringe pattern - the radio counterpart to the optical fringe pattern. In [$\S$ 4.3.2 &#10549;](#vis:sec:432) we define  two classical interferometers in a 1D regime: the $\sum$ and $\Pi$ interferometers. Finally, in [$\S$ 4.3.3 &#10549;](#vis:sec:433), we build the complex interferometer and introduce the idea of a *visibility*, which will be further detailed in [$\S$ 4.4 &#10142;](4_4_the_visibility_function.myst).
 
 +++
 
@@ -229,7 +229,7 @@ For the rest of this chapter, we will assume that we have a single point source 
 
 Before moving to the full 3D case where we will have to consider the interferometer's response - how well it detects objects on the celestial sphere - we will focus on a simple case. Consider a two-element (and therefore 1-D) interferometer observing a coherent plane wave emitted by an infinitely-distant point source. We assume this emission is spatially and temporally coherent.
 
-Each element of our interferometer is an isotropic receiver (i.e. sees the full sky) lying on the ground ([Fig. 4.3.4 &#10549;](#vis:fig:434)). They are separated by a distance $|\mathbf{b}|$. As per [$\S$ 1.2 &#10142;](../1_Radio_Science/1_2_electromagnetic_radiation_and_astronomical_quantities.ipynb), we will consider that the array is illuminated by an electromagnetic plane wave coming from a direction $\mathbf{s_0}$, at an angle $\theta$ w.r.t. the baseline.
+Each element of our interferometer is an isotropic receiver (i.e. sees the full sky) lying on the ground ([Fig. 4.3.4 &#10549;](#vis:fig:434)). They are separated by a distance $|\mathbf{b}|$. As per [$\S$ 1.2 &#10142;](../1_Radio_Science/1_2_electromagnetic_radiation_and_astronomical_quantities.myst), we will consider that the array is illuminated by an electromagnetic plane wave coming from a direction $\mathbf{s_0}$, at an angle $\theta$ w.r.t. the baseline.
 <a id="vis:fig:434"></a>
 
 ```{code-cell} ipython3
@@ -250,11 +250,11 @@ $$\Delta L= \mathbf{b} \cdot \mathbf{s_0}$$
 
 <span style="background-color:cyan">TLG:GM: Check if the italic words are in the glossary. </span>
 
-As the source moves on the celestial sphere (due to Earth's rotation), the apparent baseline length will change (see [$\S$ 4.5.1 &#10142;](4_5_1_uv_coverage_uv_tracks.ipynb) for how astronomers capitalise on this). This means that keeping the source at phase centre (i.e. continuously following a source moving with the celestial sphere - effectively pointing the telescope) requires adapting our compensation for the OPL delay to the variation of the *projected baseline* as a function of time.
+As the source moves on the celestial sphere (due to Earth's rotation), the apparent baseline length will change (see [$\S$ 4.5.1 &#10142;](4_5_1_uv_coverage_uv_tracks.myst) for how astronomers capitalise on this). This means that keeping the source at phase centre (i.e. continuously following a source moving with the celestial sphere - effectively pointing the telescope) requires adapting our compensation for the OPL delay to the variation of the *projected baseline* as a function of time.
 
 +++
 
-<b>Warning</b>: in practice, the antennas are usually steerable dishes with a directional response (or <em>beam</em>), which is NOT isotropic. To measure a signal coming from a direction $\mathbf{s_0}$ ([Fig. 4.3.4 &#10549;](#vis:fig:434)), we therefore physically point these antennas towards the desired direction in order to maximize our antenna response. see [$\S$ 7.5 &#10142;](../7_Observing_Systems/7_5_primary_beam.ipynb)
+<b>Warning</b>: in practice, the antennas are usually steerable dishes with a directional response (or <em>beam</em>), which is NOT isotropic. To measure a signal coming from a direction $\mathbf{s_0}$ ([Fig. 4.3.4 &#10549;](#vis:fig:434)), we therefore physically point these antennas towards the desired direction in order to maximize our antenna response. see [$\S$ 7.5 &#10142;](../7_Observing_Systems/7_5_primary_beam.myst)
 
 +++
 
@@ -288,7 +288,7 @@ $$\mathbf{b} \cdot \boldsymbol{\sigma} = \mathbf{b} \cdot (\mathbf{s} - \mathbf{
 
 +++
 
-<b>Warning:</b> For the moment, the vector $\mathbf{s}$ and $\mathbf{s_0}$ are unitary and defined with angles only. Therefore, the length of $\boldsymbol{\sigma}$ is a projected angular distance on the sky (defined in terms of direction cosines ($l$, $m$, $n$), defined in [$\S$ 3.4 &#10142;](../3_Positional_Astronomy/3_4_direction_cosine_coordinates.ipynb) ).
+<b>Warning:</b> For the moment, the vector $\mathbf{s}$ and $\mathbf{s_0}$ are unitary and defined with angles only. Therefore, the length of $\boldsymbol{\sigma}$ is a projected angular distance on the sky (defined in terms of direction cosines ($l$, $m$, $n$), defined in [$\S$ 3.4 &#10142;](../3_Positional_Astronomy/3_4_direction_cosine_coordinates.myst) ).
 
 +++
 
@@ -369,7 +369,7 @@ $$\boxed{\displaystyle C =\frac{V_0^2}{2}\cos{(\omega \tau)}=\frac{V_0^2}{2}\cos
 
 +++
 
-<span style="background-color:red">TLG:AC: Add a reference to the appendix where the product of cosine identities are explained. [$\S$ A.1 &#10142;](../0_Introduction/2_Appendix.ipynb)</span>
+<span style="background-color:red">TLG:AC: Add a reference to the appendix where the product of cosine identities are explained. [$\S$ A.1 &#10142;](../0_Introduction/2_Appendix.myst)</span>
 
 In [$\S$ 4.3.1.1 &#10549;](#vis:sec:4311), we have shown that the interference fringe pattern depends on the observer's position. We also found a phase-dependent equation to describe an individual fringe.
 
@@ -392,7 +392,7 @@ First result:
 
 * As a consequence, the correlation is sensitive to variations of the spatial period $T_f$, which means that a 2-element interferometer acts as **spatial filter** for this spatial frequency.
 
-In other words, *each baseline* probes *a spatial frequency*, or a single Fourier coefficient as described in [$\S$ 4.1  &#10142;](4_1_periodic_functions_and_fourier_analysis.ipynb). This is the **fundamental link** to be made here: **each baseline** probes **one spatial frequency**, which is determined by its **length** and **direction**. By stacking baselines - i.e. probing more and more Fourier coefficients - we can start reconstituting the full sky!
+In other words, *each baseline* probes *a spatial frequency*, or a single Fourier coefficient as described in [$\S$ 4.1  &#10142;](4_1_periodic_functions_and_fourier_analysis.myst). This is the **fundamental link** to be made here: **each baseline** probes **one spatial frequency**, which is determined by its **length** and **direction**. By stacking baselines - i.e. probing more and more Fourier coefficients - we can start reconstituting the full sky!
 
 +++
 
@@ -403,7 +403,7 @@ with $k(\mathbf{s})$ an implicit multiplying factor depending on $I_\nu(\mathbf{
 
 When usign this definition, $C_{\cos}$ is called a *cosine correlator*.
 
-However, as we know from Fourier analysis, any function can be expressed as the sum of an *even* function and an *odd* function. In practice, the *cosine correlator* will only be sensitive to the *even* component of the sky brigthness function - it only probes the $a_n$ components of its Fourier series as defined in [$\S$4.1  &#10142;](4_1_periodic_functions_and_fourier_analysis.ipynb). To measure the *odd* component of the sky brigthness function, we must build a *sin* correlator.
+However, as we know from Fourier analysis, any function can be expressed as the sum of an *even* function and an *odd* function. In practice, the *cosine correlator* will only be sensitive to the *even* component of the sky brigthness function - it only probes the $a_n$ components of its Fourier series as defined in [$\S$4.1  &#10142;](4_1_periodic_functions_and_fourier_analysis.myst). To measure the *odd* component of the sky brigthness function, we must build a *sin* correlator.
 
 +++
 
@@ -440,7 +440,7 @@ $V_{i_\Omega}$ is proportional to the power received from direction $\mathbf{s}$
 
 $V_{i_\Omega} \propto \frac{1}{2} A_{\text{eff}}(\mathbf{s}) I_\nu(\mathbf{s})\Delta\nu d\Omega$
 
-where $A_{\text{eff}}$ is the effective area of the antenna, $I_\nu$ the brightness distribution, $\Delta \nu$ the bandwidth of observation and $d\Omega$, an element of observing solid angle (see [$\S$ 1.2 &#10142;](../1_radio_science/1_2_electromagnetic_radiation_and_astronomical_quantities.ipynb) and [$\S$ 4.4 &#10142;](4_4_the_visibility_function.ipynb) for definitions). The $\frac{1}{2}$ comes from the fact that, usually, only one polarization is measured by an antenna.
+where $A_{\text{eff}}$ is the effective area of the antenna, $I_\nu$ the brightness distribution, $\Delta \nu$ the bandwidth of observation and $d\Omega$, an element of observing solid angle (see [$\S$ 1.2 &#10142;](../1_radio_science/1_2_electromagnetic_radiation_and_astronomical_quantities.myst) and [$\S$ 4.4 &#10142;](4_4_the_visibility_function.myst) for definitions). The $\frac{1}{2}$ comes from the fact that, usually, only one polarization is measured by an antenna.
 
 therefore,
 $$C_{\cos}= \langle V_1 V_2 \rangle_t= \langle \int_{\Omega_1} V_{1_\Omega} d \Omega_1 \int_{\Omega_2} V_{2_\Omega} d \Omega_2 \rangle_t$$
@@ -598,7 +598,7 @@ $$\underline{C}= \Delta \nu e^{-\imath 2\pi \frac{\mathbf{b}\cdot\mathbf{s_0}}{\
 
 +++
 
-The trick is now to determine the amplitude $|V|$ and phase $\phi_V$ of the visibility (i.e. **physical quantities**) from the  of the **measured visibility**. This is a **calibration** problem: we seek to go from *measured qantities* to *physical quantities*. In interferometry, we calibrate by comparing our measurement to a predefined model of the sky. The example given here is a simplified version of the more general framework, which will be introduced in [$\S$ 8 &#10142;](../8_Calibration/8_0_introduction.ipynb) and in the references therein.
+The trick is now to determine the amplitude $|V|$ and phase $\phi_V$ of the visibility (i.e. **physical quantities**) from the  of the **measured visibility**. This is a **calibration** problem: we seek to go from *measured qantities* to *physical quantities*. In interferometry, we calibrate by comparing our measurement to a predefined model of the sky. The example given here is a simplified version of the more general framework, which will be introduced in [$\S$ 8 &#10142;](../8_Calibration/8_0_introduction.myst) and in the references therein.
 
 +++
 
@@ -608,7 +608,7 @@ The trick is now to determine the amplitude $|V|$ and phase $\phi_V$ of the visi
 
 Measuring a correlation over a finite bandwidth $\Delta\nu$ will introduce a *decorrelation* of the two signals because of dependence in $\nu$ of the fringe term $e^{-\imath 2 \pi \frac{\mathbf{b}\cdot \boldsymbol{\sigma}}{\lambda}}$. Indeed, due to the superposition of various wavelengths which will destroy the interferences, we will lose the temporal coherency. This will have an effect of tempering the contrast of the fringe pattern and therefore reduce the amplitude of the correlation.
 
-In other words, because we are sampling a *finite segment* of the bandwidth rather than *the full frequency spectrum* of our EM-wave, we will experience similar boundary problems as those described in the Fourier series section of [$\S$ 4.1 &#10142;](4_1_periodic_functions_and_fourier_analysis.ipynb).
+In other words, because we are sampling a *finite segment* of the bandwidth rather than *the full frequency spectrum* of our EM-wave, we will experience similar boundary problems as those described in the Fourier series section of [$\S$ 4.1 &#10142;](4_1_periodic_functions_and_fourier_analysis.myst).
 
 Let us investigate the impact of *decorrelation* on the fringe pattern, and how to account for it.
 
@@ -689,7 +689,7 @@ Using *fringe tracking*, we can track a source as it moves on the celestial sphe
 
 In this section, we have discussed the simple case of a 1D 2-element interferometer. From the correlation of the two voltage signals, we created a complex visibility. This is the measured quantity obtained by observing the sky through a spatial filter whose characteristics depend on the projected baseline.
 
-In the next section, we will continue to work with the complex visibility in a more general scope, by combining the notations defined in [$\S$ 4.2 &#10142;](4_2_the_baseline_and_its_representation_in_space.ipynb) with the notions defined in the present section.
+In the next section, we will continue to work with the complex visibility in a more general scope, by combining the notations defined in [$\S$ 4.2 &#10142;](4_2_the_baseline_and_its_representation_in_space.myst) with the notions defined in the present section.
 
 We will investigate the physical quantity which can be recovered through the sampling of the complex visibility function.
 
@@ -722,4 +722,4 @@ We will investigate the physical quantity which can be recovered through the sam
 
 ***
  
-* Next: [4.4 The Visibility Function](4_4_the_visibility_function.ipynb)
+* Next: [4.4 The Visibility Function](4_4_the_visibility_function.myst)

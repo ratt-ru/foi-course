@@ -13,11 +13,11 @@ kernelspec:
 
 ***
 
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
-* [4. The Visibility space](4_0_introduction.ipynb)
-    * Previous: [4.5.2 UV Coverage](4_5_2_uv_coverage_improving_your_coverage.ipynb)
-    * Next: [4.x Further Reading And References](4_x_further_reading_and_references.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [4. The Visibility space](4_0_introduction.myst)
+    * Previous: [4.5.2 UV Coverage](4_5_2_uv_coverage_improving_your_coverage.myst)
+    * Next: [4.x Further Reading And References](4_x_further_reading_and_references.myst)
 
 ***
 
@@ -51,7 +51,7 @@ An interferometer does not measure the sky, but rather its associated visibility
 
 The Van Cittert-Zernike theorem makes the link between sky and visibility function explicit. So far, we have simply **stated** that there was a Fourier relation between what our antennas measure and the sky itself. Our aim is now to show the exact regime in which this is true. 
 
-In [$\S$ 4.6.1 &#10549;](#vis:sec:461), we will start by taking some approximation which will simplify [Eq. 4.4.2 &#10142;](4_4_the_visibility_function.ipynb#vis:eq:442) in [$\S$ 4.4 &#10142;](4_4_the_visibility_function.ipynb).
+In [$\S$ 4.6.1 &#10549;](#vis:sec:461), we will start by taking some approximation which will simplify [Eq. 4.4.2 &#10142;](4_4_the_visibility_function.ipynb#vis:eq:442) in [$\S$ 4.4 &#10142;](4_4_the_visibility_function.myst).
 
 +++
 
@@ -100,7 +100,7 @@ Assuming that the observing region of the sky is small, we will consider that:
 
 <a id="vis:sec:4615"></a> 
 #### 4.6.1.5 Coplanar baselines
-In [Eq. 4.4.2 &#10142;](4_4_the_visibility_function.ipynb#vis:eq:442) in [$\S$ 4.4 &#10142;](4_4_the_visibility_function.ipynb), the exponent factor of the intensity distribution in the expression of the visibility function is $K(l,m)$, defined as:
+In [Eq. 4.4.2 &#10142;](4_4_the_visibility_function.ipynb#vis:eq:442) in [$\S$ 4.4 &#10142;](4_4_the_visibility_function.myst), the exponent factor of the intensity distribution in the expression of the visibility function is $K(l,m)$, defined as:
 
 $$K(l,m)=\exp \left[ {-\imath 2\pi (ul+vm+w(\sqrt{1-l^2-m^2}-1)) }\right]$$
 
@@ -113,7 +113,7 @@ $$K(l,m)=\exp \left[ {-\imath 2\pi (ul+vm) }\right]$$
 
 +++
 
-<b>Note:</b> [$\S$ 4.6.1.4 &#10549;](#vis:sec:4614) and [$\S$ 4.6.1.5 &#10549;](#vis:sec:4615) will be treated thoroughly in [$\S$ 5.5 &#10142;](../5_Imaging/5_5_widefield_effect.ipynb).
+<b>Note:</b> [$\S$ 4.6.1.4 &#10549;](#vis:sec:4614) and [$\S$ 4.6.1.5 &#10549;](#vis:sec:4615) will be treated thoroughly in [$\S$ 5.5 &#10142;](../5_Imaging/5_5_widefield_effect.myst).
 
 +++
 
@@ -131,7 +131,7 @@ The equivalent effect in broadlight interferometry is the disappearance of fring
 <a id="vis:sec:4617"></a> 
 #### 4.6.1.7 Continuous sampling approximation
 
-We assume that our sampling of the complex visibility function is continuous, and that we therefore do not suffer from the sampling effect in the image pace (i.e. we do not experience any effect due to the sampling itself). This effect is a major challenge to deal with, and will be described in more detail in the imaging chapter ([$\S$ 5. &#10142;](../5_Imaging/5_0_introduction.ipynb)).
+We assume that our sampling of the complex visibility function is continuous, and that we therefore do not suffer from the sampling effect in the image pace (i.e. we do not experience any effect due to the sampling itself). This effect is a major challenge to deal with, and will be described in more detail in the imaging chapter ([$\S$ 5. &#10142;](../5_Imaging/5_0_introduction.myst)).
 
 +++
 
@@ -198,7 +198,7 @@ In this form, the complex visibility $V_{12}$ is the Fourier transform of the in
 
 This theorem (and its link with Fraunhofer diffraction in the classical regime) are explained in greater detail in [<cite data-cite='2001isra.book.....T'>Thompson, Moran and Swenson $\S$ 14, p. 594</cite>  &#10548;](http://adsabs.harvard.edu/abs/2001isra.book.....T).
 
-This theorem can also be derived directly from the RIME framework [$\S$ 7.2 &#10142;](../7_Observing_Systems/7_2_rime.ipynb).
+This theorem can also be derived directly from the RIME framework [$\S$ 7.2 &#10142;](../7_Observing_Systems/7_2_rime.myst).
 Bear in mind that we do not sample all the points in the $uv$ plane, and that a lot of information is missing as a consequence. Within the scope of our simplifying assumptions, it is nevertheless possible to recover the intensity distribution $I_{\nu}$ from partial measurements. Indeed, it actually consists of solving an inverse problem. In other words, the need for deconvolution techniques arises because we only have partial information on the full visibility function. <span style="background-color:red">TLG:RC: Rewrite prev paragraph. EB: it looks fine to me?</span>
 
 +++
@@ -209,23 +209,23 @@ Bear in mind that we do not sample all the points in the $uv$ plane, and that a 
 
 Radio interferometry consists of combining cross-correlation of signals measured with individual antennas, converting incoming incoherent EM waves into voltages. In order to make these signals "interfere", we devise a system to combine them in phase. To do so, we introduce the concepts of *baseline*, *projected baseline* and *phase center*. <span style="background-color:red">TLG:RC: Rewrite prev paragraph. EB: do not see how to phrase it more clearly</span> 
 
-We started in [$\S$ 4.2 &#10142;](4_2_the_baseline_and_its_representation_in_space.ipynb), by applying the tools introduced in [$\S$ 3 &#10142;](../3_Positional_Astronomy/3_0_introduction.ipynb) to express the baseline in a convenient astronomical frame of reference, attached to the *celestial sphere*. In [$\S$ 4.3 &#10142;](4_3_the_2-element_interferometer.ipynb), we studied the simple case of a 2-element interferometer, for which we derived the relevant interferometric quantities (*phase center*, *coherence*, *visibility*).
+We started in [$\S$ 4.2 &#10142;](4_2_the_baseline_and_its_representation_in_space.myst), by applying the tools introduced in [$\S$ 3 &#10142;](../3_Positional_Astronomy/3_0_introduction.myst) to express the baseline in a convenient astronomical frame of reference, attached to the *celestial sphere*. In [$\S$ 4.3 &#10142;](4_3_the_2-element_interferometer.myst), we studied the simple case of a 2-element interferometer, for which we derived the relevant interferometric quantities (*phase center*, *coherence*, *visibility*).
 
 <span style="background-color:cyan">TLG:GM: Are terms in glossary.</span> 
  
-In [$\S$ 4.4 &#10142;](4_4_the_visibility_function.ipynb), we extended the 1D case to a 3D definition of the visibility function. To give a physical interpretation of the relevance of the visibility function to study celestial objects, we linked the projected baseline to a spatial filter applied to the sky. With this, we demonstrated that the shape and position of a source could be accurately measured by an interferometer ([$\S$ 4.4.2 &#10142;](4_4_the_visibility_function.ipynb#vis:sec:442)).
+In [$\S$ 4.4 &#10142;](4_4_the_visibility_function.myst), we extended the 1D case to a 3D definition of the visibility function. To give a physical interpretation of the relevance of the visibility function to study celestial objects, we linked the projected baseline to a spatial filter applied to the sky. With this, we demonstrated that the shape and position of a source could be accurately measured by an interferometer ([$\S$ 4.4.2 &#10142;](4_4_the_visibility_function.ipynb#vis:sec:442)).
 
-An interferometer samples the visibility function of the sky in a non-random manner. From the geometry of the interferometer with respect to the observed source, it was possible in [$\S$ 4.5.1 &#10142;](4_5_1_uv_coverage_uv_tracks.ipynb) to derive the actual path taken in the $uv$-space by a physical baseline over the course of an observation: they follow elliptical paths, which can potentially be used to increase the instrument's coverage of the $uv$-plane. The more diversified and numerous the samples in the $uv$ plane, the better our knowledge of the visibility function. In order to improves the $uv$ coverage, [$\S$ 4.5.2 &#10142;](4_5_1_uv_coverage_uv_tracks.ipynb) showed three ways to increase an interferometric instrument's $uv$-coverage.
+An interferometer samples the visibility function of the sky in a non-random manner. From the geometry of the interferometer with respect to the observed source, it was possible in [$\S$ 4.5.1 &#10142;](4_5_1_uv_coverage_uv_tracks.myst) to derive the actual path taken in the $uv$-space by a physical baseline over the course of an observation: they follow elliptical paths, which can potentially be used to increase the instrument's coverage of the $uv$-plane. The more diversified and numerous the samples in the $uv$ plane, the better our knowledge of the visibility function. In order to improves the $uv$ coverage, [$\S$ 4.5.2 &#10142;](4_5_1_uv_coverage_uv_tracks.myst) showed three ways to increase an interferometric instrument's $uv$-coverage.
 
 The collection of $uv$ samples can be used to retrieve an approximation of the sky. Under a series of approximations [$\S$ 4.6.1 &#10549;](#vis:sec:461), the definition of the visibility function can be linked to the intensity distribution through a Fourier transformation [$\S$ 4.6.2 &#10549;](#vis:sec:462).
 
 Having established this relationship, we can use the Van Cittert-Zernike theorem to cast the imaging problem as an *inverse problem*: to recover the sky $\mathcal{I}_\nu$ from an incomplete knowledge of its Fourier Transform, i.e. the sampled visibility function $\mathcal{V}_\nu$.
 
-In [$\S$ 5 &#10142;](../5_Imaging/5_0_introduction.ipynb), we will discuss the principles of imaging with the Fourier Transform. Then, in [$\S$ 6 &#10142;](../6_Deconvolution/6_0_introduction.ipynb), we cover the various techniques used to perform image deconvolution, i.e. solve the inverse problem of imaging by aperture synthesis.
+In [$\S$ 5 &#10142;](../5_Imaging/5_0_introduction.myst), we will discuss the principles of imaging with the Fourier Transform. Then, in [$\S$ 6 &#10142;](../6_Deconvolution/6_0_introduction.myst), we cover the various techniques used to perform image deconvolution, i.e. solve the inverse problem of imaging by aperture synthesis.
 <span style="background-color:cyan">TLG:GM: Are terms in glossary.</span>
 
 +++
 
 ***
 
-* Next: [4.x Further Reading And References](4_x_further_reading_and_references.ipynb)
+* Next: [4.x Further Reading And References](4_x_further_reading_and_references.myst)

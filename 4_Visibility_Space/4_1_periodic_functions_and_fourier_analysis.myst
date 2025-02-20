@@ -13,11 +13,11 @@ kernelspec:
 
 ***
 
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
-* [4. The Visibility Space](4_0_introduction.ipynb)
-    * Previous: [4.0 Introduction](4_0_introduction.ipynb)
-    * Next: [4.2 The Baseline and its Representation in Space](4_2_the_baseline_and_its_representation_in_space.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [4. The Visibility Space](4_0_introduction.myst)
+    * Previous: [4.0 Introduction](4_0_introduction.myst)
+    * Next: [4.2 The Baseline and its Representation in Space](4_2_the_baseline_and_its_representation_in_space.myst)
 
 ***
 
@@ -60,7 +60,7 @@ A short note on nomenclature: in the literature, Fourier space can be referred t
 
 +++
 
-Here, we will provide a very brief reminder of important properties of periodic functions. These should already be covered - and in greater detail - in [$\S$2.2](../2_Mathematical_Groundwork/2_2_important_functions.ipynb). This should therefore not be new material, but things to keep in mind as you read this chapter.
+Here, we will provide a very brief reminder of important properties of periodic functions. These should already be covered - and in greater detail - in [$\S$2.2](../2_Mathematical_Groundwork/2_2_important_functions.myst). This should therefore not be new material, but things to keep in mind as you read this chapter.
 
 +++
 
@@ -134,7 +134,7 @@ For the remainder of this section, we will use both sine and exponential forms o
 
 +++
 
-We will now go over relevant properties of Fourier analysis, again to highlight key concepts to keep in mind when you start delving into the rest of this section. All of this content is described in greater detail in [$\S$2.3](../2_Mathematical_Groundwork/2_3_fourier_series.ipynb).
+We will now go over relevant properties of Fourier analysis, again to highlight key concepts to keep in mind when you start delving into the rest of this section. All of this content is described in greater detail in [$\S$2.3](../2_Mathematical_Groundwork/2_3_fourier_series.myst).
 
 +++
 
@@ -144,7 +144,7 @@ We will now go over relevant properties of Fourier analysis, again to highlight 
 bringing with it some simplicity. Merge your explanation with what is there.</span>
 A key discovery of French mathematician Joseph Fourier was that, within a bounded interval, any integrable function - no matter its shape - could be replicated using a linear combination of sines and cosines. The bounded interval is significant: since we are replicating the original function with periodic functions, the predefined interval will essentially correspond to the maximum period of our sines and cosines.
 
-Note that Fourier series are covered in greater mathematical detail in [$\S$ 2.3. &#10142;](../2_Mathematical_Groundwork/2_3_fourier_series.ipynb). Here, we will try to give a more physical understanding of the operation.
+Note that Fourier series are covered in greater mathematical detail in [$\S$ 2.3. &#10142;](../2_Mathematical_Groundwork/2_3_fourier_series.myst). Here, we will try to give a more physical understanding of the operation.
 
 Consider some arbitrary function (here, $f(x) = (x-0.5)^3+3$):
 
@@ -232,7 +232,7 @@ c_n  &= \frac{1}{x_1-x_0} \int_{x_0}^{x_1} f(t) \cdot e^{-i w_n x}dx
 In the example above, we have taken a *limited time band* and found weights associated with *discrete spatial frequencies*. However, why should we restrict ourselves to *discrete* spatial frequencies? Indeed, with sufficiently large $n_{max}$, we should approach a *continuous* sampling of our function's Fourier coefficients.
 
 By considering our function over its full range (i.e. $[x_0,x_1]\rightarrow[-\infty,\infty]$) and sampling infinitesimally finely in space, we can thus take the complex exponential form of the Fourier series to define the Fourier transform $\tilde{f}$ of a function $f$ defined in 
-Note that Fourier series are covered in greater mathematical detail in [$\S$ 2.4. &#10142;](../2_Mathematical_Groundwork/2_4_the_fourier_transform.ipynb):
+Note that Fourier series are covered in greater mathematical detail in [$\S$ 2.4. &#10142;](../2_Mathematical_Groundwork/2_4_the_fourier_transform.myst):
 
 $\displaystyle \tilde{f}(s) = \int_{-\infty}^{\infty} f(t) e^{-i2\pi t s} dt$
 
@@ -316,7 +316,7 @@ As it happens, a sine (or cosine) in the image plane is equivalent to a **point*
 
 ##### 4.1.2.2.3 Fourier transform of a Dirac delta
 
-Consider the extreme case of a point source sitting in the middle of an otherwise empty image (i.e. only one white pixel on an otherwise black image). This is typically described by using a Dirac delta - as defined in [$\S$ 2.2 &#10142;](../2_Mathematical_Groundwork/2_2_important_functions.ipynb):
+Consider the extreme case of a point source sitting in the middle of an otherwise empty image (i.e. only one white pixel on an otherwise black image). This is typically described by using a Dirac delta - as defined in [$\S$ 2.2 &#10142;](../2_Mathematical_Groundwork/2_2_important_functions.myst):
 
 * Infinitely thin
 
@@ -436,4 +436,4 @@ In other words, the Fourier plane of our image consists of the linear sum of the
 
 ***
 
-* Next: [4.2 The Baseline and its Representation in Space](4_2_the_baseline_and_its_representation_in_space.ipynb)
+* Next: [4.2 The Baseline and its Representation in Space](4_2_the_baseline_and_its_representation_in_space.myst)
