@@ -1,0 +1,243 @@
+---
+jupytext:
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.16.7
+kernelspec:
+  display_name: Python 2
+  language: python
+  name: python2
+---
+
+# PRAC 01
+
++++
+
+## Launch CASA
+To start CASA, open a unix terminal and run the command
+```
+$ casa # casapy will also work
+
+```
+
+This will launch a CASA shell, and a CASA logger. The shell is the environment from which CASA runs and the logger is for logging CASA processes. Bellow is a screenshot of the CASA shell (left) and logger (right)
+
+![CASA shell and logger](figures/launching_casa_ss.png)
+
+
+## CASA Tasks
+CASA processes are organized into tasks and tools. We will only be using CASA tasks in course. 
+
+**NOTE**: Commands that are executed on the command line will be preceeded by the "$" symbol and commands exucted in the casa shell wil be preceeded by the ">" symbol. 
+
++++
+
+## The Measurement Set
+
+Visibility data is generally stored in a format called a *CASA Table*, and a CASA table containing visibility data is called a *Measurement set* (MS/ms). This is a directory (or database) which holds the visibility data and other information related an observation.
+
+You are provided a with an MS from a KAT-7 simulation. Find the MS [here](link to ms). Run `ls` to see the contents fo the MS
+
+```
+$ ls <path to MS>
+ANTENNA/ DATA_DESCRIPTION/ FEED/ FIELD/ FLAG_CMD/ HISTORY/ OBSERVATION/ POINTING/ POLARIZATION/ PROCESSOR/   SORTED_TABLE/ SOURCE/ SPECTRAL_WINDOW/ STATE/ table.dat table.f0 table.f1 table.f2 table.f2_TSM1 table.f3 table.f3_TSM1 table.f4 table.f4_TSM1 table.f5 table.f5_TSM1 table.f6 table.f6_TSM1 table.f7 table.f7_TSM1 table.f8 table.info table.lock
+```
+
+The MS contains sub directories, which are themselves CASA tables. For example,
+```
+$ ls <Path to MS>/ANTENNA  
+table.dat  table.f0  table.info  table.lock
+```
+
+as well *table.\** files which hold the table data. 
+
+In CASA, the `ms` tool is used to interface and manipulate the MS. But before we proceed, lets use the `browsetable` task view the MS in a GUI
+
+```
+> MSName = <Path to MS> # For convinience, assign MS name to vairiable
+> browsetable(MSName)
+```
+
+A window like the one below will pop up
+![CASA shell and logger](figures/browse_table_ms.png)
+
+As can be seen, the MS data is organized into different fields (columns). For example, the *UVW* column holds the *u,v,w* coordinates of all the visbilites, and the *DATA* column has the corresponding data. That is, the *i*th row of *DATA* has the data for the *i*th coordinate of *UVW*. You will learn more about the other MS fields as the course progresses. But for now, lets use the `ms` tool to insert a 10Jy point source at the phase centre of the provided data set.
+
+
+First, register the MS with the `ms` tool.
+```
+> ms.open(MSName, modify=True) # set modify=True because we wish to modify the MS
+```
+
+Then, get the data from the MS
+
+```
+data = ms.getdata("DATA")
+```
+
+The `data` variable now holds the contents of the *DATA* column. Namely, the visibility data. Let us see the structure of this data
+
+```
+> data["data"].shape
+ (4, 1, 60480)
+```
+
+This data set has 60480 visibility points, for the single frequency channel, for each of the 4 polarizations.
+
+
+Now, recall that a point source at the phase centre is a delta function at zero in the image plane, and equavalent to setting all the visibility points to the same constant value. This very simple in python,
+
+```
+> data["data"][...] = 10 + 0j # visibility are complex
+```
+
+Now, we can save this updated data in the MS
+
+```
+> ms.putdata(data)
+```
+
+Once we have finished modifying the MS, we close it. This is very important since the MS can only be modfied by application at a time.
+
+```
+> ms.done()
+```
+
+Next, we learn about CASA tasks. In particular tasks that are used for data inspection and visualization.
+
++++
+
+## CASA Tasks
+
+Tasks utilize a number of tools and accomplish a specific data analysis or calibration goal. To get a list of the tasks run:
+
+`> tasklist`  
+or,
+
+`> taskhelp`  
+
+For a brief summary of the tasks. For more extensive information about any of the task run:
+
+`> help <task name>`
+
+For example, to get help about the `tasklist` task simply run:
+
+`> help tasklist`
+
+![help example](figures/help_tasklist.png)
+
++++
+
+## Task execution
+There are two ways of executing CASA tasks. The first, "interactive", the first is to list the task parameters and set them one by one. And, the second, "non-interactive",  is by executing the tasks as you would any other python function. For example, the *listobs* task gives a summary information about an MS. This task can be executed interactively like this:
+
+Note: Find the MS [here](link to MS). Then assign it to the variable *MSName*
+```
+> MSName = <path to MS>
+```
+
+ * First view the task parameters using the *inp* command  
+
+```
+> inp listobs
+```
+![inp](figures/inp_listobs.png)
+
+
+ * Then set the parameters  
+
+```
+> vis = MSName
+```
+
+ * Execute the task  
+
+```
+> go
+```
+![listobs](figures/list_obs.png)
+
++++
+
+Now, lets go over some data inspection and visualisation tasks. We will use the MS from the previous section (MS1), along with another MS (MS2) which can be found [here](link to MS2). 
+
+
+### plotants
+The `plotants` task plots the antenna layout of the observing instrument in the local coordinate system (east, north, up)
+
+```
+> inp plotants
+> vis = MSName
+> go
+```
+![plotants](figures/antennas.png)
+
+
+### plotuv
+Similarly, the `plotuv` task plots the uv-coverage of the observing instrument
+
+```
+> inp plotants
+> vis = MSName
+> go
+```
+![plotants](figures/uv-coverage_fld0.png)
+
+### plotms
+MS1 has a 10Jy point source at the phase centre, and MS2 has a point source at 30' from the phase centre. We will use the `plotms` task show the phase and amplitude of the of the visibilities as a function of time for both fields.
+
+Launch the the task
+```
+> inp plotms
+> vis = MSName
+> correlation = "xx,yy" # Lets ignore the cross terms (xy, yx) for now
+> go
+```
+
+The `plotms` window will pop up, and we can configure the options to generate the plots we want.
+
+
+|   | MS1 | MS2 |
+|:---:|:-----------------:|:----------------------:|  
+| Amplitude |![plotants](figures/plotms_ampl_centre.png) |![plotants](figures/plotms_off_centre_ampl.png)|  
+| Phase | ![plotants](figures/plotms_phase_centre.png) |![plotants](figures/plotms_off_centre_phase.png)|  
+
+What can you say about these plots?
+
+
+### clean
+The clean task images and deconvolves a visibility dataset. Deconvolution will be covered in a later practical, in this prac we will only focus on imaging.
+
+Note that CASA only images the *CORRECTED_DATA* column, and since our data is in the *DATA* column we will have to move it to *CORRCTED_DATA* so we can image it. 
+
+**Excercise:** Use the `ms` tool to move the data in the *DATA* column ino the *CORRECTED_DATA* column. Do this for MS1 and MS2.
+
+Now we are ready to image the MS
+
+```
+> vis = MSName
+> imagename = "example_image_prac01"
+> imsize = [512, 512] # image size in pixels
+> cell = "30arcsec" # size of each pixel
+> niter = 0 # This parameter will be explained in a later practical
+> field = "0"
+> go
+```
+This is the dirty image. 
+![image](figures/prac01.dirty.png)
+And this is the PSF image
+![image](figures/prac01.psf.png)
+
+Why do these two images appear to be the same?
+
++++
+
+## Exercise
+
+You are provided with a visibility data set ([prac01-exercise.ms](link to MS) ). Write a report sumarising this dataset. Make a plot of the antenna layout of the observing instrument, uv-coverage plots and dirty images of the fields. What can you say about the uv-coverage plots.
+
+```{code-cell} ipython2
+
+```

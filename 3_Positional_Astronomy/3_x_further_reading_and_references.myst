@@ -1,0 +1,75 @@
+---
+jupytext:
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.16.7
+kernelspec:
+  display_name: Python 2
+  language: python
+  name: python2
+---
+
++++ {"deletable": true, "editable": true}
+
+***
+
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [Positional Astronomy](3_0_introduction.myst)  
+    * Previous: [Direction Cosine Coordinates](3_4_direction_cosine_coordinates.myst) 
+    * Next: [Chapter 4: Visibility Space](../4_Visibility_Space/4_0_introduction.myst)
+
+***
+
++++ {"deletable": true, "editable": true}
+
+Import standard modules:
+
+```{code-cell} ipython2
+:deletable: true
+:editable: true
+
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+from IPython.display import HTML 
+HTML('../style/course.css') #apply general CSS
+```
+
+```{code-cell} ipython2
+:deletable: true
+:editable: true
+
+from IPython.display import HTML
+HTML('../style/code_toggle.html')
+```
+
++++ {"deletable": true, "editable": true}
+
+## Further Reading and References
+
++++ {"deletable": true, "editable": true}
+
+<span style="background-color:cyan">KT:CC: Chapter summary really needed.</span>
+We would like to suggest two different further reading avenues. The first is to deepen
+the readers understanding of positional astronomy. For this we recommend reading:
+
+### Positional Astronomy
+
+* [<cite data-cite='Duffett2011'>Practical Astronomy with your calculator or spreadsheet </cite> &#10548;](https://books.google.co.za/books?id=MTGYxQyW998C&dq=astronomy+with+your+calculator+or+spreadsheet) : forms the backbone of this chapter and is the main reference.
+
+The second aim is to get the reader more excited about astronomy in general. We recommend two books to accomplish this:
+
+### General Astronomy
+
+* [<cite data-cite='Seeds2015'>Foundations of Astronomy</cite> &#10548;](https://books.google.co.za/books/about/Foundations_of_Astronomy.html?id=77YwOLGzth8C&redir_esc=y) : a light easy to read introduction to astronomy.
+* [<cite data-cite='Zeilik1998'>Introductory Astronomy and Astrophysics</cite> &#10548;](https://books.google.co.za/books?id=iH7vAAAAMAAJ&q=Introductory+Astronomy+and+Astrophysics) : a more in depth and technical introduction to astronomy. 
+<!--We also highly recommend doing the online course: [Introduction to Astronomy &#10548;](https://www.coursera.org/course/introastro)-->
+
++++ {"deletable": true, "editable": true}
+
+***
+
+Next: [Chapter 4: Visibility Space](../4_Visibility_Space/4_0_introduction.myst)

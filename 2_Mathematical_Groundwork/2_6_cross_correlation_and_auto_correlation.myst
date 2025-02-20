@@ -1,0 +1,148 @@
+---
+jupytext:
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.16.7
+kernelspec:
+  display_name: Python 2
+  language: python
+  name: python2
+---
+
++++ {"deletable": true, "editable": true}
+
+***
+
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [2. Mathematical Groundwork](2_0_introduction.myst)
+    * Previous: [2.5 Convolution](2_5_convolution.myst)
+    * Next: [2.7 Fourier Theorems](2_7_fourier_theorems.myst)
+
+***
+
++++ {"deletable": true, "editable": true}
+
+Import standard modules:
+
+```{code-cell} ipython2
+:deletable: true
+:editable: true
+
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+from IPython.display import HTML 
+HTML('../style/course.css') #apply general CSS
+```
+
++++ {"deletable": true, "editable": true}
+
+Import section specific modules:
+
+```{code-cell} ipython2
+:deletable: true
+:editable: true
+
+pass
+```
+
++++ {"deletable": true, "editable": true}
+
+6. [Cross-correlation and Auto-correlation](2_6_cross_correlation_and_auto_correlation.myst)
+    1. [Cross-correlation](#math:sec:cross_correlation)
+    2. [Auto-correlation](#math:sec:auto_correlation)
+
++++ {"deletable": true, "editable": true}
+
+## 2.6. Cross-correlation and Auto-correlation<a id='math:sec:cross_correlation_and_auto_correlation'></a>
+Auto- and cross-correlation are less frequently used than the Fourier transform and convolution are. Nevertheless, they are important in interferometry. We therefore give a brief introduction here.
+
++++ {"deletable": true, "editable": true}
+
+### 2.6.1. Cross-correlation<a id='math:sec:cross_correlation'></a>
+
++++ {"deletable": true, "editable": true}
+
+The cross-correlation $\star$ is an operation acting on two complex-valued functions (remember the definition of the convolution $\circ$ in [$\S$ 2.5](2_5_convolution.myst#math:sec:convolution) <!--\ref{math:sec:convolution}-->).
+
++++ {"deletable": true, "editable": true}
+
+<a id='math:eq:7_001'></a><!--\label{math:eq:7_001}-->$$
+\star: \left\{f\,|\, f:\mathbb{R}\rightarrow \mathbb{C}\right\}\,\times\, \left\{f\,|\, f:\mathbb{R}\rightarrow \mathbb{C}\right\} \rightarrow \left\{f\,|\, f:\mathbb{R}\rightarrow \mathbb{C}\right\}\\
+\begin{split}
+(f\star g)(x) \,&=\, ({f_-}^*\circ g)(x)\\
+&=\, \int_{-\infty}^{+\infty} f^*(t-x)\,g(t)\,dt\\
+&\underset{t^\prime = t-x}{=}\, \int_{-\infty}^{+\infty} f^*(t^\prime)\,g(t^\prime+x)\,dt^\prime\\
+\end{split}\qquad
+$$
+
++++ {"deletable": true, "editable": true}
+
+with $f_-(x) = f(-x)$. In more than one dimension this reads
+
++++ {"deletable": true, "editable": true}
+
+ <a id='math:eq:7_002'></a><!--\label{math:eq:7_002}-->$$
+\star: \left\{f\,|\, f:\mathbb{R}^n\rightarrow \mathbb{C}\right\}\,\times\, \left\{f\,|\, f:\mathbb{R}^n\rightarrow \mathbb{C}\right\} \rightarrow \left\{f\,|\, f:\mathbb{R}^n\rightarrow \mathbb{C}\right\}\, \quad n \in \mathbb{N} \\
+\begin{align}
+(f\star g)(x_1,\ldots,x_n ) \,&=\, (f\star g)({\bf x})\\
+&=\, ({f_-}^*\circ g)(x)\\
+&=\, \int_{-\infty}^{+\infty} \ldots \int_{-\infty}^{+\infty} f^*(t_1-x_1, \ldots , t_n-x_n)\,g(t_1, \ldots, t_n) \,d^nt\\
+\,&=\, \int_{-\infty}^{+\infty} f^*({\bf t}-{\bf x})\,g({\bf t}) \,d^nt\\
+\,&=\, \int_{-\infty}^{+\infty} f^*({\bf t})\,g({\bf t}+{\bf x}) \,d^nt\\
+\end{align}
+$$
+
++++ {"deletable": true, "editable": true}
+
+It is clear that
+
++++ {"deletable": true, "editable": true}
+
+ <a id='math:eq:7_003'></a><!--\label{math:eq:7_003}-->$$
+\begin{align}
+(f\star g)(x) \,&=\, \int_{-\infty}^{+\infty} f^*(t-x)\,g(t) \,dt\\
+\,&=\, \int_{-\infty}^{+\infty} [f(t-x)\,g^*(t)]^* \,dt\\
+\,&=\, \left(\int_{-\infty}^{+\infty} f(t-x)\,g^*(t) \,dt\right)^*\\
+\,&\underset{t^\prime = t-x}{=}\, \left(\int_{-\infty}^{+\infty} f(t^\prime)\,g^*(t^\prime+x) \,dt^\prime\right)^*\\
+\,&=\, \left(g\star f\right)_-^*\\
+\end{align}
+\qquad
+$$
+
++++ {"deletable": true, "editable": true}
+
+and that the cross-correlation is identical to the convolution if one of the functions $f$ or $g$ is even and real-valued.
+
++++ {"deletable": true, "editable": true}
+
+### 2.6.2. Auto-correlation<a id='math:sec:auto_correlation'></a>
+
++++ {"deletable": true, "editable": true}
+
+The auto-correlation of a complex-valued function is defined as
+
++++ {"deletable": true, "editable": true}
+
+<a id='math:eq:7_004'></a><!--\label{math:eq:7_004}-->$$
+R: \left\{f\,|\, f:\mathbb{R}\rightarrow \mathbb{C}\right\}\,\times\, \left\{f\,|\, f:\mathbb{R}\rightarrow \mathbb{C}\right\} \rightarrow \left\{f\,|\, f:\mathbb{R}\rightarrow \mathbb{C}\right\}\\
+\begin{split}
+R\{f\}(x) \,&=\, (f\star f)(x)\\
+&=\, (f_-^*\circ f)(x)\\
+&=\, \int_{-\infty}^{+\infty} f^*(t-x)\,f(t)\,dt\\
+&\underset{t^\prime = t-x}{=}\, \int_{-\infty}^{+\infty} f^*(t^\prime)\,f(t^\prime+x)\,dt^\prime\\
+\end{split}\qquad \text{.}
+$$
+
++++ {"deletable": true, "editable": true}
+
+It is often easier to measure the auto-correlation of a function than to measure the function itself.
+
++++ {"deletable": true, "editable": true}
+
+***
+
+* Next: [2.7 Fourier Theorems](2_7_fourier_theorems.myst)

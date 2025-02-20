@@ -1,0 +1,395 @@
+---
+jupytext:
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.16.7
+kernelspec:
+  display_name: Python 3
+  language: python
+  name: python3
+---
+
+# Appendix
+## A.1. Derivation of ENU ($A$,$E$) to equatorial XYZ ($H$,$\delta$)
+
+```{code-cell} ipython3
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+from IPython.display import HTML 
+HTML('../style/course.css') #apply general CSS
+```
+
+We have seen in <a href='../2_Mathematical_Groundwork/2_13_spherical_trigonometry.ipynb'>$\S$ 2.13 &#10142;</a>, three main spherical trigonometry relationships between angles and arcs in a spherical triangle. Applying each of these equations, we will derive the equation A used in <a href='../4_Visibility_Space/4_1_The_Baseline.ipynb'>$\S$ 4.1 &#10142;</a>.
+
+Let's start from Figure 4.1.3, dislayed in <a href='../4_Visibility_Space/4_1_The_Baseline.ipynb'>$\S$ 4.1 &#10142;</a>. We will consider the following spherical triangle **STZ** (as in Figure A1 right).
+From <a href='../2_Mathematical_Groundwork/2_13_spherical_trigonometry.ipynb'>$\S$ 2.13 &#10142;</a>, we have the following relationships:
+
+* The *spherical cosine rule* (Rule i): $\quad \quad \cos b = \cos a \cos c + \sin a \sin c \cos \hat{B}$
+* The *spherical sine rule* (Rule ii): $\quad \quad \; \; \: \sin b \sin \hat{A} = \sin \hat{B} \sin a$
+* The *five part rule* (Rule iii): $\qquad \quad \quad \; \;\sin b \cos \hat{A} = \cos a \sin c - \sin a\cos c\cos \hat{B}$
+
++++
+
+<div class=advice>
+**Note:** Similar relations can be derived under circular permutation between the angles and the arcs.
+</div>
+
++++
+
+<img src='figures/conversion-comp.svg' width=70%>
+
++++
+
+<div align="center">**Figure A1**: Spherical triangle $STZ$ <br>
+(left) Recall from Fig. 4.1.3<br>
+(right) Close-up view to the spherical triangle STZ.<br>
+The notations in red refer to the rule i), ii) and iii)
+</div>
+
++++
+
+The quantity $s$, $t$, and $z$ are the arcs opposite to the vertices **S**, **T** and **Z**. Given the definition of these quantities and classical trigonometric identities, we can already state that:
+
+* $\cos s=\sin L_a$
+
+* $\cos t=\sin \delta$
+    
+* $\cos z=\sin E$
+
+Similarly, the $\sin$ of $s$, $t$ and $z$ also transform into the $\cos$ of $L_a$, $\delta$ and $E$. We will now derive each line of the transform matrix of Eq. x using the spherical trigonometry rules applies to the triangle **STZ**.
+
++++
+
+### A.1.1 Using Rule i)
+
++++
+
+**Left-hand side:** $\cos b=\cos t= \sin \delta$
+
+**Right-hand side:** $\cos a \cos c + \sin a \sin c \cos \hat{B}= \cos z \cos s + \sin z \sin s \cos \mathcal{A} = \sin \mathcal{E} \sin L_a + \cos \mathcal{E} \cos L_a \cos \mathcal{A}$
+
++++
+
+We have our first relationship:
+
++++
+
+$$\sin \delta = \sin \mathcal{E} \sin L_a + \cos \mathcal{E} \cos L_a \cos \mathcal{A}$$
+
++++
+
+### A.1.2 Using Rule ii)
+
++++
+
+**Left-hand side:** $\sin b \sin \hat{A}= \sin t \sin (-H) = - \cos \delta \sin H$
+
+**Right-hand side:** $\sin \hat{B} \sin a =  \sin \mathcal{A} \sin z = \sin \mathcal{A} \cos \mathcal{E}$
+
++++
+
+We have our second relationship:
+
++++
+
+$$- \cos \delta \sin H = \sin \mathcal{A} \cos \mathcal{E}$$
+
++++
+
+### A.1.3 Using Rule iii)
+
++++
+
+**Left-hand side:** $\sin b \cos \hat{A} = \sin t \cos(-H)= \cos \delta \cos{H}$
+
+**Right-hand side:** $\cos a \sin c - \sin a\cos c\cos \hat{B}= \cos z \sin s - \sin z \cos s \cos \mathcal{A} = \sin \mathcal{E} \cos L_a - \cos \mathcal{E} \sin L_a \cos \mathcal{A}$
+
++++
+
+We have our last relationship:
+
++++
+
+$$ \cos\delta \cos{H} =  \sin \mathcal{E} \cos L_a - \cos \mathcal{E} \sin L_a \cos \mathcal{A}$$
+
++++
+
+Rearranging in a matrix form, and *correct* line order, we have:
+
++++
+
+\begin{equation}
+\begin{bmatrix}
+\cos \delta \cos H\\
+\cos \delta \sin H\\
+\sin \delta
+\end{bmatrix}
+=
+\begin{bmatrix}
+\cos L_a \sin \mathcal{E} - \sin L_a \cos \mathcal{E} \cos \mathcal{A}\nonumber\\ 
+\cos \mathcal{E} \sin \mathcal{A} \nonumber\\
+\sin L_a \sin E + \cos L_a \cos \mathcal{E} \cos \mathcal{A}
+\end{bmatrix}
+\end{equation}
+
++++
+
+<div class=advice>
+**Note:** The left hand-side of Eq. is reminiscent of the components of a base vector pointing the direction ($H$,$\delta$) in the Equatorial **XYZ** frame. <br>
+**Note 2:** This is not a coincidence (see chap. [REF])
+</div>
+
++++
+
+---
+
++++
+
+## A.2. Derivation of (l,m,n) to ($\alpha$,$\delta$)
+
++++
+
+### A.2.1 Linking ($l$, $m$, $n$) to ($\alpha$,$\delta$) with spherical trigonometry
+
++++
+
+<img src='figures/conversion2-comp.svg' width=70%>
+
++++
+
+<div align="center">**Figure A2**: Spherical triangle $S_c S Z$  <br>
+(left) Recall from Fig. 3.4.2<br>
+(right) Close-up view to the spherical triangle STZ.<br>
+The notations in red refer to the rule i), ii) and iii)
+</div>
+
++++
+
+Similarly to A.1, we will derive three equations by applying spherical trigonometry identities in the triangle $\text{S}_\text{c} \text{S} \text{Z}$
+
++++
+
+\begin{eqnarray}
+l &=&  \sin \theta \sin \psi\\
+m &=& \sin \theta \cos \psi \\
+n &=& \cos \theta
+\end{eqnarray}
+
+and
+
+$$l^2+m^2+n^2=1$$
+
++++
+
+#### A.2.1.1 Using rule i)
+
++++
+
+**Left-hand side:** $\cos b=\cos \theta = n$
+
+**Right-hand side:** $\cos a \cos c + \sin a \sin c \cos \hat{B}= \cos (\frac{\pi}{2}-\delta) \cos (\frac{\pi}{2}-\delta_0) + \sin (\frac{\pi}{2}-\delta) \sin (\frac{\pi}{2}-\delta_0) \cos \Delta \alpha = \sin \delta \sin \delta_0 + \cos \delta \cos \delta_0 \cos \Delta \alpha$
+
++++
+
+We have our first relationship:
+
++++
+
+$$n= \cos \theta = \sin \delta \sin \delta_0 + \cos \delta \cos \delta_0 \cos \Delta \alpha$$
+
++++
+
+#### A.2.1.2 Using rule ii)
+
++++
+
+**Left-hand side:** $\sin b \sin \hat{A}= \sin \theta \sin \psi = l$
+
+**Right-hand side:** $\sin \hat{B} \sin a =  \sin \frac{\pi}{2}-\delta \sin \Delta \alpha = \cos \delta \sin \Delta \alpha$
+
++++
+
+We have our second relationship:
+
++++
+
+$$l = \sin \theta \sin \psi = \cos \delta \sin \Delta \alpha$$
+
++++
+
+#### A.2.1.1 Using rule iii)
+
++++
+
+**Left-hand side:** $\sin b \cos \hat{A} = \sin \theta \cos \psi= m$
+
+**Right-hand side:** $\cos a \sin c - \sin a\cos c\cos \hat{B}= \cos (\frac{\pi}{2} - \delta) \sin (\frac{\pi}{2} - \delta_0) - \sin (\frac{\pi}{2} - \delta) \cos (\frac{\pi}{2} - \delta_0) \cos \Delta \alpha =\sin \delta \cos \delta_0 - \cos \delta \sin \delta_0 \cos \Delta \alpha$
+
++++
+
+We have our third relationship:
+
++++
+
+$$m=\sin \theta \cos \psi = \sin \delta \cos \delta_0 - \cos \delta \sin \delta_0 \cos \Delta \alpha$$
+
++++
+
+Let's summarize the results
+
++++
+
+\begin{eqnarray}
+l = \sin \theta \sin \psi &=&\cos \delta \sin \delta \alpha = (i)\\
+m =\sin \theta \cos \psi &=& \sin \delta \cos \delta_0 - \cos \delta \sin \delta_0 \cos \Delta \alpha = (ii)\\
+n = \cos \theta &=& \sin \delta \sin \delta_0 + \cos \delta \cos \delta_0 \cos \Delta \alpha = (iii)
+\end{eqnarray}
+
++++
+
+### A.2.2 Expressions of ($\alpha$,$\delta$) as function of ($l$, $m$, $n$)
+
++++
+
+From the ($l$, $m$, $n$) coordinates of one source, one can compute back the ($\alpha$,$\delta$) coordinates by combinations of the $(i)$, $(ii)$, $(iii)$ relatioships.
+
++++
+
+$\require{cancel}$
+
+
+\begin{eqnarray}
+\frac{(i)}{(ii)} &\Leftrightarrow& \frac{\cancel{\cos{\delta}} \sin\Delta \alpha}{\cancel{\cos{\delta}} \sin \delta_0 \cos\Delta \alpha} &=& \frac{l}{\sin \delta \cos \delta_0 - m}&\Leftrightarrow& \frac{\tan \Delta \alpha}{\sin\delta_0} = \frac{l}{\sin\delta\cos\delta_0-m}= (i')\\
+\frac{(i)}{(iii)} &\Leftrightarrow& \frac{\cancel{\cos{\delta}} \sin\Delta \alpha}{\cancel{\cos{\delta}} \cos \delta_0 \cos\Delta \alpha} &=& \frac{l}{n-\sin \delta \sin \delta_0} &\Leftrightarrow& \frac{\tan \Delta \alpha}{\cos \delta_0}=\frac{l}{n-\sin\delta\sin\delta_0} = (ii') \\
+\end{eqnarray}
+
++++
+
+$\require{cancel}$
+\begin{eqnarray}
+(i') \sin \delta_0 = (ii') \cos \delta_0 &\Leftrightarrow & \frac{\cancel{l}\sin\delta_0}{\sin\delta\cos\delta_0 -m} = \frac{\cancel{l}\cos\delta_0}{n-\sin\delta\sin\delta_0}  \\
+&\Leftrightarrow& \sin\delta \cos^2\delta_0-m\cos\delta_0 = m\sin\delta_0 - \sin\delta\sin^2\delta_0 \\
+&\Leftrightarrow& \sin\delta \left[ \underbrace{\cos^2 \delta_0 + \sin^2 \delta_0}_{=1} \right] = n\sin\delta_0+m\cos\delta_0 \\
+&\Leftrightarrow& \boxed{\delta = \arcsin (n\sin\delta_0 + m\cos\delta_0)}
+\end{eqnarray}
+
++++
+
+Now, we reinject the expression of $\delta$ into $(i')$ or $(ii')$ which display a $\sin \delta$ term.
+
++++
+
+$\require{cancel}$
+\begin{eqnarray}
+\frac{\tan \Delta \alpha}{\sin\delta_0} &=& \frac{l}{(n\sin\delta_0+m\cos\delta_0)\cos\delta_0-m} \Leftrightarrow \\
+\tan \Delta \alpha &=& \frac{l \bcancel{\sin\delta_0}}{n\bcancel{\sin\delta_0}\cos\delta_0 +m \underbrace{(\cos^2\delta_0-1)}_{\sin^{\bcancel{2}}\delta_0}} \Leftrightarrow \\
+\tan (\alpha - \alpha_0) &=& \frac{l}{n\cos\delta_0 + m\sin\delta_0} \Leftrightarrow \\
+&\Leftrightarrow& \boxed{\alpha = \alpha_0 + \arctan \left[ \frac{l}{n\cos\delta_0 + m\sin\delta_0} \right]}
+\end{eqnarray}
+
++++
+
+### A.3 Expression of the ($u$,$v$) ellipsis: 
+
++++
+
+Starting from the expression of $u$ and $v$.
+
+$\lambda u = X \sin H + Y \cos H$
+
+$\lambda v= -X \sin \delta \cos H + Y \sin\delta\sin H + Z \cos\delta$
+
++++
+
+ \begin{eqnarray}
+v &=&\frac{1}{\lambda} -X \sin \delta \cos H + Y \sin\delta\sin H + Z \cos\delta \\
+\Leftrightarrow  v -\frac{Z}{\lambda} \cos \delta &=& \frac{Y}{\lambda}\sin\delta\sin H -  \frac{X}{\lambda} \sin\delta \cos H \\
+\Leftrightarrow  \frac{v -\frac{Z}{\lambda} \cos \delta}{\sin \delta} &=& \frac{Y}{\lambda}\sin H -  \frac{X}{\lambda}  \cos H \\
+\Leftrightarrow  \left[ \frac{v -\frac{Z}{\lambda} \cos \delta}{\sin \delta} \right]^2 &=& \left[ \frac{Y}{\lambda}\right]^2 \sin^2 H + \left[ \frac{X}{\lambda}\right]^2  \cos^2 H  - \frac{2XY\cos H\sin H}{\lambda^2}\\
+\Leftrightarrow  \left[ \frac{v -\frac{Z}{\lambda} \cos \delta}{\sin \delta} \right]^2 &=& \left[ \frac{Y}{\lambda}\right]^2 + \left[ \frac{X}{\lambda}\right]^2 \underbrace{-\left[ \frac{Y}{\lambda}\right]^2 \cos^2 H - \left[ \frac{X}{\lambda}\right]^2  \sin^2 H  - \frac{2XY\cos H\sin H}{\lambda^2}}_{\left[ \frac{X\sin H}{\lambda} + \frac{Y\cos H}{\lambda}\right]^2=u^2} \\
+\Leftrightarrow  u^2 + \left[ \frac{v -\frac{Z}{\lambda} \cos \delta}{\sin \delta} \right]^2 &=& \left[ \frac{Y}{\lambda} \right]^2 + \left[ \frac{X}{\lambda} \right]^2
+\end{eqnarray}
+
++++
+
+
+$$\frac{u^2}{a^2} + \frac{ \left[ \frac{v -\frac{Z}{\lambda} \cos \delta}{\sin \delta} \right]^2}{a^2} = 1$$
+
++++
+
+## A.4. Expressing the infinitesimal solid angle $d\Omega$ in direction cosine coordinates $(l,m,n)$
+
++++
+
+In [Sec. 2.12 &#10142;](../2_Mathematical_Groundwork/2_12_solid_angle.ipynb) the infinitesimal solid angle $d\Omega$ was defined in terms of polar coordinates. The infinitesimal solid angle $d\Omega$ can also be expressed in direction cosine coordinates by using the Jacobian transformation. First the relationship between $(\theta,\phi)$ and $(l,m)$ must be established. It should be clear from [Fig. A.3(b) &#10549;](#app:fig:relations) <!--\ref{app:fig:relations}--> and [Fig. A.3(c) &#10549;](#app:fig:relations) <!--\ref{app:fig:relations}--> that:
+\begin{eqnarray}
+\phi &=& \tan^{-1}\frac{\rho m}{\rho l} = tan^{-1}\frac{m}{l}=f(l,m)\\
+\theta &=& \sin^{-1}\frac{\rho \sqrt{l^2+m^2}}{\rho} = \sin^{-1} \sqrt{l^2+m^2}=g(l,m).\nonumber 
+\end{eqnarray}    
+
++++
+
+<img src='figures/cosine2.svg' width=70%>
+
++++
+
+<div align="center">**Figure A3**: Relating $(\theta,\phi)$ and $(l,m)$. </div> <a id='app:fig:relations'></a> <!--\label{app:fig:relations}-->
+
++++
+
+Now by the Jacobian transformation $\boldsymbol{J}$:
+\begin{equation}
+d\Omega = \sin \theta d\theta d\phi = \sin(g(l,m)) \left| \boldsymbol{J} \right| dl dm,
+\end{equation}
+where 
+\begin{equation}
+\left|\boldsymbol{J}\right|= \left| \begin{array}{cc}
+\frac{\delta\theta}{\delta l} & \frac{\delta\theta}{\delta m} \\
+\frac{\delta\phi}{\delta l} & \frac{\delta\phi}{\delta m} \end{array} \right|,
+\end{equation}
+and
+\begin{eqnarray}
+\frac{\delta \theta}{\delta l} &=&\frac{l}{\sqrt{1-l^2-m^2}\sqrt{l^2+m^2}},\\
+\frac{\delta \theta}{\delta m} &=& \frac{m}{\sqrt{1-l^2-m^2}\sqrt{l^2+m^2}},\nonumber\\ 
+\frac{\delta \phi}{\delta l} &=& \frac{-\frac{m}{l^2}}{1+\frac{m^2}{l^2}},\nonumber\\
+\frac{\delta \phi}{\delta m} &=& \frac{\frac{1}{l}}{1+\frac{m^2}{l^2}},\nonumber
+\end{eqnarray}
+so that
+\begin{eqnarray}
+\left|\boldsymbol{J}\right| &=& \frac{1}{\sqrt{1-l^2-m^2}\sqrt{l^2+m^2}(1+\frac{m^2}{l^2})}+\frac{\frac{m^2}{l^2}}{\sqrt{1-l^2-m^2}\sqrt{l^2+m^2}(1+\frac{m^2}{l^2})},\\
+&=& \frac{1}{\sqrt{1-l^2-m^2}\sqrt{l^2+m^2}},\nonumber 
+\end{eqnarray} 
+and
+\begin{equation}
+d\Omega = \sin(g(l,m)) \left| \boldsymbol{J} \right| dl dm = \frac{dldm}{\sqrt{1-l^2-m^2}}=\frac{dldm}{n}.
+\end{equation}
+
++++
+
+## A5. Delayed product identities of cosine and sine
+
++++
+
+The delayed product identities of cos and sin are given by:
+\begin{eqnarray}
+\cos(x-y)\cos(x) &=& \frac{1}{2}\cos y + \frac{1}{2}\cos(2x-y)\\
+\sin(x-y)\sin(x) &=& \frac{1}{2}\cos y - \frac{1}{2}\cos(2x-y)\\
+\sin(x-y)\cos(x) &=& -\frac{1}{2}\sin y + \frac{1}{2}\sin(2x-y)\\
+\cos(x-y)\sin(x) &=& \frac{1}{2}\sin y + \frac{1}{2}\sin(2x-y).
+\end{eqnarray}
+
+The delayed product identities are derived from the standard trigonometric identities. 
+We can derive the first identiy as follow:  
+
+\begin{eqnarray}
+\cos(x-y)\cos(x) &=& [\cos x\cos y + \sin x \sin y]\cdot \cos x\\
+&=& \cos^2 x\cos y + \cos x\sin x \sin y\nonumber\\
+&=& \bigg(\frac{1+\cos 2x}{2}\bigg)\cdot \cos y + \frac{\sin 2x \sin y}{2}\nonumber\\
+&=& \frac{1}{2}\cos y + \frac{\cos2x \cos y}{2} + \frac{\sin2x \sin y}{2}\nonumber\\
+&=& \frac{1}{2}\cos (y) + \frac{1}{2}\cos(2x-y).\nonumber
+\end{eqnarray}
+
+The remaining delayed product identities are derived similarly.

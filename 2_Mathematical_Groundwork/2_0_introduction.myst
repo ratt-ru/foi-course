@@ -1,0 +1,144 @@
+---
+jupytext:
+  text_representation:
+    extension: .myst
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.16.7
+kernelspec:
+  display_name: Python 3 (ipykernel)
+  language: python
+  name: python3
+---
+
+***
+
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [2. Mathematical Groundwork](#)  
+    * Next: [2.1 Complex numbers](2_1_complex_numbers.myst)
+
+***
+
++++
+
+# Chapter 2: Mathematical Groundwork<a id='math:sec:intro'></a>
+
++++
+
+Radio interferometry requires a firm mathematical background. Luckily, this background is rather limited and well understandable if we assume some background in calculus and algebra. In this chapter, we give an overview of the mathematical definitions and formulae used throughout this book. Much of the approach taken here is based on the one assumed by Ulrich Klein und J&uuml;rgen Kerp in their Introductory Radio astronomy techniques script at AIfA (Univ. Bonn).
+
+It should be pointed out that learning the mathematics presented here is not in vain, even when interferometry will not turn up again in the reader's career. In any description of measurements and especially digitization all the groundwork presented here will reoccur.
+
++++
+
+#### Chapter Outline
+
++++
+
+1. [Complex Numbers](2_1_complex_numbers.myst)
+    1. [The field of complex numbers](2_1_complex_numbers.myst#math:sec:the_field_of_complex_numbers)
+    2. [Euler's formula](2_1_complex_numbers.myst#math:sec:eulers_formula)
+    3. [Periodic functions and complex numbers](2_2_special_functions.myst#math:sec:periodic_functions_and_complex_numbers)
+2. [Important functions](2_2_important_functions.myst)
+    1. [Gaussian function](2_2_important_functions.myst#math:sec:gaussian_function)
+    2. [Sinc function](2_2_important_functions.myst#math:sec:sync_function)
+    3. [Heaviside function](2_2_important_functions.myst#math:sec:heaviside_function)
+    4. [Dirac delta function](2_2_important_functions.myst#math:sec:dirac_delta_function)
+    5. [Shah function](2_2_important_functions.myst#math:sec:shah_function)
+    6. [Boxcar and rectangle function](2_2_important_functions.myst#math:sec:boxcar_and_rectangle_function)
+3. [Fourier Series](2_3_fourier_series.myst)
+    1. [Definition](2_3_fourier_series.myst#math:sec:fourier_series_definition)
+    2. [Example](2_3_fourier_series.myst#math:sec:fourier_series_example)
+4. [The Fourier Transform](2_4_the_fourier_transform.myst)
+    1. [Definition of the Fourier transform and its inversion](2_4_the_fourier_transform.myst#math:sec:definition_of_the_fourier_transform)
+    2. [Fourier transform of the Gaussian](2_4_the_fourier_transform.myst#math:sec:fourier_transform_of_the_gaussian)
+    3. [Fourier transform of Dirac's delta function](2_4_the_fourier_transform.myst#math:sec:fourier_transform_of_diracs_delta_function)
+    4. [Fourier transform of the comb function](2_4_the_fourier_transform.myst#math:sec:fourier_transform_of_the_comb_function)
+    5. [Fourier transform of the rectangle and the sinc function](2_4_the_fourier_transform.myst#math:sec:fourier_transform_of_the_rectangle_and_the_sinc_function)
+    6. [Fourier transforms of real valued and hermetian functions](2_4_the_fourier_transform.myst#math:sec:fourier_transforms_of_real_valued_and_hermetian_functions)
+    7. [Fourier transforms of complex conjugate functions](2_4_the_fourier_transform.myst#math:sec:fourier_transforms_of_complex_conjugate_functions)
+5. [Convolution](2_5_convolution.myst)
+    1. [Definition of the convolution](2_5_convolution.myst#math:sec:definition_of_the_convolution)
+    2. [Properties of the convolution](2_5_convolution.myst#math:sec:properties_of_the_convolution)
+    3. [Convolution examples](2_5_convolution.myst#math:sec:convolution_examples)
+6. [Cross-correlation and Auto-correlation](2_6_cross_correlation_and_auto_correlation.myst)
+    1. [Cross-correlation](2_6_cross_correlation_and_auto_correlation.myst#math:sec:cross_correlation)
+    2. [Auto-correlation](2_6_cross_correlation_and_auto_correlation.myst#math:sec:auto_correlation)
+7. [Fourier Theorems](2_7_fourier_theorems.myst)
+    1. [Linearity of the Fourier transform](2_7_fourier_theorems.myst#math:sec:linearity_of_the_fourier_transform)
+    2. [Similarity theorem](2_7_fourier_theorems.myst#math:sec:similarity_theorem)
+    3. [Shift theorem](2_7_fourier_theorems.myst#math:sec:shift_theorem)
+    4. [Convolution theorem](2_7_fourier_theorems.myst#math:sec:convolution_theorem)
+    5. [Modulation theorem](2_7_fourier_theorems.myst#math:sec:modulation_theorem)
+    6. [Power theorem](2_7_fourier_theorems.myst#math:sec:power_theorem)
+    7. [Rayleigh theorem](2_7_fourier_theorems.myst#math:sec:rayleigh_theorem)
+    8. [Cross-correlation theorem](2_7_fourier_theorems.myst#math:sec:cross_correlation_theorem)
+    9. [Auto-correlation theorem (Wiener-Khinchin theorem)](2_7_fourier_theorems.myst#math:sec:auto_correlation_theorem_wiener_khinchin_theorem)
+    10. [Derivative theorem](2_7_fourier_theorems.myst#math:sec:derivative_theorem)
+8. [The Discrete Fourier transform](2_8_the_discrete_fourier_transform.myst)
+    1. [The Discrete Time Fourier transform (DTFE): definition](2_8_the_discrete_fourier_transform.myst#math:sec:the_discrete_time_fourier_transform_definition)
+    2. [The Discrete Fourier transform (DFT): definition](2_8_the_discrete_fourier_transform.myst#math:sec:the_discrete_fourier_transform_definition)
+    3. [The Discrete convolution: definition and discrete convolution theorem](2_8_the_discrete_fourier_transform.myst#math:sec:the_discrete_convolution_definition_and_discrete_convolution_theorem)
+    4. [Numerically Implementing the DFT](2_8_the_discrete_fourier_transform.myst#math:sec:numerical_DFT)
+    5. [Fast Fourier transforms](2_8_the_discrete_fourier_transform.myst#math:sec:fast_fourier_tranforms)
+9. [Sampling theory](2_9_sampling_theory.myst) 
+    1. [Sampling a continuous function](2_9_sampling_theory.myst#math:sec:sampling_continuous_function)
+    2. [Nyquist-Shannon Sampling Theorem](2_9_sampling_theory.myst#math:sec:nyquists_sampling_theorem)
+    3. [Aliasing](2_9_sampling_theory.myst#math:sec:aliasing)
+10. [Linear Algrebra](2_10_linear_algebra.myst)
+    1. [Vectors](2_10_linear_algebra.myst#math:sec:alg_vectors)
+    2. [Matrices](2_10_linear_algebra.myst#math:sec:lin_alg_matrices)
+    3. [Linear Systems](2_10_linear_algebra.myst#math:sec:lin_alg_lin_sys)
+    4. [Convolution and Toeplitz matrices](2_10_linear_algebra.myst#math:lin_alg:conv_toeplitz)
+11. [Least-squares Minimization](2_11_least_squares.myst)
+12. [Solid Angle](2_12_solid_angle.myst)
+13. [Spherical Trigonometry](2_13_spherical_trigonometry.myst)
+14. [Further Reading and References](2_x_further_reading_and_references.myst)
+
++++
+
+#### Chapter Editors
+
+* Landman Bester (2016)
+* Jonathan Kenyon (2016)
+* UA Mbou Sob (2016)
+* Benjamin Hugo (2017)
+
+#### Chapter Contributors
+
+* Landman Bester (2.8, 2.9)
+* Trienko Grobler (2.10, 2.12, 2.13)
+* Gyula Jozsa (2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9)
+* Jonathan Kenyon (2.11)
+
+#### Format status:
+
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : LF: 7 February 2017
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : NC: 10 February 2017
+* <span style="background-color:yellow">&nbsp;&nbsp;&nbsp;&nbsp;</span> : RF: 10 February 2017
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : HF: 10 February 2017
+* <span style="background-color:yellow">&nbsp;&nbsp;&nbsp;&nbsp;</span> : GM: 10 February 2017
+* <span style="background-color:red">&nbsp;&nbsp;&nbsp;&nbsp;</span> : CC: 10 February 2017 (missing conclusion)
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : CL: 10 February 2017
+* <span style="background-color:yellow">&nbsp;&nbsp;&nbsp;&nbsp;</span> : ST: 10 February 2017 styling sparcely used, but used correctly
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : FN: 10 February 2017
+* <span style="background-color:yellow">&nbsp;&nbsp;&nbsp;&nbsp;</span> : TC: 10 February 2017
+* <span style="background-color:red">&nbsp;&nbsp;&nbsp;&nbsp;</span> : SP: Unchecked
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : XX: 10 February 2017
+
+Editors notes:
+Did not edit above 2.10. Please assign another editor.
+
++++
+
+***
+
+Next: [2.1 Complex Numbers](2_1_complex_numbers.myst)
+
++++
+
+<div class=warn><b>Future Additions:</b></div>
+
+* add section on orthogonal functions and basis functions (perhaps in one of the Fourier sections?)
+* add section on log space identities and decibel definitions

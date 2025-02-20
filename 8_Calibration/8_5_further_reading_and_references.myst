@@ -1,0 +1,122 @@
+---
+jupytext:
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.16.7
+kernelspec:
+  display_name: Python 3
+  language: python
+  name: python3
+---
+
+***
+
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [8. Calibration](8_0_introduction.myst)  
+    * Previous: [8.4 3GC Calibration](8_4_3gc.myst)  
+    * Next: [9. Pracrical Advice for Reducing a Data Set and Recognizing Errors](../9_Practical/9_0_introduction.myst)
+
+***
+
++++
+
+Import standard modules:
+
+```{code-cell} ipython3
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+from IPython.display import HTML 
+HTML('../style/course.css') #apply general CSS
+```
+
+Import section specific modules:
+
+```{code-cell} ipython3
+pass
+```
+
+```{code-cell} ipython3
+HTML('../style/code_toggle.html')
+```
+
+## 8.5 Further Reading and References <a id='cal:sec:refs'></a>
+
++++
+
+We summarize all the references and the further reading material which we have already mentioned in a dispersed manner througout the chapter here. We started the chapter by showing that calibration is usually performed by using the Levenberg-Marquedt gradient method in [Sec. 8.1 &#10142;](../8_Calibration/8_1_Calibration_Least_Squares_Problem.myst). The relevant references and further reading material for [Sec. 8.1 &#10142;](../8_Calibration/8_1_Calibration_Least_Squares_Problem.myst) is given in the following summary block:
+
+**Calibration as a least squares problem**
+
+* [<cite data-cite='Yatawatta2012'>GPU accelerated nonlinear optimization in radio interferometric calibration</cite> &#10548;](http://ieeexplore.ieee.org/xpl/freeabs_all.jsp?arnumber=6339610&abstractAccess=no&userType=inst)
+* [<cite data-cite='Smirnov2015'>Radio interferometric gain calibration as a complex optimization problem</cite> &#10548;](http://arxiv.org/abs/1502.06974)
+
+In [Sec. 8.2 &#10142;](../8_Calibration/8_2_1GC.myst) we discussed 1GC calibration, which is when we use the calibration solutions we obtained from a calibrator observation to correct our target field observation. The relevant external material associated with this section can be found in the following summary block:
+
+**1GC**
+
+* [<cite data-cite='Thompson2008'>Interferometry and synthesis in radio astronomy</cite> &#10548;](https://books.google.co.za/books?hl=en&lr=&id=S99Z7kNBYzAC&oi=fnd&pg=PP2&dq=Interferometry+synthesis+and+radio+astronomy&ots=mGUC2Fe6nr&sig=1g43eD2Q0wKO9ATN8a8T4a1_xGk#v=onepage&q=Interferometry%20synthesis%20and%20radio%20astronomy&f=false)<br>
+* [<cite data-cite='Taylor1999'>Synthesis imaging in radio astronomy II</cite> &#10548;](http://adsabs.harvard.edu/abs/1999sira.conf.....T)
+
+We then described the method of self-calibration (2GC calibration) in [Sec. 8.3 &#10142;](../8_Calibration/8_3_2GC.myst), which entails using the field that we are observing to also calibrate the observation. Some of the most important articles that pertain to 2GC calibration can be found below:
+
+**2GC**
+
+* [<cite data-cite='Jennison1958'>A phase sensitive interferometer technique for the measurement of the Fourier transforms of spatial brightness distributions of small angular extent</cite> &#10548;](http://mnras.oxfordjournals.org/content/118/3/276.short)
+* [<cite data-cite='Smith1952'>The measurement of the angular diameter of radio stars</cite> &#10548;](http://iopscience.iop.org/article/10.1088/0370-1301/65/12/309/meta;jsessionid=9DF36DAB88B75643A607FA921E11CC4A.c2.iopscience.cld.iop.org)
+* [<cite data-cite='Readhead1978'>The mapping of compact radio sources from VLBI data</cite> &#10548;](http://adsabs.harvard.edu/full/1978ApJ...223...25R)
+* [<cite data-cite='Schwab1980'>Adaptive calibration of radio interferometer data</cite> &#10548;](http://proceedings.spiedigitallibrary.org/proceeding.aspx?articleid=1229965)
+* [<cite data-cite='Cornwill1981'>A new method for making maps with unstable radio interferometers</cite> &#10548;](http://mnras.oxfordjournals.org/content/196/4/1067.short)
+* [<cite data-cite='Ekers1984'>The almost serendipitous discovery of self-calibration</cite> &#10548;](http://adsabs.harvard.edu/abs/1984sdra.conf..154E)
+* [<cite data-cite='Pearson1984'>Image formation by self-calibration in radio astronomy</cite> &#10548;](http://adsabs.harvard.edu/full/1984ARA%26A..22...97P)
+
+We ended the chapter by briefly looking at 3GC calibration (see [Sec 8.4 &#10142;](../8_Calibration/8_3_3GC.myst)). In wide-field observations we can no longer afford to ignore direction dependent effects, i.e. effects like pointing error. The 3GC calibration algorithms can in general be divided into physics-based and heuristic approaches (depending on whether a physical model that can accurately describe the direction dependent effect exists or not). The approaches belonging to these two broad categories are summarized below:
+
+**3GC: Physics-based approaches**
+
+* *Pointing-selfcal*: <span style="background-color:red">GSF:LF: dead link:
+[<cite data-cite='Bhatnagar2004'>EVLA Memo 84. Solving for the antenna based pointing errors</cite> &#10548;](www.aoc.nrao.edu/evla/geninfo/memoseries/evlamemo84.ps)</span>
+* *Kalman filter*: [<cite data-cite='Tasse2014'>Nonlinear Kalman filters for calibration in radio interferometry</cite> &#10548;](http://arxiv.org/abs/1403.6308)
+* *Primary beam*: [<cite data-cite='Mitra2015'>Incorporation of antenna primary beam patterns in radio-interferometric data reduction to produce wide-field, high-dynamic-range images</cite> &#10548;](http://ieeexplore.ieee.org/Xplore/defdeny.jsp?url=http%3A%2F%2Fieeexplore.ieee.org%2Fstamp%2Fstamp.jsp%3Ftp%3D%26arnumber%3D7297163%26userType%3Dinst&denyReason=-134&arnumber=7297163&productsMatched=null&userType=inst)
+
+**3GC: Heuristic-only approaches**
+
+* *Peeling*: [<cite data-cite='Noordam2004'>LOFAR calibration challenges</cite> &#10548;](http://proceedings.spiedigitallibrary.org/proceeding.aspx?articleid=847375)
+* *Differential gains*: [<cite data-cite='Smirnov2011'>Revisiting the radio interferometer measurement equation-II.  Calibration and direction-dependent effects</cite> &#10548;](http://arxiv.org/abs/1101.1765)
+* *Clustered calibration*: [<cite data-cite='Kazemi2013'>Clustered calibration: an improvement to radio interferometric direction-dependent self-calibration</cite> &#10548;](http://arxiv.org/abs/1301.0633)
+
+Correcting for a direction dependent effect is tricky in its own right, some of the approaches that are used to accomplish this is summarized below:
+
+**3GC: Correcting for a known direction dependent effect**
+
+* *Facetting*: [<cite data-cite='Cornwell1992'>Radio-interferometric imaging of very large fields-The problem of non-coplanar arrays</cite> &#10548;](http://adsabs.harvard.edu/abs/1992A%26A...261..353C)
+* *AW-projection*: [<cite data-cite='Batnagar2008'>Correcting direction-dependent gains in the deconvolution of radio interferometric images</cite> &#10548;](http://arxiv.org/abs/0805.0834)
+
+We also briefly mentioned the developments which have been made with regards to the calibration solver itself (see [Sec 8.4 &#10142;](../8_Calibration/8_3_3GC.myst)); some of the most recent developments in this regard can be found below: 
+
+**Solver Development**
+
+* Eigendecomposition: [<cite data-cite='Boonstra2003'>Gain calibration methods for radio telescope arrays</cite> &#10548;](http://ieeexplore.ieee.org/xpl/freeabs_all.jsp?arnumber=1145704&abstractAccess=no&userType=inst)
+* SAGEcal: [<cite data-cite='Kazemi2011'>Radio interferometric calibration using the SAGE algorithm</cite> &#10548;](http://arxiv.org/abs/1012.1722)
+* Robust calibration: [<cite data-cite='Kazemi2013robust'>Robust radio interferometric calibration using the t-distribution</cite> &#10548;](http://arxiv.org/abs/1307.5040)
+* StEFCal: [<cite data-cite='Salvini2014'>Fast gain calibration in radio astronomy using alternating direction implicit methods: Analysis and applications</cite> &#10548;](http://arxiv.org/abs/1410.2101)
+* Riemann-Manifold: [<cite data-cite='Yatawatta2013'>Radio interferometric calibration using a Riemannian manifold</cite> &#10548;](http://arxiv.org/abs/1303.1029)
+* Blind Calibration: [<cite data-cite='Kazemi2015'>Blind calibration for radio interferometry using convex optimization</cite> &#10548;](http://ieeexplore.ieee.org/xpl/freeabs_all.jsp?arnumber=7330285&abstractAccess=no&userType=inst)
+* Complex Optimization: [<cite data-cite='Smirnov2015'>Radio interferometric gain calibration as a complex optimization problem</cite> &#10548;](http://arxiv.org/abs/1502.06974)
+* Kalman filter: [<cite data-cite='Tasse2014'>Nonlinear Kalman filters for calibration in radio interferometry</cite> &#10548;](http://arxiv.org/abs/1403.6308)
+
+Good literature reviews on 3GC can be found in:
+
+**3GC: Literature reviews**
+
+* [<cite data-cite='Smirnov2011'>Revisiting the radio interferometer measurement equation-II.  Calibration and direction-dependent effects</cite> &#10548;](http://arxiv.org/abs/1101.1765)
+* [<cite data-cite='Rau2009'>Advances in calibration and imaging techniques in radio interferometry</cite> &#10548;](http://arxiv.org/abs/0902.0817)
+
++++
+
+***
+
+Next: [9. Practical Advice for Reducing a Data Set and Recognizing Errors](../9_Practical/9_0_introduction.myst)

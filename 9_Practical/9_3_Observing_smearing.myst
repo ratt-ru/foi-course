@@ -1,0 +1,118 @@
+---
+jupytext:
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.16.7
+kernelspec:
+  display_name: Python 2
+  language: python
+  name: python2
+---
+
+***
+
+* [Outline](#)
+    * [9.3 Accumulation interval and smearing](#)  
+        *  [Phase changes as a function of accumulation frequencies](#)
+        *  [Phase changes as a function of accumulation times](#)
+        *  [Phase changes as a function of baseline length](#)
+        *  [Phase changes as a function of distance from the phase centre](#)
+        *  [Observation](#)  
+* [Glossary](*)
+  
+* Previous: [9.2. Calibration ](*)
+* Next: [9.4. Line observations: calibration and imaging issues](*)
+***
+
++++
+
+In this section, we explore smearing and the requirements to avoid time and bandwidth smearing.
+Some practical examples with the JVLA radio interferometer are given. The examples show various  accumulations intervals and thier smearing effects on a source at different sky position.
+
++++
+
+# Time and bandwidth smearing
+
++++
+
+Time and bandwidth smearing also know as averaging, occurs  when visibilities are averaged over non-zero extent  of time and frequency bins (see Bridle and Schwab). This effect happen in the correlator, since the output of a correlator is an average measurement over some time and frequency intervals (accumulations intervals). Also, keep in mind that during data processing these visibilities may be further averaged in other to same computer memory or to reduce computation cost.
+
+One may see smearing as a decrease in the amplitude of off-axis sources. This is undertood as follow: 
+
+The visibility contribution of a point source of flux $S$ located in the direction given by the unit vector $\bf{\sigma}$ is given by
+
+$$
+\begin{equation}
+V = S \exp \big \{  \frac{2\pi i}{\lambda} \bf{u}\cdot(\bf{\sigma}-\bf{\sigma}_0) \big \},
+\end{equation}
+$$
+
+where $\bf{u}$ is the baseline vector, and $\bf{\sigma}_0$ is the phase centre (or fringe stopping centre) of the observation. The phase term $\Delta \Phi = \frac{2\pi}{\lambda} \bf{u}\cdot(\bf{\sigma}-\bf{\sigma}_0)$ rotates as a function of:
+
+1. Frequency due to the inverse scaling with $\lambda$.
+2. Time due to the fact that $\bf{u}$ changes with time, at least in an Earth or orbit-based interferometer i.e $\bf{u}=\bf{u}(t)$, where $t$ is the integration time.
+
+Taking a vector average over a time/frequency bin then results  in a net loss of amplitude.
+
++++
+
+###Phase changes as a function of accumulation frequency
+
++++
+
+Knowing that $c=\lambda \nu$ with $\nu$ the initial frequency of the observation, we can expressed the phase changing in frequency as $\Delta \Phi_{\nu} = \frac{2\pi}{c}(\nu+\Delta \nu)~ \bf{u}\cdot(\bf{\sigma}-\bf{\sigma}_0)$, where $\Delta \nu$ is the frequency step or accumulation frequency. This will result in a high frange speed for larger $\Delta \nu$ given that the term $\nu+\Delta \nu$ increases linearly with $\Delta \nu$.
+
++++
+
+### Phase changes as a function of accumulation times
+
++++
+
+The baseline vector $\bf{u}=\bf{u}(t)$ is a function of time. 
+Supose that the visibilities for a set of integration times $t_1$, $\cdots$ $t_n$ were average 
+together and the result is the single point visibility $V$. 
+
+The phase changing in time is given by 
+$\Delta \Phi_{t} = \frac{2\pi}{\lambda} \bf{u}^{a}\cdot(\bf{\sigma}-\bf{\sigma}_0)$,
+where $\bf{u}^{a}$ is the averaged baseline vector for the set  of vectors $\bf{u}(t_1) \cdots \bf{u}(t_n)$. Any increase in $\Delta t=(t_n-t_1)$ result in net loss of amplitude.
+
+Smearing  also increases  with baseline length and distance from the phase centre.
+
++++
+
+### Phase changes as a function of baseline length
+
++++
+
+For larger norm of $\bf{u}_{pq}$ i.e the baseline length, the larger
+the phase and thus the amplitude $S$ is severely attenuated by the exponentiel term i.e 
+the frange $\exp \big \{ i\Phi\}$.
+
++++
+
+ ### Phase changes as a function of distance from the phase centre
+
++++
+
+The fringes for sources far from the observatry pointing direction rotates rapidely
+in the visibility domain and therefore can only lead to a decrease in amplitude. 
+This is understood as: the larger the source radius $||\bf{\sigma}-\bf{\sigma}_0||$, from the pointing direction,
+the larger the phase and thus amplitude descrease.
+
++++
+
+Besides reducing apparent source flux $S$, smearing also distorts the PSF, since different baselines   are attenuated differently.
+
++++
+
+# Observation
+
++++
+
+The following example are produced by simulating a series of high time-frequency resolution observation and applying averaging to see the effets of time/bandwidth smearing on a 1Jy source move from the phase centre.
+
+Our example uses the JVLA telescope observing at $1.4GHz$ with accumulation times 10 s, 50 s, 100 s and channel bandwidth of 125 KHz, 1250 KHz, 6250 KHz.
+<img src="timeSmearing.png">
+<img src="bandwidthSmearing.png">

@@ -1,0 +1,247 @@
+---
+jupytext:
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.16.7
+kernelspec:
+  display_name: Python 2
+  language: python
+  name: python2
+---
+
++++ {"deletable": true, "editable": true}
+
+***
+
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [Positional Astronomy](3_0_introduction.myst)
+    * Previous: [Horizontal Coordinates](3_3_horizontal_coordinates.myst)
+    * Next: [Further Reading](3_x_further_reading_and_references.myst) 
+
+***
+
++++ {"deletable": true, "editable": true}
+
+Import standard modules:
+
+```{code-cell} ipython2
+:deletable: true
+:editable: true
+
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+from IPython.display import HTML 
+HTML('../style/course.css') #apply general CSS
+```
+
++++ {"deletable": true, "editable": true}
+
+Import section specific modules:
+
+```{code-cell} ipython2
+:deletable: true
+:editable: true
+
+from IPython.display import HTML
+HTML('../style/code_toggle.html')
+```
+
++++ {"deletable": true, "editable": true}
+
+## Direction Cosine Coordinates
+
++++ {"deletable": true, "editable": true}
+
+There is another useful astronomical coordinate system that we ought to introduce at this juncture, namely the *direction cosine coordinate system*. The direction cosine coordinate system is quite powerful and allows us to redefine the fundamental reference point on the celestial sphere, from which we measure all other celestial objects, to an arbitrary location (i.e. we can make local sky-maps around our own chosen reference point; the vernal equinox need not be our fundamental reference point). Usually this arbitrary location is chosen to be the celestial source that we are interested in observing. We generally refer to this arbitrary location as the *field centre* or *phase centre*.
+
+<div class=advice>
+<b>Note:</b> The direction cosine coordinate system is useful for another reason, when we use
+it to image interferometric data, then it becomes evident that there exists a Fourier relationship between the sky brightness function and the measurements that an interferometer makes (see <a href='../4_Visibility_Space/4_0_introduction.myst'>Chapter 4 &#10142;</a>).
+</div><br>
+We use three coordinates in the direction cosine coordinate system, namely $l$, $m$ and $n$. The coordinates $l$, $m$ and $n$ are dimensionless direction cosines, i.e.
+
++++ {"deletable": true, "editable": true}
+
+\begin{eqnarray}
+l &=& \cos(\alpha) = \frac{a_1}{|\mathbf{a}|}\\
+m &=& \cos(\beta) = \frac{a_2}{|\mathbf{a}|}\\
+n &=& \cos(\gamma) = \frac{a_3}{|\mathbf{a}|}
+\end{eqnarray}
+
++++ {"deletable": true, "editable": true}
+
+<a id='pos:fig:cosines'></a> <!--\label{pos:fig:cosines}--><img src='figures/cosine.svg' width=35%>
+
++++ {"deletable": true, "editable": true}
+
+*Figure 3.4.1*: Definition of direction cosines. 
+
++++ {"deletable": true, "editable": true}
+
+The quantities $\alpha$, $\beta$, $\gamma$, $a_1$, $a_2$, $a_3$ and $\mathbf{a}$ are all defined in <a class='pos_fig_cos_dir'></a> <!--\ref{pos:fig:cos}-->. Moreover, $|\cdot|$ denotes the magnitude of its operand. The definitions above also imply that $l^2+m^2+n^2 = 1$. When $|\mathbf{a}|=1$ then we may simply interpret $l$, $m$ and $n$ as   Cartesian coordinates, i.e. we may simply relabel the axes $x$, $y$ and $z$ (in <a class='pos_fig_cos_dir'></a><!--\ref{pos:fig:cos}-->) to 
+$l$, $m$ and $n$. 
+
++++ {"deletable": true, "editable": true}
+
+So the question now arises, how do we use $l$, $m$ and $n$ to uniquely identify a location on the celestial sphere? The direction cosine coordinate system (and the relationship between it and the celestial coordinate sytem) is depicted in <a class='pos_fig_dirconversion_dir'></a><!--\ref{pos:fig:dirconversion}-->. Note that the $n$-axis points toward the field center (which is denoted by $\boldsymbol{s}_c$ in <a class='pos_fig_dirconversion_dir'></a><!--\ref{pos:fig:dirconversion}-->. It should be clear from <a class='pos_fig_dirconversion_dir'></a><!--\ref{pos:fig:dirconversion}--> that we can use $\mathbf{s} = (l,m,n)$ to uniquely idnetify any location on the celestial sphere.
+
++++ {"deletable": true, "editable": true}
+
+<a id='pos:fig:convert_lmn_ra_dec'></a> <!--\label{pos:fig:convert_lmn_ra_dec}--><img src='figures/conversion2.svg' width=40%>
+
++++ {"deletable": true, "editable": true}
+
+*Figure 3.4.2*: The source-celestial pole-field center triangle; which enables us to derive the conversion equations between direction cosine and equatorial coordinates. The red plane represents the fundamental plane of the equatorial coordinate system, while the blue plane represents the fundamental plane of the direction cosine coordinate system. We are able to label the orthogonal fundamental axes of the direction cosine coordinate system $l$,$m$ and $n$, since the radius of the celestial sphere is equal to one.
+
++++ {"deletable": true, "editable": true}
+
+We use the following equations to convert between the equatorial and direction cosine coordinate systems: 
+
++++ {"deletable": true, "editable": true}
+
+<p class=conclusion>
+  <font size=4><b>Converting between the equatorial and direction cosine coordinates (3.1)</b></font>
+  <br>
+  <br>
+\begin{eqnarray}
+l &=&  \sin \theta \sin \psi = \cos \delta  \sin \Delta \alpha \nonumber\\
+m &=& \sin \theta \cos \psi = \sin \delta \cos \delta_0 - \cos \delta \sin \delta_0 \cos\Delta \alpha \nonumber\\
+\delta &=& \sin^{-1}(m\cos \delta_0 + \sin \delta_0\sqrt{1-l^2-m^2})\nonumber\\
+\alpha &=& \alpha_0 + \tan^{-1}\bigg(\frac{l}{\cos\delta_0\sqrt{1-l^2-m^2}-m\sin\delta_0}\bigg)\nonumber
+\end{eqnarray}
+</p>
+**<a id='pos_eq_convertlmnradec'></a><!--\label{pos:eq:convertlmnradec}-->**
+
++++ {"deletable": true, "editable": true}
+
+<div class=advice>
+<b>Note:</b> See <a href='../0_Introduction/2_Appendix.myst'>Appendix &#10142;</a> for the derivation of the above relations.
+</div>
+
++++ {"deletable": true, "editable": true}
+
+We can obtain the conversion relations above by applying the spherical trigonemetric identities in <a href='../2_Mathematical_Groundwork/2_13_spherical_trigonometry.myst'>$\S$ 2.13 &#10142;</a> to the triangle depicted in <a class='pos_fig_dirconversion_dir'></a><!--\ref{pos:fig:dirconversion}--> (the one formed by the source the field center and the NCP).
+
++++ {"deletable": true, "editable": true}
+
+There is another important interpretation of direction cosine coordinates we should
+be cognisant of. If we project the direction cosine position vector $\mathbf{s}$ of a celestial body onto the $lm$-plane it's projected length will be equal to $\sin \theta$, where $\theta$ is the angular distance between your field center $\mathbf{s}_c$ and $\mathbf{s}$ measured along the surface of the celestial sphere. If $\theta$ is small we may use the small angle approximation, i.e. $\sin \theta \approx \theta$. The projected length of $\mathbf{s}$ is also equal to $\sqrt{l^2+m^2}$, implying that $l^2+m^2 \approx \theta^2$. We may therefore loosely interpret $\sqrt{l^2+m^2}$ as the angular distance measured between the source at $\mathbf{s}$ and the field-center $\mathbf{s}_c$ measured along the surface of the celestial sphere, i.e. we may measure $l$ and $m$ in $^{\circ}$. 
+The explenation above is graphically illustrated in <a class='pos_fig_proj_dir'></a> <!--\ref{pos:fig:proj}-->. 
+
++++ {"deletable": true, "editable": true}
+
+<a id='pos:fig:understand_lm'></a> <!--\label{pos:fig:understand_lm}--><img src='figures/conversion2b.svg' width=40%>
+
++++ {"deletable": true, "editable": true}
+
+*Figure 3.4.3*: Why do we measure $l$ and $m$ in degrees? 
+
++++ {"deletable": true, "editable": true}
+
+<p class=conclusion>
+  <font size=4><b>Three interpretations of direction cosine coordinates</b></font>
+  <br>
+  <br>
+&bull; **Direction cosines**: $l$,$m$ and $n$ are direction cosines<br><br>
+&bull; **Cartesian coordinates**: $l$,$m$ and $n$ are Cartesian coordinates if we work on the 
+    unit sphere<br><br> 
+&bull; <b>Angular distance</b>: $\sqrt{l^2+m^2}$ denotes the angular distance $\theta$, $(l,m,n)$ is from the field center (if $\theta$ is sufficiently small).
+</p>
+
++++ {"deletable": true, "editable": true}
+
+### Example
+
++++ {"deletable": true, "editable": true}
+
+Here we have a couple of sources given in RA ($\alpha$) and DEC ($\delta$):
+* Source 1: (5h 32m 0.4s,60$^{\circ}$17' 57'') - 1Jy
+* Source 2: (5h 36m 12.8s,61$^{\circ}$ 12' 6.9'') - 0.5Jy
+* Source 3: (5h 40m 45.5s,61$^{\circ}$ 56' 34'') - 0.2Jy
+
+The field center is located at $(\alpha_0,\delta_0) = $ (5h 30m,60$^{\circ}$). The first step is to convert right ascension and declination into radians with
+
++++ {"deletable": true, "editable": true}
+
+\begin{eqnarray}
+\alpha_{\textrm{rad}} &=& \frac{\pi}{12} \bigg(h + \frac{m}{60} + \frac{s}{3600}\bigg)\\
+\delta_{\textrm{rad}} &=& \frac{\pi}{180} \bigg(d + \frac{m_{\textrm{arcmin}}}{60}+\frac{s_{\textrm{arcsec}}}{3600}\bigg)
+\end{eqnarray}
+
++++ {"deletable": true, "editable": true}
+
+In the above equations $h,~m,~s,~d,~m_{\textrm{arcmin}}$ and $s_{\textrm{arcsec}}$ respectively denote hours, minutes, seconds, degrees, arcminutes and arcseconds. If we apply the above to our three sources we obtain
+
+```{code-cell} ipython2
+:deletable: true
+:editable: true
+
+RA_rad = (np.pi/12) * np.array([5. + 30./60, 5 + 32./60 + 0.4/3600, 5 + 36./60 + 12.8/3600, 5 + 40./60 + 45.5/3600])
+DEC_rad = (np.pi/180)*np.array([60., 60. + 17.0/60 + 57./3600, 61. + 12./60 + 6.9/3600, 61 + 56./60 + 34./3600])
+Flux_sources_labels = np.array(["", "1 Jy", "0.5 Jy", "0.2 Jy"])
+Flux_sources = np.array([1., 0.5, 0.1]) #in Janskys
+print "RA (rad) of Sources and Field Center = ", RA_rad
+print "DEC (rad) of Sources = ", DEC_rad
+```
+
++++ {"deletable": true, "editable": true}
+
+Recall that we can use <a class='pos_eq_convertlmnradec_dir'></a><!--\label{pos:eq:convertlmnradec}--> to convert between equatorial and direction cosine coordinates, in terms of the current example this translates into the python code below. Note that before we can do the conversion we first need to calculate $\Delta \alpha$.
+
+```{code-cell} ipython2
+:deletable: true
+:editable: true
+
+RA_delta_rad = RA_rad-RA_rad[0] #calculating delta alpha
+
+l = np.cos(DEC_rad) * np.sin(RA_delta_rad)
+m = (np.sin(DEC_rad) * np.cos(DEC_rad[0]) - np.cos(DEC_rad) * np.sin(DEC_rad[0]) * np.cos(RA_delta_rad))
+print "l (degrees) = ", l*(180./np.pi)
+print "m (degrees) = ", m*(180./np.pi)
+```
+
++++ {"deletable": true, "editable": true}
+
+Plotting the result.
+
+```{code-cell} ipython2
+:deletable: true
+:editable: true
+
+fig = plt.figure()
+ax = fig.add_subplot(111)
+plt.xlim([-4., 4.])
+plt.ylim([-4., 4.])
+plt.xlabel("$l$ [degrees]")
+plt.ylabel("$m$ [degrees]")
+plt.plot(l[0], m[0], "bx")
+plt.hold("on")
+plt.plot(l[1:]*(180/np.pi), m[1:]*(180/np.pi), "ro")
+counter = 1
+for xy in zip(l[1:]*(180/np.pi)+0.25, m[1:]*(180/np.pi)+0.25):                                              
+    ax.annotate(Flux_sources_labels[counter], xy=xy, textcoords='offset points',horizontalalignment='right',
+                verticalalignment='bottom')  
+    counter = counter + 1
+
+plt.grid()
+```
+
++++ {"deletable": true, "editable": true}
+
+*Figure 3.4.4*: 
+
++++ {"deletable": true, "editable": true}
+
+***
+
+Next: [Further Reading](3_x_further_reading_and_references.myst)
+
++++ {"deletable": true, "editable": true}
+
+<div class=warn><b>Future Additions:</b></div>
+
+* figure: projection plot similar to white book figure 2-9

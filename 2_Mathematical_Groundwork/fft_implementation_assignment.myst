@@ -1,0 +1,260 @@
+---
+jupytext:
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.16.7
+kernelspec:
+  display_name: Python 2
+  language: python
+  name: python2
+---
+
++++ {"deletable": true, "editable": true}
+
+## Implementation of a Radix-2 Fast Fourier Transform
+
++++ {"deletable": true, "editable": true}
+
+Import standard modules:
+
+```{code-cell} ipython2
+:deletable: true
+:editable: true
+
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+from IPython.display import HTML 
+HTML('../style/course.css') #apply general CSS
+
+import cmath
+```
+
++++ {"deletable": true, "editable": true}
+
+This assignment is to implement a python-based Fast Fourier Transform (FFT). Building on [$\S$ 2.8 &#10142;](2_8_the_discrete_fourier_transform.myst) we will implement a 1-D radix-2 Cooley-Tukey-based FFT using decimation in time (DIT) an $N = 2^n$ input function, and then generalize the function to take any input.
+
++++ {"deletable": true, "editable": true}
+
+From [$\S$ 2.8.2 &#10142;](2_8_the_discrete_fourier_transform.myst) the discrete Fourier transform (DFT) is defined as:
+
+$$ \mathscr{F}_{\rm D}\{y\}_k = Y_k =  \sum_{n\,=\,0}^{N-1} y_n\,e^{-\imath 2\pi \frac{nk}{N}}, $$
+
+That is, the $k^{th}$ element of the Fourier transformed spectrum $Y$ is a sum over all $n$ elements of the function $y$, each multipled by a complex twiddle factor $e^{-\imath 2\pi \frac{nk}{N}}$. In [$\S$ 2.8.5 &#10142;](2_8_the_discrete_fourier_transform.myst) two methods for computing the DFT for a size $N = 2^n$ discrete function. A double loop to compute all elements of the Fourier-transformed spectrum, and a matrix multiplication by generating the Fourier kernel $K$. The compute time to perform the DFT is $\mathcal{O}(N^2)$, this is it takes $cN^2$ operations where $c > 1$ is a constant factor. Though as note in [$\S$ 2.8.5 &#10142;](2_8_the_discrete_fourier_transform.myst) the matrix implementation is much fast that the loop because this algorithm takes advantage of fast vector math libraries.
+
+The DFT code is replicated here as it will be used to compare our implementation of the FFT:
+
+```{code-cell} ipython2
+:deletable: true
+:editable: true
+
+def loop_DFT(x):
+    """
+    Implementing the DFT in a double loop
+    Input: x = the vector we want to find the DFT of
+    """
+    #Get the length of the vector (will only work for 1D arrays)
+    N = x.size
+    #Create vector to store result in
+    X = np.zeros(N, dtype=complex)
+    for k in range(N):
+        for n in range(N):
+            X[k] += np.exp(-1j * 2.0* np.pi* k * n / N) * x[n]
+    return X
+
+def matrix_DFT(x):
+    """
+    Implementing the DFT in vectorised form
+    Input: x = the vector we want to find the DFT of
+    """
+    #Get the length of the vector (will only work for 1D arrays)
+    N = x.size
+    #Create vector to store result in
+    n = np.arange(N)
+    k = n.reshape((N,1))
+    K = np.exp(-1j * 2.0 * np.pi * k * n / N)
+    return K.dot(x)
+```
+
++++ {"deletable": true, "editable": true}
+
+In [$\S$ 2.8.6 &#10142;](2_8_the_discrete_fourier_transform.myst) the fast Fourier transform was introduced as using recursion to implement a Fourier transform in $\mathcal{O}(N\log_2N)$ computations, significantly reducing the computational cost of computing the Fourier transform, especially for large $N$. A 'one layer' fast Fourier transform was presented which split the input function into two, and applied the twiddle factor to all values in the layer before calling the matrix-based DFT. This code is replicated below.
+
+```{code-cell} ipython2
+:deletable: true
+:editable: true
+
+def one_layer_FFT(x):
+    """An implementation of the 1D Cooley-Tukey FFT using one layer"""
+    N = x.size
+    if N%2 > 0:
+        print "Warning: length of x is not a power of two, returning DFT"
+        return matrix_DFT(x)
+    else:
+        X_even = matrix_DFT(x[::2])
+        X_odd = matrix_DFT(x[1::2])
+        factor = np.exp(-2j * np.pi * np.arange(N) / N)
+        return np.concatenate([X_even + factor[:N / 2] * X_odd, X_even + factor[N / 2:] * X_odd])
+```
+
++++ {"deletable": true, "editable": true}
+
+We can easily show that each of these functions produce the same results by introducting a discrete test function $x$ and showing that the same results are reported by each function call:
+
+```{code-cell} ipython2
+:deletable: true
+:editable: true
+
+xTest = np.random.random(256)  # create random vector to take the DFT of
+
+print np.allclose(loop_DFT(xTest), matrix_DFT(xTest)) # returns True if all values are equal (within numerical error)
+print np.allclose(matrix_DFT(xTest), one_layer_FFT(xTest)) # returns True if all values are equal (within numerical error)
+```
+
++++ {"deletable": true, "editable": true}
+
+We can also time each function to report of the amount of time is takes to return a finished spectrum.
+
+```{code-cell} ipython2
+:deletable: true
+:editable: true
+
+print 'Double Loop DFT:'
+%timeit loop_DFT(xTest)
+print '\nMatrix DFT:'
+%timeit matrix_DFT(xTest)
+print '\nOne Layer FFT + Matrix DFT:'
+%timeit one_layer_FFT(xTest)
+```
+
++++ {"deletable": true, "editable": true}
+
+As we can see the matrix DFT is significatly faster than the double loop DFT, this is because of the fast vectorization functions in numpy. And, the 'one-layer' FFT is about twice as fast as the matrix DFT because of the FFT architecture. We can go one fast and use the built-in numpy FFT:
+
+```{code-cell} ipython2
+:deletable: true
+:editable: true
+
+print np.allclose(one_layer_FFT(xTest), np.fft.fft(xTest))
+
+print 'numpy FFT:'
+%timeit np.fft.fft(xTest)
+```
+
++++ {"deletable": true, "editable": true}
+
+The numpy FFT is *very* fast, in part because of the low-level programing implementation, but fundamentally because it uses an FFT architecture. Our goal for this assignment is to implement such an architecture.
+
++++ {"deletable": true, "editable": true}
+
+### Decimation-in-Time (DIT) FFT (12 Points)
+
++++ {"deletable": true, "editable": true}
+
+The computational efficiency of the FFT comes from the recursive design of the algorithm which takes advantage of a binary tree design and the use of generalized *twiddle factors*. There are two designs of the binary tree which leads to the *decimation-in-time (DIT)* and *decimation-in-frequency (DIF)* architectures. Both architectures produce equivalent results, they they differ in the direction and starting point of the computations on the FFT binary tree. See the wikipedia page on the [Cooley-Tukey FFT &#10548;](https://en.wikipedia.org/wiki/Cooley%E2%80%93Tukey_FFT_algorithm) for a diagram and pseudo-code of the DIT implementation.
+
+For this section of the assignment implement the Radix-2 DIT FFT algorithm for the case of a $2^n$ size input, this input can be either real or complex.
+
+```{code-cell} ipython2
+:deletable: true
+:editable: true
+
+def ditrad2(x):
+    """radix-2 DIT FFT
+    x: list or array of N values to perform FFT on, can be real or imaginary, x must be of size 2^n
+    """
+    ox = np.asarray(x, dtype='complex') # assure the input is an array of complex values
+    # INSERT: assign a value to N, the size of the FFT
+    N = #??? 1 point
+    
+    if N==1: return ox # base case
+
+    # INSERT: compute the 'even' and 'odd' components of the FFT,
+    # you will recursively call ditrad() here on a subset of the input values
+    # Hint: a binary tree design splits the input in half
+    even = #??? 2 points
+    odd = #??? 2 points
+    
+    twiddles = np.exp(-2.j * cmath.pi * np.arange(N) / N) # compute the twiddle factors
+
+    # INSERT: apply the twiddle factors and return the FFT by combining the even and odd values
+    # Hint: twiddle factors are only applied to the odd values
+    # Hint: combing even and odd is different from the way the inputs were split apart above.
+    return #??? 3 points
+```
+
++++ {"deletable": true, "editable": true}
+
+Once `ditrad2()` is properly implemented then the results of calling the function should be equivalent to the output of the numpy FFT, and should run faster than the DFT and one-layer FFT.
+
+```{code-cell} ipython2
+:deletable: true
+:editable: true
+
+print 'The output of ditrad2() is correct?', np.allclose(np.fft.fft(xTest), ditrad2(xTest)) # 2 points if true
+
+print 'your FFT:'
+%timeit ditrad2(xTest) # 2 point if your time < One Layer FFT + Matrix DFT
+```
+
++++ {"deletable": true, "editable": true}
+
+### A non-$2^n$ FFT (10 points)
+
++++ {"deletable": true, "editable": true}
+
+Now that we have implemented a fast radix-2 algorithm for vectors of length $2^n$, we can write a generic algorithm which can take any length input. This algorithm will check if the length of the input is divisible by 2, if so then it will use the FFT, otherwise it will default to the slower matrix-based DFT.
+
+```{code-cell} ipython2
+:deletable: true
+:editable: true
+
+def generalFFT(x):
+    """radix-2 DIT FFT
+    x: list or array of N values to perform FFT on, can be real or imaginary
+    """
+    ox = np.asarray(x, dtype='complex') # assure the input is an array of complex values
+    # INSERT: assign a value to N, the size of the FFT
+    N = #??? 1 point
+    
+    if N==1: return ox # base case
+    elif # INSERT: check if the length is divisible by 2, 1 point
+
+        # INSERT: do a FFT, use your ditrad2() code here, 3 points
+        # Hint: your ditrad2() code can be copied here, and will work with only a minor modification
+        
+    else: # INSERT: if not divisable by 2, do a slow Fourier Transform
+        return # ??? 1 point
+```
+
++++ {"deletable": true, "editable": true}
+
+Now running this algorithm on inputs of different lengths there should be different run times. For a vector with a prime number length then the algorithm will default to the slow matrix-based DFT. For a vector of length nearly always divisible by 2 then the algorithm should be faster.
+
+```{code-cell} ipython2
+:deletable: true
+:editable: true
+
+xTest2 = np.random.random(251)  # create random vector to take the DFT of, not, this is not of length 2^n
+xTest3 = np.random.random(12*32)  # create random vector to take the DFT of, not, this is not of length 2^n
+```
+
+```{code-cell} ipython2
+:deletable: true
+:editable: true
+
+print 'The output of generalFFT() is correct?', np.allclose(np.fft.fft(xTest2), generalFFT(xTest2)) # 1 point
+
+print 'Your generic FFT:'
+%timeit generalFFT(xTest2) # 1 point if it runs in approximately the same time as matrix_DFT
+
+%timeit generalFFT(xTest3) # 2 point if it runs faster than the xTest2 vector
+```
+
++++ {"deletable": true, "editable": true}
+
+### FUTURE: Extras
+
+* in place FFT, fixed point, radix-2 DIF, radix-4

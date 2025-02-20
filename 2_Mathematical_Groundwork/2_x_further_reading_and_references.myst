@@ -1,0 +1,32 @@
+---
+jupytext:
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.16.7
+kernelspec:
+  display_name: Python 2
+  language: python
+  name: python2
+---
+
+***
+
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [2. Mathematical Groundwork](2_0_introduction.myst)
+    * Previous: [2.13 Spherical Trigonometry](2_13_spherical_trigonometry.myst)
+    * Next: [Chapter 3: Positional Astronomy](../3_Positional_Astronomy/3_0_introduction.myst)
+
+***
+
++++
+
+## 2.x Further Reading and References
+
++++
+
+***
+
+* Next: [Chapter 3: Positional Astronomy](../3_Positional_Astronomy/3_0_introduction.myst)

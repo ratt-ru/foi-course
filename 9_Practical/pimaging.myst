@@ -1,0 +1,248 @@
+---
+jupytext:
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.16.7
+kernelspec:
+  display_name: Python 2
+  language: python
+  name: python2
+---
+
++++ {"deletable": true, "editable": true, "slideshow": {"slide_type": "slide"}}
+
+<center>
+<h1 class="title">Imaging</h1>
+
+<h2>S.K. Sirothia</h2>
+<h3>RARG, SKA-SA</h3>
+<h3>NASSP Radio Interferometry Practical</h3>
+</center>
+
++++ {"deletable": true, "editable": true, "slideshow": {"slide_type": "slide"}}
+
+# Check the msfile
+
+    #Set up some useful variables
+    prefix = '3gc4_prac_01'
+    srcsplitms = '3gc4_prac_01.src.split.ms'
+
+    vis = srcsplitms
+    listobs()
+
++++ {"deletable": true, "editable": true, "slideshow": {"slide_type": "subslide"}}
+
+## The listobs output on casa logger window
+![image](fig_pimag/list_obs.png)
+
++++ {"deletable": true, "editable": true, "slideshow": {"slide_type": "slide"}}
+
+
+<center>
+
+<h1 class="title">Imaging mode 'Channel'</h1>
+
+</center>
+
++++ {"deletable": true, "editable": true, "slideshow": {"slide_type": "slide"}}
+
+# CASA task CLEAN (Make the dirty image)
+    
+    default('clean')                     #Set the clean defaults
+    vis = srcsplitms                     #Pick up our split source data
+    dirtyname = prefix + '.dirtyimg'     #Make an image root file name
+    imagename = dirtyname
+
+    mode = 'channel'                     #Setting the parameters related to imaging
+    nchan = 72                           #Set up the output image cube
+    start = 1
+    width = 1
+    
+    field = '0'                          #Set the field to image
+    spw = ''                             #Set the spectral window to image
+    
+    imsize = [256,256]                   #Set the image size
+    cell = [45.,45.]                     #Pixel size 45 arcsec for this KAT7 data
+
+    weighting = 'briggs'                 #Set the visibility weighting scheme
+    robust = 0.5
+    
+    niter = 0                            #No cleaning since we are making the dirtly image
+    inp()                                #Check the inputs
+
+    clean()                              #Run the task clean to make the dirtly image
+    
+    dirtyimage = dirtyname+'.image'      #Check the image
+    viewer(dirtyimage)
+
++++ {"deletable": true, "editable": true, "slideshow": {"slide_type": "slide"}}
+
+## Clean log, in the casa shell window 
+![image](fig_pimag/inp_dirtyimage_clean.png)
+
++++ {"deletable": true, "editable": true, "slideshow": {"slide_type": "slide"}}
+
+## Checking the inputs, in the casa logger window 
+![image](fig_pimag/clean_dirtyimage_casa_logger.png)
+
++++ {"deletable": true, "editable": true, "slideshow": {"slide_type": "slide"}}
+
+## Dirty image in the casa viewer window
+![image](fig_pimag/viewer_dirtyimage.png)
+
++++ {"deletable": true, "editable": true, "slideshow": {"slide_type": "slide"}}
+
+# CASA task CLEAN (Make the clean image)
+
+    default('clean')                     #Set the clean defaults
+    vis = srcsplitms                     #Pick up our split source data
+    imname = prefix + '.cleanimg'        #Make an image root file name
+    imagename = imname
+
+    mode = 'channel'                     #Setting the parameters related to imaging
+    nchan = 72                           #Set up the output image cube
+    start = 1
+    width = 1
+
+    field = '0'                          #Set the field to image (This is a single-source MS with one spw)
+    spw = ''                             #Set the spectral window to image
+    imsize = [256,256]                   #Set the image size
+    cell = [45.,45.]                     #Pixel size 45 arcsec for this KAT7 data
+
+    gain = 0.1                           #Standard gain factor 0.1
+    psfmode = 'clark'                    #Do a simple Clark clean
+    csclean = False                      #No Cotton-Schwab iterations
+    #imsize = [512,512]                  #Twice as big for Cotton-Schwab (cleans inner quarter)
+    #csclean = True                      #If desired, you can do a Cotton-Schwab clean 
+                                         #but will have only marginal improvement for this data
+
+    niter = 6000                         #Fix maximum number of iterations
+    threshold=10.0                       #Also set flux residual threshold (in mJy)
+
+    weighting = 'briggs'                 #Set the visibility weighting scheme
+    robust = 0.5                         #Use Briggs weighting (a moderate value, on the uniform side)
+
+    #mask = [108,108,148,148]            #Set a cleanbox +/-20 pixels around the center 128,128
+    mask = ''                            #If you don't want any clean boxes or masks
+
+    interactive=False                    #If you want interactive clean set to True
+
+    inp()                                #Check the inputs
+    clean()                              #Run the task clean to make the dirtly image
+
+    clnimage = imname+'.image'           #Check the image
+    viewer(clnimage)
+
++++ {"deletable": true, "editable": true, "slideshow": {"slide_type": "slide"}}
+
+## Clean log, in the casa shell window 
+![image](fig_pimag/inp_cleanimage_clean.png)
+
++++ {"deletable": true, "editable": true, "slideshow": {"slide_type": "slide"}}
+
+## Checking the inputs, in the casa logger window 
+![image](fig_pimag/clean_cleanimage_casa_logger.png)
+
++++ {"deletable": true, "editable": true, "slideshow": {"slide_type": "slide"}}
+
+## Clean image in the casa viewer window
+![image](fig_pimag/viewer_cleanimage.png)
+
++++ {"deletable": true, "editable": true, "slideshow": {"slide_type": "slide"}}
+
+
+<center>
+
+<h1 class="title">Imaging mode 'mfs'</h1>
+
+</center>
+
++++ {"deletable": true, "editable": true, "slideshow": {"slide_type": "slide"}}
+
+# CASA task CLEAN (Make the dirty image mode=mfs)
+    
+    default('clean')                     #Set the clean defaults
+    vis = srcsplitms                     #Pick up our split source data
+    dirtyname = prefix + '.dirtyimg'     #Make an image root file name
+    imagename = dirtyname
+    
+    os.system('rm -rf '+imagename+'*')   #remove previous version of these images
+    
+    mode = 'mfs'                         #Setting the parameters related to imaging
+    nchan = 72                           #Set up the output image cube
+    start = 1
+    width = 1
+    
+    field = '0'                          #Set the field to image
+    spw = ''                             #Set the spectral window to image
+    
+    imsize = [256,256]                   #Set the image size
+    cell = [45.,45.]                     #Pixel size 45 arcsec for this KAT7 data
+
+    weighting = 'briggs'                 #Set the visibility weighting scheme
+    robust = 0.5
+    
+    niter = 0                            #No cleaning since we are making the dirtly image
+    inp()                                #Check the inputs
+
+    clean()                              #Run the task clean to make the dirtly image
+    
+    dirtyimage = dirtyname+'.image'      #Check the image
+    viewer(dirtyimage)
+
++++ {"deletable": true, "editable": true, "slideshow": {"slide_type": "slide"}}
+
+## Dirty image (mode=mfs) in the casa viewer window
+![image](fig_pimag/viewer_dirtyimagemfs.png)
+
++++ {"deletable": true, "editable": true, "slideshow": {"slide_type": "slide"}}
+
+# CASA task CLEAN (Make the clean image, mode=mfs)
+
+    default('clean')                     #Set the clean defaults
+    vis = srcsplitms                     #Pick up our split source data
+    imname = prefix + '.cleanimg'        #Make an image root file name
+    imagename = imname
+
+    os.system('rm -rf '+imagename+'*')   #remove previous version of these images
+
+    mode = 'mfs'                         #Setting the parameters related to imaging
+    nchan = 72                           #Set up the output image cube
+    start = 1
+    width = 1
+
+    field = '0'                          #Set the field to image (This is a single-source MS with one spw)
+    spw = ''                             #Set the spectral window to image
+    imsize = [256,256]                   #Set the image size
+    cell = [45.,45.]                     #Pixel size 45 arcsec for this KAT7 data
+
+    gain = 0.1                           #Standard gain factor 0.1
+    psfmode = 'clark'                    #Do a simple Clark clean
+    csclean = False                      #No Cotton-Schwab iterations
+    #imsize = [512,512]                  #Twice as big for Cotton-Schwab (cleans inner quarter)
+    #csclean = True                      #If desired, you can do a Cotton-Schwab clean 
+                                         #but will have only marginal improvement for this data
+
+    niter = 6000                         #Fix maximum number of iterations
+    threshold=10.0                       #Also set flux residual threshold (in mJy)
+
+    weighting = 'briggs'                 #Set the visibility weighting scheme
+    robust = 0.5                         #Use Briggs weighting (a moderate value, on the uniform side)
+
+    #mask = [108,108,148,148]            #Set a cleanbox +/-20 pixels around the center 128,128
+    mask = ''                            #If you don't want any clean boxes or masks
+
+    interactive=False                    #If you want interactive clean set to True
+
+    inp()                                #Check the inputs
+    clean()                              #Run the task clean to make the dirtly image
+
+    clnimage = imname+'.image'           #Check the image
+    viewer(clnimage)
+
++++ {"deletable": true, "editable": true, "slideshow": {"slide_type": "slide"}}
+
+## Clean image (mode=mfs) in the casa viewer window
+![image](fig_pimag/viewer_cleanimagemfs.png)

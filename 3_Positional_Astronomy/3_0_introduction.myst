@@ -1,0 +1,138 @@
+---
+jupytext:
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.16.7
+kernelspec:
+  display_name: Python 2
+  language: python
+  name: python2
+---
+
++++ {"deletable": true, "editable": true}
+
+***
+
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [Positional Astronomy](#)
+    * Next: [Equatorial Coordinates](3_1_equatorial_coordinates.myst)
+
+***
+
++++ {"deletable": true, "editable": true}
+
+Import standard modules:
+
+```{code-cell} ipython2
+:deletable: true
+:editable: true
+
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+from IPython.display import HTML 
+HTML('../style/course.css') #apply general CSS
+```
+
++++ {"deletable": true, "editable": true}
+
+Import section specific modules:
+
+```{code-cell} ipython2
+:deletable: true
+:editable: true
+
+from IPython.display import HTML
+HTML('../style/code_toggle.html')
+```
+
++++ {"deletable": true, "editable": true}
+
+# Positional Astronomy
+
++++ {"deletable": true, "editable": true}
+
+In this chapter we present the positional astronomy we will need to comprehend interferometry. We discuss three useful astronomical coordinate systems in this chapter.
+
+<p class=conclusion>
+  <font size=4><b> Astronomical coordinate systems </b></font>
+  <br>
+  <br>
+&bull; the <em>equatorial coordinate system</em> in <a class='pos_sec_eq_intro'></a>: the equatorial coordinate system enables us to create 
+astronomical catalogues, so that we can easily locate celestial objects in the night sky.
+<br><br>
+&bull; the <em>horizontal coordinate system</em> in <a class='pos_sec_hoz_intro'></a>: the horizontal coordinate system is used to point a telescope to a specific location in an observer's local sky. <br><br> 
+&bull; the <em>direction cosine coordinate system</em> in <a class='pos_sec_dir_intro'></a>: the direction cosine coordinate system is used to make local sky-maps around a direction of interest. It is also important in radio interferometry as it allows us to define a Fourier relationship between the sky brightness and interferometric measurements (see <a href='../4_Visibility_Space/4_0_introduction.myst'>$\S$ 4 &#10142;</a>).
+</p>
+
+There are two additional concepts that are also discussed: *hour angle* and *local sidereal time*. 
+
+<p class=conclusion>
+  <font size=4><b> Hour angle </b></font>
+  <br>
+  <br>
+The equatorial coordinate system is static, i.e. the positions of the stars changes very slowly. The longitude equivalent equatorial coordinate is known as <em>right ascension</em>. The stars do however move across the sky of an earth-bound observer all the time, we therefore need a mutable longitude equivalent equatorial coordinate if we wish to keep track of the stars from earth. This is exactly what the hour angle provides. The hour angle is discussed in more detail in <a class='pos_sec_ha_intro'></a>.
+</p>
+
+<p class=conclusion>
+  <font size=4><b> Local sidereal time </b></font>
+  <br>
+  <br>
+The <em>local sidereal time</em>, is the current star time of a local observer. We need a separate "star" clock as our normal civil clocks keep track of the Sun. The Sun and an arbitrary star take different amounts of time to reappear at the same position in the sky. We discuss this in greater detail in <a class='pos_sec_lst_intro'></a>. We use the local sidereal time to obtain the hour angle of a source from its right ascension coordinate.
+</p>
+
+In general, we do not explicitly reference any outside material in this chapter, but the reader is referred to [<cite data-cite='Duffett2011'>Practical Astronomy with your calculator or spreadsheet </cite> &#10548;](https://books.google.co.za/books?id=MTGYxQyW998C&dq=astronomy+with+your+calculator+or+spreadsheet) as it provides an in depth review of astronomical coordinate systems. It is the main (mostly silent) reference of this chapter.
+
++++ {"deletable": true, "editable": true}
+
+#### Chapter Sections
+
+* [Equatorial Coordinates](3_1_equatorial_coordinates.myst)
+* [Hour Angle and Local Sidereal Time](3_2_hour_angle.myst)
+* [Horizontal Coordinates](3_3_horizontal_coordinates.myst)
+* [Direction Cosine Coordinates](3_4_direction_cosine_coordinates.myst)
+* [Further Reading](3_x_further_reading_and_references.myst)
+
++++ {"deletable": true, "editable": true}
+
+#### Chapter Contributors
+
+* Trienko Grobler (3.1, 3.2, 3.3, 3.4, 3.5) <span style="background-color:cyan">KT:CC:Is section 3.5 the same as 3.x, i.e. further reading and references?</span>
+* Julien Girard (3.2, Figures)
+
++++ {"deletable": true, "editable": true}
+
+#### Chapter Editors
+
+* Kshitij Thorat (2017)
+
++++ {"deletable": true, "editable": true}
+
+#### Format status:
+
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : LF: 06/02/2017
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : NC: 06/02/2017
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : RF: 06/02/2017
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : HF: 06/02/2017
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : GM: 06/02/2017
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : CC: 06/02/2017
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : CL: 06/02/2017
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : ST: 06/02/2017
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : FN: 06/02/2017
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : TC: 06/02/2017
+* <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</span> : XX: 07/02/2017
+
++++ {"deletable": true, "editable": true}
+
+***
+
+Next: [Equatorial Coordinates](3_1_equatorial_coordinates.myst)
+
++++ {"deletable": true, "editable": true}
+
+<div class=warn><b>Future Additions:</b></div>
+
+* Stellarium example to show movement of sky sources from different locations on the Earth
