@@ -1,23 +1,23 @@
 ---
 jupytext:
   text_representation:
-    extension: .md
+    extension: .myst
     format_name: myst
     format_version: 0.13
     jupytext_version: 1.16.7
 kernelspec:
-  display_name: Python 2
+  display_name: Python 3 (ipykernel)
   language: python
-  name: python2
+  name: python3
 ---
 
 ***
 
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
-* [1. Radio Science](1_0_introduction.ipynb)  
-    * Previous: [1.2 Electromagnetic radiation and astronomical quantities](1_2_electromagnetic_radiation_and_astronomical_quantities.ipynb)
-    * Next: [1.4 Radio regime](1_4_radio_regime.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [1. Radio Science](1_0_introduction.myst)  
+    * Previous: [1.2 Electromagnetic radiation and astronomical quantities](1_2_electromagnetic_radiation_and_astronomical_quantities.myst)
+    * Next: [1.4 Radio regime](1_4_radio_regime.myst)
 
 ***
 
@@ -27,7 +27,7 @@ Section status: <span style="background-color:orange">&nbsp;&nbsp;&nbsp;&nbsp;</
 
 Import standard modules:
 
-```{code-cell} ipython2
+```{code-cell} ipython3
 import numpy as np
 import matplotlib.pyplot as plt
 %matplotlib inline
@@ -37,7 +37,7 @@ HTML('../style/course.css') #apply general CSS
 
 Import section specific modules:
 
-```{code-cell} ipython2
+```{code-cell} ipython3
 from IPython.display import Image
 ```
 
@@ -45,7 +45,7 @@ from IPython.display import Image
 
 +++
 
-In this section we briefly review how electromagnetic radiation propagates through non-empty space in which radiation may be absorbed or generated. To keep things simple we will refrain from going too far into the details. However the concept of radiative transport plays a fundamental role in interferometry and therefore cannot be omitted. 
+In this section we briefly review how electromagnetic radiation propagates through non-empty space in which radiation may be absorbed or generated. To keep things simple we will refrain from going too far into the details. However the concept of radiative transport plays a fundamental role in interferometry and therefore cannot be omitted.
 
 +++
 
@@ -105,9 +105,9 @@ $$
 
 +++
 
-The figure below shows the radiative transport process in a pictorial form. 
+The figure below shows the radiative transport process in a pictorial form.
 
-```{code-cell} ipython2
+```{code-cell} ipython3
 Image(filename='figures/radiative_transport.png', width=800)
 ```
 
@@ -167,7 +167,7 @@ $$
 
 +++
 
-where $B_\nu(T)$ is the radiation emitted, at frequency $\nu$, by a black body of temperature $T$ ([see section 1.5.1 &#10142;](1_5_black_body_radiation.ipynb#science:sec:blackbody_emission) <!--\ref{science:sec:blackbody_emission}--> ). 
+where $B_\nu(T)$ is the radiation emitted, at frequency $\nu$, by a black body of temperature $T$ ([see section 1.5.1 &#10142;](1_5_black_body_radiation.myst#science:sec:blackbody_emission) <!--\ref{science:sec:blackbody_emission}--> ).
 
 +++
 
@@ -271,4 +271,4 @@ medium and dimmer when it passes through a cold absorbing medium?</span>
 
 ***
 
-* Next: [1.4 Radio regime](1_4_radio_regime.ipynb)
+* Next: [1.4 Radio regime](1_4_radio_regime.myst)

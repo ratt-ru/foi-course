@@ -1,14 +1,14 @@
 ---
 jupytext:
   text_representation:
-    extension: .md
+    extension: .myst
     format_name: myst
     format_version: 0.13
     jupytext_version: 1.16.7
 kernelspec:
-  display_name: Python 2
+  display_name: Python 3 (ipykernel)
   language: python
-  name: python2
+  name: interferometry
 ---
 
 +++ {"deletable": true, "editable": true}
@@ -26,10 +26,13 @@ kernelspec:
 
 Import standard modules:
 
-```{code-cell} ipython2
-:deletable: true
-:editable: true
-
+```{code-cell} ipython3
+---
+deletable: true
+editable: true
+jupyter:
+  outputs_hidden: false
+---
 import numpy as np
 import matplotlib.pyplot as plt
 %matplotlib inline
@@ -41,10 +44,13 @@ HTML('../style/course.css') #apply general CSS
 
 Import section specific modules:
 
-```{code-cell} ipython2
-:deletable: true
-:editable: true
-
+```{code-cell} ipython3
+---
+deletable: true
+editable: true
+jupyter:
+  outputs_hidden: false
+---
 from IPython.display import HTML
 HTML('../style/code_toggle.html')
 ```

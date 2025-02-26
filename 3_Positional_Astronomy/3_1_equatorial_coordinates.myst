@@ -1,14 +1,14 @@
 ---
 jupytext:
   text_representation:
-    extension: .md
+    extension: .myst
     format_name: myst
     format_version: 0.13
     jupytext_version: 1.16.7
 kernelspec:
-  display_name: Python 2
+  display_name: Python 3 (ipykernel)
   language: python
-  name: python2
+  name: python3
 ---
 
 +++ {"deletable": true, "editable": true}
@@ -27,7 +27,7 @@ kernelspec:
 
 Import standard modules:
 
-```{code-cell} ipython2
+```{code-cell} ipython3
 :deletable: true
 :editable: true
 
@@ -38,7 +38,7 @@ from IPython.display import HTML
 HTML('../style/course.css') #apply general CSS
 ```
 
-```{code-cell} ipython2
+```{code-cell} ipython3
 :deletable: true
 :editable: true
 
@@ -92,7 +92,7 @@ The *Right Ascension* $\alpha$ - We define the *hour circle* of an object as the
 
 The *Declination* $\delta$ - the declination of an object is the angular distance from the celestial equator measured along its hour circle (it is positive in the northern celestial hemisphere and negative in the southern celestial hemisphere). It is measured in **Degrees Arcmin Arcsec** (e.g. $\delta = -15^\circ23'44''$) which spans from $\delta = -90^\circ00'00''$ (SCP) to $+\delta = 90^\circ00'00''$ (NCP).
 
-The equatorial coordinates are presented graphically in Figure 3.1.2. 
+The equatorial coordinates are presented graphically in Figure 3.1.2.
 
 +++ {"deletable": true, "editable": true}
 
@@ -123,7 +123,7 @@ You should be careful about this **factor of 4 difference between RA min and DEC
 
 +++ {"deletable": true, "editable": true}
 
-We will be making use of the [<cite data-cite=''>`pyephem` package</cite> &#10548;](http://rhodesmill.org/pyephem/quick.html#body-compute-date) package in the rest of this chapter to help us clarify and better understand some theoretical concepts. The two classes we will be using are the `Observer` and the `Body` class. The `Observer` class acts as a proxy for an array, while the `Body` class embodies a specific celestial object. In this section we will only make use of the `Body` class.      
+We will be making use of the [<cite data-cite=''>`pyephem` package</cite> &#10548;](http://rhodesmill.org/pyephem/quick.html#body-compute-date) package in the rest of this chapter to help us clarify and better understand some theoretical concepts. The two classes we will be using are the `Observer` and the `Body` class. The `Observer` class acts as a proxy for an array, while the `Body` class embodies a specific celestial object. In this section we will only make use of the `Body` class.
 
 +++ {"deletable": true, "editable": true}
 
@@ -131,9 +131,9 @@ Earlier in this section I mentioned that the celestial objects do not move on th
 * B1950 - 1949/12/31 22:09:50 UT,
 * J2000 - 2000/1/1 12:00:00 UT.
 
-The 'B' and the 'J'  serve as a shorthand for the *Besselian* year and the *Julian* year respectively. They indicate the lenght of time used to measure one year while choosing the exact instant in time associated with J2000 and B1950. The Besselian year is based on the concept of a [<cite data-cite=''>tropical year</cite> &#10548;](https://en.wikipedia.org/wiki/Tropical_year) and is not used anymore. The Julian year consists of 365.25 days. In the code snippet below we use `pyephem` to determine the J2000 and B1950 equatorial coordinates of *Arcturus*.      
+The 'B' and the 'J'  serve as a shorthand for the *Besselian* year and the *Julian* year respectively. They indicate the lenght of time used to measure one year while choosing the exact instant in time associated with J2000 and B1950. The Besselian year is based on the concept of a [<cite data-cite=''>tropical year</cite> &#10548;](https://en.wikipedia.org/wiki/Tropical_year) and is not used anymore. The Julian year consists of 365.25 days. In the code snippet below we use `pyephem` to determine the J2000 and B1950 equatorial coordinates of *Arcturus*.
 
-```{code-cell} ipython2
+```{code-cell} ipython3
 :deletable: true
 :editable: true
 
@@ -150,16 +150,16 @@ print('B1950: RA:%s DEC:%s' % (arcturus.a_ra, arcturus.a_dec))
 
 +++ {"deletable": true, "editable": true}
 
-To finish things off, let's make sure that given the concepts we have learned in this section we are able to interpret a radio skymap correctly. We will be plotting and inspecting the [<cite data-cite=''>Haslam 408 MHz map</cite> &#10548;](https://lambda.gsfc.nasa.gov/product/foreground/fg_haslam_get.cfm). We load the Haslam map with `read_map` and view it with `cartview`. These two functions form part of the [<cite data-cite=''>`healpy` package</cite> &#10548;](https://healpy.readthedocs.io/en/latest/).      
+To finish things off, let's make sure that given the concepts we have learned in this section we are able to interpret a radio skymap correctly. We will be plotting and inspecting the [<cite data-cite=''>Haslam 408 MHz map</cite> &#10548;](https://lambda.gsfc.nasa.gov/product/foreground/fg_haslam_get.cfm). We load the Haslam map with `read_map` and view it with `cartview`. These two functions form part of the [<cite data-cite=''>`healpy` package</cite> &#10548;](https://healpy.readthedocs.io/en/latest/).
 
-```{code-cell} ipython2
+```{code-cell} ipython3
 :deletable: true
 :editable: true
 
 haslam = hp.read_map('../data/fits/haslam/lambda_haslam408_nofilt.fits')
 ```
 
-```{code-cell} ipython2
+```{code-cell} ipython3
 :deletable: true
 :editable: true
 
@@ -170,9 +170,9 @@ hp.graticule()
 
 +++ {"deletable": true, "editable": true}
 
-The `cartview` function also produces a projected map as a byproduct (it takes the form of a 2D `numpy` array). We can now replot this projected map using `matplotlib` (see <a class='pos_fig_haslam_eq'></a> <!--\ref{pos:fig:haslam}-->). We do so in the code snippet that follows. 
+The `cartview` function also produces a projected map as a byproduct (it takes the form of a 2D `numpy` array). We can now replot this projected map using `matplotlib` (see <a class='pos_fig_haslam_eq'></a> <!--\ref{pos:fig:haslam}-->). We do so in the code snippet that follows.
 
-```{code-cell} ipython2
+```{code-cell} ipython3
 :deletable: true
 :editable: true
 
@@ -221,7 +221,7 @@ ax.grid('on')
 +++ {"deletable": true, "editable": true}
 
 To make sure that you are able to interpret <a class='pos_fig_haslam_eq'></a> correctly try to find the 
-location of Pictor A from first principles. The equatorial coordinates of Pictor A is $\alpha = 5^\text{h}19^\text{m}49.7^\text{s}$ and $\delta = -45^\circ 46'44''$. 
+location of Pictor A from first principles. The equatorial coordinates of Pictor A is $\alpha = 5^\text{h}19^\text{m}49.7^\text{s}$ and $\delta = -45^\circ 46'44''$.
 
 +++ {"deletable": true, "editable": true}
 

@@ -1,25 +1,25 @@
 ---
 jupytext:
   text_representation:
-    extension: .md
+    extension: .myst
     format_name: myst
     format_version: 0.13
     jupytext_version: 1.16.7
 kernelspec:
-  display_name: Python 2
+  display_name: Python 3 (ipykernel)
   language: python
-  name: python2
+  name: python3
 ---
 
 +++ {"deletable": true, "editable": true}
 
 ***
 
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
-* [1. Radio Science using Interferometric Arrays](1_0_introduction.ipynb)  
-    * Previous: [1.6 Synchrotron emission](1_6_synchrotron_emission.ipynb)
-    * Next: [1.8 Astronomical radio sources](1_8_astronomical_radio_sources.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [1. Radio Science using Interferometric Arrays](1_0_introduction.myst)  
+    * Previous: [1.6 Synchrotron emission](1_6_synchrotron_emission.myst)
+    * Next: [1.8 Astronomical radio sources](1_8_astronomical_radio_sources.myst)
    
 ***
 
@@ -29,7 +29,7 @@ Section status: <span style="background-color:orange">&nbsp;&nbsp;&nbsp;&nbsp;</
 
 Import standard modules:
 
-```{code-cell} ipython2
+```{code-cell} ipython3
 :deletable: true
 :editable: true
 
@@ -44,7 +44,7 @@ HTML('../style/course.css') #apply general CSS
 
 Import section specific modules:
 
-```{code-cell} ipython2
+```{code-cell} ipython3
 :deletable: true
 :editable: true
 
@@ -57,7 +57,7 @@ pass
 
 +++ {"deletable": true, "editable": true}
 
-In [$\S$ 1.3 &#10142;](../1_Radio_Science/1_3_radiative_transport.ipynb) <!--\ref{science:sec:radiative_transport}--> we discussed how radiation propagates through space for given macroscopic quantities, the linear emission coefficient $\varepsilon_\nu$ and the linear absorption coefficient $\kappa_\nu$. It is possible to connect both these quantities to the so-called Einstein coefficients, which measure the the probability of the emission or absorption of photons by an atom or a molecule. 
+In [$\S$ 1.3 &#10142;](../1_Radio_Science/1_3_radiative_transport.myst) <!--\ref{science:sec:radiative_transport}--> we discussed how radiation propagates through space for given macroscopic quantities, the linear emission coefficient $\varepsilon_\nu$ and the linear absorption coefficient $\kappa_\nu$. It is possible to connect both these quantities to the so-called Einstein coefficients, which measure the the probability of the emission or absorption of photons by an atom or a molecule.
 
 +++ {"deletable": true, "editable": true}
 
@@ -112,7 +112,7 @@ which can be used to determine $\varepsilon_\nu$ and $\kappa_\nu$ from the popul
 
 +++ {"deletable": true, "editable": true}
 
-These relations have been taken from [<cite data-cite=''>Tools of Radio Astronomy </cite> &#10548;](http://adsabs.harvard.edu/abs/2012tra..book.....W) which can be consulted for further details.  
+These relations have been taken from [<cite data-cite=''>Tools of Radio Astronomy </cite> &#10548;](http://adsabs.harvard.edu/abs/2012tra..book.....W) which can be consulted for further details.
 
 +++ {"deletable": true, "editable": true}
 
@@ -166,7 +166,7 @@ $$
 
 +++ {"deletable": true, "editable": true}
 
-with $T_{\rm b}$ being the brightness temperature (see [$\S$ 1.5.1 &#10142;](1_5_black_body_radiation.ipynb#science:sec:blackbody_emission) <!--\ref{science:sec:blackbody_emission}--> ). This makes it rather simple to derive column densities or masses of neutral-hydrogen clouds. The full derivation will be developed later on. <span style="background-color:yellow"> LB:IC: where is this done? Add a link.</span>
+with $T_{\rm b}$ being the brightness temperature (see [$\S$ 1.5.1 &#10142;](1_5_black_body_radiation.myst#science:sec:blackbody_emission) <!--\ref{science:sec:blackbody_emission}--> ). This makes it rather simple to derive column densities or masses of neutral-hydrogen clouds. The full derivation will be developed later on. <span style="background-color:yellow"> LB:IC: where is this done? Add a link.</span>
 
 High angular resolution has become an important ingredient for the study of galaxy evolution, especially for extra-galactic sources (i.e. sources outside our own galaxy). Interferometric imaging has proved an indispensable tool in obtaining high resolution radio maps.
 
@@ -191,13 +191,13 @@ Several other emission lines are also observed in the radio band. Some examples 
 * Radio recombination lines, which are high-level transition lines of electrons captured by an atom.
 * Molecular lines, which are transitions of rotational or vibrational excitation states, and can be used to trace the cold interstellar medium.
 
-However, since we are more focussed on observational techniques, we will not attempt to explain the emission mechanisms associated with these phenomena. The reader is referred to [<cite data-cite='1999ASPC..180.....T'>Synthesis Imaging in Radio Astronomy II</cite> &#10548;](http://adsabs.harvard.edu/abs/1999ASPC..180.....T) for further details regarding spectral line emission and its applications. 
+However, since we are more focussed on observational techniques, we will not attempt to explain the emission mechanisms associated with these phenomena. The reader is referred to [<cite data-cite='1999ASPC..180.....T'>Synthesis Imaging in Radio Astronomy II</cite> &#10548;](http://adsabs.harvard.edu/abs/1999ASPC..180.....T) for further details regarding spectral line emission and its applications.
 
 +++ {"deletable": true, "editable": true}
 
 ***
 
-* Next:[1.8 Astronomical radio sources](1_8_astronomical_radio_sources.ipynb)
+* Next:[1.8 Astronomical radio sources](1_8_astronomical_radio_sources.myst)
 
 +++ {"deletable": true, "editable": true}
 

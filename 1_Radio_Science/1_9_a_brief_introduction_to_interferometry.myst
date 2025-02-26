@@ -1,23 +1,23 @@
 ---
 jupytext:
   text_representation:
-    extension: .md
+    extension: .myst
     format_name: myst
     format_version: 0.13
     jupytext_version: 1.16.7
 kernelspec:
-  display_name: Python 3
+  display_name: interferometry (local)
   language: python
-  name: python3
+  name: interferometry
 ---
 
 ***
 
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
-* [1. Radio Science using Interferometric Arrays](1_0_introduction.ipynb)
-    * Previous: [1.8 Astronomical radio sources](1_8_astronomical_radio_sources.ipynb)
-    * Next: [1.10 The Limits of Single Dish Astronomy](1_10_limits_of_single_dishes.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [1. Radio Science using Interferometric Arrays](1_0_introduction.myst)
+    * Previous: [1.8 Astronomical radio sources](1_8_astronomical_radio_sources.myst)
+    * Next: [1.10 The Limits of Single Dish Astronomy](1_10_limits_of_single_dishes.myst)
 ***
 
 +++
@@ -55,6 +55,7 @@ HTML('../style/code_toggle.html')
 The basics of interferometry date back to Thomas Young's [double-slit experiment &#10142;](https://en.wikipedia.org/wiki/Double-slit_experiment) of 1801. In this experiment, a plate pierced by two parallel slits is illuminated by a monochromatic source of light. Due to the wave-like nature of light, the waves passing through the two slits *interfere*, resulting in an *interference pattern*, or *fringe*, projected onto a screen behind the slits:
 
 <img src="figures/514px-Doubleslit.svg.png" width="50%"/>
+
 **Figure 1.9.1:** *Schematic diagram of Young's double-slit experiment. Credit: Unknown.*
 
 The position on the screen $P$ determines the phase difference between the two arriving wavefronts. Waves arriving in phase interfere constructively and produce bright strips in the interference pattern. Waves arriving out of phase interfere destructively and result in dark strips in the pattern.
@@ -115,7 +116,7 @@ def double_slit(positions=[0], intensities=[1], baseline=1, d1=5, d2=5,
         to render fringes from multiple invocations of double_slit() into the
         same intensity scale, i.e. for comparison.
     """
-    
+    positions = [positions] if isinstance(positions, float) else positions
     p0 = np.atleast_1d(positions)
     a0 = np.atleast_1d(intensities)
     
@@ -189,7 +190,7 @@ Inside the function, we simply compute the path length difference along the two 
 
 ### 1.9.3 Playing with the baseline
 
-First of all, note how the properties of the interference pattern vary with *baseline* $B$ (the distance between the slits) and wavelength $\lambda$. Use the sliders below to adjust both. Note how increasing the baseline increases the frequency of the fringe, as does reducing the wavelength. 
+First of all, note how the properties of the interference pattern vary with *baseline* $B$ (the distance between the slits) and wavelength $\lambda$. Use the sliders below to adjust both. Note how increasing the baseline increases the frequency of the fringe, as does reducing the wavelength.
 
 ```{code-cell} ipython3
 # setup default values for the experiment
@@ -215,7 +216,7 @@ interact(double_slit,
          **{**defaults,
             **dict(baseline=(0.1, 2 , 0.01),
                    wavelength=(0.05, 0.2, 0.01),
-                   positions=FloatSlider(min=-1, max=1, step=0.01, description='position'))});
+                   positions=(-1, 1, 0.01))});
 ```
 
 Note that long baselines are very sensitive to change in source position, while short baselines are less sensitive. As we'll learn in Chapter 4, the spatial resolution (i.e. the distance at which we can distinguish sources) of an interferometer is given by $\lambda/B$ , while the spatial resolution of a conventional telescope is given by $\lambda/D$, where $D$ is the dish (or mirror) aperture. This is a fortunate fact, as in practice it is much cheaper to build long baselines than large apertures!
@@ -234,13 +235,13 @@ double_slit([0], baseline=0.5, wavelength=0.1)
 double_slit([0.69], baseline=0.5, wavelength=0.1)
 ```
 
-Modern interferometers exploit this by using an array of elements, which provides a whole range of possible baselines. 
+Modern interferometers exploit this by using an array of elements, which provides a whole range of possible baselines.
 
 +++
 
 #### 1.9.4.2 Measuring source size
 
-Perhaps less obviously, we can use an interferometer to measure source size. Until now we have been simulating only point-like sources. First, consider what happens when we add a second source to the experiment (fortunately, we wrote the function above to accommodate such a scenario). The interference pattern from two (independent) sources is the sum of the individual interference patterns. This seems obvious, but will be shown more formally later on. Here we add a second source, with a slider to control its position and intensity. Try to move the second source around, and observe how the superimposed interference pattern can become attenuated or even cancel out. 
+Perhaps less obviously, we can use an interferometer to measure source size. Until now we have been simulating only point-like sources. First, consider what happens when we add a second source to the experiment (fortunately, we wrote the function above to accommodate such a scenario). The interference pattern from two (independent) sources is the sum of the individual interference patterns. This seems obvious, but will be shown more formally later on. Here we add a second source, with a slider to control its position and intensity. Try to move the second source around, and observe how the superimposed interference pattern can become attenuated or even cancel out.
 
 ```{code-cell} ipython3
 interact(lambda position, intensity, baseline, wavelength:
@@ -356,7 +357,7 @@ $$
 
 As we already discussed above, the first two terms in this sum are constant (corresponding to the total intensity of the two signals), while the cross-term $E_1 E_2^*$ and its complex conjugate is the *interfering* term that is responsible for fringe formation. 
 
-Modern radio interferometers are *multiplicative*. Rather than adding the signals, the antennas measure $E_1$ and $E_2$ and feed these measurements into a *cross-correlator*, which directly computes the $E_1 E_2^*$ term.  
+Modern radio interferometers are *multiplicative*. Rather than adding the signals, the antennas measure $E_1$ and $E_2$ and feed these measurements into a *cross-correlator*, which directly computes the $E_1 E_2^*$ term.
 
 +++
 
@@ -463,7 +464,7 @@ def michelson(positions=[0], intensities=[1], baseline=50, maxbaseline=100,
     ax.plot([0, 0], [-bl2, bl2], 'o', ms=10)
     ax.plot([0, d2/2., d2/2., d2], [-bl2, -bl2, -d3/2., 0], '-k')
     ax.plot([0, d2/2., d2/2., d2], [bl2, bl2, d3/2., 0], '-k')
-    ax.text(0, 0, f'$b={baseline:.2f}\lambda$', ha='right', va='bottom', size='xx-large')
+    ax.text(0, 0, f'$b={baseline:.2f}\\lambda$', ha='right', va='bottom', size='xx-large')
 
     # draw representation of sine wave from the central position
     xw = np.arange(-d1, -d1 + (d1 + d2) / 4, 0.01)
@@ -555,4 +556,4 @@ interact(lambda extent_arcsec, baseline:
 
 ***
 
-* Next: [1.10 The Limits of Single Dish Astronomy](1_10_limits_of_single_dishes.ipynb)
+* Next: [1.10 The Limits of Single Dish Astronomy](1_10_limits_of_single_dishes.myst)

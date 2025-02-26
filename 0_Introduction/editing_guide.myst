@@ -53,7 +53,7 @@ a conclusion section. So there ought to be very few cyan editor commments.
 * <span style="background-color:red">&nbsp;&nbsp;&nbsp;&nbsp;</span> : TC: Date
 * <span style="background-color:red">&nbsp;&nbsp;&nbsp;&nbsp;</span> : XX: Date
 
-The following formatting errors are to be checked for. The formatting guide for the book is discussed in more detail in the [outline &#10142;](0_introduction.ipynb).
+The following formatting errors are to be checked for. The formatting guide for the book is discussed in more detail in the [outline &#10142;](0_introduction.myst).
 
 +++
 
@@ -82,9 +82,9 @@ Check that the sections, figures, equations etc... are in the correct numerical 
 
 We reference internal, external sections, figures, tables as follow:
 
-* `[Fig. xxx &#10142;](#destination)`: [Fig. 3.1.1 &#10142;](../3_Positional_Astronomy/3_1_Equatorial_Coordinates.ipynb#pos:fig:geo). Note we used the external symbol here &#10142; as we are pointing to another notebook. If we were pointing within the current notebook we would use &#10549;, i.e. `&#10549;`. 
+* `[Fig. xxx &#10142;](#destination)`: [Fig. 3.1.1 &#10142;](../3_Positional_Astronomy/3_1_Equatorial_Coordinates.myst#pos:fig:geo). Note we used the external symbol here &#10142; as we are pointing to another notebook. If we were pointing within the current notebook we would use &#10549;, i.e. `&#10549;`. 
 * We use the abbreviated version of Figure when we reference (Fig. xx). We do not when we are refferring to a Chapter or Table.
-* `[$\S$ xxx &#10142;](#destination)`: [$\S$ 3.1. &#10142;](../3_Positional_Astronomy/3_1_Equatorial_Coordinates.ipynb). To refer to sections we use the $\S$ (`$\S$`) symbol.
+* `[$\S$ xxx &#10142;](#destination)`: [$\S$ 3.1. &#10142;](../3_Positional_Astronomy/3_1_Equatorial_Coordinates.myst). To refer to sections we use the $\S$ (`$\S$`) symbol.
 * All links within chapters using &#10142; or &#10549; must point to a numbered Figure, Section etc... 
 * `[<cite data-cite='Duffett2011'>Practical Astronomy with your calculator or spreadsheet </cite> &#10548;](https://books.google.co.za/books?id=MTGYxQyW998C&dq=astronomy+with+your+calculator+or+spreadsheet)` : [<cite data-cite='Duffett2011'>Practical Astronomy with your calculator or spreadsheet </cite> &#10548;](https://books.google.co.za/books?id=MTGYxQyW998C&dq=astronomy+with+your+calculator+or+spreadsheet). Make sure that citations are as follows and that the text that is displayed is the name of book article. Make sure reference is in chapters .bib file. 
 * An equation is only numbered if it is referenced. Use same standard as Figure. Also use abbreviated Eq. when reffering to it.
@@ -100,11 +100,11 @@ The header and footer should look exactly like this. If someone is including som
 
 ***
 
-* [Outline](0_introduction.ipynb)
-* [Glossary](1_glossary.ipynb)
-* [3. Positional Astronomy](../3_Positional_Astronomy/3_0_Introduction.ipynb)
-    * Previous: [3.1 Equatorial Coordinates (RA,DEC)](../3_Positional_Astronomy/3_1_Equatorial_Coordinates.ipynb)
-    * Next: [3.3 Horizontal Coordinates (ALT,AZ)](../3_Positional_Astronomy/3_3_Horizontal_Coordinates.ipynb) 
+* [Outline](0_introduction.myst)
+* [Glossary](1_glossary.myst)
+* [3. Positional Astronomy](../3_Positional_Astronomy/3_0_Introduction.myst)
+    * Previous: [3.1 Equatorial Coordinates (RA,DEC)](../3_Positional_Astronomy/3_1_Equatorial_Coordinates.myst)
+    * Next: [3.3 Horizontal Coordinates (ALT,AZ)](../3_Positional_Astronomy/3_3_Horizontal_Coordinates.myst) 
 
 ***
 
@@ -132,7 +132,7 @@ HTML('../style/course.css') #apply general CSS
 
 ***
 
-Next: [3.3 Horizontal Coordinates (ALT,AZ)](../3_Positional_Astronomy/3_3_Horizontal_Coordinates.ipynb)
+Next: [3.3 Horizontal Coordinates (ALT,AZ)](../3_Positional_Astronomy/3_3_Horizontal_Coordinates.myst)
 
 +++
 
@@ -163,7 +163,7 @@ Are all the new definition in *italics* when first used in a chapter and describ
  * If one symbol is used to denote two quantities use a subscript to remove ambiguity. For instance $\lambda$ can mean wavelength or the LM-damping factor. Add a subscript, for
 instance $\lambda_{\textrm{LM}}$ now refers to to the LM-damping factor, while $\lambda$ still refers to wavelength. Please add any new subscripted symbol to the glossary.  
 
-The general list of symbols can be found in the [glossary &#10142;](1_glossary.ipynb#preface:sec:glossary).
+The general list of symbols can be found in the [glossary &#10142;](1_glossary.myst#preface:sec:glossary).
 
 +++
 
@@ -175,7 +175,7 @@ Chapter Introduction:
 * Provide an overview of the topics in the chapter.
 * Outline of the notebooks in the chapter.
 * Include a list of editors and contributors of the chapter.
-See [$\S$ 5.0. &#10142;](../5_Imaging/5_0_introduction.ipynb) for exact format. Make sure editors are filled in. Add year to editor name.
+See [$\S$ 5.0. &#10142;](../5_Imaging/5_0_introduction.myst) for exact format. Make sure editors are filled in. Add year to editor name.
 
 Chapter Conclusion:
 
@@ -192,7 +192,7 @@ No good example as everyone does it different.
 
 +++
 
-Make sure that all figure, section, equation and citation strings contain the correct label string format, i.e. `chapterStr:type:uniqueID`. Do they use the correct label string (see [outline &#10142;](0_introduction.ipynb)).
+Make sure that all figure, section, equation and citation strings contain the correct label string format, i.e. `chapterStr:type:uniqueID`. Do they use the correct label string (see [outline &#10142;](0_introduction.myst)).
 
 | Chapter    |  chapterStr  |
 |------------|-------------:|
@@ -262,8 +262,8 @@ To create a "Prerequisites"/"To read" header block:
   <font size=4> <b>Prerequisites</b></font>
   <br>
   <br>
-&bull; <b>Definition of ($u$,$v$,$w$):</b> [Go to 4.1](4_1_The_Baseline.ipynb) <br><br>
-&bull; <b>The visibility function:</b> [Go to 4.3](4_3_The_Visibility_Function.ipynb)
+&bull; <b>Definition of ($u$,$v$,$w$):</b> [Go to 4.1](4_1_The_Baseline.myst) <br><br>
+&bull; <b>The visibility function:</b> [Go to 4.3](4_3_The_Visibility_Function.myst)
 </p>
 ```
 
@@ -273,7 +273,7 @@ To create a "Prerequisites"/"To read" header block:
 
 +++
 
-Are the file names in the correct format. Example: `6_1_sky_models.ipynb`. All small letters. Name of section. Single digits if possible.
+Are the file names in the correct format. Example: `6_1_sky_models.myst`. All small letters. Name of section. Single digits if possible.
 
 +++
 
