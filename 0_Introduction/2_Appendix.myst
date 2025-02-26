@@ -22,10 +22,10 @@ from IPython.display import HTML
 HTML('../style/course.css') #apply general CSS
 ```
 
-We have seen in <a href='../2_Mathematical_Groundwork/2_13_spherical_trigonometry.ipynb'>$\S$ 2.13 &#10142;</a>, three main spherical trigonometry relationships between angles and arcs in a spherical triangle. Applying each of these equations, we will derive the equation A used in <a href='../4_Visibility_Space/4_1_The_Baseline.ipynb'>$\S$ 4.1 &#10142;</a>.
+We have seen in <a href='../2_Mathematical_Groundwork/2_13_spherical_trigonometry.myst'>$\S$ 2.13 &#10142;</a>, three main spherical trigonometry relationships between angles and arcs in a spherical triangle. Applying each of these equations, we will derive the equation A used in <a href='../4_Visibility_Space/4_1_The_Baseline.myst'>$\S$ 4.1 &#10142;</a>.
 
-Let's start from Figure 4.1.3, dislayed in <a href='../4_Visibility_Space/4_1_The_Baseline.ipynb'>$\S$ 4.1 &#10142;</a>. We will consider the following spherical triangle **STZ** (as in Figure A1 right).
-From <a href='../2_Mathematical_Groundwork/2_13_spherical_trigonometry.ipynb'>$\S$ 2.13 &#10142;</a>, we have the following relationships:
+Let's start from Figure 4.1.3, dislayed in <a href='../4_Visibility_Space/4_1_The_Baseline.myst'>$\S$ 4.1 &#10142;</a>. We will consider the following spherical triangle **STZ** (as in Figure A1 right).
+From <a href='../2_Mathematical_Groundwork/2_13_spherical_trigonometry.myst'>$\S$ 2.13 &#10142;</a>, we have the following relationships:
 
 * The *spherical cosine rule* (Rule i): $\quad \quad \cos b = \cos a \cos c + \sin a \sin c \cos \hat{B}$
 * The *spherical sine rule* (Rule ii): $\quad \quad \; \; \: \sin b \sin \hat{A} = \sin \hat{B} \sin a$
@@ -324,7 +324,7 @@ $$\frac{u^2}{a^2} + \frac{ \left[ \frac{v -\frac{Z}{\lambda} \cos \delta}{\sin \
 
 +++
 
-In [Sec. 2.12 &#10142;](../2_Mathematical_Groundwork/2_12_solid_angle.ipynb) the infinitesimal solid angle $d\Omega$ was defined in terms of polar coordinates. The infinitesimal solid angle $d\Omega$ can also be expressed in direction cosine coordinates by using the Jacobian transformation. First the relationship between $(\theta,\phi)$ and $(l,m)$ must be established. It should be clear from [Fig. A.3(b) &#10549;](#app:fig:relations) <!--\ref{app:fig:relations}--> and [Fig. A.3(c) &#10549;](#app:fig:relations) <!--\ref{app:fig:relations}--> that:
+In [Sec. 2.12 &#10142;](../2_Mathematical_Groundwork/2_12_solid_angle.myst) the infinitesimal solid angle $d\Omega$ was defined in terms of polar coordinates. The infinitesimal solid angle $d\Omega$ can also be expressed in direction cosine coordinates by using the Jacobian transformation. First the relationship between $(\theta,\phi)$ and $(l,m)$ must be established. It should be clear from [Fig. A.3(b) &#10549;](#app:fig:relations) <!--\ref{app:fig:relations}--> and [Fig. A.3(c) &#10549;](#app:fig:relations) <!--\ref{app:fig:relations}--> that:
 \begin{eqnarray}
 \phi &=& \tan^{-1}\frac{\rho m}{\rho l} = tan^{-1}\frac{m}{l}=f(l,m)\\
 \theta &=& \sin^{-1}\frac{\rho \sqrt{l^2+m^2}}{\rho} = \sin^{-1} \sqrt{l^2+m^2}=g(l,m).\nonumber 
