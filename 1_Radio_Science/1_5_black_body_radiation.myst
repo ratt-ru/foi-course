@@ -1,25 +1,25 @@
 ---
 jupytext:
   text_representation:
-    extension: .md
+    extension: .myst
     format_name: myst
     format_version: 0.13
     jupytext_version: 1.16.7
 kernelspec:
-  display_name: Python 2
+  display_name: Python 3 (ipykernel)
   language: python
-  name: python2
+  name: python3
 ---
 
 +++ {"deletable": true, "editable": true}
 
 ***
 
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
 * [1. Radio Science using Interferometric Arrays](../1_Radio_Science)  
-    * Previous: [1.4 Radio regime](1_4_radio_regime.ipynb)
-    * Next: [1.6 Synchrotron emission](1_6_synchrotron_emission.ipynb)
+    * Previous: [1.4 Radio regime](1_4_radio_regime.myst)
+    * Next: [1.6 Synchrotron emission](1_6_synchrotron_emission.myst)
     
 ***
 
@@ -29,7 +29,7 @@ Section status: <span style="background-color:yellow">&nbsp;&nbsp;&nbsp;&nbsp;</
 
 Import standard modules:
 
-```{code-cell} ipython2
+```{code-cell} ipython3
 :deletable: true
 :editable: true
 
@@ -44,7 +44,7 @@ HTML('../style/course.css') #apply general CSS
 
 Import section specific modules:
 
-```{code-cell} ipython2
+```{code-cell} ipython3
 :deletable: true
 :editable: true
 
@@ -52,7 +52,7 @@ import scipy.constants
 from IPython.display import Image
 ```
 
-```{code-cell} ipython2
+```{code-cell} ipython3
 :deletable: true
 :editable: true
 
@@ -67,7 +67,7 @@ HTML('../style/code_toggle.html')
 
 There are two main types of continuum emission mechanisms we'll encounter in radio astronomy, thermal and non-thermal. As the names suggest, the thermal emission depends on the *temperature* of the black body while non-thermal emission depends on some other properties of the emitting body. In the next few sections, we'll have an overview of the emission mechanisms and some examples of each in radio astronomy. 
 
-We'll begin the overview with an example of one of the mechanisms of thermal emission, blackbody emission. 
+We'll begin the overview with an example of one of the mechanisms of thermal emission, blackbody emission.
 
 +++ {"deletable": true, "editable": true}
 
@@ -101,7 +101,7 @@ At high frequencies, i.e. where $h\nu \gg kT$, this will reduce to Wien's approx
 
 +++ {"deletable": true, "editable": true}
 
-$$B_{\nu}(T)= \frac{2h\nu^{3}}{c^{2}} e^{\frac{-h\nu}{kT}}$$ 
+$$B_{\nu}(T)= \frac{2h\nu^{3}}{c^{2}} e^{\frac{-h\nu}{kT}}$$
 
 +++ {"deletable": true, "editable": true}
 
@@ -111,7 +111,7 @@ In radio astronomy, a more typical situation is when the frequency of the radiat
 
 $$B_{\nu}(T)= \frac{2\nu^{2}}{c^{2}} kT $$
 
-```{code-cell} ipython2
+```{code-cell} ipython3
 :deletable: true
 :editable: true
 
@@ -132,7 +132,7 @@ def B_v(T):
     return B
 ```
 
-```{code-cell} ipython2
+```{code-cell} ipython3
 :deletable: true
 :editable: true
 
@@ -155,9 +155,9 @@ ax.set_title("Blackbody Spectral Distribution")
 
 +++ {"deletable": true, "editable": true}
 
-The above distribution is for a temperature of 2.725 K, approximately the same as that of the Cosmic Microwave Background. If T (the temperature) in the above script is changed to $5700$ K, we would get a plot for the emission from the Sun. 
+The above distribution is for a temperature of 2.725 K, approximately the same as that of the Cosmic Microwave Background. If T (the temperature) in the above script is changed to $5700$ K, we would get a plot for the emission from the Sun.
 
-```{code-cell} ipython2
+```{code-cell} ipython3
 :deletable: true
 :editable: true
 
@@ -194,7 +194,7 @@ It should be noted that the actual specific intensity of an object is used here 
 
 +++ {"deletable": true, "editable": true}
 
-Thermal Bremsstrahlung radiation is another example of thermal radiation. The word Bremsstrahlung is German, meaning 'braking radiation'. This is because the origin of bremsstrahlung radiation is in accelerating (non-relativistic) particles in electric field. The 'thermal' designation refers to the fact that we are dealing with a collection of particles which are in local thermodynamic equilibrium. 
+Thermal Bremsstrahlung radiation is another example of thermal radiation. The word Bremsstrahlung is German, meaning 'braking radiation'. This is because the origin of bremsstrahlung radiation is in accelerating (non-relativistic) particles in electric field. The 'thermal' designation refers to the fact that we are dealing with a collection of particles which are in local thermodynamic equilibrium.
 
 +++ {"deletable": true, "editable": true}
 
@@ -215,7 +215,7 @@ $$P= \frac{2}{3}\frac{q^{2}\mathbf{a}^{2}}{c^{3}}$$
 
 where $\mathbf{a}$ is the acceleration of the charged particle, $q$ is its charge and $c$ is the speed of light.
 
-```{code-cell} ipython2
+```{code-cell} ipython3
 :deletable: true
 :editable: true
 
@@ -268,7 +268,7 @@ Using these equations, it is possible to express the emissivity as
 
 $$\epsilon_{\nu} = \frac{8}{3}\frac{Z^{2}e^{6}}{c^{3}}\frac{N_{i}N_{e}}{m^{2}}\left(\frac{2m}{\pi \,kT}\right)^{1/2} \ln\left(\frac{b_{2}}{b_{1}}\right)$$
 
-```{code-cell} ipython2
+```{code-cell} ipython3
 :deletable: true
 :editable: true
 
@@ -281,4 +281,4 @@ Image(filename='figures/orion_HII.png', width=300)
 
 ***
 
-* Next: [1.6 Synchrotron emission](1_6_synchrotron_emission.ipynb)
+* Next: [1.6 Synchrotron emission](1_6_synchrotron_emission.myst)

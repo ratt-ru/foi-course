@@ -1,23 +1,23 @@
 ---
 jupytext:
   text_representation:
-    extension: .md
+    extension: .myst
     format_name: myst
     format_version: 0.13
     jupytext_version: 1.16.7
 kernelspec:
-  display_name: Python 2
+  display_name: Python 3 (ipykernel)
   language: python
-  name: python2
+  name: python3
 ---
 
 ***
 
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
-* [1. Radio Science using Interferometric Arrays](1_0_introduction.ipynb)  
-    * Previous: [1.1 A Brief Introduction to Basic Astrophysics](1_1_a_brief_introduction_to_basic_astrophysics.ipynb) 
-    * Next: [1.3 Radiative Transport](1_3_radiative_transport.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [1. Radio Science using Interferometric Arrays](1_0_introduction.myst)  
+    * Previous: [1.1 A Brief Introduction to Basic Astrophysics](1_1_a_brief_introduction_to_basic_astrophysics.myst) 
+    * Next: [1.3 Radiative Transport](1_3_radiative_transport.myst)
 
 ***
 
@@ -27,7 +27,7 @@ Section status: <span style="background-color:yellow">&nbsp;&nbsp;&nbsp;&nbsp;</
 
 Import standard modules:
 
-```{code-cell} ipython2
+```{code-cell} ipython3
 import numpy as np
 import matplotlib.pyplot as plt
 %matplotlib inline
@@ -37,7 +37,7 @@ HTML('../style/course.css') #apply general CSS
 
 Import section specific modules:
 
-```{code-cell} ipython2
+```{code-cell} ipython3
 from IPython.display import Image
 ```
 
@@ -132,7 +132,7 @@ The idea is basically to characterise the polarisation as phase shifts ($\phi_0$
 
 <center>$\begin{pmatrix} E_x(t) \\ E_y(t) \\ E_z(t) \end{pmatrix} = \begin{pmatrix} E_{0x}e^{i(kz-\omega t +\phi_x)} \\  E_{0y}e^{i(kz-\omega t +\phi_y)} \\ 0 \end{pmatrix} = \begin{pmatrix} E_{0x}e^{i\phi_x} \\ E_{0y}e^{i\phi_y} \\ 0 \end{pmatrix} e^{i(kz-\omega t)} $</center>
 
-This framework will be extended [7.1. Jones notation](../7_Observing_Systems/7_1_jones_notation.ipynb).
+This framework will be extended [7.1. Jones notation](../7_Observing_Systems/7_1_jones_notation.myst).
 
 Having shown that radio waves are electromagnetic waves, we will now consider how they are analysed.
 
@@ -172,7 +172,7 @@ For example, Cygnus A, the closest extragalactic radio source, has a flux of $15
 
 Note that flux density measures the spectral flux of a single source but it does not provide any information about the direction from which the radiation originates or about the internal structure of the source. Such additional information needs to be obtained and recorded by some other means. The specific intensity or brightness specifies the flux density per solid angle from a certain direction of the sky. It is defined in terms of the infinitesimal power $dP$ permeating an infinitesimal surface $dA$ from the direction of the solid angle element $d\Omega$ over the infinitesimal frequency range $d\nu$
 
-```{code-cell} ipython2
+```{code-cell} ipython3
 Image(filename='figures/solid_angle_1.png', width=500)
 ```
 
@@ -185,9 +185,9 @@ $$
 
 where $\theta$ and $\phi$ are polar coordinates. Note that $\theta$ is the angle between the solid angle element and the normal of the surface element and $A_{\rm eff}$ the surface cross-section in the direction of the observed solid angle element.
 
-The remarkable thing about specific intensity is that it does not change with distance to the source (as long as the radiation is neither emitted nor absorbed on it path). This can be shown by considering the power flux through two infinitesimal surface elements $dA_1$ and $dA_2$. Suppose that the normals to these surface elements make angles of $\theta_1$ and $\theta_2$ with the connecting line. 
+The remarkable thing about specific intensity is that it does not change with distance to the source (as long as the radiation is neither emitted nor absorbed on it path). This can be shown by considering the power flux through two infinitesimal surface elements $dA_1$ and $dA_2$. Suppose that the normals to these surface elements make angles of $\theta_1$ and $\theta_2$ with the connecting line.
 
-```{code-cell} ipython2
+```{code-cell} ipython3
 Image(filename='figures/solid_angle_2.png', width=500)
 ```
 
@@ -213,7 +213,7 @@ and hence $I_\nu^1\,=\,I_\nu^2$. In other words, given that intensity is not abs
 
 Specific intensity is also known as the brightness, spectral radiance, spectral intensity etc. The units of spectral intensity are $ {\rm W} {\rm m}^{-2} {\rm Hz}^{-1} {\rm sr}^{-1}$ or more usually in radio astronomy, ${\rm Jy} \,{\rm sr}^{-1}$ and it is denoted generally as $I_{\nu}$. It is not uncommon that the intensity is normalised to the effective solid angle of an instrumental function, the "beam". In that case, the units of intensity become ${\rm Jy}\, {\rm beam}^{-1}$, where "beam" can be substituted by the effective solid angle of the observation.
 
-Specific intensity is the quantity which is *mapped* in radio interferometric images of radio sources. How exactly this is done is discussed in [$\S$ 5 &#10142;](../5_Imaging/5_0_introduction.ipynb).
+Specific intensity is the quantity which is *mapped* in radio interferometric images of radio sources. How exactly this is done is discussed in [$\S$ 5 &#10142;](../5_Imaging/5_0_introduction.myst).
 
 <!-- connect intensity to spectral energy density -->
 
@@ -223,7 +223,7 @@ In the next section, we'll discuss how electromagnetic radiation is generated, e
 
 ***
 
-* Next: [1.3 Radiative Transport](1_3_radiative_transport.ipynb)
+* Next: [1.3 Radiative Transport](1_3_radiative_transport.myst)
 
 +++
 
@@ -232,6 +232,6 @@ In the next section, we'll discuss how electromagnetic radiation is generated, e
 * add citations + references in wave section
 * interactive: change the phase and wavelength/frequency of light
 
-```{code-cell} ipython2
+```{code-cell} ipython3
 
 ```

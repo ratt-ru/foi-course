@@ -1,25 +1,25 @@
 ---
 jupytext:
   text_representation:
-    extension: .md
+    extension: .myst
     format_name: myst
     format_version: 0.13
     jupytext_version: 1.16.7
 kernelspec:
-  display_name: Python 2
+  display_name: Python 3 (ipykernel)
   language: python
-  name: python2
+  name: python3
 ---
 
 +++ {"deletable": true, "editable": true}
 
 ***
 
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
-* [1. Radio Science using Interferometric Arrays](1_0_introduction.ipynb)  
-    * Previous: [1.0 Introduction](../1_Radio_Science/1_0_introduction.ipynb)
-    * Next: [1.2 Electromagnetic radiation and astronomical quantities](../1_Radio_Science/1_2_electromagnetic_radiation_and_astronomical_quantities.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [1. Radio Science using Interferometric Arrays](1_0_introduction.myst)  
+    * Previous: [1.0 Introduction](../1_Radio_Science/1_0_introduction.myst)
+    * Next: [1.2 Electromagnetic radiation and astronomical quantities](../1_Radio_Science/1_2_electromagnetic_radiation_and_astronomical_quantities.myst)
 
 ***
 
@@ -29,7 +29,7 @@ Section status: <span style="background-color:green">&nbsp;&nbsp;&nbsp;&nbsp;</s
 
 Import standard modules:
 
-```{code-cell} ipython2
+```{code-cell} ipython3
 :deletable: true
 :editable: true
 
@@ -44,7 +44,7 @@ HTML('../style/course.css') #apply general CSS
 
 Import section specific modules:
 
-```{code-cell} ipython2
+```{code-cell} ipython3
 :deletable: true
 :editable: true
 
@@ -98,4 +98,4 @@ While there are detectors observing other phenomena, the medium through which th
 
 ***
 
-* Next: [1.2 Electromagnetic radiation and astronomical quantities](../1_Radio_Science/1_2_electromagnetic_radiation_and_astronomical_quantities.ipynb)
+* Next: [1.2 Electromagnetic radiation and astronomical quantities](../1_Radio_Science/1_2_electromagnetic_radiation_and_astronomical_quantities.myst)

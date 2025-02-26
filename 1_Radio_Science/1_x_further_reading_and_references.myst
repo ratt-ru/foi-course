@@ -1,23 +1,25 @@
 ---
 jupytext:
   text_representation:
-    extension: .md
+    extension: .myst
     format_name: myst
     format_version: 0.13
     jupytext_version: 1.16.7
 kernelspec:
-  display_name: Python 3
+  display_name: Python 3 (ipykernel)
   language: python
   name: python3
 ---
 
++++ {"jupyter": {"outputs_hidden": true}}
+
 ***
 
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
-* [1. Radio Science using Interferometric Arrays](1_0_introduction.ipynb)  
-    * Previous: [1.11 Modern interferometric arrays](1_11_modern_interferometric_arrays.ipynb)
-    * Next: [Chapter 2: Mathematical Groundwork](../2_Mathematical_Groundwork/2_0_introduction.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [1. Radio Science using Interferometric Arrays](1_0_introduction.myst)  
+    * Previous: [1.11 Modern interferometric arrays](1_11_modern_interferometric_arrays.myst)
+    * Next: [Chapter 2: Mathematical Groundwork](../2_Mathematical_Groundwork/2_0_introduction.myst)
 ***
 
 +++
@@ -34,10 +36,10 @@ The standard reference books for radio interferometry are [<cite data-cite='1999
 
 For technical aspects of this chapter, especially emission mechanisms, see [<cite data-cite='1981PEPI...25..432L'>Radiative Processes in Astrophysics</cite> &#10548;](http://adsabs.harvard.edu/abs/1985rpa..book.....R) and [<cite data-cite='2012tra..book.....W'>Tools of Radio Astronomy</cite> &#10548;](http://adsabs.harvard.edu/abs/2012tra..book.....W).
 
-For an excellent account of the astronomical processes taking place in Cygnus A, see [<cite data-cite='1996A&ARv...7....1C'>Cygnus A</cite> &#10548;](https://ned.ipac.caltech.edu/level5/Carilli/Car_contents.html).
+For an excellent account of the astronomical processes taking place in Cygnus A, see [<cite data-cite='1996A&ARv...7....1C'>Cygnus A</cite> &#10548;](https://ned.ipac.caltech.edu/level5/Carilli/Car_contents.html), and [<cite data-cite='10.3847/1538-4357/abb80e'>A Wideband Polarization Study of Cygnus A with the Jansky Very Large Array. I. The Observations and Data</cite>](https://ui.adsabs.harvard.edu/abs/2020ApJ...903...36S/abstract) for its radio spectropolarimetric properties.
 
 +++
 
 ***
 
-Next: [Chapter 2: Mathematical Groundwork](../2_Mathematical_Groundwork/2_0_introduction.ipynb)
+Next: [Chapter 2: Mathematical Groundwork](../2_Mathematical_Groundwork/2_0_introduction.myst)

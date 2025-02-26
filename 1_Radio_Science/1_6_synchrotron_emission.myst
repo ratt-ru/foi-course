@@ -1,23 +1,23 @@
 ---
 jupytext:
   text_representation:
-    extension: .md
+    extension: .myst
     format_name: myst
     format_version: 0.13
     jupytext_version: 1.16.7
 kernelspec:
-  display_name: Python 2
+  display_name: Python 3 (ipykernel)
   language: python
-  name: python2
+  name: python3
 ---
 
 ***
 
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
-* [1. Radio Science using Interferometric Arrays](1_0_introduction.ipynb)
-    * Previous: [1.5 Black body radiation](1_5_black_body_radiation.ipynb)
-    * Next: [1.7 Line emission](1_7_line_emission.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [1. Radio Science using Interferometric Arrays](1_0_introduction.myst)
+    * Previous: [1.5 Black body radiation](1_5_black_body_radiation.myst)
+    * Next: [1.7 Line emission](1_7_line_emission.myst)
 ***
 
 +++
@@ -26,7 +26,7 @@ Section status: <span style="background-color:orange">&nbsp;&nbsp;&nbsp;&nbsp;</
 
 Import standard modules:
 
-```{code-cell} ipython2
+```{code-cell} ipython3
 import numpy as np
 import matplotlib.pyplot as plt
 %matplotlib inline
@@ -36,7 +36,7 @@ HTML('../style/course.css') #apply general CSS
 
 Import section specific modules:
 
-```{code-cell} ipython2
+```{code-cell} ipython3
 from IPython.display import Image
 HTML('../style/code_toggle.html')
 ```
@@ -45,11 +45,11 @@ HTML('../style/code_toggle.html')
 
 +++
 
-Synchrotron emission is one of the most commonly encountered forms of radiation from astronomical radio sources. This type of radiation originates from relativistic particles accelerated in a magnetic field. 
+Synchrotron emission is one of the most commonly encountered forms of radiation from astronomical radio sources. This type of radiation originates from relativistic particles accelerated in a magnetic field.
 
 +++
 
-The mechanism by which synchrotron emission occurs depends fundamentally on special relativistic effects. We won't delve into the details here. Instead we will try to explain (in a rather hand wavy way) some of the underlying physics. As we have seen in [$\S$ 1.2.1 &#10142;](../1_Radio_Science/1_2_electromagnetic_radiation_and_astronomical_quantities.ipynb),
+The mechanism by which synchrotron emission occurs depends fundamentally on special relativistic effects. We won't delve into the details here. Instead we will try to explain (in a rather hand wavy way) some of the underlying physics. As we have seen in [$\S$ 1.2.1 &#10142;](../1_Radio_Science/1_2_electromagnetic_radiation_and_astronomical_quantities.myst),
 
 <span style="background-color:cyan"> LB:RF:this is the original link but I don't think it points to the right place. Add a reference to where this is discussed and link to that. See also comment in previous section about where the Larmor formula is first introduced</span>
 
@@ -77,7 +77,7 @@ From this equation it can be seen that *the total power radiated by the particle
 
 In analogy with the non-relativistic case, there is a frequency of gyration. This refers to the path the charged particle follows while being accelerated in a magnetic field. The figure below illustrates the idea.
 
-```{code-cell} ipython2
+```{code-cell} ipython3
 Image(filename='figures/drawing.png', width=300)
 ```
 
@@ -135,9 +135,9 @@ This is approximately valid for a 'fresh' collection of radiating particles. How
 
 +++
 
-So where do we actually see synchrotron emission? As mentioned above, the prerequisites are magnetic fields and relativistic particles. These conditions are satisfied in a variety of situations. Prime examples are the lobes of radio galaxies. The lobes contain relativistic plasma in magnetic fields of strength ~ $\mu$G. It is believed that these plasmas and magnetic fields ultimately originate from the activity in the center of radio galaxies where a supermassive black hole resides. The figure below shows a radio image of the radio galaxy nearest to us, Cygnus A. 
+So where do we actually see synchrotron emission? As mentioned above, the prerequisites are magnetic fields and relativistic particles. These conditions are satisfied in a variety of situations. Prime examples are the lobes of radio galaxies. The lobes contain relativistic plasma in magnetic fields of strength ~ $\mu$G. It is believed that these plasmas and magnetic fields ultimately originate from the activity in the center of radio galaxies where a supermassive black hole resides. The figure below shows a radio image of the radio galaxy nearest to us, Cygnus A.
 
-```{code-cell} ipython2
+```{code-cell} ipython3
 Image(filename='figures/cygnusA.png')
 ```
 
@@ -150,7 +150,7 @@ The jets, which carry relativistic charged particles or plasma originating from 
 Well, the non-thermal nature of the emission can be verified by measuring the spectrum of the radio emission. A value close to -0.7 suggests, by the reasoning given above, that the radiation results from a synchrotron emission mechanism. The plots below show the spectrum of the lobes of Cygnus A within a frequency range of 150 MHz to 14.65 GHz. 
 <span style="background-color:cyan"> LB:RF: Add proper citation. </span>
 
-```{code-cell} ipython2
+```{code-cell} ipython3
 # Data taken from Steenbrugge et al.,2010, MNRAS
 freq = (151.0, 327.5, 1345.0, 4525.0, 8514.9, 14650.0)
 flux_L = (4746, 2752.7, 749.8, 189.4, 83.4, 40.5)
@@ -184,11 +184,11 @@ Another important mechanism by which astronomical objects emit at radio frequenc
 
 +++
 
-Once again we will sacrifice rigour for simplicity in order to try and convey the important underlying physics. We start with a situation, analogous to the derivation of Bremsstrahlung radiation, in which a photon is interacting with an electron.    
+Once again we will sacrifice rigour for simplicity in order to try and convey the important underlying physics. We start with a situation, analogous to the derivation of Bremsstrahlung radiation, in which a photon is interacting with an electron.
 
 +++
 
-Recall from [$\S$ 1.2.1 &#10142;](../1_Radio_Science/1_2_electromagnetic_radiation_and_astronomical_quantities.ipynb#1.2.1.1-Derivation-of-electromagnetic-waves), that a photon represents a oscillation in the electromagnetic field. Since the electron is charged, it will experience a force from the electric an field $\mathbf{E'}$, which produces an acceleration. In the rest frame of the electron, we may write this acceleration as
+Recall from [$\S$ 1.2.1 &#10142;](../1_Radio_Science/1_2_electromagnetic_radiation_and_astronomical_quantities.myst#1.2.1.1-Derivation-of-electromagnetic-waves), that a photon represents a oscillation in the electromagnetic field. Since the electron is charged, it will experience a force from the electric an field $\mathbf{E'}$, which produces an acceleration. In the rest frame of the electron, we may write this acceleration as
 
 $$\mathbf{a} = \frac{e}{m_{e}}\mathbf{E'} $$ 
 
@@ -210,11 +210,11 @@ $$\frac{\Delta E}{E} = (\gamma^{2}-1)\sim \frac{v^{2}}{c^{2}}$$
 
 +++
 
-This process takes place when low energy photons interact with high energy plasma. One of the main examples is photons from the cosmic microwave background interacting with hot intra-cluster gas (i.e. the medium between galaxies within a galaxy cluster). As we learned in $\S$ [1.5 &#10549;](1_5_black_body_radiation.ipynb), the CMB has a temperature $T = 2.725$ K. Hot intra-cluster gas, on the other hand, has a temperature of $\sim 10^7 - 10^8$ K. The photons from the CMB interact with this medium resulting in in increase of the overall energy of the photons. This effectively marks a change in the CMB temperature in the direction of the cluster and is known as the Sunyaev-Zeldovich effect (see [here](https://en.wikipedia.org/wiki/Sunyaev%E2%80%93Zel'dovich_effect) for example). The change in the temperature can be written as:
+This process takes place when low energy photons interact with high energy plasma. One of the main examples is photons from the cosmic microwave background interacting with hot intra-cluster gas (i.e. the medium between galaxies within a galaxy cluster). As we learned in $\S$ [1.5 &#10549;](1_5_black_body_radiation.myst), the CMB has a temperature $T = 2.725$ K. Hot intra-cluster gas, on the other hand, has a temperature of $\sim 10^7 - 10^8$ K. The photons from the CMB interact with this medium resulting in in increase of the overall energy of the photons. This effectively marks a change in the CMB temperature in the direction of the cluster and is known as the Sunyaev-Zeldovich effect (see [here](https://en.wikipedia.org/wiki/Sunyaev%E2%80%93Zel'dovich_effect) for example). The change in the temperature can be written as:
 
 $$\frac{\Delta T}{T} = \frac{2kT}{m_{e}c^{2}}\sigma_{T}\,N_{e}L$$
 
 +++
 
 ***
-* Next: [1.7 Line emission](1_7_line_emission.ipynb)
+* Next: [1.7 Line emission](1_7_line_emission.myst)

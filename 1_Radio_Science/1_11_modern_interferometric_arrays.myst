@@ -1,23 +1,23 @@
 ---
 jupytext:
   text_representation:
-    extension: .md
+    extension: .myst
     format_name: myst
     format_version: 0.13
     jupytext_version: 1.16.7
 kernelspec:
-  display_name: Python 3
+  display_name: Python 3 (ipykernel)
   language: python
   name: python3
 ---
 
 ***
 
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
-* [1. Radio Science using Interferometric Arrays](1_0_introduction.ipynb)  
-    * Previous: [1.10 The Limits of Single Dish Astronomy](1_10_limits_of_single_dishes.ipynb)
-    * Next: [1.x Further reading and references](1_x_further_reading_and_references.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [1. Radio Science using Interferometric Arrays](1_0_introduction.myst)  
+    * Previous: [1.10 The Limits of Single Dish Astronomy](1_10_limits_of_single_dishes.myst)
+    * Next: [1.x Further reading and references](1_x_further_reading_and_references.myst)
    
 ***
 
@@ -84,7 +84,7 @@ Each of the elements is a 12 metre, prime-focus (the receiver is at the focal po
 
 The resolution of the dish $\Delta \theta_{1.4 GHz}$ (also called the primary beam) is presented at 1.4 GHz i.e. at the 21 cm Hydrogen hyperfine transition line. This is a common observing frequency so it will be used as a comparison between many of the arrays in this section.
 
-The KAT-7 receiver band covers the observing frequency range between 1.2 GHz and 1.95 GHz. The digital hardware is capable of processing 256 MHz of this band instantaneously, i.e. at any given time. This frequency range is called L-band in reference to the radio communication spectrum allocation labels. The L-band receiver feed is a dual-polarization linear system (polarization will be covered in [$\S$ 7.6 &#10142;](../7_Observing_Systems/7_6_polarization.ipynb)). The receiver specifications are in the table below.
+The KAT-7 receiver band covers the observing frequency range between 1.2 GHz and 1.95 GHz. The digital hardware is capable of processing 256 MHz of this band instantaneously, i.e. at any given time. This frequency range is called L-band in reference to the radio communication spectrum allocation labels. The L-band receiver feed is a dual-polarization linear system (polarization will be covered in [$\S$ 7.6 &#10142;](../7_Observing_Systems/7_6_polarization.myst)). The receiver specifications are in the table below.
 
 | Receivers ||
 |:---|:---:|
@@ -505,7 +505,7 @@ This section has provided a brief overview of some of the interferometric arrays
 
 *** 
 
-* Next: [1.x Further reading and references](1_x_further_reading_and_references.ipynb)
+* Next: [1.x Further reading and references](1_x_further_reading_and_references.myst)
 
 +++
 

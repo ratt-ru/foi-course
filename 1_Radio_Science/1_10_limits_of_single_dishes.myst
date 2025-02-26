@@ -1,23 +1,23 @@
 ---
 jupytext:
   text_representation:
-    extension: .md
+    extension: .myst
     format_name: myst
     format_version: 0.13
     jupytext_version: 1.16.7
 kernelspec:
-  display_name: Python 3
+  display_name: Python 3 (ipykernel)
   language: python
   name: python3
 ---
 
 ***
 
-* [Outline](../0_Introduction/0_introduction.ipynb)
-* [Glossary](../0_Introduction/1_glossary.ipynb)
-* [1. Radio Science using Interferometric Arrays](1_0_introduction.ipynb)  
-    * Previous: [1.9 A brief introduction to interferometry](1_9_a_brief_introduction_to_interferometry.ipynb)
-    * Next: [1.11 Modern Interferometric Arrays](1_11_modern_interferometric_arrays.ipynb)
+* [Outline](../0_Introduction/0_introduction.myst)
+* [Glossary](../0_Introduction/1_glossary.myst)
+* [1. Radio Science using Interferometric Arrays](1_0_introduction.myst)  
+    * Previous: [1.9 A brief introduction to interferometry](1_9_a_brief_introduction_to_interferometry.myst)
+    * Next: [1.11 Modern Interferometric Arrays](1_11_modern_interferometric_arrays.myst)
    
 ***
 
@@ -31,15 +31,16 @@ Import standard modules:
 import numpy as np
 import matplotlib.pyplot as plt
 %matplotlib inline
-from IPython.display import HTML 
+from IPython.display import HTML
 HTML('../style/course.css') #apply general CSS
 ```
 
 Import section specific modules:
 
 ```{code-cell} ipython3
-import ipywidgets
+from ipywidgets import interact
 from IPython.display import Image
+from textwrap import dedent
 ```
 
 ```{code-cell} ipython3
@@ -50,7 +51,7 @@ HTML('../style/code_toggle.html')
 
 +++
 
-In the [previous section &#10142;](1_9_a_brief_introduction_to_interferometry.ipynb) of this chapter we introduced the concepts and historical background of interferometry.  Earlier in the chapter we presented some of the basic astrophysical sources which emit in the radio spectrum. In this section we will try to answer why we need to use interferometry in radio astronomy. A related question we will try to answer is why we can not just use a single telescope as in traditional optical astronomy.
+In the [previous section &#10142;](1_9_a_brief_introduction_to_interferometry.myst) of this chapter we introduced the concepts and historical background of interferometry.  Earlier in the chapter we presented some of the basic astrophysical sources which emit in the radio spectrum. In this section we will try to answer why we need to use interferometry in radio astronomy. A related question we will try to answer is why we can not just use a single telescope as in traditional optical astronomy.
 
 Single telescopes are used in radio astronomy, and provide complimentary observational data to that of interferometric arrays. Astronomy with a single radio telescope is often called *single dish astronomy* as the telescope usually has a dish reflector (Figure 1.10.1). This dish is usually parabolic, but other shapes are also used, as it allows for the focusing of light to a single focal point where a receiver is placed - among other instruments this could be a camera in the optical, a bolometer in the far-infrared, or an antenna feed in the radio. Instead of a single dish telescope, a more general term would be a single *element* telescope which can be as simple as a dipole (Figure 1.10.2). An interferometric array (Figure 1.10.3) is used to create a *synthesized telescope* as it is considered a single telescope synthesized out of many elements (each element is also a telescope, it can get even more confusing).
 
@@ -80,7 +81,7 @@ Depending on the science goals of an experiment or observatory, different types 
 
 ### 1.10.1. Aperture Diameter and Angular Resolution
 
-+++
++++ {"jupyter": {"outputs_hidden": true}}
 
 If we consider a generic radio telescope dish, ignoring blockage from feeds and structure and any practical issues, we can think of the dish as having a circular aperture. We will use the term 'primary beam' later in Chapter 7 to discuss this aperture in detail. Until then we can think of the dish aperture size as being the *collecting area*. The larger the aperture the more collecting area, thus the more *sensitive* (a measure of how well the telescope is able to measure a signal) the telescope. This is the same as in photography. Since we are modelling our simple telescope as a circle then the collection area $A$, or aperture size, is proportional to the square of the dish diameter $D$.
 
@@ -282,7 +283,7 @@ In the next section we will provide an overview of common interferometric arrays
 
 *** 
 
-* Next: [1.11 Modern Interferometric Arrays](1_11_modern_interferometric_arrays.ipynb)
+* Next: [1.11 Modern Interferometric Arrays](1_11_modern_interferometric_arrays.myst)
 
 +++
 
