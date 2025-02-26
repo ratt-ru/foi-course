@@ -1,14 +1,14 @@
 ---
 jupytext:
   text_representation:
-    extension: .md
+    extension: .myst
     format_name: myst
     format_version: 0.13
     jupytext_version: 1.16.7
 kernelspec:
-  display_name: Python 2
+  display_name: Python 3 (ipykernel)
   language: python
-  name: python2
+  name: interferometry
 ---
 
 +++ {"deletable": true, "editable": true}
@@ -27,10 +27,13 @@ kernelspec:
 
 Import standard modules:
 
-```{code-cell} ipython2
-:deletable: true
-:editable: true
-
+```{code-cell} ipython3
+---
+deletable: true
+editable: true
+jupyter:
+  outputs_hidden: false
+---
 import numpy as np
 import matplotlib.pyplot as plt
 %matplotlib inline
@@ -42,16 +45,19 @@ HTML('../style/course.css') #apply general CSS
 
 Import section specific modules:
 
-```{code-cell} ipython2
-:deletable: true
-:editable: true
-
+```{code-cell} ipython3
+---
+deletable: true
+editable: true
+jupyter:
+  outputs_hidden: false
+---
 from IPython.display import HTML
 HTML('../style/code_toggle.html')
 import ephem
 import matplotlib
-%pylab inline
-pylab.rcParams['figure.figsize'] = (15, 10)
+%matplotlib inline
+matplotlib.rcParams['figure.figsize'] = (15, 10)
 ```
 
 +++ {"deletable": true, "editable": true}
@@ -60,7 +66,7 @@ pylab.rcParams['figure.figsize'] = (15, 10)
 
 +++ {"deletable": true, "editable": true}
 
-In <a class="pos_sec_ha_hz"></a> <!--\ref{pos:sec:ha}--> we introduced the concept of an hour angle, which allows us to determine the time that still needs to elapse before a source crosses the local meridian. This however does not tell us where we should point a telescope on earth in order to observe a source with a specific hour angle. The *horizontal coordinates* *azimuth* $\mathcal{A}$ and *altitude* $\mathcal{E}$ (elevation) is used to enable an observer on earth to locate celestial objects in the observer's local sky. The observer's horizontal plane is the fundamental plane of this coordinate system and is known as the *celestial horizon*. The azimuth angle is measured in the celestial horizon from due north towards the east, while the altitude of a celestial object is the angle between it and the celestial horizon. Both azimuth and elevation are measured in degrees. The azimuth and elevation angle are depicted in <a class="pos_fig_hoz_hz"></a> <!--\ref{pos:fig:hoz}--> 
+In <a class="pos_sec_ha_hz"></a> <!--\ref{pos:sec:ha}--> we introduced the concept of an hour angle, which allows us to determine the time that still needs to elapse before a source crosses the local meridian. This however does not tell us where we should point a telescope on earth in order to observe a source with a specific hour angle. The *horizontal coordinates* *azimuth* $\mathcal{A}$ and *altitude* $\mathcal{E}$ (elevation) is used to enable an observer on earth to locate celestial objects in the observer's local sky. The observer's horizontal plane is the fundamental plane of this coordinate system and is known as the *celestial horizon*. The azimuth angle is measured in the celestial horizon from due north towards the east, while the altitude of a celestial object is the angle between it and the celestial horizon. Both azimuth and elevation are measured in degrees. The azimuth and elevation angle are depicted in <a class="pos_fig_hoz_hz"></a> <!--\ref{pos:fig:hoz}-->
 
 +++ {"deletable": true, "editable": true}
 
@@ -68,7 +74,7 @@ In <a class="pos_sec_ha_hz"></a> <!--\ref{pos:sec:ha}--> we introduced the conce
 
 +++ {"deletable": true, "editable": true}
 
-*Figure 3.3.1*: The horizontal coordinates. <span style="background-color:cyan">KT:XX: Azimuth and elevation symbols seem to have been exchanged in the figure.</span> 
+*Figure 3.3.1*: The horizontal coordinates. <span style="background-color:cyan">KT:XX: Azimuth and elevation symbols seem to have been exchanged in the figure.</span>
 
 +++ {"deletable": true, "editable": true}
 
@@ -105,7 +111,7 @@ the triangle $\Delta PSZ$ which is depicted in <a class="pos_fig_conversion_hz">
 +++ {"deletable": true, "editable": true}
 
 *Figure 3.3.2*: The source-celestial pole-zenith triangle; which enables us to derive the conversion equations between horizontal and equatorial coordinates. The red plane represents the fundamental plane of the horizontal coordinate system, while the blue plane represents the 
-fundamental plane of the celestial coordinate system. <span style="background-color:cyan">KT:XX: Where is the source located in the figure?</span> 
+fundamental plane of the celestial coordinate system. <span style="background-color:cyan">KT:XX: Where is the source located in the figure?</span>
 
 +++ {"deletable": true, "editable": true}
 
@@ -120,12 +126,15 @@ The parallactic angle, and how it pertains to radio interferometry is discussed 
 
 +++ {"deletable": true, "editable": true}
 
-Let us cement the concpets we have learned in this section by once again making use of the  `pyephem` package. In this section we will use it to compute the horizontal coordinates for two primary use cases. In the first use case we plot the horizontal coordinates of a few randomly selected stars under the assumption that they are "observed" with KAT7. We will compute the horizontal coordinates of the selected stars for one entire day (2016/5/30). As we have already mentioned, the horizontal coordinates of the stars change during the course of one day, since the earth is rotating around its own axis. To achieve this we first create a `pyephem` observer object acting as a proxy for the KAT-7 array. Next we create `pyephem` body objects for the randomly selected stars. Each of the body objects has a method called `compute`. This `compute` method can take in an observer object. The compute method of the body object uses the geometrical location and the date attributes of the observer object to calculate the horizontal coordinates of the celestial body (in this case a star) the body object embodies. To track the change of the horizontal coordinates of stars (i.e. the stars we are interested in) we only need to iteratively call the compute methods of the body objects associated with them. Every time we call the compute method we just pass in an observer object with an appropriately altered date attribute. The code snippet below implements the above procedure. The altitude and azimuth angles of ten well known stars, calculated with `pyephem`, is depicted in <a class="pos_fig_alt_hz"></a> <!--\ref{pos:fig:alt}--> and <a class="pos_fig_az_hz"></a> <!--\ref{pos:fig:az}-->. 
+Let us cement the concpets we have learned in this section by once again making use of the  `pyephem` package. In this section we will use it to compute the horizontal coordinates for two primary use cases. In the first use case we plot the horizontal coordinates of a few randomly selected stars under the assumption that they are "observed" with KAT7. We will compute the horizontal coordinates of the selected stars for one entire day (2016/5/30). As we have already mentioned, the horizontal coordinates of the stars change during the course of one day, since the earth is rotating around its own axis. To achieve this we first create a `pyephem` observer object acting as a proxy for the KAT-7 array. Next we create `pyephem` body objects for the randomly selected stars. Each of the body objects has a method called `compute`. This `compute` method can take in an observer object. The compute method of the body object uses the geometrical location and the date attributes of the observer object to calculate the horizontal coordinates of the celestial body (in this case a star) the body object embodies. To track the change of the horizontal coordinates of stars (i.e. the stars we are interested in) we only need to iteratively call the compute methods of the body objects associated with them. Every time we call the compute method we just pass in an observer object with an appropriately altered date attribute. The code snippet below implements the above procedure. The altitude and azimuth angles of ten well known stars, calculated with `pyephem`, is depicted in <a class="pos_fig_alt_hz"></a> <!--\ref{pos:fig:alt}--> and <a class="pos_fig_az_hz"></a> <!--\ref{pos:fig:az}-->.
 
-```{code-cell} ipython2
-:deletable: true
-:editable: true
-
+```{code-cell} ipython3
+---
+deletable: true
+editable: true
+jupyter:
+  outputs_hidden: false
+---
 #Creating the observer: KAT-7
 KAT7 = ephem.Observer() 
 KAT7.lat = '-30:43:17'
@@ -136,7 +145,7 @@ KAT7.date = '2016/5/30 00:00:00' #UTC
 #Creating the celestial bodies
 star_names = np.array(["Rigel","Thuban","Mimosa","Procyon","Sirius","Achernar","Menkar","Zaurak","Aldebaran","Betelgeuse"])
 star_objects = np.empty((len(star_names),),dtype=object)
-for k in xrange(len(star_names)):
+for k in range(len(star_names)):
     star_objects[k] = ephem.star(star_names[k],KAT7) 
 
 
@@ -146,7 +155,7 @@ minutes = np.empty((96,),dtype=object)
 alt_az_mat = np.zeros((len(star_names),len(hours)+1,2),dtype=float) #(sources,hours,horz_coord) 
 
 hours_c = 0
-for k in xrange(len(hours)):
+for k in range(len(hours)):
    
     if k % 4 == 0:
        if hours_c < 10:
@@ -175,7 +184,7 @@ for k in xrange(len(hours)):
        minutes[k] = "45"
         
 #Compute the alt/az for different stars observed by KAT-7 at different times on 2016/5/30         
-for k in xrange(len(hours)):
+for k in range(len(hours)):
     
     #Set new time
     n_date = '2016/5/30 ' + hours[k] + ':' + minutes[k] + ':00'
@@ -183,7 +192,7 @@ for k in xrange(len(hours)):
     KAT7.date = n_date
     
     #Calculate new alt/az
-    for j in xrange(len(star_names)):
+    for j in range(len(star_names)):
         star_objects[j].compute(KAT7)
         alt_az_mat[j,k,0] = float(star_objects[j].alt)
         alt_az_mat[j,k,1] = float(star_objects[j].az)
@@ -202,7 +211,7 @@ l = ["-","--"]
 l_ind = 0
 c_ind = 0
 
-for k in xrange(len(star_names)):
+for k in range(len(star_names)):
     if c_ind == 7:
        c_ind = 0
        l_ind = 1
@@ -225,11 +234,15 @@ plt.yticks(ticks)
 ticks = np.array([0,2,4,6,8,10,12,14,16,18,20,22,24])
 plt.xticks(ticks)
 plt.xlabel("UTC [$h$]")
-plt.ylabel("Altitude [$^{\circ}$]")
+plt.ylabel("Altitude [$^{\\circ}$]")
 plt.title("KAT-7: 2016/5/30")
 
 labels = [item.get_text() for item in ax.get_yticklabels()]
-labels = np.array(["-90$^{\circ}$","-80$^{\circ}$","-70$^{\circ}$","-60$^{\circ}$","-50$^{\circ}$","-40$^{\circ}$","-30$^{\circ}$","-20$^{\circ}$","-10$^{\circ}$","0$^{\circ}$","10$^{\circ}$","20$^{\circ}$","30$^{\circ}$","40$^{\circ}$","50$^{\circ}$","60$^{\circ}$","70$^{\circ}$","80$^{\circ}$","90$^{\circ}$"])
+labels = np.array(["-90$^{\\circ}$","-80$^{\\circ}$","-70$^{\\circ}$","-60$^{\\circ}$",
+                   "-50$^{\\circ}$","-40$^{\\circ}$","-30$^{\\circ}$","-20$^{\\circ}$",
+                   "-10$^{\\circ}$","0$^{\\circ}$","10$^{\\circ}$","20$^{\\circ}$",
+                   "30$^{\\circ}$","40$^{\\circ}$","50$^{\\circ}$","60$^{\\circ}$",
+                   "70$^{\\circ}$","80$^{\\circ}$","90$^{\\circ}$"])
 ax.set_yticklabels(labels)
 
 ax.grid('on')
@@ -237,16 +250,19 @@ ax.grid('on')
 
 +++ {"deletable": true, "editable": true}
 
-*Figure 3.3.3*: The altitude angle of ten well known stars during 2016/5/30 as observed by the KAT-7 array. The altitude angle was computed by employing `pyephem`. The peaks of the curves indicate the times at which the stars were at transit. The black rectangle represents the fundamental horizon<span style="background-color:cyan">KT:XX: What is the fundamental horizon? Do you mean the celestial horizon?</span> . Any star that stays below the horizon would not be observable at all (see the curve associated with *Thuban* for an example). Any star that stays above the horizon for the entire day is a circumpolar star. *Mimosa* can almost be classified as a circumpolar star.   <!--\label{pos:fig:alt}-->     
+*Figure 3.3.3*: The altitude angle of ten well known stars during 2016/5/30 as observed by the KAT-7 array. The altitude angle was computed by employing `pyephem`. The peaks of the curves indicate the times at which the stars were at transit. The black rectangle represents the fundamental horizon<span style="background-color:cyan">KT:XX: What is the fundamental horizon? Do you mean the celestial horizon?</span> . Any star that stays below the horizon would not be observable at all (see the curve associated with *Thuban* for an example). Any star that stays above the horizon for the entire day is a circumpolar star. *Mimosa* can almost be classified as a circumpolar star.   <!--\label{pos:fig:alt}-->
 
 +++ {"deletable": true, "editable": true}
 
-We have not yet plotted the azimuth coordinates for the randomly selected stars. We do so by using the code snippet below. 
+We have not yet plotted the azimuth coordinates for the randomly selected stars. We do so by using the code snippet below.
 
-```{code-cell} ipython2
-:deletable: true
-:editable: true
-
+```{code-cell} ipython3
+---
+deletable: true
+editable: true
+jupyter:
+  outputs_hidden: false
+---
 #Plot az
 matplotlib.rcParams.update({'font.size': 13.75})
 fig, ax = plt.subplots()
@@ -256,7 +272,7 @@ l = ["-","--"]
 l_ind = 0
 c_ind = 0
 
-for i in xrange(10):
+for i in range(10):
     if c_ind == 7:
        c_ind = 0
        l_ind = 1
@@ -271,11 +287,11 @@ plt.yticks(ticks)
 ticks = np.array([0,2,4,6,8,10,12,14,16,18,20,22,24])
 plt.xticks(ticks)
 plt.xlabel("UTC [$h$]")
-plt.ylabel("Azimuth [$^{\circ}$]")
+plt.ylabel("Azimuth [$^{\\circ}$]")
 plt.title("KAT-7: 2016/5/30")
 
 labels = [item.get_text() for item in ax.get_yticklabels()]
-labels = np.array(["0$^{\circ}$","60$^{\circ}$","120$^{\circ}$","180$^{\circ}$","240$^{\circ}$","300$^{\circ}$","360$^{\circ}$"])
+labels = np.array(["0$^{\\circ}$","60$^{\\circ}$","120$^{\\circ}$","180$^{\\circ}$","240$^{\\circ}$","300$^{\\circ}$","360$^{\\circ}$"])
 ax.set_yticklabels(labels)
 
 ax.grid('on')
@@ -290,10 +306,13 @@ ax.grid('on')
 In the second use case we determine the horizontal coordinates of *Betelgeuse*
 for different arrays around the world at a specific moment in time (2016/5/30 00:00:00). We again use `pyephem` to accomplish this. See the code snippet below for the exact details of how this can be achieved. We plot the main result of the code snippet in <a class='pos_fig_hbetelgeuse_hz'></a> <!--\ref{pos:fig:hbetelgeuse}-->.
 
-```{code-cell} ipython2
-:deletable: true
-:editable: true
-
+```{code-cell} ipython3
+---
+deletable: true
+editable: true
+jupyter:
+  outputs_hidden: false
+---
 #Preliminaries
 matplotlib.rcParams.update({'font.size': 13.75})
 observatories = ["LOFAR","KAT7","MWA","VLA","ALMA","GMRT"]
@@ -303,7 +322,7 @@ lon_v = ["06:52:08","21:25:40.08","116:40:16","-107:37:05","-67:45:12","74:02:59
 alt_az = np.zeros((len(observatories),2),dtype=float)
 
 #Loading different observatories and calculating alt/az of Betelgeuse for each of them
-for k in xrange(len(observatories)):
+for k in range(len(observatories)):
     obs = ephem.Observer() 
     obs.lat = lat_v[k]
     obs.lon = lon_v[k]
@@ -331,15 +350,19 @@ ticks = np.array([-90,-80,-70,-60,-50,-40,-30,-20,-10,0,10,20,30,40,50,60,70,80,
 plt.xticks(ticks)
 
 labels = [item.get_text() for item in ax.get_yticklabels()]
-labels = np.array(["0$^{\circ}$","60$^{\circ}$","120$^{\circ}$","180$^{\circ}$","240$^{\circ}$","300$^{\circ}$","360$^{\circ}$"])
+labels = np.array(["0$^{\\circ}$","60$^{\\circ}$","120$^{\\circ}$","180$^{\\circ}$","240$^{\\circ}$","300$^{\\circ}$","360$^{\\circ}$"])
 ax.set_yticklabels(labels)
 
 labels = [item.get_text() for item in ax.get_xticklabels()]
-labels = np.array(["-90$^{\circ}$","-80$^{\circ}$","-70$^{\circ}$","-60$^{\circ}$","-50$^{\circ}$","-40$^{\circ}$","-30$^{\circ}$","-20$^{\circ}$","-10$^{\circ}$","0$^{\circ}$","10$^{\circ}$","20$^{\circ}$","30$^{\circ}$","40$^{\circ}$","50$^{\circ}$","60$^{\circ}$","70$^{\circ}$","80$^{\circ}$","90$^{\circ}$"])
+labels = np.array(["-90$^{\\circ}$","-80$^{\\circ}$","-70$^{\\circ}$","-60$^{\\circ}$",
+                   "-50$^{\\circ}$","-40$^{\\circ}$","-30$^{\\circ}$","-20$^{\\circ}$",
+                   "-10$^{\\circ}$","0$^{\\circ}$","10$^{\\circ}$","20$^{\\circ}$",
+                   "30$^{\\circ}$","40$^{\\circ}$","50$^{\\circ}$","60$^{\\circ}$",
+                   "70$^{\\circ}$","80$^{\\circ}$","90$^{\\circ}$"])
 ax.set_xticklabels(labels)
 
-plt.xlabel("Altitude [$^{\circ}$]")
-plt.ylabel("Azimuth [$^{\circ}$]")
+plt.xlabel("Altitude [$^{\\circ}$]")
+plt.ylabel("Azimuth [$^{\\circ}$]")
 plt.title("Betelgeuse: 2016/5/30 - 00:00:00 UTC")
 
 ax.grid('on')

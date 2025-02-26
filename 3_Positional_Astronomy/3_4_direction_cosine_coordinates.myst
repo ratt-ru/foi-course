@@ -1,14 +1,14 @@
 ---
 jupytext:
   text_representation:
-    extension: .md
+    extension: .myst
     format_name: myst
     format_version: 0.13
     jupytext_version: 1.16.7
 kernelspec:
-  display_name: Python 2
+  display_name: Python 3 (ipykernel)
   language: python
-  name: python2
+  name: interferometry
 ---
 
 +++ {"deletable": true, "editable": true}
@@ -27,10 +27,13 @@ kernelspec:
 
 Import standard modules:
 
-```{code-cell} ipython2
-:deletable: true
-:editable: true
-
+```{code-cell} ipython3
+---
+deletable: true
+editable: true
+jupyter:
+  outputs_hidden: false
+---
 import numpy as np
 import matplotlib.pyplot as plt
 %matplotlib inline
@@ -42,10 +45,13 @@ HTML('../style/course.css') #apply general CSS
 
 Import section specific modules:
 
-```{code-cell} ipython2
-:deletable: true
-:editable: true
-
+```{code-cell} ipython3
+---
+deletable: true
+editable: true
+jupyter:
+  outputs_hidden: false
+---
 from IPython.display import HTML
 HTML('../style/code_toggle.html')
 ```
@@ -78,12 +84,12 @@ n &=& \cos(\gamma) = \frac{a_3}{|\mathbf{a}|}
 
 +++ {"deletable": true, "editable": true}
 
-*Figure 3.4.1*: Definition of direction cosines. 
+*Figure 3.4.1*: Definition of direction cosines.
 
 +++ {"deletable": true, "editable": true}
 
 The quantities $\alpha$, $\beta$, $\gamma$, $a_1$, $a_2$, $a_3$ and $\mathbf{a}$ are all defined in <a class='pos_fig_cos_dir'></a> <!--\ref{pos:fig:cos}-->. Moreover, $|\cdot|$ denotes the magnitude of its operand. The definitions above also imply that $l^2+m^2+n^2 = 1$. When $|\mathbf{a}|=1$ then we may simply interpret $l$, $m$ and $n$ as   Cartesian coordinates, i.e. we may simply relabel the axes $x$, $y$ and $z$ (in <a class='pos_fig_cos_dir'></a><!--\ref{pos:fig:cos}-->) to 
-$l$, $m$ and $n$. 
+$l$, $m$ and $n$.
 
 +++ {"deletable": true, "editable": true}
 
@@ -99,7 +105,7 @@ So the question now arises, how do we use $l$, $m$ and $n$ to uniquely identify 
 
 +++ {"deletable": true, "editable": true}
 
-We use the following equations to convert between the equatorial and direction cosine coordinate systems: 
+We use the following equations to convert between the equatorial and direction cosine coordinate systems:
 
 +++ {"deletable": true, "editable": true}
 
@@ -130,7 +136,7 @@ We can obtain the conversion relations above by applying the spherical trigoneme
 
 There is another important interpretation of direction cosine coordinates we should
 be cognisant of. If we project the direction cosine position vector $\mathbf{s}$ of a celestial body onto the $lm$-plane it's projected length will be equal to $\sin \theta$, where $\theta$ is the angular distance between your field center $\mathbf{s}_c$ and $\mathbf{s}$ measured along the surface of the celestial sphere. If $\theta$ is small we may use the small angle approximation, i.e. $\sin \theta \approx \theta$. The projected length of $\mathbf{s}$ is also equal to $\sqrt{l^2+m^2}$, implying that $l^2+m^2 \approx \theta^2$. We may therefore loosely interpret $\sqrt{l^2+m^2}$ as the angular distance measured between the source at $\mathbf{s}$ and the field-center $\mathbf{s}_c$ measured along the surface of the celestial sphere, i.e. we may measure $l$ and $m$ in $^{\circ}$. 
-The explenation above is graphically illustrated in <a class='pos_fig_proj_dir'></a> <!--\ref{pos:fig:proj}-->. 
+The explenation above is graphically illustrated in <a class='pos_fig_proj_dir'></a> <!--\ref{pos:fig:proj}-->.
 
 +++ {"deletable": true, "editable": true}
 
@@ -138,7 +144,7 @@ The explenation above is graphically illustrated in <a class='pos_fig_proj_dir'>
 
 +++ {"deletable": true, "editable": true}
 
-*Figure 3.4.3*: Why do we measure $l$ and $m$ in degrees? 
+*Figure 3.4.3*: Why do we measure $l$ and $m$ in degrees?
 
 +++ {"deletable": true, "editable": true}
 
@@ -176,42 +182,51 @@ The field center is located at $(\alpha_0,\delta_0) = $ (5h 30m,60$^{\circ}$). T
 
 In the above equations $h,~m,~s,~d,~m_{\textrm{arcmin}}$ and $s_{\textrm{arcsec}}$ respectively denote hours, minutes, seconds, degrees, arcminutes and arcseconds. If we apply the above to our three sources we obtain
 
-```{code-cell} ipython2
-:deletable: true
-:editable: true
-
+```{code-cell} ipython3
+---
+deletable: true
+editable: true
+jupyter:
+  outputs_hidden: false
+---
 RA_rad = (np.pi/12) * np.array([5. + 30./60, 5 + 32./60 + 0.4/3600, 5 + 36./60 + 12.8/3600, 5 + 40./60 + 45.5/3600])
 DEC_rad = (np.pi/180)*np.array([60., 60. + 17.0/60 + 57./3600, 61. + 12./60 + 6.9/3600, 61 + 56./60 + 34./3600])
 Flux_sources_labels = np.array(["", "1 Jy", "0.5 Jy", "0.2 Jy"])
 Flux_sources = np.array([1., 0.5, 0.1]) #in Janskys
-print "RA (rad) of Sources and Field Center = ", RA_rad
-print "DEC (rad) of Sources = ", DEC_rad
+print("RA (rad) of Sources and Field Center = ", RA_rad)
+print("DEC (rad) of Sources = ", DEC_rad)
 ```
 
 +++ {"deletable": true, "editable": true}
 
 Recall that we can use <a class='pos_eq_convertlmnradec_dir'></a><!--\label{pos:eq:convertlmnradec}--> to convert between equatorial and direction cosine coordinates, in terms of the current example this translates into the python code below. Note that before we can do the conversion we first need to calculate $\Delta \alpha$.
 
-```{code-cell} ipython2
-:deletable: true
-:editable: true
-
+```{code-cell} ipython3
+---
+deletable: true
+editable: true
+jupyter:
+  outputs_hidden: false
+---
 RA_delta_rad = RA_rad-RA_rad[0] #calculating delta alpha
 
 l = np.cos(DEC_rad) * np.sin(RA_delta_rad)
 m = (np.sin(DEC_rad) * np.cos(DEC_rad[0]) - np.cos(DEC_rad) * np.sin(DEC_rad[0]) * np.cos(RA_delta_rad))
-print "l (degrees) = ", l*(180./np.pi)
-print "m (degrees) = ", m*(180./np.pi)
+print("l (degrees) = ", l*(180./np.pi))
+print("m (degrees) = ", m*(180./np.pi))
 ```
 
 +++ {"deletable": true, "editable": true}
 
 Plotting the result.
 
-```{code-cell} ipython2
-:deletable: true
-:editable: true
-
+```{code-cell} ipython3
+---
+deletable: true
+editable: true
+jupyter:
+  outputs_hidden: false
+---
 fig = plt.figure()
 ax = fig.add_subplot(111)
 plt.xlim([-4., 4.])
@@ -219,7 +234,7 @@ plt.ylim([-4., 4.])
 plt.xlabel("$l$ [degrees]")
 plt.ylabel("$m$ [degrees]")
 plt.plot(l[0], m[0], "bx")
-plt.hold("on")
+# plt.hold("on")
 plt.plot(l[1:]*(180/np.pi), m[1:]*(180/np.pi), "ro")
 counter = 1
 for xy in zip(l[1:]*(180/np.pi)+0.25, m[1:]*(180/np.pi)+0.25):                                              
@@ -232,7 +247,7 @@ plt.grid()
 
 +++ {"deletable": true, "editable": true}
 
-*Figure 3.4.4*: 
+*Figure 3.4.4*:
 
 +++ {"deletable": true, "editable": true}
 

@@ -1,14 +1,14 @@
 ---
 jupytext:
   text_representation:
-    extension: .md
+    extension: .myst
     format_name: myst
     format_version: 0.13
     jupytext_version: 1.16.7
 kernelspec:
-  display_name: Python 2
+  display_name: Python 3 (ipykernel)
   language: python
-  name: python2
+  name: interferometry
 ---
 
 +++ {"deletable": true, "editable": true}
@@ -27,10 +27,13 @@ kernelspec:
 
 Import standard modules:
 
-```{code-cell} ipython2
-:deletable: true
-:editable: true
-
+```{code-cell} ipython3
+---
+deletable: true
+editable: true
+jupyter:
+  outputs_hidden: false
+---
 import numpy as np
 import matplotlib.pyplot as plt
 %matplotlib inline
@@ -42,10 +45,13 @@ HTML('../style/course.css') #apply general CSS
 
 Import section specific modules:
 
-```{code-cell} ipython2
-:deletable: true
-:editable: true
-
+```{code-cell} ipython3
+---
+deletable: true
+editable: true
+jupyter:
+  outputs_hidden: false
+---
 from IPython.display import HTML
 import ephem
 import matplotlib
@@ -59,7 +65,7 @@ HTML('../style/code_toggle.html')
 
 ## Hour Angle (HA) and Local Sidereal Time (LST)
 
-As we already mentioned in the chapter introduction, the static equatorial coordinates right ascension and declination are not enough if one wants to pin point the location of an object in the night sky from earth. We introduce two concepts here (namely hour angle and local sidereal time) which together with the static equatorial coordinates allow an observer to track celestial objects from earth.  
+As we already mentioned in the chapter introduction, the static equatorial coordinates right ascension and declination are not enough if one wants to pin point the location of an object in the night sky from earth. We introduce two concepts here (namely hour angle and local sidereal time) which together with the static equatorial coordinates allow an observer to track celestial objects from earth.
 
 +++ {"deletable": true, "editable": true}
 
@@ -98,12 +104,12 @@ The above relation is presented graphically in <a class='pos_fig_ha_halst'></a> 
 
 +++ {"deletable": true, "editable": true}
 
-<a id='pos:fig:hour_angle'></a> <!--\label{pos:fig:hour_angle}--> <img src='figures/hour.svg' width=40%> 
+<a id='pos:fig:hour_angle'></a> <!--\label{pos:fig:hour_angle}--> <img src='figures/hour.svg' width=40%>
 
 +++ {"deletable": true, "editable": true}
 
 *Figure 3.2.1*: The relationship that exists between $\alpha$, $H$ and LST. The red plane represents the fundamental plane of the celestial coordinate system. The
-the blue plane represent the fundamental plane of the horizontal coordinate system (see <a class='pos_sec_hoz_halst'></a>). 
+the blue plane represent the fundamental plane of the horizontal coordinate system (see <a class='pos_sec_hoz_halst'></a>).
 
 +++ {"deletable": true, "editable": true}
 
@@ -111,7 +117,7 @@ The natural question now arises, why do we need separate time-keeping systems to
 
 +++ {"deletable": true, "editable": true}
 
-<a id='pos:fig:sidereal'></a> <!--\label{pos:fig:sidereal}--><img src='figures/sidereal.svg' width=50%> 
+<a id='pos:fig:sidereal'></a> <!--\label{pos:fig:sidereal}--><img src='figures/sidereal.svg' width=50%>
 
 +++ {"deletable": true, "editable": true}
 
@@ -119,7 +125,7 @@ The natural question now arises, why do we need separate time-keeping systems to
 
 +++ {"deletable": true, "editable": true}
 
-We are now in a position to attain a better understanding of what the vernal equinox physically represents. As discussed in the previous paragraph the sun appears to move on the celestial sphere (its right ascension and declination changes throughout the year). As mentioned in <a class='pos_sec_eq_halst'></a>, the imaginary path it traverses on the celestial sphere is known as the ecliptic. The ecliptic is depicted in <a class='pos_fig_ecliptic_halst'></a> <!--\ref{pos:fig:ecliptic}-->. The vernal equinox is the point on the celestial sphere where the Sun crosses the celestial equator from south to north. The vernal equinox is currently in Pisces, but used to be in Aries. Which is why it is also known as the first point of Aries. It has moved due to precession. 
+We are now in a position to attain a better understanding of what the vernal equinox physically represents. As discussed in the previous paragraph the sun appears to move on the celestial sphere (its right ascension and declination changes throughout the year). As mentioned in <a class='pos_sec_eq_halst'></a>, the imaginary path it traverses on the celestial sphere is known as the ecliptic. The ecliptic is depicted in <a class='pos_fig_ecliptic_halst'></a> <!--\ref{pos:fig:ecliptic}-->. The vernal equinox is the point on the celestial sphere where the Sun crosses the celestial equator from south to north. The vernal equinox is currently in Pisces, but used to be in Aries. Which is why it is also known as the first point of Aries. It has moved due to precession.
 
 +++ {"deletable": true, "editable": true}
 
@@ -139,10 +145,13 @@ In the previous section I mentioned that the sidereal day is 4 min shorter than 
 as the year passes, until the time between them amounts to a full day. When this 
 happens the two clocks are aligned for a brief moment. The sidereal clock will then start to speed up again relative to the solar clock until another year has passed. We investigate this phenomenon below. We again make use of the `pyephem` package. We only use the `Observer` class in the code snippet below. An observer object has a date attribute to which a date time string in [<cite data-cite=''>UTC (Coordinated Universal Time)</cite> &#10548;](https://en.wikipedia.org/wiki/Coordinated_Universal_Time) can be assigned. One also needs to set the geographical coordinates of the observer object. In the example below we chose the geographical coordinates to be equal to the Jodrell Bank Observatory. The observer object then has a method called `sidereal_time` which can calculate the current sidereal time of the observer given the current time of the observer in UTC. We plot the local sidereal time of the observer at 23:59:59 UTC on the 22nd of each month for an entire year (2016) in <a class='pos_fig_lstutc_halst'></a>.
 
-```{code-cell} ipython2
-:deletable: true
-:editable: true
-
+```{code-cell} ipython3
+---
+deletable: true
+editable: true
+jupyter:
+  outputs_hidden: false
+---
 #Setting up the observer
 JB = ephem.Observer() 
 JB.lat = '53:14:10'
@@ -153,7 +162,7 @@ months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec
 h_number = np.zeros((14,),dtype=float)
 
 #Calculating the lst at differnt times of the year
-for k in xrange(1,14):
+for k in range(1,14):
     if k < 10:
        JB.date = '2016/'+str(k)+'/22  23:59:59'
        str_sid = str(JB.sidereal_time()).split(":")
