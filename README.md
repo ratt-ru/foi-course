@@ -1,19 +1,21 @@
 # Fundamentals of Radio Interferometry
 
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ratt-ru/fundamentals_of_interferometry/master)
+
 An ipython notebook-based book on the Fundamentals of Radio Interferometry. This is a community effort with the aim to be constantly improving and adding to the content in an effort to make interferometry as accessible as possible.  Please contribute, whether it is content, editing, or even suggestions.
 
 This book is currently being used to teach the NASSP [Fundamentals of Radio Interferometry](https://ratt-ru.github.io/fundamentals_of_interferometry/) Masters' Course.
-
-
-## Data Files
-
-There are additional large files (> 1MB), mainly FITS images, which are needed for some of the sections, these can be downloaded [fix-here](http://www.mth.uct.ac.za/~siphelo/admin/interferometry/data/fundamentals_fits.tar.gz) ([alt](https://www.dropbox.com/s/n3jyiajytwuldpu/fundamentals_fits.tar.gz?dl=0)), the original simulated KAT-7 measurement sets can be downloaded [fix-here](http://www.mth.uct.ac.za/~siphelo/admin/interferometry/data/simulated_KAT-7_ms.tar.gz) ([alt](https://www.dropbox.com/s/kb3p2mthei8dgl9/simulated_KAT-7_ms.tar.gz?dl=0)). These are tarballs which should be extracted in the data directory.
 
 ## Usage
 
 It is assumed you are familiar with the console and have git, Python 3 and make installed. on Ubuntu/Debian you can install this with:
 ```
 $ sudo apt install python3-pip make
+```
+
+For some matplotlib images involving latex, you may require the installing cm-super and dvipng. They can be installed by
+```
+$ sudo apt install cm-super dvipng
 ```
 
 Now get yourself a copy of this repository (if you didn't already)
@@ -29,7 +31,7 @@ $ make
 
 ## Data Files
 
-There are additional large files (> 1MB), mainly FITS images, which are needed for some of the sections, these can be downloaded [here](http://math_research.uct.ac.za/~siphelo/admin/interferometry/data/fundamentals_fits.tar.gz), the original simulated KAT-7 measurement sets can be downloaded [here](http://math_research.uct.ac.za/~siphelo/admin/interferometry/data/simulated_KAT-7_ms.tar.gz). These are tarballs which should be extracted in the data directory.
+There are additional large files (> 1MB), mainly FITS images, which are needed for some of the sections, these can be downloaded [here](http://www.mth.uct.ac.za/~siphelo/admin/interferometry/data/fundamentals_fits.tar.gz) ([alt](https://www.dropbox.com/s/n3jyiajytwuldpu/fundamentals_fits.tar.gz?dl=0)), the original simulated KAT-7 measurement sets can be downloaded [here](http://www.mth.uct.ac.za/~siphelo/admin/interferometry/data/simulated_KAT-7_ms.tar.gz) ([alt](https://www.dropbox.com/s/kb3p2mthei8dgl9/simulated_KAT-7_ms.tar.gz?dl=0)). These are tarballs which should be extracted in the data directory.
 
 ```
 cd fundamentals_of_interferometry/data/
